@@ -34,7 +34,7 @@
             <div class="flex flex-col md:flex-row justify-between items-center">
             <span class="text-lg md:text-2xl font-bold pb-3 md:pb-0">{{ card.price }}$</span>
             <span class="text-lg md:text-2xl font-bold opacity-30 pb-3 md:pb-0">{{ card.store }}</span>
-            <router-link to="/" class="text-pink-600 hover:text-white border border-pink-600 bg-white hover:bg-pink-600 focus:ring-4 focus:outline-none focus:ring-pink-300 rounded-full text-base font-medium px-5 py-2.5 text-center me-3 mb-3 dark:border-pink-500 dark:text-pink-500 dark:hover:text-white dark:hover:bg-pink-500 dark:bg-gray-900 dark:focus:ring-pink-800" >Add to Cart</router-link>
+            <router-link to="/" class="text-pink-600 hover:text-white border border-pink-600 bg-white hover:bg-pink-600 focus:ring-4 focus:outline-none focus:ring-pink-300 rounded-full text-base font-medium px-5 py-2.5 text-center me-3 mb-3 " >Add to Cart</router-link>
             </div>
         </div>
     </div>
