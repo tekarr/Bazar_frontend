@@ -1,4 +1,4 @@
-# v_ultra
+# Bazar_frontend
 
 ## Project setup
 ```
