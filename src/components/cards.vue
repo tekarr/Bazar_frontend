@@ -11,7 +11,7 @@
     v-model="searchTerm"
     type="text"
     placeholder="Search..." 
-    class="w-full bg-slate-50 px-20 py-2 rounded-3xl focus:outline-none focus:ring focus:ring-pink-500 font-bold" />
+    class="w-full bg-slate-50 px-20 py-2 rounded-3xl focus:outline-none focus:ring focus:ring-pink-500 font-bold" @click="scrollDown" />
     </li>
 
     <li>   
@@ -155,7 +155,13 @@
     methods:{
         clearSearch() {
         this.searchTerm = '';
-        }
+        },
+        scrollDown() {
+        window.scrollTo({
+        top: window.pageYOffset + 500,
+        behavior: 'smooth'
+        });
+    }
     }
 }
 </script>
