@@ -1,6 +1,6 @@
 <template>
 
-    <div ref="specificSection">hi</div>
+    
 
 <li class="fixed top-1 right-80 flex items-center justify-center w-auto h-28 z-50 ">
     <img class="px-3 w-14 hover:cursor-pointer" src="../assets/icons/carts/shopping-bag.png" alt="cart1" >
