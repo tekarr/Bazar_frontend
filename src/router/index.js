@@ -3,6 +3,7 @@ import HomeView from '../views/HomeView.vue'
 import AboutView from '../views/AboutView.vue'
 import Signup from '../views/signup.vue'
 import Login from '../views/login.vue' 
+import productdetail from '../views/productdetail.vue'
 
 const routes = [
   {
@@ -24,6 +25,11 @@ const routes = [
     path: '/login',
     name: 'login',
     component: Login
+  },
+  {
+    path: '/product/:id',
+    name: 'productdetail',
+    component: productdetail
   }
 ]
 
