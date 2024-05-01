@@ -1,12 +1,14 @@
 <template>
 
-    <div class="p-10 flex justify-between">
+    <navbarr/>
+
+    <div class="p-32 mt-14 flex justify-between">
         
-        <div class="grid gap-5" v-for="card in cards" :key="card.id">
+        <div class="grid gap-2" v-for="card in cards" :key="card.id">
             <div>
-                <img class="h-auto w-4/6 ml-16 rounded-3xl " :src="selectedImage"  alt="">
+                <img class="h-auto w-3/4 ml-0 rounded-3xl " :src="selectedImage"  alt="">
             </div>
-            <div class="grid grid-cols-6 gap-3 rounded-3xl">
+            <div class="grid grid-cols-5 w-3/4 gap-3 rounded-3xl">
                 <div v-for="pr in prs" :key="pr.id">
                     <img class="h-auto rounded-3xl border-4 hover:border-pink-600 hover:cursor-pointer transition-all" :src="pr.image" alt="" @click="switchimg(pr.image)" >
                 </div>
@@ -28,10 +30,16 @@
         </div> 
 
     </div>
+
+    <footer-2/>
 </template>
 
 <script>
+import Navbarr from '@/components/Navbarr.vue';
+import Footer2 from '@/components/footer2.vue';
+
     export default {
+    components: { Navbarr, Footer2 },
         data(){
             return{
             id : this.$route.params.id ,
@@ -71,10 +79,14 @@
         ]
         };
         },
+        created() {
+        // Set the selectedImage to the URL of the first image
+        this.selectedImage = this.prs[0].image;
+        },
         methods:{
-            switchimg(image) {
+            switchimg(image) {    
             this.selectedImage = image;
-        }
+        },
     }
 }
 </script>
