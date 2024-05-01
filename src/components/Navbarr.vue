@@ -1,6 +1,6 @@
 <template>
     
-    <nav class="bg-white fixed w-full z-20 top-0 start-0 border-b-4 border-pink-700 rounded-none">
+    <nav class="bg-white fixed w-full z-20 top-0 start-0 border-b-4 border-pink-600 rounded-none">
         
         <div class="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-2">
     
