@@ -1,17 +1,19 @@
 <template>
 
+    <div ref="specificSection">hi</div>
 
 <li class="fixed top-1 right-80 flex items-center justify-center w-auto h-28 z-50 ">
     <img class="px-3 w-14 hover:cursor-pointer" src="../assets/icons/carts/shopping-bag.png" alt="cart1" >
 </li>
-    
+
+
 <ul class="fixed top-1 mr-10 right-96 flex items-center justify-center w-auto h-28 z-50 ">
     <li class="p-3">
     <input
     v-model="searchTerm"
     type="text"
     placeholder="Search..." 
-    class="w-full bg-slate-50 px-20 py-2 rounded-3xl focus:outline-none focus:ring focus:ring-pink-500 font-bold" @click="scrollDown" />
+    class="w-full bg-slate-50 px-20 py-2 rounded-3xl focus:outline-none focus:ring focus:ring-pink-500 font-bold" @click="scrollToSection" />
     </li>
 
     <li>   
@@ -23,9 +25,8 @@
     </li> 
 </ul>
 
-<p class="text-xl"></p>
 
-<div class="grid grid-cols-2 md:grid-cols-1 lg:grid-cols-3 gap-10 p-4 md:p-8">
+<div  class="grid grid-cols-2 md:grid-cols-1 lg:grid-cols-3 gap-10 p-4 md:p-8">
     <div class="bg-gray-100 rounded-3xl cursor-pointer hover:shadow-lg transition-all" v-for="card in filteredItems" :key="card.id">
         <img class="h-auto w-full rounded-t-3xl md:rounded-3xl" :src="card.image" alt="">
         <div class="p-4 md:pl-10">
@@ -156,11 +157,10 @@
         clearSearch() {
         this.searchTerm = '';
         },
-        scrollDown() {
-        window.scrollTo({
-        top: window.pageYOffset + 500,
-        behavior: 'smooth'
-        });
+    scrollToSection() {
+        const specificSection = this.$refs.specificSection;
+        const sectionPosition = specificSection.offsetTop - 100;
+        window.scrollTo({ top: sectionPosition, behavior: 'smooth' });
     }
     }
 }
