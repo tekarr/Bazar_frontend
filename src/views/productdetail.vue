@@ -2,6 +2,15 @@
 
     <navbarr/>
 
+    <!-- Alerts: Success -->
+    <div v-if="showPopup" class="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50">
+        <div class="bg-white p-6 rounded-3xl">
+        <p class="text-lg"> added successfully!</p>
+        <button @click="closePopup" class="mt-4 bg-pink-600 hover:bg-pink-700 text-white font-bold py-2 px-4 rounded-3xl">Close</button>
+        </div>
+    </div>
+
+
     <div class="p-32 mt-14 md:p-10 lg:p-32  md:mt-28 flex flex-col md:flex-row justify-between">
         
         <div class="grid gap-2" v-for="card in cards" :key="card.id">
@@ -23,7 +32,7 @@
                 <div class="text-lg md:text-2xl font-bold p-3 text-start">{{ card.price }}$</div>
                 <p class="pb-1 text-base md:text-start w-80">{{ card.description }}</p>
                 <div class="flex flex-col md:flex-row justify-around items-center p-1 pt-10">
-                    <router-link to="/" class="text-pink-600 hover:text-white border border-pink-600 bg-white hover:bg-pink-600 focus:ring-4 focus:outline-none focus:ring-pink-300 rounded-full text-base font-medium px-5 py-2.5 text-center me-3 mb-3 "> Add to Cart</router-link>
+                    <router-link to="/product/:id" class="text-pink-600 hover:text-white border border-pink-600 bg-white hover:bg-pink-600 focus:ring-4 focus:outline-none focus:ring-pink-300 rounded-full text-base font-medium px-5 py-2.5 text-center me-3 mb-3 " @click="showPopup = true"> Add to Cart</router-link>
                     <router-link to="/" class="text-pink-600 hover:text-white border border-pink-600 bg-white hover:bg-pink-600 focus:ring-4 focus:outline-none focus:ring-pink-300 rounded-full text-base font-medium px-5 py-2.5 text-center me-3 mb-3 "> Buy </router-link>
                 </div>
             </div>
@@ -42,6 +51,7 @@ import Footer2 from '@/components/footer2.vue';
     components: { Navbarr, Footer2 },
         data(){
             return{
+            showPopup: false,
             id : this.$route.params.id ,
             selectedImage: '',
 
@@ -86,6 +96,9 @@ import Footer2 from '@/components/footer2.vue';
         methods:{
             switchimg(image) {    
             this.selectedImage = image;
+        },
+        closePopup() {
+        this.showPopup = false;
         },
     }
 }
