@@ -52,7 +52,7 @@
                 v-model="searchTerm"
                 type="text"
                 placeholder="Search..." 
-                class="w-full bg-slate-50 px-20 py-2 rounded-3xl focus:outline-none focus:ring focus:ring-pink-500 "  @click="scrollToSection"/>
+                class="w-full bg-slate-50 px-20 py-2 font-bold rounded-3xl focus:outline-none focus:ring focus:ring-pink-500 "  @click="scrollToSection"/>
                 
             </li>
 
