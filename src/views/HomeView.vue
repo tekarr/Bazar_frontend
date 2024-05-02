@@ -1,8 +1,8 @@
 <template>
   <div>
-    <navbarr/>
     <banner/>
     <tabs-2/>
+    <deals/>
     <cards/>
     <pages/>
     <footer-2/>
@@ -16,6 +16,7 @@ import Tabs2 from '@/components/tabs2.vue'
 import Cards from '@/components/cards.vue'
 import Pages from '@/components/pages.vue'
 import footer2 from '@/components/footer2.vue'
+import Deals from '@/components/deals.vue'
   
 export default {
   components: {  
@@ -24,8 +25,8 @@ export default {
     Tabs2,
     Cards,
     Pages,
-    footer2},
-    
+    footer2,
+    Deals},
     }
 </script>
 
