@@ -29,8 +29,8 @@
             <router-link class="block py-2 px-3 mt-1 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-pink-700 md:p-0   transition-all duration-300" to="/about">About</router-link>
             </li>
             
-            <li class="fixed top-1 right-80 flex items-center justify-center w-auto h-28 z-40 ">
-                <img class="px-3 w-14 hover:cursor-pointer" src="../assets/icons/carts/shopping-bag.png" alt="cart1" >
+            <li class="fixed top-1 right-80 flex items-center justify-center w-auto h-28  ">
+                <router-link to="/cart"><img class="px-3 w-14 hover:cursor-pointer" src="../assets/icons/carts/shopping-bag.png" alt="cart1" ></router-link>
             </li>
 
             <li>

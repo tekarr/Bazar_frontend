@@ -2,9 +2,15 @@
 
 
 
-<li class="fixed top-1 right-80 flex items-center justify-center w-auto h-28 z-50 ">
-    <img class="px-3 w-14 hover:cursor-pointer" src="../assets/icons/carts/shopping-bag.png" alt="cart1" >
-</li>
+<!-- Alerts: Success -->
+    <div v-if="showPopup" class="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50">
+        <div class="bg-white p-6 rounded-3xl">
+        <p class="text-lg"> added successfully!</p>
+        <button @click="closePopup" class="mt-4 bg-pink-600 hover:bg-pink-700 text-white font-bold py-2 px-4 rounded-3xl">Close</button>
+        </div>
+    </div>
+
+
 
 
 <ul class="fixed top-1 mr-10 right-96 flex items-center justify-center w-auto h-28 z-50 ">
@@ -35,7 +41,7 @@
             <div class="flex flex-col md:flex-row justify-between items-center">
             <span class="text-lg md:text-2xl font-bold pb-3 md:pb-0">{{ card.price }}$</span>
             <span class="text-lg md:text-2xl font-bold opacity-30 pb-3 md:pb-0">{{ card.store }}</span>
-            <router-link to="/" class="text-pink-600 hover:text-white border border-pink-600 bg-white hover:bg-pink-600 focus:ring-4 focus:outline-none focus:ring-pink-300 rounded-full text-base font-medium px-5 py-2.5 text-center me-3 mb-3 " >Add to Cart</router-link>
+            <router-link to="/" class="text-pink-600 hover:text-white border border-pink-600 bg-white hover:bg-pink-600 focus:ring-4 focus:outline-none focus:ring-pink-300 rounded-full text-base font-medium px-5 py-2.5 text-center me-3 mb-3 " @click="showPopup = true">Add to Cart</router-link>
             </div>
         </div>
     </router-link>
@@ -47,6 +53,7 @@
     export default {
         data(){
         return {   
+        showPopup: false,
         searchTerm:'' ,
         cards: [
         {
@@ -154,6 +161,12 @@
         },
     },
     methods:{
+        closePopup() {
+    this.showPopup = false;
+    },
+        addtocart(){
+
+        },
         clearSearch() {
         this.searchTerm = '';
         },
