@@ -29,8 +29,8 @@
                     <td class="px-6 py-4">
                         <div class="flex items-center">
                             <div>
-                                <input type="number" min="1" id="first_product" class="bg-gray-50 w-14 border border-gray-300 text-gray-900 text-sm rounded-xl focus:outline-none focus:ring focus:ring-pink-500 block px-2.5 py-1"
-                                v-model="product.quantity" @click="increaseQuantity(product)"  placeholder="1" required />
+                                <input type="number" min="1" id="first_product" class="bg-gray-50 w-16 border border-gray-300 text-gray-900 text-base rounded-xl focus:outline-none focus:ring focus:ring-pink-500 block px-2.5 py-1"
+                                v-model="product.quantity" @click="increaseQuantity(product)"  placeholder="Qt" required />
                             </div>
                         </div>
                     </td>
