@@ -92,6 +92,13 @@
 
 <script>
 import Navbarr from './Navbarr.vue';
+
+import {onMounted} from "vue";
+import {products, getProducts} from "@/comp/products.js";
+
+onMounted(() => {
+  getProducts()
+})
     export default {
     components: { Navbarr },
         data(){
