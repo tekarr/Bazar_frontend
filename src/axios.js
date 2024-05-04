@@ -1,5 +1,4 @@
 import Axios from 'axios';
-import {csrf} from "@/store";
 
 const axiosClient = Axios.create({
     baseURL: 'http://localhost:8000/api/v1',
