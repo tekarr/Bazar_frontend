@@ -13,7 +13,7 @@
                 </tr>
             </thead>
             <tbody v-for="product in products" :key="product.id" class="hover:shadow-md">
-                <tr class="bg-white border-b">
+                <tr class="bg-white border-b" @click="increaseQuantity(product)" >
                     <div class="flex justify-start items-center">
                         <td class="p-4">
                             <img :src="product.imageSrc" :alt="product.imageAlt" class="w-28 md:w-32 max-w-full max-h-full rounded-3xl" >
@@ -24,12 +24,12 @@
                         </td>
                     </div>
                     <td>
-                        <p class="flex justify-start p-10">In stock</p>
+                        <p class="flex justify-start p-10">{{product.stock}} available</p>
                     </td>
                     <td class="px-6 py-4">
                         <div class="flex items-center">
                             <div>
-                                <input type="number" min="1" id="first_product" class="bg-gray-50 w-16 border border-gray-300 text-gray-900 text-base rounded-xl focus:outline-none focus:ring focus:ring-pink-500 block px-2.5 py-1"
+                                <input type="number" min="1" :max="product.stock" id="first_product" class="bg-gray-50 w-16 border border-gray-300 text-gray-900 text-base rounded-xl focus:outline-none focus:ring focus:ring-pink-500 block px-2.5 py-1"
                                 v-model="product.quantity" @click="increaseQuantity(product)"  placeholder="Qt" required />
                             </div>
                         </div>
@@ -87,6 +87,7 @@ import Footer2 from '@/components/footer2.vue'
                 price: 90.00,
                 total:90.00,
                 quantity: 1,
+                stock:10,
                 imageSrc: 'https://tailwindui.com/img/ecommerce-images/shopping-cart-page-04-product-01.jpg',
                 imageAlt: 'Salmon orange fabric pouch with match zipper, gray zipper pull, and adjustable hip belt.',
             },
@@ -98,6 +99,7 @@ import Footer2 from '@/components/footer2.vue'
                 price: 32.00,
                 total:32.00,
                 quantity: 1,
+                stock:5,
                 imageSrc: 'https://tailwindui.com/img/ecommerce-images/shopping-cart-page-04-product-02.jpg',
                 imageAlt:
                 'Front of satchel with blue canvas body, black straps and handle, drawstring top, and front zipper pouch.',
@@ -109,6 +111,7 @@ import Footer2 from '@/components/footer2.vue'
                 store: 'Store name',
                 price: 32.00,
                 quantity: 1,
+                stock:3,
                 total:32.00,
                 imageSrc: 'https://flowbite.s3.amazonaws.com/docs/gallery/square/image.jpg',
                 imageAlt:
@@ -121,6 +124,7 @@ import Footer2 from '@/components/footer2.vue'
                 store: 'Store name',
                 price: 32.00,
                 quantity: 1,
+                stock:6,
                 total:32.00,
                 imageSrc: 'https://flowbite.s3.amazonaws.com/docs/gallery/square/image-1.jpg',
                 imageAlt:
@@ -133,6 +137,7 @@ import Footer2 from '@/components/footer2.vue'
                 store: 'Store name',
                 price: 32.00,
                 quantity: 1,
+                stock:9,
                 total:32.00,
                 imageSrc: 'https://flowbite.s3.amazonaws.com/docs/gallery/square/image-2.jpg',
                 imageAlt:
@@ -143,8 +148,10 @@ import Footer2 from '@/components/footer2.vue'
     },
     methods: {
         increaseQuantity(product) { 
-            if (product.quantity == 0)
+            if (product.quantity == 0 )
             { product.quantity = 1 }
+            if ( product.quantity > product.stock)
+            { product.quantity = product.stock }
             product.total = product.quantity * product.price
         },
     },
