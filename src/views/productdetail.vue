@@ -31,9 +31,8 @@
                 <p class="text-lg md:text-base text-start  font-bold opacity-30 mb-1 md:pb-0">{{ card.store }}</p>
                 <div class="text-lg md:text-2xl font-bold p-3 text-start">{{ card.price }}$</div>
                 <p class="pb-1 text-base md:text-start w-80">{{ card.description }}</p>
-                <div class="flex flex-col md:flex-row justify-around items-center p-1 pt-10">
+                <div class="flex flex-col md:flex-row justify-start items-center p-1 pt-10">
                     <router-link to="/product/:id" class="text-pink-600 hover:text-white border border-pink-600 bg-white hover:bg-pink-600 focus:ring-4 focus:outline-none focus:ring-pink-300 rounded-full text-base font-medium px-5 py-2.5 text-center me-3 mb-3 " @click="showPopup = true"> Add to Cart</router-link>
-                    <router-link to="/" class="text-pink-600 hover:text-white border border-pink-600 bg-white hover:bg-pink-600 focus:ring-4 focus:outline-none focus:ring-pink-300 rounded-full text-base font-medium px-5 py-2.5 text-center me-3 mb-3 "> Buy </router-link>
                 </div>
             </div>
         </div> 
