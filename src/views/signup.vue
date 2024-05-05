@@ -10,19 +10,19 @@
         
         <div class="mb-5 text-start">
             <label class="font-bold pl-5" for="username">Name</label>
-            <input type="text" id="username" v-model="username" placeholder="username" 
+            <input type="text" id="username" v-model="userForm.name" placeholder="username"
             class="w-full mt-4 bg-slate-50 px-20 py-2 rounded-3xl focus:outline-none focus:ring focus:ring-pink-500 " required>
         </div>
 
         <div class="mb-5 text-start">
             <label class="font-bold pl-5" for="email">Email</label>
-            <input type="email" id="email" v-model="email" placeholder="name@gmail.com" 
+            <input type="email" id="email" v-model="userForm.email" placeholder="name@gmail.com"
             class="w-full mt-4 bg-slate-50 px-20 py-2 rounded-3xl focus:outline-none focus:ring focus:ring-pink-500 " required>
         </div>
         
         <div class="mb-5 text-start">
             <label class="font-bold pl-5" for="email">Password</label>
-            <input type="password" id="password" v-model="password" placeholder="password" 
+            <input type="password" id="password" v-model="userForm.password" placeholder="password"
             class="w-full mt-4 bg-slate-50 px-20 py-2 rounded-3xl focus:outline-none focus:ring focus:ring-pink-500 " required>
         </div>
 
@@ -41,7 +41,7 @@
 </div>
 </template>
 
-<script>
+<!--<script>
 
 export default {
     data() {
@@ -58,8 +58,28 @@ export default {
         console.log('Username:', this.username);
         console.log('Email:', this.email);
         console.log('Password:', this.password);
-        
+
         }
     }
 };
+</script>-->
+
+
+<script setup>
+
+import {ref} from "vue";
+import useUser from "@/comp/user.js";
+
+const userForm = ref({
+    name: '',
+    email: '',
+    password: ''
+})
+
+const { storeUser} = useUser()
+const   submitForm =async () => {
+    await storeUser(userForm)
+  console.log('user.value', userForm.value)
+
+    }
 </script>

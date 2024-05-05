@@ -232,7 +232,7 @@ import {onMounted} from "vue";
 
 const {products, getProducts} = useProducts()
 onMounted(() => {
-  getProducts()
+  getProducts(2)
 })
 </script>
 
