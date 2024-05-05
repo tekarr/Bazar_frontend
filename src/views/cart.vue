@@ -58,7 +58,7 @@
                         <router-link to="/" class="flex items-center mr-5 rounded-3xl border-2 border-pink-300 bg-white px-10 py-3 text-base font-medium  text-gray-800 shadow-sm hover:bg-pink-600 hover:text-white">Continue Shopping</router-link>
                     </td>
                     <td class="">
-                        <a href="#" class="flex items-center rounded-3xl border border-transparent bg-pink-600 px-10 py-3 mr-5 text-base font-medium text-white shadow-sm hover:bg-pink-700">Checkout</a>
+                        <router-link to="/checkout" class="flex items-center rounded-3xl border border-transparent bg-pink-600 px-10 py-3 mr-5 text-base font-medium text-white shadow-sm hover:bg-pink-700">Checkout</router-link>
                     </td>
                 </tr>
             </table>
