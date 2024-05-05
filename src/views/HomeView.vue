@@ -17,7 +17,7 @@ import Cards from '@/components/cards.vue'
 import Pages from '@/components/pages.vue'
 import footer2 from '@/components/footer2.vue'
 import Deals from '@/components/deals.vue'
-  
+
 export default {
   components: {  
     Banner,
@@ -28,6 +28,8 @@ export default {
     footer2,
     Deals},
     }
+
+
 </script>
 
 <style lang="scss" scoped>

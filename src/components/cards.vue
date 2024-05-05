@@ -74,11 +74,11 @@
 
 <!-- Cards -->
 <div ref="specificSection" class="grid grid-cols-2 md:grid-cols-1 lg:grid-cols-3 gap-10 p-4 md:p-8"> 
-    <router-link :to="`/product/${card.title}`" class="bg-gray-100 rounded-3xl cursor-pointer hover:shadow-lg transition-all" v-for="card in filteredItems" :key="card.id">
+    <router-link :to="`/product/${card.name}`" class="bg-gray-100 rounded-3xl cursor-pointer hover:shadow-lg transition-all" v-for="card in products" :key="card.id">
         <img class="h-auto w-full rounded-t-3xl md:rounded-3xl" :src="card.image" alt="">
         <div class="p-4 md:pl-10">
-            <p class="text-lg md:text-2xl font-bold pt-4 md:text-start text-center">{{ card.title }}</p>
-            <p class="pb-1 text-sm md:text-start">{{ card.description }}</p>
+            <p class="text-lg md:text-2xl font-bold pt-4 md:text-start text-center">{{ card.name }}</p>
+            <p class="pb-1 text-sm md:text-start">{{ card.desc }}</p>
             <div class="flex flex-col md:flex-row justify-between items-center">
             <span class="text-lg md:text-2xl font-bold pb-3 md:pb-0">{{ card.price }}$</span>
             <span class="text-lg md:text-2xl font-bold opacity-30 pb-3 md:pb-0">{{ card.store }}</span>
@@ -92,6 +92,9 @@
 
 <script>
 import Navbarr from './Navbarr.vue';
+
+
+
     export default {
     components: { Navbarr },
         data(){
@@ -220,6 +223,17 @@ import Navbarr from './Navbarr.vue';
     }
     }
 }
+</script>
+
+<script setup>
+
+import useProducts from "@/comp/products.js";
+import {onMounted} from "vue";
+
+const {products, getProducts} = useProducts()
+onMounted(() => {
+  getProducts()
+})
 </script>
 
 <style lang="scss" scoped>
