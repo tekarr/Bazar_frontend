@@ -3,8 +3,8 @@
 
     <navbarr/>
 
-    <div class="relative overflow-x-auto flex justify-center bg-gray-300 pt-28 " >
-        <table class="w-3/4 text-sm overflow-hidden  text-left rtl:text-right text-gray-500  border-8 rounded-3xl m-10  bg-gray-50">
+    <div class="relative overflow-x-auto flex justify-center bg-gray-100 pt-28">
+        <table class="w-3/4 text-sm overflow-hidden  text-left rtl:text-right text-gray-500  border-8 rounded-3xl m-10  bg-white">
             <thead class="text-xs text-gray-800 rounded-3xl ">
                 <tr>
                     <th scope="col" class="px-10 py-3 text-3xl p-5 font-semibold">
@@ -12,10 +12,10 @@
                     </th>
                 </tr>
             </thead>
-            <tbody v-for="product in products" :key="product.id" class="hover:shadow-md">
-                <tr class="bg-white border-b" @click="increaseQuantity(product)" >
-                    <div class="flex justify-start items-center">
-                        <td class="p-4">
+            <tbody v-for="product in products" :key="product.id" >
+                <tr class="bg-white border-b" @click="increaseQuantity(product)"  >
+                    <div class="flex justify-start items-center ">
+                        <td class="p-4 ">
                             <img :src="product.imageSrc" :alt="product.imageAlt" class="w-28 md:w-32 max-w-full max-h-full rounded-3xl" >
                         </td>
                         <td class="px-6 py-4">
@@ -42,18 +42,14 @@
                     </td>
                 </tr>
             </tbody>
-        </table>
-    </div>
-
-        <div class="flex justify-center pb-10 p-5 ">
-            <table>
+            <tfoot>
                 <tr>
-                    <td class="text-lg text-start font-medium text-gray-900 p-5 "> 
+                    <td class="text-xl text-start font-bold text-gray-900 pl-10 pb-5 pt-10 "> 
                         Subtotal : <span>${{ totalPrice }}</span>
                         <p class="mt-0.5 text-sm text-gray-500">Shipping and taxes calculated at checkout.</p>
                     </td>
                 </tr>
-                <tr class="flex justify-center">
+                <tr class="flex justify-start pl-10 pb-10">
                     <td class="">
                         <router-link to="/" class="flex items-center mr-5 rounded-3xl border-2 border-pink-300 bg-white px-10 py-3 text-base font-medium  text-gray-800 shadow-sm hover:bg-pink-600 hover:text-white">Continue Shopping</router-link>
                     </td>
@@ -61,8 +57,10 @@
                         <router-link to="/checkout" class="flex items-center rounded-3xl border border-transparent bg-pink-600 px-10 py-3 mr-5 text-base font-medium text-white shadow-sm hover:bg-pink-700">Checkout</router-link>
                     </td>
                 </tr>
-            </table>
-        </div>
+            </tfoot>
+        </table>
+    </div>
+
 
 
 </template>
