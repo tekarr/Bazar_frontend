@@ -201,11 +201,6 @@ import Navbarr from './Navbarr.vue';
         ]
     };
     },
-    computed: {
-        filteredItems() {
-        return this.cards.filter(card => card.title.toLowerCase().includes(this.searchTerm.toLowerCase()));
-        },
-    },
     methods:{
         closePopup() {
     this.showPopup = false;
@@ -230,7 +225,6 @@ import useProducts from "@/comp/products.js";
 import { onMounted, ref } from "vue";
 
 const { products, getProducts } = useProducts();
-const cards = ref([]);
 const searchTerm = ref('');
 
 onMounted(() => {
