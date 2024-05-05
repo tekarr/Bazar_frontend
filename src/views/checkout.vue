@@ -63,7 +63,7 @@
         </div>
 
         <div class="mt-8 flex justify-end">
-            <button type="submit" class="bg-white text-gray-900 border-pink-400 border-2  px-4 py-2 rounded-3xl hover:bg-pink-600 hover:text-white focus:ring-4 focus:outline-none focus:ring-pink-300">Review Cart</button>
+            <router-link to="/cart" ><button type="submit" class="bg-white text-gray-900 border-pink-400 border-2  px-4 py-2 rounded-3xl hover:bg-pink-600 hover:text-white focus:ring-4 focus:outline-none focus:ring-pink-300">Back</button></router-link>
             <button type="submit" class="bg-pink-600 text-white ml-2 px-4 py-2 rounded-3xl hover:bg-pink-700 focus:ring-4 focus:outline-none focus:ring-pink-300">Place Order</button>
         </div>
         </div>
