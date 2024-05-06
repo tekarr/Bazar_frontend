@@ -39,9 +39,9 @@
             </div>
 
             <div class="py-6 flex justify-between">
-                <p>Order placed</p>
-                <p>Processing</p>
-                <p>Delivered</p>
+                <p class="font-bold">Order placed</p>
+                <p class="">Processing</p>
+                <p class="">Delivered</p>
             </div>
         </div>
     </div>
