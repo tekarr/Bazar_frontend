@@ -1,6 +1,7 @@
 <template>
-    
-        <form @submit.prevent="submitForm" class="bg-gray-100">
+    <navbarr/>
+
+        <form @submit.prevent="submitForm" class="bg-gray-100 pt-20">
     <div class="w-full max-w-3xl mx-auto lg:p-28 md:p-28 sm:p-28">
         <div class="bg-white p-4 sm:p-8 rounded-3xl shadow-md border text-start">
 
@@ -74,7 +75,9 @@
 </template>
 
 <script>
+import Navbarr from '@/components/Navbarr.vue';
     export default {
+    components: { Navbarr },
         data(){
             return{
                 PaymentMethod: '',

@@ -6,6 +6,7 @@ import Login from '../views/login.vue'
 import productdetail from '../views/productdetail'
 import checkout from '../views/checkout.vue'
 import cart from '@/views/cart.vue'
+import trackorder from '@/views/trackorder.vue'
 
 const routes = [
   {
@@ -42,6 +43,11 @@ const routes = [
     path: '/checkout',
     name: 'checkout',
     component: checkout
+  },
+  {
+    path: '/trackorder',
+    name: 'trackorder',
+    component: trackorder
   }
 ]
 
