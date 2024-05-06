@@ -22,7 +22,7 @@
                     <p class="text-lg font-bold text-gray-700">${{product.price}}</p><br>
                 </td>
                 <td>
-                    <p class="text-lg font-bold text-pink-600">{{ product.state }}</p><br>
+                    <p class="text-lg font-bold text-gray-400">{{ product.state }}</p><br>
                 </td>
                 <td class="px-10" v-for="user in users" :key="user.id" >
                     <p class="text-lg font-bold text-gray-700 ">Delivery address</p>
