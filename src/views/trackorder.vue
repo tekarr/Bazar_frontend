@@ -8,7 +8,7 @@
 
     <div class="  grid grid-cols-1 w-full gap-2  rounded-3xl py-4 ">
         <table class="w-fulll text-sm overflow-hidden  text-left rtl:text-right text-gray-500 rounded-3xl mx-20 bg-gray-100">
-            <tr class="flex justify-between bg-white p-10 border-b-4 border-white" v-for="product in products" :key="product.id">
+            <tr class="flex justify-between bg-gray-100 p-10  border-white" v-for="product in products" :key="product.id">
                 <td>
                     <img :src="product.image" alt="" class="w-56 rounded-3xl" >
                 </td>
