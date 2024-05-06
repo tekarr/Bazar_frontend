@@ -22,7 +22,7 @@
                     <p class="text-lg font-bold text-gray-700">${{product.price}}</p><br>
                 </td>
                 <td>
-                    <p class="text-lg font-bold text-gray-400">{{ product.state }}</p><br>
+                    <p class="text-lg font-bold text-pink-600">{{ product.state }}</p><br>
                 </td>
                 <td class="px-10" v-for="user in users" :key="user.id" >
                     <p class="text-lg font-bold text-gray-700 ">Delivery address</p>
@@ -34,14 +34,16 @@
             <div class="py-6"> Preparing to ship on March 24, 2021</div>
 
             <div class="bg-gray-200 rounded-3xl ">
-                <div id="Processing" class="bg-pink-600 rounded-3xl text-pink-600 h-4 text-xs w-1/2 hidden ">.</div>
                 <div id="Order placed" class="bg-pink-600 rounded-3xl text-pink-600 h-4 text-xs w-24  ">.</div>
-                <div id="Order placed" class="bg-pink-600 rounded-3xl text-pink-600 h-4 text-xs w-full hidden ">.</div>
+                <div id="Processing" class="bg-pink-600 rounded-3xl text-pink-600 h-4 text-xs w-[40%] hidden  ">.</div>
+                <div id="Shipping" class="bg-pink-600 rounded-3xl text-pink-600 h-4 text-xs w-3/4 hidden ">.</div>
+                <div id="Delivered" class="bg-pink-600 rounded-3xl text-pink-600 h-4 text-xs w-full hidden ">.</div>
             </div>
 
             <div class="py-6 flex justify-between">
                 <p class="font-bold">Order placed</p>
                 <p class="">Processing</p>
+                <p class="">Shipping</p>
                 <p class="">Delivered</p>
             </div>
         </div>
