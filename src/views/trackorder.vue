@@ -1,7 +1,8 @@
 <template>
 
+    <navbarr/>
 
-    <div class="flex justify-between p-10 mx-20 my-5">
+    <div class="flex justify-between p-10 mx-20 my-5 mt-28 ">
         <h1 class="text-2xl font-bold ">Track Order #54879</h1>
         <p>Order placed March 22, 2021</p> 
     </div>
@@ -55,7 +56,9 @@
 </template>
 
 <script>
+import Navbarr from '@/components/Navbarr.vue'
     export default {
+  components: { Navbarr },
         data(){
             return{
             products:[
