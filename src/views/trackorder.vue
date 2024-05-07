@@ -2,18 +2,22 @@
 
     <navbarr/>
 
-    <div class="flex justify-between p-10 mx-20 my-5 mt-28 ">
-        <h1 class="text-2xl font-bold ">Track Order #54879</h1>
-        <p>Order placed March 22, 2021</p> 
+    <div class="flex justify-center">
+        <div class="flex justify-between p-10  my-5 mt-28 w-3/4">
+            <h1 class="text-2xl font-bold pr-40">Track Order #54879</h1>
+            <p class=" text-pink-600">Order placed March 22, 2021</p> 
+        </div>
     </div>
+    
 
-    <div class="  grid grid-cols-1 w-full gap-2  rounded-3xl py-4 ">
+<div class="flex justify-center">
+    <div class="  grid grid-cols-1 w-3/4 gap-2  rounded-3xl py-4">
         <table class="w-fulll text-sm overflow-hidden  text-left rtl:text-right text-gray-500 rounded-3xl mx-20 bg-gray-100">
             <tr class="flex justify-between bg-gray-100 p-10  border-white" v-for="product in products" :key="product.id">
                 <td>
                     <img :src="product.image" alt="" class="w-56 rounded-3xl" >
                 </td>
-                <td>
+                <td class="pl-5">
                     <p class="text-lg font-bold text-gray-700">{{product.name}}</p>
                     <p class="text-base  text-gray-700" >Store name</p><br>
                     <p class="w-32">Lorem ipsum dolor sit amet consectetur adipisicing elit. Animi, iusto?</p>
@@ -48,10 +52,11 @@
             </div>
         </div>
     </div>
+</div>
 
-    <div class="flex justify-between p-20" >
-        <p class="text-xl font-bold">Billing address</p>
-        <p class="text-xl font-bold">Subtotal : 70</p>
+    <div class="grid justify-center p-20  grid-cols-1 " >
+        <p class="text-xl font-bold pb-5 ">Order Status  <span class="p-2">|</span>  <span class=" text-pink-600">{{ state }}</span></p>
+        <p class="text-xl font-bold ">Subtotal : 70</p>
     </div>
 
 
@@ -63,6 +68,7 @@ import Navbarr from '@/components/Navbarr.vue'
   components: { Navbarr },
         data(){
             return{
+                state:'  Order Placed',
             products:[
                 {
                     id:1,
