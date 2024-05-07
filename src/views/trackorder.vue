@@ -3,8 +3,8 @@
     <navbarr/>
 
     <div class="flex justify-center">
-        <div class="flex justify-between p-10  my-5 mt-28  mx-32">
-            <h1 class="text-2xl font-bold pr-80 ">Track Order #54879</h1>
+        <div class="flex justify-between w-3/4 my-5 mt-36 mx-72">
+            <h1 class="text-2xl font-bold ">Track Order #54879</h1>
             <p class=" text-pink-600">Order placed March 22, 2021</p> 
         </div>
     </div>
