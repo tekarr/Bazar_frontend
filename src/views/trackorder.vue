@@ -3,8 +3,8 @@
     <navbarr/>
 
     <div class="flex justify-center">
-        <div class="flex justify-between p-10  my-5 mt-28 w-3/4">
-            <h1 class="text-2xl font-bold pr-40">Track Order #54879</h1>
+        <div class="flex justify-between p-10  my-5 mt-28  mx-32">
+            <h1 class="text-2xl font-bold pr-80 ">Track Order #54879</h1>
             <p class=" text-pink-600">Order placed March 22, 2021</p> 
         </div>
     </div>
@@ -34,7 +34,7 @@
                 </td>
             </tr>
         </table>
-        <div class="text-start p-1 mx-32 bg-white ">
+        <div class="text-start pt-4 mx-32 bg-white ">
             <div class="py-6"> Preparing to ship on March 24, 2021</div>
 
             <div class="bg-gray-200 rounded-3xl ">
@@ -54,7 +54,7 @@
     </div>
 </div>
 
-    <div class="grid justify-center p-20  grid-cols-1 " >
+    <div class="grid justify-center p-10  grid-cols-1 " >
         <p class="text-xl font-bold pb-5 ">Order Status  <span class="p-2">|</span>  <span class=" text-pink-600">{{ state }}</span></p>
         <p class="text-xl font-bold ">Subtotal : 70</p>
     </div>
