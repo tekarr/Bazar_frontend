@@ -7,6 +7,7 @@ import productdetail from '../views/productdetail'
 import checkout from '../views/checkout.vue'
 import cart from '@/views/cart.vue'
 import trackorder from '@/views/trackorder.vue'
+import orderhistory from '@/views/orderhistory.vue'
 
 const routes = [
   {
@@ -48,6 +49,11 @@ const routes = [
     path: '/trackorder',
     name: 'trackorder',
     component: trackorder
+  },
+  {
+    path: '/orderhistory',
+    name: 'orderhistory',
+    component: orderhistory
   }
 ]
 
