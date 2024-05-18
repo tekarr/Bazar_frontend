@@ -31,13 +31,13 @@
             <div>
                 <label for="start-time" class="block mb-2 text-sm font-medium text-gray-900 ">Open </label>
                 <div class="relative">
-                    <input type="time" id="start-time" class="bg-white border-2  py-2  leading-none border-gray-300 text-gray-900 text-md rounded-3xl focus:outline-none focus:ring-pink-600 focus:border-pink-600 block w-full " min="09:00" max="18:00" value="00:00" required />
+                    <input type="time" id="start-time" class="bg-white border-2 px-10  py-2  leading-none border-gray-300 text-gray-900 text-md rounded-3xl focus:outline-none focus:ring-pink-600 focus:border-pink-600 block w-full " min="09:00" max="18:00" value="00:00" required />
                 </div>
             </div>
             <div>
                 <label for="end-time" class="block mb-2 text-sm font-medium text-gray-900 ">Close </label>
                 <div class="relative">
-                    <input type="time" id="end-time" class="bg-white  py-2 border-2 leading-none border-gray-300 text-gray-900 text-md rounded-3xl focus:outline-none focus:ring-pink-600 focus:border-pink-600 block w-full p-2.5" min="09:00" max="18:00" value="00:00" required />
+                    <input type="time" id="end-time" class="bg-white px-10 py-2 border-2 leading-none border-gray-300 text-gray-900 text-md rounded-3xl focus:outline-none focus:ring-pink-600 focus:border-pink-600 block w-full p-2.5" min="09:00" max="18:00" value="00:00" required />
                 </div>
             </div>
             </div>
