@@ -52,6 +52,7 @@ export default {
     components: { navbar, Sidbar },
     data() {
         return {
+        username:'',
         email: '',
         password: '',
         selectedOption: '' 
@@ -61,8 +62,10 @@ export default {
         submitForm() {
         // Perform form submission logic here
         console.log('Loged in!');
+        console.log('username:', this.username);
         console.log('Email:', this.email);
         console.log('Password:', this.password);
+        console.log('selectedOption:', this.selectedOption);
         
         }
     }
