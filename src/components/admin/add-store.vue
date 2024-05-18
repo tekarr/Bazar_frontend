@@ -57,17 +57,19 @@ export default {
     components: { navbar, Sidbar },
     data() {
         return {
-        email: '',
-        password: '',
-        fileSelected: true
+        storename: '',
+        fileSelected: true,
+        startime:'09:00',
+        endtime:'18:00'
         };
     },
     methods: {
         submitForm() {
         // Perform form submission logic here
-        console.log('Loged in!');
-        console.log('Email:', this.email);
-        console.log('Password:', this.password);
+        console.log('Added');
+        console.log('name:', this.storename);
+        console.log('startime:', this.startime);
+        console.log('endtime:', this.endtime);
         
         },
     }

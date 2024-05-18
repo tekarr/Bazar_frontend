@@ -31,13 +31,13 @@
             <div>
                 <label for="start-time" class=" mb-2 text-sm font-medium text-gray-900 flex justify-center">Open </label>
                 <div class="relative">
-                    <input type="time" id="start-time" class="bg-white border-2 px-8  py-2  leading-none border-gray-300 text-gray-900 text-md rounded-3xl focus:outline-none focus:ring-pink-600 focus:border-pink-600 block w-full " min="09:00" max="18:00" value="00:00" required />
+                    <input type="time" id="start-time" v-model="startime" class="bg-white border-2 px-8  py-2  leading-none border-gray-300 text-gray-900 text-md rounded-3xl focus:outline-none focus:ring-pink-600 focus:border-pink-600 block w-full " min="09:00" max="18:00" value="00:00" required />
                 </div>
             </div>
             <div>
                 <label for="end-time" class=" mb-2 text-sm font-medium text-gray-900 flex justify-center">Close </label>
                 <div class="relative">
-                    <input type="time" id="end-time" class="bg-white px-8  py-2 border-2 leading-none border-gray-300 text-gray-900 text-md rounded-3xl focus:outline-none focus:ring-pink-600 focus:border-pink-600 block w-full p-2.5" min="09:00" max="18:00" value="00:00" required />
+                    <input type="time" id="end-time" v-model="endtime" class="bg-white px-8  py-2 border-2 leading-none border-gray-300 text-gray-900 text-md rounded-3xl focus:outline-none focus:ring-pink-600 focus:border-pink-600 block w-full p-2.5" min="09:00" max="18:00" value="00:00" required />
                 </div>
             </div>
             </div>
@@ -56,17 +56,20 @@ export default {
     components: { navbar, Sidbar },
     data() {
         return {
-        email: '',
-        password: '',
-        fileSelected: true
+        storename: '',
+        fileSelected: true,
+        startime:'09:00',
+        endtime:'18:00'
+
         };
     },
     methods: {
         submitForm() {
         // Perform form submission logic here
-        console.log('Loged in!');
-        console.log('Email:', this.email);
-        console.log('Password:', this.password);
+        console.log('updated');
+        console.log('name:', this.storename);
+        console.log('startime:', this.startime);
+        console.log('endtime:', this.endtime);
         
         },
     }
