@@ -43,8 +43,8 @@
 </template>
 
 <script>
-import Navbarr from '@/components/Navbarr.vue';
-import Footer2 from '@/components/footer2.vue';
+import Navbarr from '/src/components/customer/Navbarr.vue';
+import Footer2 from '/src/components/customer/footer2.vue';
 
     export default {
     components: { Navbarr, Footer2 },

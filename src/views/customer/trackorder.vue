@@ -63,7 +63,7 @@
 </template>
 
 <script>
-import Navbarr from '@/components/Navbarr.vue'
+import Navbarr from '/src/components/customer/Navbarr.vue'
     export default {
   components: { Navbarr },
         data(){

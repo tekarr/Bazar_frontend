@@ -17,7 +17,7 @@
         <div class="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-2">
     
         <router-link class="flex items-center space-x-3 rtl:space-x-reverse" to="/">
-            <img src="../assets/icons/BAZAR (2).png" class=" h-16" alt="Bazar Logo">
+            <img src="../../assets/icons/BAZAR (2).png" class=" h-16" alt="Bazar Logo">
             <span class=" text-black hover:text-pink-600 transition-all duration-200 self-center text-2xl font-semibold whitespace-nowrap ">Bazar</span>
         </router-link>
         
@@ -43,7 +43,7 @@
             
             <!-- cart -->
             <li>
-                <router-link to="/cart"><img class="px-3 w-14 hover:cursor-pointer" src="../assets/icons/carts/shopping-bag.png" alt="cart1"></router-link>
+                <router-link to="/cart"><img class="px-3 w-14 hover:cursor-pointer" src="../../assets/icons/carts/shopping-bag.png" alt="cart1"></router-link>
             </li>
 
             <!-- Search bar -->
@@ -60,7 +60,7 @@
                 <button
                 class=" px-2 py-2 rounded-3xl  bg-pink-600 hover:bg-pink-700 text-white focus:outline-none"
                 @click="clearSearch">
-                <img class="w-5" src="../assets/icons/image.png" alt="Search">
+                <img class="w-5" src="../../assets/icons/image.png" alt="Search">
                 </button>
             </li> 
 
@@ -91,7 +91,7 @@
 </template>
 
 <script>
-import Navbarr from './Navbarr.vue';
+import Navbarr from '/src/components/customer/Navbarr.vue';
 
 
 

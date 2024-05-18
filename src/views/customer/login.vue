@@ -1,7 +1,7 @@
 <template>
 
     <router-link class="flex justify-center items-center space-x-3 mt-20 rtl:space-x-reverse" to="/">
-        <img src="../assets/icons/BAZAR (2).png" class=" h-24" alt="Bazar Logo">
+        <img src="src/assets/icons/BAZAR (2).png" class=" h-24" alt="Bazar Logo">
     </router-link>
 
     <p class="text-xl font-bold text-center pt-5">Login</p>    

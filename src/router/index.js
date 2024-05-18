@@ -1,15 +1,27 @@
 import { createRouter, createWebHistory } from 'vue-router'
-import HomeView from '../views/HomeView.vue'
-import AboutView from '../views/AboutView.vue'
-import Signup from '../views/signup.vue'
-import Login from '../views/login.vue' 
-import productdetail from '../views/productdetail'
-import checkout from '../views/checkout.vue'
-import cart from '@/views/cart.vue'
-import trackorder from '@/views/trackorder.vue'
-import orderhistory from '@/views/orderhistory.vue'
+import HomeView from '../views/customer/HomeView.vue'
+import AboutView from '../views/customer/AboutView.vue'
+import Signup from '../views/customer/signup.vue'
+import Login from '../views/customer/login.vue' 
+import productdetail from '../views/customer/productdetail'
+import checkout from '../views/customer/checkout.vue'
+import cart from '@/views/customer/cart.vue'
+import trackorder from '@/views/customer/trackorder.vue'
+import orderhistory from '@/views/customer/orderhistory.vue'
+import dashboard from '../views/admin/dashboard.vue'
+import notification from '@/views/admin/notification.vue'
+import users from '@/views/admin/users.vue'
+import stores from '@/views/admin/stores.vue'
+import orders from '@/views/admin/orders.vue'
+import profile from '@/views/admin/profile.vue'
+import Add from '@/components/admin/Add.vue'
+import edit from '@/components/admin/edit.vue'
+import addStore from '@/components/admin/add-store.vue'
+import editStore from '@/components/admin/edit-store.vue'
 
 const routes = [
+  
+  //customer routes --------------------------------------
   {
     path: '/',
     name: 'home',
@@ -54,7 +66,70 @@ const routes = [
     path: '/orderhistory',
     name: 'orderhistory',
     component: orderhistory
-  }
+  },
+
+
+  //admin routes --------------------------------------
+  {
+    path: '/admin',
+    redirect: '/admin/dashboard',
+    name: 'Admin',
+  },
+  {
+    path: '/admin/dashboard',
+    name: 'Dashboard',
+    component: dashboard
+  },
+  {
+    path: '/admin/notification',
+    name: 'Notification',
+    component: notification
+  },
+  {
+    path: '/admin/notification',
+    name: 'Notification',
+    component: notification
+  },
+  {
+    path: '/admin/users',
+    name: 'Users',
+    component: users
+  },
+  {
+    path: '/admin/users/add',
+    name: 'Add User',
+    component: Add
+  },
+  {
+    path: '/admin/users/edit',
+    name: 'Edit User',
+    component: edit
+  },
+  {
+    path: '/admin/stores',
+    name: 'Stores',
+    component: stores
+  },
+  {
+    path: '/admin/store/add',
+    name: 'Add Store',
+    component: addStore
+  },
+  {
+    path: '/admin/store/edit',
+    name: 'Edit Store',
+    component: editStore
+  },
+  {
+    path: '/admin/orders',
+    name: 'Orders',
+    component: orders
+  },
+  {
+    path: '/admin/profile',
+    name: 'Profile',
+    component: profile
+  },
 ]
 
 const router = createRouter({
