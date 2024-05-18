@@ -6,6 +6,7 @@
     <p class="text-3xl font-bold text-center pt-5 ">{{ $route.name }}</p>       
     <div class="flex items-center justify-center min-h-screen">
     <form @submit.prevent="submitForm" class="max-w-sm mx-auto mb-40">
+            <!-- image -->
             <div class="relative mb-10 flex justify-center ">
                 <input type="file" id="fileInput" class="hidden">
                 <label for="fileInput" class="cursor-pointer bg-pink-600 text-white px-4 py-2 rounded-3xl">
@@ -17,11 +18,25 @@
                 No chosen file
                 </span>
             </div>
-        <div class="mb-5 text-start">
-            <label class="font-bold pl-5" for="username">Name</label>
-            <input type="text" id="storename" v-model="storename" placeholder="storename" 
-            class="w-full mt-4 bg-slate-50 px-20 py-2 rounded-3xl focus:outline-none focus:ring focus:ring-pink-500 " required>
-        </div>
+
+            <!-- name -->
+            <div class="mb-5 text-start">
+                <label class="font-bold pl-5" for="username">Name</label>
+                <input type="text" id="storename" v-model="storename" placeholder="storename" 
+                class="w-full mt-4 bg-slate-50 px-20 py-2 rounded-3xl focus:outline-none focus:ring focus:ring-pink-500 " required>
+            </div>
+
+            <!-- open & close -->
+            <div class="mb-5 text-start flex justify-between">
+                <label class="font-bold mt-6 mr-2" for="username">Open</label>
+                <input type="text" id="open" v-model="open" placeholder="9am" 
+                class="w-full mt-4 bg-slate-50 px-5 py-2 rounded-3xl focus:outline-none focus:ring focus:ring-pink-500 " required>
+
+                <label class="font-bold mt-6 mr-2 ml-4" for="username">Close</label>
+                <input type="text" id="close" v-model="close" placeholder="10pm" 
+                class="w-full mt-4 bg-slate-50 px-5 py-2 rounded-3xl focus:outline-none focus:ring focus:ring-pink-500 " required>
+            </div>
+
         <button type="submit" class=" m-5 text-white bg-pink-600 hover:bg-pink-700 focus:ring-4 focus:outline-none focus:ring-pink-300 font-medium rounded-3xl text-sm px-5 py-2.5 text-center ">Update</button>
     </form>
     </div>
