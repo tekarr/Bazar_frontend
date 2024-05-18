@@ -1,4 +1,5 @@
 import { createRouter, createWebHistory } from 'vue-router'
+// customer imports ------------------------------------------------
 import HomeView from '../views/customer/HomeView.vue'
 import AboutView from '../views/customer/AboutView.vue'
 import Signup from '../views/customer/signup.vue'
@@ -8,6 +9,7 @@ import checkout from '../views/customer/checkout.vue'
 import cart from '@/views/customer/cart.vue'
 import trackorder from '@/views/customer/trackorder.vue'
 import orderhistory from '@/views/customer/orderhistory.vue'
+// admin imports ------------------------------------------------
 import dashboard from '../views/admin/dashboard.vue'
 import notification from '@/views/admin/notification.vue'
 import users from '@/views/admin/users.vue'
@@ -18,6 +20,9 @@ import Add from '@/components/admin/Add.vue'
 import edit from '@/components/admin/edit.vue'
 import addStore from '@/components/admin/add-store.vue'
 import editStore from '@/components/admin/edit-store.vue'
+// vendor imports ------------------------------------------------
+import vdashboard from '@/views/vendor/vdashboard.vue'
+
 
 const routes = [
   
@@ -86,11 +91,6 @@ const routes = [
     component: notification
   },
   {
-    path: '/admin/notification',
-    name: 'Notification',
-    component: notification
-  },
-  {
     path: '/admin/users',
     name: 'Users',
     component: users
@@ -129,6 +129,19 @@ const routes = [
     path: '/admin/profile',
     name: 'Profile',
     component: profile
+  },
+
+
+  //vendor routes --------------------------------------
+  {
+    path: '/vendor',
+    redirect: '/vendor/dashboard',
+    name: 'vendor',
+  },
+  {
+    path: '/vendor/dashboard',
+    name: 'Dashboard ',
+    component: vdashboard
   },
 ]
 

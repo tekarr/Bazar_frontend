@@ -4,9 +4,9 @@
     <div class="p-4 sm:ml-64"> 
         <navbar/>  
         <!-- Statistic cards -->
-        <div class="bg-pink-600 p-6 rounded-3xl">   
+        <div class="bg-pink-600 p-10 rounded-3xl">   
         
-        <div class="grid grid-cols-3 gap-2 mb-4 ">
+        <div class="grid grid-cols-4 gap-4 mb-4 ">
             
             <!-- client card -->
             <div class="w-50 rounded-3xl bg-white p-10 hover:shadow-2xl transition-all aspect">
@@ -50,7 +50,7 @@
 
             
             <!-- Orders card -->
-            <div class="w-48 mt-4 rounded-3xl bg-white p-10 hover:shadow-2xl transition-all aspect">
+            <div class="w-48 rounded-3xl bg-white p-10 hover:shadow-2xl transition-all aspect">
                 <div class="h-12">
                     <svg class="flex-shrink-0 w-16 h-16  transition duration-75   " enable-background="new 0 0 100 100" height="100" viewBox="0 0 100 110" width="100" xmlns="http://www.w3.org/2000/svg" fill="currentColor"><g>
                         <path d="m78.8 62.1-3.6-1.7c-.5-.3-1.2-.3-1.7 0l-21.5 10.2c-1.2.6-2.7.6-3.9 0l-21.6-10.2c-.5-.3-1.2-.3-1.7 0l-3.6 1.7c-1.6.8-1.6 2.9 0 3.7l26.8 12.7c1.2.6 2.7.6 3.9 0l26.8-12.7c1.7-.8 1.7-3 .1-3.7z"/><path d="m78.8 48.1-3.7-1.7c-.5-.3-1.2-.3-1.7 0l-21.4 10.2c-1.2.6-2.7.6-3.9 0l-21.5-10.2c-.5-.3-1.2-.3-1.7 0l-3.7 1.7c-1.6.8-1.6 2.9 0 3.7l26.8 12.8c1.2.6 2.7.6 3.9 0l26.8-12.7c1.7-.8 1.7-3 .1-3.8z"/><path d="m21.2 37.8 26.8 12.7c1.2.6 2.7.6 3.9 0l26.8-12.7c1.6-.8 1.6-2.9 0-3.7l-26.8-12.7c-1.2-.6-2.7-.6-3.9 0l-26.8 12.8c-1.6.7-1.6 2.9 0 3.6z"/></g>
@@ -70,8 +70,8 @@
 </template> 
 
 <script>
-import Navbar from '@/components/admin/navbar.vue';
-import Sidbar from '/src/components/admin/Sidbar.vue'
+import Navbar from '@/components/vendor/navbar.vue';
+import Sidbar from '/src/components/vendor/Sidbar.vue'
 
     export default {
     components:
