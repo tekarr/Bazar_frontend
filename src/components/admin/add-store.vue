@@ -27,14 +27,19 @@
             </div>
             
             <!-- open & close -->
-            <div class="mb-5 text-start flex justify-between">
-                <label class="font-bold mt-6 mr-2" for="username">Open</label>
-                <input type="text" id="open" v-model="open" placeholder="9am" 
-                class="w-full mt-4 bg-slate-50 px-5 py-2 rounded-3xl focus:outline-none focus:ring focus:ring-pink-500 " required>
-
-                <label class="font-bold mt-6 mr-2 ml-4" for="username">Close</label>
-                <input type="text" id="close" v-model="close" placeholder="10pm" 
-                class="w-full mt-4 bg-slate-50 px-5 py-2 rounded-3xl focus:outline-none focus:ring focus:ring-pink-500 " required>
+            <div class="flex justify-between">
+            <div>
+                <label for="start-time" class="block mb-2 text-sm font-medium text-gray-900 ">Open </label>
+                <div class="relative">
+                    <input type="time" id="start-time" class="bg-white border-2  py-2  leading-none border-gray-300 text-gray-900 text-md rounded-3xl focus:outline-none focus:ring-pink-600 focus:border-pink-600 block w-full " min="09:00" max="18:00" value="00:00" required />
+                </div>
+            </div>
+            <div>
+                <label for="end-time" class="block mb-2 text-sm font-medium text-gray-900 ">Close </label>
+                <div class="relative">
+                    <input type="time" id="end-time" class="bg-white  py-2 border-2 leading-none border-gray-300 text-gray-900 text-md rounded-3xl focus:outline-none focus:ring-pink-600 focus:border-pink-600 block w-full p-2.5" min="09:00" max="18:00" value="00:00" required />
+                </div>
+            </div>
             </div>
 
 
