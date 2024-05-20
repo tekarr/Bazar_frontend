@@ -16,7 +16,7 @@
     </div>
 
     <!-- File input -->
-    <div class="mb-8 mt-8 flex justify-center">
+    <div class="mb-8 mt-8 ">
         <label class="mb-4 p-2 bg-pink-600 text-white rounded-3xl px-4 shadow-md hover:bg-pink-700 cursor-pointer">
         Choose Images
         <input type="file" multiple @change="onFileChange" class="hidden" />

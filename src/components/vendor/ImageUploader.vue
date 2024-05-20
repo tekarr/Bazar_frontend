@@ -6,7 +6,7 @@
     </div>
 
     <!-- Choose image button -->
-    <div class="flex flex-col items-center  h-20 ">    
+    <div class=" h-20 ">    
         <label class="mb-4 p-2 px-4 bg-pink-600 text-white rounded-3xl shadow-md hover:bg-gray-800 cursor-pointer">
             Choose image
             <input type="file" @change="onFileChange" class="hidden" />
