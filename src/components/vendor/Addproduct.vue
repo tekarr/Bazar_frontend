@@ -10,7 +10,7 @@
             <image-uploader-2/>
 
             <!-- name -->
-            <div class="mb-5 text-start">
+            <div class="mb-5 text-start w-80">
                 <label class="" for="storename">Name</label>
                 <input type="text" id="productname" v-model="productname" placeholder="product name" 
                 class="w-full mt-4 bg-slate-50 px-10 py-2 rounded-xl focus:outline-none focus:ring focus:ring-pink-500 " required>
@@ -51,7 +51,6 @@
 
             <hr>
             
-
         <button type="submit" class=" m-5 text-white bg-pink-600 hover:bg-gray-800 focus:ring-4 focus:outline-none focus:ring-pink-300 font-medium rounded-3xl text-sm px-5 py-2.5 text-center ">Add</button>
     </form>
     </div>
