@@ -38,12 +38,12 @@
                 </tbody>
             </table>
         </div>
-        
+            
 </template>
 
 <script>
-import Sidbar from '@/components/admin/Sidbar.vue'
-import Navbar from '@/components/admin/navbar.vue'
+import Sidbar from '@/components/vendor/Sidbar.vue'
+import Navbar from '@/components/vendor/navbar.vue'
     export default {
     components: { Sidbar, Navbar },
     data(){

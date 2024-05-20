@@ -1,8 +1,6 @@
 <template>
-    <sidbar/>
-    
-    <div class="p-4 sm:ml-64"> 
-        <navbar/>  
+
+
         <!-- Statistic cards -->
         <div class="bg-pink-600 p-6 rounded-3xl">   
         
@@ -21,7 +19,7 @@
                 <p class="mt-2 font-sans text-base font-medium text-gray-500">Clients</p>
             </div>
             
-            <!-- Sales -->
+            <!-- Sales card -->
             <div class="w-52 mt-4 rounded-3xl bg-white p-10  hover:shadow-2xl transition-all aspect">
                 <div class="h-10">
                     <svg class="h-full fill-white"  stroke-width="1.5" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -65,7 +63,7 @@
 
         </div>   
         </div>
-    </div>
+
 
 </template> 
 

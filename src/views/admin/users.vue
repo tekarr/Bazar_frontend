@@ -1,7 +1,4 @@
 <template>
-    <sidbar/>
-    <div class="p-4 sm:ml-64"> 
-        <navbar/>
 
         <!-- users table -->
         <div class="relative overflow-x-auto">
@@ -41,8 +38,7 @@
                 <button class="px-4 mx-4 py-2 mt-2 bg-pink-600 rounded-3xl text-white">Add User</button>
             </router-link>
         </div>
-
-    </div>    
+        
 </template>
 
 <script>

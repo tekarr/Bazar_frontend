@@ -36,19 +36,19 @@
             </router-link>
             </li>
             <li>
-                <router-link to="/vendor/users" :class="sidebarLinkClass('/vendor/users')" class="flex items-center p-4 text-gray-900 rounded-lg  hover:bg-pink-600  group">
-                <svg class="flex-shrink-0 w-5 h-5 hover:text-gray-100 transition duration-75  group-hover:text-gray-100 " aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 18">
-                    <path d="M14 2a3.963 3.963 0 0 0-1.4.267 6.439 6.439 0 0 1-1.331 6.638A4 4 0 1 0 14 2Zm1 9h-1.264A6.957 6.957 0 0 1 15 15v2a2.97 2.97 0 0 1-.184 1H19a1 1 0 0 0 1-1v-1a5.006 5.006 0 0 0-5-5ZM6.5 9a4.5 4.5 0 1 0 0-9 4.5 4.5 0 0 0 0 9ZM8 10H5a5.006 5.006 0 0 0-5 5v2a1 1 0 0 0 1 1h11a1 1 0 0 0 1-1v-2a5.006 5.006 0 0 0-5-5Z"/>
+                <router-link to="/vendor/products" :class="sidebarLinkClass('/vendor/products')" class="flex items-center p-4 text-gray-900 rounded-lg  hover:bg-pink-600  group">
+                <svg  class="flex-shrink-0 w-6 h-6 hover:text-gray-100 transition duration-75  group-hover:text-gray-100 " fill="currentColor" height="20" viewBox="0 0 48 48" width="48" xmlns="http://www.w3.org/2000/svg"><path d="m0 0h48v48h-48z" fill="currentColor" fill-opacity=".01"/>
+                        <path d="m4 14-.89443-1.7889c-.67757.3388-1.10557 1.0314-1.10557 1.7889zm20-10 .8944-1.78885c-.563-.28153-1.2258-.28153-1.7888 0zm20 10h2c0-.7575-.428-1.4501-1.1056-1.7889zm0 20 .8944 1.7889c.6776-.3388 1.1056-1.0314 1.1056-1.7889zm-20 10-.8944 1.7889c.563.2815 1.2258.2815 1.7888 0zm-20-10h-2c0 .7575.428 1.4501 1.10557 1.7889zm.89443-18.2111 19.99997-10.00005-1.7888-3.5777-20.00003 9.99995zm37.10557-1.7889v20h4v-20zm1.1056 18.2111-20 10 1.7888 3.5778 20-10zm-18.2112 10-19.99997-10-1.78886 3.5778 20.00003 10zm-18.8944-8.2111v-20h-4v20zm38.8944-21.7889-20-9.99995-1.7888 3.5777 20 10.00005z" fill="currentColor"/><path d="m4 14 20 10" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="4"/><path clip-rule="evenodd" d="m24 24v20z" fill="#2f88ff" fill-rule="evenodd"/><path d="m24 44v-20" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="4"/><path d="m44 14-20 10" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="4"/><path d="m34.8944 10.7889c.988-.494 1.3884-1.69537.8945-2.68333-.494-.98795-1.6954-1.3884-2.6833-.89442zm-21.7888 6.4222c-.988.494-1.3884 1.6954-.8945 2.6833.494.988 1.6954 1.3884 2.6833.8945zm20-9.99995-20 9.99995 1.7888 3.5778 20-10z" fill="currentColor"/>
                 </svg>
-                <span class="flex-1 ms-3 whitespace-nowrap">Users</span>
+                <span class="flex-1 ms-3 whitespace-nowrap">Products</span>
                 </router-link>
             </li>
             <li>
-                <router-link to="/vendor/stores" :class="sidebarLinkClass('/vendor/stores')"  class="flex items-center p-4 text-gray-900 rounded-lg  hover:bg-pink-600 dark:hover:bg-gray-700 group">
+                <router-link to="/vendor/store" :class="sidebarLinkClass('/vendor/store')"  class="flex items-center p-4 text-gray-900 rounded-lg  hover:bg-pink-600 dark:hover:bg-gray-700 group">
                     <svg class="flex-shrink-0 w-6 h-6 hover:text-gray-100 transition duration-75  group-hover:text-gray-100 " aria-hidden="true"  xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 256 256">
                         <path d="M231.98987,95.79919c-.00293-.11914-.00971-.23779-.01807-.35705-.01269-.1836-.03168-.36475-.05658-.5448-.0144-.10315-.02868-.20581-.04712-.30872-.03772-.21142-.08545-.41894-.13946-.62426-.01416-.05372-.02094-.10853-.03626-.16211L217.35059,43.604A16.06985,16.06985,0,0,0,201.96582,32H54.03418A16.06971,16.06971,0,0,0,38.64941,43.60449L24.30762,93.80225c-.01532.05358-.0221.10839-.03626.16211-.054.20532-.10174.41284-.13946.62426-.01844.10291-.03272.20557-.04712.30872-.0249.18-.04389.3612-.05658.5448-.00836.11926-.01514.23791-.01807.35705C24.00848,95.86658,24,95.93213,24,96v16a39.96225,39.96225,0,0,0,16,31.978V208a16.01833,16.01833,0,0,0,16,16H200a16.01833,16.01833,0,0,0,16-16V143.978A39.96225,39.96225,0,0,0,232,112V96C232,95.93213,231.99152,95.86658,231.98987,95.79919ZM54.03027,48H201.96582l11.42871,40H42.60547ZM104,104h48v8a24,24,0,0,1-48,0Zm-16,0v8a23.98436,23.98436,0,0,1-35.12427,21.256,7.98348,7.98348,0,0,0-1.813-1.05774A23.99615,23.99615,0,0,1,40,112v-8ZM200,208H56V151.19507a39.99151,39.99151,0,0,0,40-15.223,39.95817,39.95817,0,0,0,64,0,39.99151,39.99151,0,0,0,40,15.223Zm4.932-75.79834a7.97833,7.97833,0,0,0-1.80152,1.05115A23.9845,23.9845,0,0,1,168,112v-8h48v8A23.99617,23.99617,0,0,1,204.932,132.20166Z"/>
                     </svg>
-                    <span class="flex-1 ms-3 whitespace-nowrap">Stores</span>
+                    <span class="flex-1 ms-3 whitespace-nowrap">Store</span>
                 </router-link>
             </li>
             <li>

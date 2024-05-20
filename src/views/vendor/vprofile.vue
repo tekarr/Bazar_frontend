@@ -1,4 +1,5 @@
 <template>
+
     
     <div class="flex items-start justify-start  min-h-screen ">
     <form @submit.prevent="submitForm" class="max-w-sm mx-10 mt-4 ">
@@ -27,8 +28,8 @@
 </template>
 
 <script>
-import navbar from '../../components/admin/navbar.vue';
-import Sidbar from '../../components/admin/Sidbar.vue';
+import navbar from '../../components/vendor/navbar.vue';
+import Sidbar from '../../components/vendor/Sidbar.vue';
 export default {
     components: { navbar, Sidbar },
     data() {

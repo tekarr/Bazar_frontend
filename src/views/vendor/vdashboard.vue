@@ -1,27 +1,24 @@
 <template>
-    <sidbar/>
-    
-    <div class="p-4 sm:ml-64"> 
-        <navbar/>  
+
         <!-- Statistic cards -->
         <div class="bg-pink-600 p-6 rounded-3xl">   
         
         <div class="grid grid-cols-5 gap-2 mb-4 md:grid-cols-2 lg:grid-cols-5 ">
             
-            <!-- client card -->
+            <!-- Products card -->
             <div class="w-52 mt-4 rounded-3xl bg-white p-10 hover:shadow-2xl transition-all aspect">
-                <div class="h-10">
-                    <svg class="h-full fill-white stroke-blue-600" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
-                        <path stroke-linecap="round" stroke-linejoin="round" d="M15 19.128a9.38 9.38 0 002.625.372 9.337 9.337 0 004.121-.952 4.125 4.125 0 00-7.533-2.493M15 19.128v-.003c0-1.113-.285-2.16-.786-3.07M15 19.128v.106A12.318 12.318 0 018.624 21c-2.331 0-4.512-.645-6.374-1.766l-.001-.109a6.375 6.375 0 0111.964-3.07M12 6.375a3.375 3.375 0 11-6.75 0 3.375 3.375 0 016.75 0zm8.25 2.25a2.625 2.625 0 11-5.25 0 2.625 2.625 0 015.25 0z" />
+                <div class="h-10 flex justify-start">
+                    <svg  class=" w-9 h-9 hover:text-gray-100 transition duration-75  group-hover:text-gray-100 " fill="blue" height="20" viewBox="0 0 48 48" width="48" xmlns="http://www.w3.org/2000/svg"><path d="m0 0h48v48h-48z" fill="blue" fill-opacity=".01"/>
+                        <path d="m4 14-.89443-1.7889c-.67757.3388-1.10557 1.0314-1.10557 1.7889zm20-10 .8944-1.78885c-.563-.28153-1.2258-.28153-1.7888 0zm20 10h2c0-.7575-.428-1.4501-1.1056-1.7889zm0 20 .8944 1.7889c.6776-.3388 1.1056-1.0314 1.1056-1.7889zm-20 10-.8944 1.7889c.563.2815 1.2258.2815 1.7888 0zm-20-10h-2c0 .7575.428 1.4501 1.10557 1.7889zm.89443-18.2111 19.99997-10.00005-1.7888-3.5777-20.00003 9.99995zm37.10557-1.7889v20h4v-20zm1.1056 18.2111-20 10 1.7888 3.5778 20-10zm-18.2112 10-19.99997-10-1.78886 3.5778 20.00003 10zm-18.8944-8.2111v-20h-4v20zm38.8944-21.7889-20-9.99995-1.7888 3.5777 20 10.00005z" fill="#00C1DC"/><path d="m4 14 20 10" stroke="#00C1DC" stroke-linecap="round" stroke-linejoin="round" stroke-width="4"/><path clip-rule="evenodd" d="m24 24v20z" fill="#00C1DC" fill-rule="evenodd"/><path d="m24 44v-20" stroke="#00C1DC" stroke-linecap="round" stroke-linejoin="round" stroke-width="4"/><path d="m44 14-20 10" stroke="#00C1DC" stroke-linecap="round" stroke-linejoin="round" stroke-width="4"/><path d="m34.8944 10.7889c.988-.494 1.3884-1.69537.8945-2.68333-.494-.98795-1.6954-1.3884-2.6833-.89442zm-21.7888 6.4222c-.988.494-1.3884 1.6954-.8945 2.6833.494.988 1.6954 1.3884 2.6833.8945zm20-9.99995-20 9.99995 1.7888 3.5778 20-10z" fill="#00C1DC"/>
                     </svg>
                 </div>
                 <div class="my-2">
-                    <h2 class="text-4xl font-bold"><span>2680 +</span></h2>
+                    <h2 class="text-4xl font-bold"><span>10 +</span></h2>
                 </div>
-                <p class="mt-2 font-sans text-base font-medium text-gray-500">Clients</p>
+                <p class="mt-2 font-sans text-base font-medium text-gray-500">Products</p>
             </div>
             
-            <!-- Sales -->
+            <!-- Sales card -->
             <div class="w-52 mt-4 rounded-3xl bg-white p-10  hover:shadow-2xl transition-all aspect">
                 <div class="h-10">
                     <svg class="h-full fill-white"  stroke-width="1.5" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -30,22 +27,22 @@
                     </svg>
                 </div>
                 <div class="my-2">
-                    <h2 class="text-4xl font-bold"><span class="">380$</span></h2>
+                    <h2 class="text-4xl font-bold"><span class="">180$</span></h2>
                 </div>
                 <p class="mt-2 font-sans text-base font-medium text-gray-500">Sales</p>
             </div>
 
-            <!-- vendor card -->
+            <!-- Low in stock card -->
             <div class="w-52 mt-4 rounded-3xl bg-white p-10 hover:shadow-2xl transition-all aspect">
-                <div class="h-10">
-                    <svg class="h-full fill-white stroke-pink-600" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
-                        <path stroke-linecap="round" stroke-linejoin="round" d="M15 19.128a9.38 9.38 0 002.625.372 9.337 9.337 0 004.121-.952 4.125 4.125 0 00-7.533-2.493M15 19.128v-.003c0-1.113-.285-2.16-.786-3.07M15 19.128v.106A12.318 12.318 0 018.624 21c-2.331 0-4.512-.645-6.374-1.766l-.001-.109a6.375 6.375 0 0111.964-3.07M12 6.375a3.375 3.375 0 11-6.75 0 3.375 3.375 0 016.75 0zm8.25 2.25a2.625 2.625 0 11-5.25 0 2.625 2.625 0 015.25 0z" />
+                <div class="h-10 ">
+                    <svg height="34" viewBox="0 0 16 16" width="34" xmlns="http://www.w3.org/2000/svg"><g fill="#DB2777">
+                        <path d="m12 6v-6h-8v6h-4v7h16v-7zm-5 6h-6v-5h2v1h2v-1h2zm-2-6v-5h2v1h2v-1h2v5zm10 6h-6v-5h2v1h2v-1h2z"/><path d="m0 16h3v-1h10v1h3v-2h-16z"/></g>
                     </svg>
                 </div>
                 <div class="my-2">
-                    <h2 class="text-4xl font-bold"><span class="">380 +</span></h2>
+                    <h2 class="text-4xl font-bold"><span class="">2 +</span></h2>
                 </div>
-                <p class="mt-2 font-sans text-base font-medium text-gray-500">Vendors</p>
+                <p class="mt-2 font-sans text-base font-medium text-gray-500">Low in stock</p>
             </div>
 
             
@@ -57,27 +54,36 @@
                     </svg>
                 </div>
                 <div class="my-2">
-                    <h2 class="text-4xl font-bold"><span class="">200 +</span></h2>
+                    <h2 class="text-4xl font-bold"><span class="">9 +</span></h2>
                 </div>
                 <p class="mt-2 font-sans text-base font-medium text-gray-500">Orders</p>
             </div>
-            
 
         </div>   
         </div>
-    </div>
 
 </template> 
 
 <script>
 import Navbar from '@/components/vendor/navbar.vue';
 import Sidbar from '/src/components/vendor/Sidbar.vue'
+import Storecard from '@/components/customer/storecard.vue';
 
     export default {
     components:
-    { Sidbar , Navbar },
+    { Sidbar , Navbar, Storecard },
     data() {
     return {
+        cards: [
+        {
+            id: 1,
+            image: 'https://flowbite.s3.amazonaws.com/docs/gallery/square/image.jpg',
+            title: 'Weed',
+            description: 'good for ur health',
+            price: '95',
+            store: 'Store-name'
+        },
+    ]
     };
     },
     methods: {

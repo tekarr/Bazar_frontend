@@ -12,7 +12,7 @@
                         <ul>
                         <li v-for="message in messages" :key="message.id">{{ message.text }}</li>
                         </ul>
-                        <div class="pt-2"><router-link to="/admin/notification" class="text-pink-600">Show all</router-link></div>
+                        <div class="pt-2"><router-link to="/vendor/notification" class="text-pink-600">Show all</router-link></div>
                     </div>
                 </div>
                 <!-- profile -->
@@ -20,7 +20,7 @@
                     <button @click="pMenu" :class="pborderColor"  class="p-2 border-2 hover:border-pink-600 text-white rounded-full w-10"><img src="../../assets/icons/profile-circle-new.png" class="w-6" alt="notifi"></button>
                     <div v-if="profilMenu" class="bg-white mt-2 p-8 rounded-3xl shadow-md absolute top-20 right-5 z-10 " >
                         <h3 class="text-lg font-bold mb-2">username</h3>
-                        <div><router-link to="/admin/profile" class="hover:text-pink-600">Edit profile</router-link></div>
+                        <div><router-link to="/vendor/profile" class="hover:text-pink-600">Edit profile</router-link></div>
                         <div class="pt-2"><router-link to="/" class=" text-pink-600 cursor-pointer">logout</router-link></div>
                     </div>
                 </div>
