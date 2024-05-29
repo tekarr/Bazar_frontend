@@ -12,7 +12,7 @@
             <input type="file" @change="onFileChange" class="hidden" />
         </label>
     </div>
-    <div class="mb-4">Prefered image size <span class="text-pink-500">100x50</span></div>
+    <div class="mb-4 opacity-60">Prefered image size <span class="text-pink-500">100x50</span></div>
 
 </template>
 

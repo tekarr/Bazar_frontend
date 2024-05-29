@@ -74,7 +74,7 @@
 
 <!-- Cards -->
 <div ref="specificSection" class="grid grid-cols-2 md:grid-cols-1 lg:grid-cols-3 gap-10 p-4 md:p-8"> 
-    <router-link :to="`/product/${card.name}`" class="bg-gray-100 rounded-3xl cursor-pointer hover:shadow-lg transition-all" v-for="card in products" :key="card.id">
+    <router-link :to="`/product/${card.name}`" class="bg-gray-100 rounded-3xl cursor-pointer hover:shadow-lg transition-all" v-for="card in cards" :key="card.id">
         <img class="h-auto w-full rounded-t-3xl md:rounded-3xl" :src="card.image" alt="">
         <div class="p-4 md:pl-10">
             <p class="text-lg md:text-2xl font-bold pt-4 md:text-start text-center">{{ card.name }}</p>

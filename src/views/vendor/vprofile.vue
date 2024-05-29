@@ -1,5 +1,4 @@
 <template>
-
     
     <div class="flex items-start justify-start  min-h-screen ">
     <form @submit.prevent="submitForm" class="max-w-sm mx-10 mt-4 ">
