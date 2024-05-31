@@ -26,8 +26,8 @@ export default {
     Cards,
     Pages,
     footer2,
-    Deals},
-    }
+    Deals,
+    }}
 
 
 </script>

@@ -11,8 +11,7 @@
     </div>
 
 
-<!-- Navbar -->
-<nav class="bg-white fixed w-full h-28 z-20 top-0 start-0 border-b-4 border-gray-200 rounded-none">
+    <nav class="bg-white fixed w-full h-28 z-20 top-0 start-0 border-b-4 border-gray-200 rounded-none">
         
         <div class="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-2">
     
@@ -41,24 +40,22 @@
             <router-link class="block py-2 px-3 mt-1 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-pink-700 md:p-0   transition-all duration-300 " to="/about">About</router-link>
             </li>
             
-            <!-- cart -->
             <li>
                 <router-link to="/cart"><img class="px-3 w-14 hover:cursor-pointer" src="../../assets/icons/carts/shopping-bag.png" alt="cart1"></router-link>
             </li>
 
-            <!-- Search bar -->
             <li>
                 <input
                 v-model="searchTerm"
                 type="text"
                 placeholder="Search..." 
-                class="w-full bg-slate-50 px-20 py-2 font-bold rounded-3xl focus:outline-none focus:ring focus:ring-pink-500 "  @click="scrollToSection"/>
+                class="w-full bg-slate-50 px-20 py-2 rounded-3xl focus:outline-none focus:ring focus:ring-pink-500  " @click="scrollToSpecificPosition" />
                 
             </li>
 
             <li>   
                 <button
-                class=" px-2 py-2 rounded-3xl  bg-pink-600 hover:bg-pink-700 text-white focus:outline-none"
+                class=" px-2 py-2 rounded-3xl  bg-pink-600 hover:bg-pink-700 text-white focus:outline-none "
                 @click="clearSearch">
                 <img class="w-5" src="../../assets/icons/image.png" alt="Search">
                 </button>
@@ -70,11 +67,9 @@
         </div>
     </nav>
 
-
-
 <!-- Cards -->
 <div ref="specificSection" class="grid grid-cols-2 md:grid-cols-1 lg:grid-cols-3 gap-10 p-4 md:p-8"> 
-    <router-link :to="`/product/${card.name}`" class="bg-gray-100 rounded-3xl cursor-pointer hover:shadow-lg transition-all" v-for="card in cards" :key="card.id">
+    <router-link :to="`/product/${card.name}`" class="bg-gray-100 rounded-3xl cursor-pointer hover:shadow-lg transition-all" v-for="card in filteredItems()" :key="card.id">
         <img class="h-auto w-full rounded-t-3xl md:rounded-3xl" :src="card.image" alt="">
         <div class="p-4 md:pl-10">
             <p class="text-lg md:text-2xl font-bold pt-4 md:text-start text-center">{{ card.name }}</p>
@@ -91,9 +86,7 @@
 </template>
 
 <script>
-import Navbarr from '/src/components/customer/Navbarr.vue';
-
-
+import Navbarr from './Navbarr.vue';
 
     export default {
     components: { Navbarr },
@@ -206,21 +199,23 @@ import Navbarr from '/src/components/customer/Navbarr.vue';
     this.showPopup = false;
     },
     addtocart(){
-
     },
     clearSearch() {
     this.searchTerm = '';
     },
-    scrollToSection() {
-    const specificSection = this.$refs.specificSection;
-    const sectionPosition = specificSection.offsetTop - 110;
-    window.scrollTo({ top: sectionPosition, behavior: 'smooth' });
+    scrollToSpecificPosition() {
+    const targetPosition = 600; // Desired scroll position in pixels from the top
+    window.scrollTo({
+        top: targetPosition,
+        behavior: 'smooth' // Smooth scroll transition
+    });
     }
     }
 }
 </script>
 
 <script setup>
+
 import useProducts from "@/comp/products.js";
 import { onMounted, ref } from "vue";
 
@@ -236,7 +231,7 @@ const filteredItems = () => {
     card.name.toLowerCase().includes(searchTerm.value.toLowerCase())
     );
 };
-    
+
 </script>
 
 <style lang="scss" scoped>

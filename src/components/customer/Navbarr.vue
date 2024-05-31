@@ -38,13 +38,13 @@
                 v-model="searchTerm"
                 type="text"
                 placeholder="Search..." 
-                class="w-full bg-slate-50 px-20 py-2 rounded-3xl focus:outline-none focus:ring focus:ring-pink-500 invisible "  @click="scrollToSection"/>
+                class="w-full bg-slate-50 px-20 py-2 rounded-3xl focus:outline-none focus:ring focus:ring-pink-500 invisible " @click="scrollToSpecificPosition" />
                 
             </li>
 
             <li>   
                 <button
-                class=" px-2 py-2 rounded-3xl  bg-pink-600 hover:bg-pink-700 text-white focus:outline-none invisible"
+                class=" px-2 py-2 rounded-3xl  bg-pink-600 hover:bg-pink-700 text-white focus:outline-none invisible "
                 @click="clearSearch">
                 <img class="w-5" src="../../assets/icons/image.png" alt="Search">
                 </button>
@@ -56,10 +56,13 @@
         </div>
     </nav>
     
+    
 </template>
     
     <script>
+import cards from './cards.vue';
     export default {
+    components: { cards },
     data() {
         return {
         searchTerm: ''
@@ -68,6 +71,13 @@
     methods: {
         clearSearch() {
         this.searchTerm = '';
+        },
+        scrollToSpecificPosition() {
+        const targetPosition = 600; // Desired scroll position in pixels from the top
+        window.scrollTo({
+            top: targetPosition,
+            behavior: 'smooth' // Smooth scroll transition
+        });
         }
     } 
 }

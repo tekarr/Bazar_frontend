@@ -1,4 +1,5 @@
 import { createRouter, createWebHistory } from 'vue-router'
+
 // customer imports ------------------------------------------------
 import HomeView from '../views/customer/HomeView.vue'
 import AboutView from '../views/customer/AboutView.vue'
@@ -191,9 +192,12 @@ const routes = [
   },
 ];
 
+
 const router = createRouter({
   history: createWebHistory(process.env.BASE_URL),
   routes
 })
+
+
 
 export default router
