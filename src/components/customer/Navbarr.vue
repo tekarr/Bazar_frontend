@@ -53,23 +53,28 @@
         </ul>
         </div>
         </div>
+        
+        <!--side menu -->
         <div class="flex justify-end">
-        <div class="mt-4 mr-6 py-2 flex justify-center text-white bg-gray-800 w-40 rounded-2xl">
-            <ul>
-                <li class="py-1">
-                    <div class="flex justify-between">
-                        <span class="w-6">username</span>
-                        <button class="bg-gray-700 w-6 rounded-3xl">x</button>
-                    </div>
-                </li> 
-                <li class="py-1 "><router-link to="/profile">Profile</router-link></li>
-                <li class="py-1"><router-link to="/trackorder">Track Orders</router-link></li>
-                <li class="py-1"><router-link to="/orderhistory">Order History</router-link></li>
-                <li class="py-1"><router-link to="/becomevendor">Become vendor</router-link></li>
-                <li class="py-1"><router-link to="/logout">logout</router-link></li>
-            </ul>
+            <div class="mt-6 mr-6 py-2 flex justify-center text-white bg-gray-800 w-40 rounded-2xl">
+                <ul>
+                    <li class="py-1">
+                        <div class="flex justify-between">
+                            <span class="w-6">username</span>
+                            <button class="bg-gray-700 w-6 rounded-3xl">x</button>
+                        </div>
+                    </li>
+                    <li class="py-1"><router-link to="/">Shop</router-link></li>
+                    <li class="py-1"><router-link to="/cart">Cart</router-link></li>
+                    <li class="py-1 "><router-link to="/profile">Profile</router-link></li>
+                    <li class="py-1"><router-link to="/trackorder">Track Orders</router-link></li>
+                    <li class="py-1"><router-link to="/orderhistory">Order History</router-link></li>
+                    <li class="py-1"><router-link to="/becomevendor">Become vendor</router-link></li>
+                    <li class="py-1"><router-link to="/about">About</router-link></li>
+                    <li class="py-1"><router-link to="/logout">logout</router-link></li>
+                </ul>
+            </div>
         </div>
-    </div>
     </nav>
     
     
