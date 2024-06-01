@@ -1,8 +1,10 @@
 <template>
 
-    <router-link class="flex justify-center items-center space-x-3 mt-8  rtl:space-x-reverse" to="/">
-        <img src="../../assets/icons/BAZAR (2).png" class=" h-24" alt="Bazar Logo">
-    </router-link>  
+    <div class="flex justify-center">
+        <router-link class="flex justify-center items-center mt-8 w-32" to="/">
+            <img src="../../assets/icons/BAZAR (2).png" class=" h-24" alt="Bazar Logo">
+        </router-link>  
+    </div>
 
     <p class="text-xl font-bold text-center pt-2 mb-4">Sign up</p>    
     <div class="flex items-center justify-center ">
@@ -65,9 +67,8 @@ export default {
             name: this.name,
             email: this.email,
             password: this.password,
-            password_confirmatio: this.password_confirmation
+            password_confirmation: this.password_confirmation
             });
-            console.log("hi");
             console.log(response.data);
         } 
     }
