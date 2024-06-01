@@ -4,9 +4,9 @@
         <img src="../../assets/icons/BAZAR (2).png" class=" h-24" alt="Bazar Logo">
     </router-link>  
 
-    <p class="text-xl font-bold text-center pt-2 mb-4">Sign Up</p>    
+    <p class="text-xl font-bold text-center pt-2 mb-4">Sign up</p>    
     <div class="flex items-center justify-center ">
-    <form @submit.prevent="submit" class="w-1/3">
+    <form @submit.prevent="submit" class="lg:w-1/3 md:w-1/2">
 
             <div class="mb-5 text-start">
                 <label class="font-bold pl-5" for="username">Name</label>
