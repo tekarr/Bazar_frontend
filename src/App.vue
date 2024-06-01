@@ -45,6 +45,6 @@ nav a:hover{
 }
 
 nav a.router-link-exact-active {
-  color: #e60e5e;
+  color: #f02771;
 }
 </style>

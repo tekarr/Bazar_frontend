@@ -38,7 +38,7 @@
                 v-model="searchTerm"
                 type="text"
                 placeholder="Search..." 
-                class="w-full bg-slate-50 px-20 py-2 rounded-3xl focus:outline-none focus:ring focus:ring-pink-500 invisible " @click="scrollToSpecificPosition" />
+                class="w-full bg-slate-50 mr-32 px-4 py-2 rounded-3xl focus:outline-none focus:ring focus:ring-pink-500 invisible " @click="scrollToSpecificPosition" />
                 
             </li>
 
@@ -52,8 +52,24 @@
 
         </ul>
         </div>
-    
         </div>
+        <div class="flex justify-end">
+        <div class="mt-4 mr-6 py-2 flex justify-center text-white bg-gray-800 w-40 rounded-2xl">
+            <ul>
+                <li class="py-1">
+                    <div class="flex justify-between">
+                        <span class="w-6">username</span>
+                        <button class="bg-gray-700 w-6 rounded-3xl">x</button>
+                    </div>
+                </li> 
+                <li class="py-1 "><router-link to="/profile">Profile</router-link></li>
+                <li class="py-1"><router-link to="/trackorder">Track Orders</router-link></li>
+                <li class="py-1"><router-link to="/orderhistory">Order History</router-link></li>
+                <li class="py-1"><router-link to="/becomevendor">Become vendor</router-link></li>
+                <li class="py-1"><router-link to="/logoutb">logout</router-link></li>
+            </ul>
+        </div>
+    </div>
     </nav>
     
     

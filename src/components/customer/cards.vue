@@ -30,6 +30,7 @@
             </svg>
         </button>
         </div>
+
         
         <div class="items-center justify-between hidden w-full md:flex md:w-auto md:order-1" id="navbar-sticky">
         <ul class="flex flex-col p-4 md:p-0 mt-4 font-medium border border-gray-100 rounded-lg bg-gray-50 md:space-x-8 rtl:space-x-reverse md:flex-row md:mt-0 md:border-0 md:bg-white ">
@@ -49,7 +50,7 @@
                 v-model="searchTerm"
                 type="text"
                 placeholder="Search..." 
-                class="w-full bg-slate-50 px-20 py-2 rounded-3xl focus:outline-none focus:ring focus:ring-pink-500  " @click="scrollToSpecificPosition" />
+                class="w-full bg-slate-50 mr-32 px-4 py-2 rounded-3xl focus:outline-none focus:ring focus:ring-pink-500  " @click="scrollToSpecificPosition" />
                 
             </li>
 
@@ -60,16 +61,33 @@
                 <img class="w-5" src="../../assets/icons/image.png" alt="Search">
                 </button>
             </li> 
-
+            
         </ul>
-        </div>
+    </div>
     
+    </div>
+    <div class="flex justify-end">
+        <div class="mt-4 mr-6 py-2 flex justify-center text-white bg-gray-800 w-40 rounded-2xl">
+            <ul>
+                <li class="py-1">
+                    <div class="flex justify-between">
+                        <span class="w-6">username</span>
+                        <button class="bg-gray-700 w-6 rounded-3xl">x</button>
+                    </div>
+                </li> 
+                <li class="py-1"><router-link to="/profile">Profile</router-link></li>
+                <li class="py-1"><router-link to="/trackorder">Track Orders</router-link></li>
+                <li class="py-1"><router-link to="/orderhistory">Order History</router-link></li>
+                <li class="py-1"><router-link to="/becomevendor">Become vendor</router-link></li>
+                <li class="py-1"><router-link to="/logout">logout</router-link></li>
+            </ul>
         </div>
+    </div>
     </nav>
 
 <!-- Cards -->
 <div ref="specificSection" class="grid grid-cols-2 md:grid-cols-1 lg:grid-cols-3 gap-10 p-4 md:p-8"> 
-    <router-link :to="`/product/${card.name}`" class="bg-gray-100 rounded-3xl cursor-pointer hover:shadow-lg transition-all" v-for="card in filteredItems()" :key="card.id">
+    <router-link :to="`/product/${card.name}`" class="bg-gray-100 rounded-3xl cursor-pointer hover:shadow-lg transition-all" v-for="card in products" :key="card.id">
         <img class="h-auto w-full rounded-t-3xl md:rounded-3xl" :src="card.image" alt="">
         <div class="p-4 md:pl-10">
             <p class="text-lg md:text-2xl font-bold pt-4 md:text-start text-center">{{ card.name }}</p>
@@ -215,7 +233,7 @@ import Navbarr from './Navbarr.vue';
 </script>
 
 <script setup>
-
+/*
 import useProducts from "@/comp/products.js";
 import { onMounted, ref } from "vue";
 
@@ -231,7 +249,7 @@ const filteredItems = () => {
     card.name.toLowerCase().includes(searchTerm.value.toLowerCase())
     );
 };
-
+*/
 </script>
 
 <style lang="scss" scoped>

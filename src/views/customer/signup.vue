@@ -1,31 +1,38 @@
 <template>
 
-    <router-link class="flex justify-center items-center space-x-3 mt-20 rtl:space-x-reverse" to="/">
+    <router-link class="flex justify-center items-center space-x-3 mt-8  rtl:space-x-reverse" to="/">
         <img src="../../assets/icons/BAZAR (2).png" class=" h-24" alt="Bazar Logo">
     </router-link>  
 
-    <p class="text-xl font-bold text-center pt-5">Sign Up</p>    
-    <div class="flex items-center justify-center min-h-screen">
-    <form @submit.prevent="submitForm" class="max-w-sm mx-auto mb-40">
-        
-        <div class="mb-5 text-start">
-            <label class="font-bold pl-5" for="username">Name</label>
-            <input type="text" id="username" v-model="username" placeholder="username" 
-            class="w-full mt-4 bg-slate-50 px-20 py-2 rounded-3xl focus:outline-none focus:ring focus:ring-pink-500 " required>
-        </div>
+    <p class="text-xl font-bold text-center pt-2 mb-4">Sign Up</p>    
+    <div class="flex items-center justify-center ">
+    <form @submit.prevent="submit" class="w-1/3">
 
-        <div class="mb-5 text-start">
-            <label class="font-bold pl-5" for="email">Email</label>
-            <input type="email" id="email" v-model="email" placeholder="name@gmail.com" 
-            class="w-full mt-4 bg-slate-50 px-20 py-2 rounded-3xl focus:outline-none focus:ring focus:ring-pink-500 " required>
-        </div>
-        
-        <div class="mb-5 text-start">
-            <label class="font-bold pl-5" for="email">Password</label>
-            <input type="password" id="password" v-model="password" placeholder="password" 
-            class="w-full mt-4 bg-slate-50 px-20 py-2 rounded-3xl focus:outline-none focus:ring focus:ring-pink-500 " required>
-        </div>
+            <div class="mb-5 text-start">
+                <label class="font-bold pl-5" for="username">Name</label>
+                <input type="text" id="name" v-model="name" placeholder="username" 
+                class="w-full mt-4 bg-slate-50 pl-4 py-2 rounded-3xl focus:outline-none focus:ring focus:ring-pink-500 " required>
+            </div>
 
+            <div class="mb-5 text-start">
+                <label class="font-bold pl-5" for="email">Email</label>
+                <input type="email" id="email" v-model="email" placeholder="name@gmail.com" 
+                class="w-full mt-4 bg-slate-50 pl-4 py-2 rounded-3xl focus:outline-none focus:ring focus:ring-pink-500 " required>
+            </div>
+
+        <div class="grid grid-cols-2 gap-2">
+            <div class="mb-5 text-start">
+                <label class="font-bold pl-5" for="email">Password</label>
+                <input type="password" id="password" v-model="password" placeholder="password" 
+                class="w-full mt-4 bg-slate-50 pl-4  py-2 rounded-3xl focus:outline-none focus:ring focus:ring-pink-500 " required>
+            </div>
+
+            <div class="mb-5 text-start">
+                <label class="font-bold pl-5" for="email">Password Confirmation</label>
+                <input type="password" id="password_confirmation" v-model="password_confirmation" placeholder="password" 
+                class="w-full mt-4 bg-slate-50 pl-4 py-2 rounded-3xl focus:outline-none focus:ring focus:ring-pink-500 " required>
+            </div>
+        </div>
 
         <div class="flex items-start mb-5">
         <div class="flex items-center h-5">
@@ -42,24 +49,27 @@
 </template>
 
 <script>
-
+import axiosClient from '@/axios';
 export default {
     data() {
         return {
-        username: '',
+        name: '',
         email: '',
-        password: ''
+        password: '',
+        password_confirmation:''
         };
     },
     methods: {
-        submitForm() {
-        // Perform form submission logic here
-        console.log('Submitted!');
-        console.log('Username:', this.username);
-        console.log('Email:', this.email);
-        console.log('Password:', this.password);
-        
-        }
+        async submit() {
+            const response = await axiosClient.post('/register', {
+            name: this.name,
+            email: this.email,
+            password: this.password,
+            password_confirmatio: this.password_confirmation
+            });
+            console.log("hi");
+            console.log(response.data);
+        } 
     }
 };
 </script>
