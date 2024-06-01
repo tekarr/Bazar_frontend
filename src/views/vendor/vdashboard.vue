@@ -1,7 +1,7 @@
 <template>
 
         <!-- Statistic cards -->
-        <div class="bg-pink-600 p-6 rounded-3xl">   
+        <div class="bg-gray-200 p-6 rounded-3xl">   
         
         <div class="grid grid-cols-5 gap-2 mb-4 md:grid-cols-2 lg:grid-cols-5 ">
             
