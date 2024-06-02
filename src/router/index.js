@@ -33,6 +33,7 @@ import vorders from '@/views/vendor/vorders.vue'
 import vnotification from '@/views/vendor/vnotification.vue'
 import vprofile from '@/views/vendor/vprofile.vue'
 import Addproduct from '@/components/vendor/Addproduct.vue'
+import store from "@/store";
 
 
 const routes = [
@@ -51,12 +52,14 @@ const routes = [
   {
     path: '/signup',
     name: 'signup',
-    component: Signup
+    component: Signup,
+
   },
   {
     path: '/login',
     name: 'login',
-    component: Login
+    component: Login,
+
   },
   {
     path: '/product/:id',
@@ -91,6 +94,8 @@ const routes = [
     redirect: '/admin/dashboard',
     name: 'Admin',
     component:  AdminLayout,
+    requireAuth: true,
+    role: ['admin'],
     children: [
       {
         path: '/admin/dashboard',
@@ -152,6 +157,8 @@ const routes = [
     redirect: '/vendor/dashboard',
     name: 'vendor',
     component:  vendorLayout,
+    requireAuth: true,
+    role: ['vendor'],
     children: [
       {
         path: '/vendor/dashboard',
@@ -198,6 +205,29 @@ const router = createRouter({
   routes
 })
 
+router.beforeEach((to, from, next) => {
+    if(to.matched.some(record => record.meta.requireAuth)){
+        if(!store.getters['auth/authenticated']){
+        next({
+            name: 'login',
+            query: {redirect: to.fullPath}
+        })
+        }else{
+        let user = store.getters['auth/user']
+        if(to.matched.some(record => record.meta.role)){
+            if(to.meta.role.includes(user.role)){
+            next()
+            }else{
+            next({name: 'home'})
+            }
+        }else{
+            next()
+        }
+        }
+    }else{
+        next()
+    }
+})
 
 
 export default router

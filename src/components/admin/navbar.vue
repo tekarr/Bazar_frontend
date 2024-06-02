@@ -1,7 +1,7 @@
 <template>
     
     <!-- navbar -->
-    <div class="flex justify-between p-4 m-4 rounded-2xl">
+    <div class="flex justify-between p-5  bg-white">
         <p class="p-2 font-semibold text-lg ">{{ $route.name }}</p>
         <div class="flex justify-between">
                 <!-- notification -->

@@ -1,9 +1,12 @@
 <template>
     <sidbar/>
     
-    <div class="p-4 sm:ml-64"> 
-        <navbar/>  
-        <router-view></router-view>
+    <div class="bg-gray-100  sm:ml-64 h-screen">
+        <navbar/>
+      <div class="m-3">
+
+        <router-view> </router-view>
+      </div>
     </div>
     
 </template>

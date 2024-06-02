@@ -28,23 +28,26 @@
 </div>
 </template>
 
-<script>
-import axiosClient from '@/axios';
+<script setup>
+import { ref } from 'vue';
+import { useStore } from 'vuex';
+import router from "@/router";
 
-export default {
-    data() {
-        return {
-        form:{    
-            email: '',
-            password: ''
-        }
-    };
-    },
-    methods: {
-        async login() {
-            const response = await axiosClient.post('/login', this.form );
-            console.log(response.data);
-        } 
-    }
-};
+const store = useStore();
+const form = ref({
+    email: '',
+    password: ''
+});
+
+const login = async () => {
+
+  try {
+    const response = await store.dispatch('auth/login', form.value);
+    console.log(response);
+    await router.push('/admin');
+
+  } catch (error) {
+    console.log(error);
+  }
+}
 </script>
