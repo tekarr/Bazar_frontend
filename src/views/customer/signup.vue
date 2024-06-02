@@ -11,26 +11,26 @@
     <form @submit.prevent="submit" class="lg:w-1/3 md:w-1/2">
 
             <div class="mb-5 text-start">
-                <label class="font-bold pl-5" for="username">Name</label>
+                <label class=" pl-5" for="username">Name</label>
                 <input type="text" id="name" v-model="name" placeholder="username" 
                 class="w-full mt-4 bg-slate-50 pl-4 py-2 rounded-3xl focus:outline-none focus:ring focus:ring-pink-500 " required>
             </div>
 
             <div class="mb-5 text-start">
-                <label class="font-bold pl-5" for="email">Email</label>
+                <label class=" pl-5" for="email">Email</label>
                 <input type="email" id="email" v-model="email" placeholder="name@gmail.com" 
                 class="w-full mt-4 bg-slate-50 pl-4 py-2 rounded-3xl focus:outline-none focus:ring focus:ring-pink-500 " required>
             </div>
 
         <div class="grid grid-cols-2 gap-2">
             <div class="mb-5 text-start">
-                <label class="font-bold pl-5" for="email">Password</label>
+                <label class=" pl-5" for="email">Password</label>
                 <input type="password" id="password" v-model="password" placeholder="password" 
                 class="w-full mt-4 bg-slate-50 pl-4  py-2 rounded-3xl focus:outline-none focus:ring focus:ring-pink-500 " required>
             </div>
 
             <div class="mb-5 text-start">
-                <label class="font-bold pl-5" for="email">Password Confirmation</label>
+                <label class=" pl-5" for="email">Password Confirmation</label>
                 <input type="password" id="password_confirmation" v-model="password_confirmation" placeholder="password" 
                 class="w-full mt-4 bg-slate-50 pl-4 py-2 rounded-3xl focus:outline-none focus:ring focus:ring-pink-500 " required>
             </div>
