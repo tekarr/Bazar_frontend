@@ -4,13 +4,13 @@ import router from "@/router";
 export default {
     namespaced: true,
     
-   state: {
+    state: {
         user: null,
         token: null,
-       role: null,
+        role: null,
         authenticated: false,
 
-     },
+    },
     getters: {
         user(state){
             return state.user
