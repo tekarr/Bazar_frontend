@@ -55,20 +55,18 @@ import axiosClient from '@/axios';
 export default {
     data() {
         return {
-        name: '',
-        email: '',
-        password: '',
-        password_confirmation:''
-        };
+        form:
+        {
+            name: '',
+            email: '',
+            password: '',
+            password_confirmation:''
+        }
+    };
     },
     methods: {
         async submit() {
-            const response = await axiosClient.post('/register', {
-            name: this.name,
-            email: this.email,
-            password: this.password,
-            password_confirmation: this.password_confirmation
-            });
+            const response = await axiosClient.post('/register',this.form );
             console.log(response.data);
         } 
     }

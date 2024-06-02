@@ -8,17 +8,17 @@
 
     <p class="text-xl font-bold text-center pt-2 mb-4">Login</p>    
     <div class="flex items-center justify-center ">
-    <form @submit.prevent="submitForm" class="max-w-sm w-96 ">
+    <form @submit.prevent="login" class="max-w-sm w-96 ">
         
         <div class="mb-5 text-start">
             <label class=" pl-5" for="email">Email</label>
-            <input type="email" id="email" v-model="email" placeholder="name@gmail.com" 
+            <input type="email" id="email" v-model="form.email" placeholder="name@gmail.com" 
             class="w-full mt-4 bg-slate-50 pl-4 py-2 rounded-3xl focus:outline-none focus:ring focus:ring-pink-500 " required>
         </div>
         
         <div class="mb-5 text-start">
             <label class=" pl-5" for="email">Password</label>
-            <input type="password" id="password" v-model="password" placeholder="password" 
+            <input type="password" id="password" v-model="form.password" placeholder="password" 
             class="w-full mt-4 bg-slate-50 pl-4  py-2 rounded-3xl focus:outline-none focus:ring focus:ring-pink-500 " required>
         </div>
 
@@ -29,21 +29,22 @@
 </template>
 
 <script>
+import axiosClient from '@/axios';
+
 export default {
     data() {
         return {
-        email: '',
-        password: ''
-        };
+        form:{    
+            email: '',
+            password: ''
+        }
+    };
     },
     methods: {
-        submitForm() {
-        // Perform form submission logic here
-        console.log('Loged in!');
-        console.log('Email:', this.email);
-        console.log('Password:', this.password);
-        
-        }
+        async login() {
+            const response = await axiosClient.post('/login', this.form );
+            console.log(response.data);
+        } 
     }
 };
 </script>
