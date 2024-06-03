@@ -7,5 +7,7 @@ const axiosClient = Axios.create({
         // "XSRF-TOKEN": Axios.get('http://localhost:8000/sanctum/csrf-cookie')
     },
     // withCredentials:true,
+    
 })
+
 export default axiosClient;

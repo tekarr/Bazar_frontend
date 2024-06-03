@@ -6,9 +6,9 @@ export default {
     
     state: {
         user: null,
-        token: null,
-        role: null,
-        authenticated: false,
+        token: localStorage.getItem('token') || null,
+        role: localStorage.getItem('role') || null,
+        authenticated: localStorage.getItem('authenticated') === 'true'
 
     },
     getters: {
@@ -31,12 +31,24 @@ export default {
         },
         SET_TOKEN(state, token){
             state.token = token
+            localStorage.setItem('token', token);
         },
         SET_AUTHENTICATED(state, value){
             state.authenticated = value
+            localStorage.setItem('authenticated', value);
         },
         SET_ROLE(state, role){
             state.role = role
+            localStorage.setItem('role', role);
+        },
+        CLEAR_AUTH(state) {
+            state.user = null;
+            state.token = null;
+            state.authenticated = false;
+            state.role = null;
+            localStorage.removeItem('token');
+            localStorage.removeItem('role');
+            localStorage.removeItem('authenticated');
         }
     },
     actions: {
@@ -46,24 +58,18 @@ export default {
                 commit('SET_USER', response.data.user)
                 commit('SET_TOKEN', response.data.token)
                 commit('SET_AUTHENTICATED', true)
-                commit('SET_ROLE', response.data.role_id)
-
+                commit('SET_ROLE', response.data.user.role_id)
 
                 return response
             }catch (e) {
-                commit('SET_USER', null)
-                commit('SET_TOKEN', null)
-                commit('SET_AUTHENTICATED', false)
-
+                commit('CLEAR_AUTH');
                 return e.response
             }
         },
         async logout({commit}){
             try {
-                const response = await axios.post('http://localhost:8000/api/logout')
-                commit('SET_USER', null)
-                commit('SET_TOKEN', null)
-                commit('SET_AUTHENTICATED', false)
+                const response = await axios.post('http://localhost:8000/logout')
+                commit('CLEAR_AUTH');
                 return response
             }catch (e) {
                 return e.response
@@ -75,12 +81,10 @@ export default {
                 commit('SET_USER', response.data.user)
                 commit('SET_TOKEN', response.data.token)
                 commit('SET_AUTHENTICATED', true)
-                commit('SET_ROLE', response.data.role_id)
+                commit('SET_ROLE', response.data.user.role_id)
                 return response
             }catch (e) {
-                commit('SET_USER', null)
-                commit('SET_TOKEN', null)
-                commit('SET_AUTHENTICATED', false)
+                commit('CLEAR_AUTH');
                 return e.response
             }
         },
@@ -91,8 +95,7 @@ export default {
                 commit('SET_AUTHENTICATED', true)
                 return response
             }catch (e) {
-                commit('SET_USER', null)
-                commit('SET_AUTHENTICATED', false)
+                commit('CLEAR_AUTH');
                 return e.response
             }
         },

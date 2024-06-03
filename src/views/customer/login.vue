@@ -41,13 +41,32 @@ const form = ref({
 
 const login = async () => {
 
-  try {
-    const response = await store.dispatch('auth/login', form.value);
-    console.log(response);
-    await router.push('/admin');
+    try {
+        const response = await store.dispatch('auth/login', form.value);
+        const userRole = response.data.user.role_id;
+        const authenticated = store.getters['auth/authenticated'];
 
-  } catch (error) {
-    console.log(error);
-  }
-}
+
+
+        console.log(response);
+        console.log(userRole);
+        console.log(authenticated);
+        
+        
+        if (userRole === 1) {
+            //await router.push('/admin');
+            console.log('admin')
+        if (userRole === 2) {
+            //await router.push('/vendor');
+            console.log('vendor')
+        }   
+        } else {
+            //await router.push('/');
+            console.log('customer')
+            }
+        } catch (error) {
+            console.log(error);
+            alert('Login failed. Please check your credentials.');
+        }
+    };
 </script>

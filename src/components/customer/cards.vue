@@ -22,7 +22,7 @@
         
         
         <div class="flex md:order-2 space-x-3 md:space-x-0 rtl:space-x-reverse">
-            <router-link to="/signup" class="text-white  bg-pink-600 hover:bg-pink-700 focus:ring-4 focus:outline-none focus:ring-pink-400 font-bold rounded-3xl text-sm  px-4 py-2.5 text-center ">Sign up</router-link>
+            <router-link to="/signup" v-if="authenticated" class="text-white  bg-pink-600 hover:bg-pink-700 focus:ring-4 focus:outline-none focus:ring-pink-400 font-bold rounded-3xl text-sm  px-4 py-2.5 text-center ">Sign up</router-link>
             <button data-collapse-toggle="navbar-sticky" type="button" class="inline-flex items-center p-2 w-10 h-10 justify-center text-sm text-gray-500 rounded-lg md:hidden hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200 " aria-controls="navbar-sticky" aria-expanded="false">
             <span class="sr-only">Open main menu</span>
             <svg class="w-5 h-5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 17 14">
@@ -83,7 +83,7 @@
                     <li class="py-1"><router-link to="/orderhistory">Order History</router-link></li>
                     <li class="py-1"><router-link to="/becomevendor">Become vendor</router-link></li>
                     <li class="py-1"><router-link to="/about">About</router-link></li>
-                    <li class="py-1"><router-link to="/logout">logout</router-link></li>
+                    <li class="py-1" @click="logout"><router-link to="/logout">logout</router-link></li>
                 </ul>
             </div>
         </div>
@@ -237,6 +237,30 @@ import Navbarr from './Navbarr.vue';
 </script>
 
 <script setup>
+
+import { ref } from 'vue'
+import { computed } from 'vue';
+import { useStore } from 'vuex';
+const store = useStore();
+
+
+const authenticated = computed(() => store.getters['auth/authenticated']);
+const userRole = computed(() => store.getters['auth/role']);
+const tokenn = computed(() => store.getters['auth/token']);
+
+
+console.log(authenticated.value);
+console.log(userRole.value);
+console.log(tokenn.value);
+
+
+
+const logout = async () => {
+    await store.dispatch('auth/logout');
+    
+    //await router.push('/login');
+};
+
 /*
 import useProducts from "@/comp/products.js";
 import { onMounted, ref } from "vue";

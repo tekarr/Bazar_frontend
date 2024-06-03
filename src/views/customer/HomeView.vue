@@ -10,6 +10,7 @@
 </template>
 
 <script>
+
 import Banner from '/src/components/customer/banner.vue'
 import Navbarr from '/src/components/customer/Navbarr.vue'
 import Tabs2 from '/src/components/customer/tabs2.vue'
@@ -28,7 +29,6 @@ export default {
     footer2,
     Deals,
     }}
-
 
 </script>
 
