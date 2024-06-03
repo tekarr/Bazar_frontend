@@ -9,7 +9,8 @@ export default {
         user: null,
         token: localStorage.getItem('token') || null,
         role: localStorage.getItem('role') || null,
-        authenticated: localStorage.getItem('authenticated') === 'true'
+        authenticated: localStorage.getItem('authenticated') === 'true',
+        username: localStorage.getItem('username') || null
 
     },
     getters: {
@@ -24,6 +25,9 @@ export default {
         },
         role(state){
             return state.role
+        },
+        username(state){
+            return state.username
         }
     },
     mutations: {
@@ -42,6 +46,10 @@ export default {
             state.role = role
             localStorage.setItem('role', role);
         },
+        SET_USERNAME(state, username){
+            state.username = username
+            localStorage.setItem('username', username);
+        },
         CLEAR_AUTH(state) {
             state.user = null;
             state.token = null;
@@ -49,6 +57,7 @@ export default {
             state.role = null;
             localStorage.removeItem('token');
             localStorage.removeItem('role');
+            localStorage.removeItem('username');
             localStorage.removeItem('authenticated');
         }
     },
@@ -60,6 +69,7 @@ export default {
                 commit('SET_TOKEN', response.data.token)
                 commit('SET_AUTHENTICATED', true)
                 commit('SET_ROLE', response.data.user.role_id)
+                commit('SET_USERNAME', response.data.user.name) 
 
                 return response
             }catch (e) {

@@ -54,14 +54,14 @@ const login = async () => {
         
         
         if (userRole === 1) {
-            //await router.push('/admin');
+            await router.push('/admin');
             console.log('admin')
         if (userRole === 2) {
-            //await router.push('/vendor');
+            await router.push('/vendor');
             console.log('vendor')
         }   
         } else {
-            //await router.push('/');
+            await router.push('/');
             console.log('customer')
             }
         } catch (error) {
