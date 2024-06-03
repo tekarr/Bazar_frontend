@@ -83,7 +83,7 @@
                     <li class="py-1"><router-link to="/orderhistory">Order History</router-link></li>
                     <li class="py-1"><router-link to="/becomevendor">Become vendor</router-link></li>
                     <li class="py-1"><router-link to="/about">About</router-link></li>
-                    <li class="py-1" @click="logout"><router-link to="/logout">logout</router-link></li>
+                    <li class="py-1" @click="logout">logout</li>
                 </ul>
             </div>
         </div>

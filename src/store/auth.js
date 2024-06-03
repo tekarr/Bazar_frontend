@@ -1,6 +1,7 @@
 
 import axios from 'axios'
 import router from "@/router";
+import axiosClient from "@/axios";
 export default {
     namespaced: true,
     
@@ -68,10 +69,12 @@ export default {
         },
         async logout({commit}){
             try {
-                const response = await axios.post('http://localhost:8000/logout')
+                const response = await axiosClient.post('/logout')
+                console.log(response)
                 commit('CLEAR_AUTH');
                 return response
             }catch (e) {
+                console.log(e)
                 return e.response
             }
         },

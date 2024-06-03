@@ -205,29 +205,6 @@ const router = createRouter({
   routes
 })
 
-router.beforeEach((to, from, next) => {
-    if(to.matched.some(record => record.meta.requireAuth)){
-        if(!store.getters['auth/authenticated']){
-        next({
-            name: 'login',
-            query: {redirect: to.fullPath}
-        })
-        }else{
-        let user = store.getters['auth/user']
-        if(to.matched.some(record => record.meta.role)){
-            if(to.meta.role.includes(user.role)){
-            next()
-            }else{
-            next({name: 'home'})
-            }
-        }else{
-            next()
-        }
-        }
-    }else{
-        next()
-    }
-})
 
 
 export default router
