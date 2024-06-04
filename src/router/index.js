@@ -160,7 +160,7 @@ const routes = [
     component:  vendorLayout,
     requireAuth: true,
     role: ['vendor'],
-    beforeEnter: hasRole([1,2]),
+    beforeEnter: hasRole([2]),
     children: [
       {
         path: '/vendor/dashboard',
