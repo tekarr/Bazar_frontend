@@ -1,9 +1,11 @@
 <template>
     
     <!-- image preview -->
-    <div v-if="imageUrl" class="my-8 flex justify-center">
+    <div v-if="imageUrl" class="my-8 flex justify-center pt-8">
         <img :src="imageUrl" alt="Selected Image" class="w-full rounded-3xl hover:shadow-md" />
     </div>
+
+    <hr class="mb-8">
 
     <!-- Choose image button -->
     <div class=" h-20 ">    
@@ -12,7 +14,7 @@
             <input type="file" @change="onFileChange" class="hidden" />
         </label>
     </div>
-    <div class="mb-4 opacity-60">Prefered image size <span class="text-pink-500">100x50</span></div>
+    <div class="mb-4 opacity-80">Prefered image size <span class="text-pink-500">100x50</span></div>
 
 </template>
 

@@ -2,9 +2,9 @@
 
 
         <!-- Statistic cards -->
-        <div class="  overflow-x-auto rounded-3xl mt-8 pb-10">
+        <div class="overflow-x-auto rounded-3xl mt-8 py-10">
 
-        <div class="grid grid-cols-4 gap-4 mb-4 md:grid-cols-1 lg:grid-cols-3 ">
+        <div class="grid grid-cols-4 gap-4 mb-4 md:grid-cols-1 lg:grid-cols-3 rounded-3xl ">
 
             <!-- client card -->
             <div class="flex justify-center">

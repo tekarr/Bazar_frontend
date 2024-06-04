@@ -12,7 +12,7 @@
             <div class="mb-5 text-start w-80">
                 <label class="" for="storename">Name</label>
                 <input type="text" id="storename" v-model="storename" placeholder="Storename" 
-                class="w-full mt-4 bg-slate-50 px-10 py-2 rounded-xl focus:outline-none focus:ring focus:ring-pink-500 " required>
+                class="w-full mt-4 bg-white px-10 py-2 rounded-xl focus:outline-none focus:ring focus:ring-pink-500 " required>
             </div>
 
             <!-- catagories -->

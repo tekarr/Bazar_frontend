@@ -47,7 +47,7 @@ const Signin = async () => {
         if (response.status === 200) {
         const userRole = response.data.user.role_id;
         if (userRole === 1) {
-            await router.push('/vendor');
+            await router.push('/admin');
             console.log('admin');
         } else if (userRole === 2) {
             await router.push('/vendor');

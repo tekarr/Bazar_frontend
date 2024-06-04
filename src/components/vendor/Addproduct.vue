@@ -13,14 +13,14 @@
             <div class="mb-5 text-start w-80">
                 <label class="" for="storename">Name</label>
                 <input type="text" id="productname" v-model="productname" placeholder="product name" 
-                class="w-full mt-4 bg-slate-50 px-10 py-2 rounded-xl focus:outline-none focus:ring focus:ring-pink-500 " required>
+                class="w-full mt-4 bg-white px-10 py-2 rounded-xl focus:outline-none focus:ring focus:ring-pink-500 " required>
             </div>
 
             <!-- Description -->
             <div class="mb-2 text-start ">
                 <div><label class=" " for="storename" >Description</label></div>
                 <textarea 
-                    class="w-full max-w-lg p-4 bg-gray-50 my-4 border rounded-lg border-gray-300 shadow-sm focus:outline-none focus:ring focus:ring-pink-500" rows="5" 
+                    class="w-full max-w-lg p-4 bg-white my-4 border rounded-lg border-gray-300 shadow-sm focus:outline-none focus:ring focus:ring-pink-500" rows="5" 
                     placeholder="Enter your text here...">
                 </textarea>
             </div>

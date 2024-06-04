@@ -21,11 +21,15 @@
                 </thead>
                 <tbody>
                     <tr v-for="store in stores" :key="store.id" class="bg-white " >
-                        <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
+                        <td  class="px-6 py-4 font-medium ">
                             {{store.name}}
-                        </th>
-                        <td class=" flex justify-start">8 am</td>
-                        <td>10 pm</td>
+                        </td>
+                        <td class=" flex justify-start">
+                            8 am
+                        </td>
+                        <td>
+                            10 pm
+                        </td>
                         <td class="px-1 py-4 flex justify-end">
                             <router-link to="/admin/store/edit">
                                 <button class="px-4 py-2  bg-gray-100 rounded-3xl">Edit</button>

@@ -1,6 +1,7 @@
 <template>
     
-    <div class="flex flex-col items-center justify-center  bg-white p-4 rounded-3xl mb-4">
+    <div class="flex flex-col items-center justify-center   p-4 rounded-3xl mb-4">
+        <hr>
 
         <!-- Preview images -->
         <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 my-2 p-2">
