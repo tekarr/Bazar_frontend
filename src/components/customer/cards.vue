@@ -82,7 +82,9 @@
                     <li class="py-1 "><router-link to="/profile">Profile</router-link></li>
                     <li class="py-1"><router-link to="/trackorder">Track Orders</router-link></li>
                     <li class="py-1"><router-link to="/orderhistory">Order History</router-link></li>
-                    <li class="py-1"><router-link to="/becomevendor">Become vendor</router-link></li>
+                    <li class="py-1" v-if="customer"><router-link to="/becomevendor" >Become vendor</router-link></li>
+                    <li class="py-1" v-if="vendor"><router-link to="/vendor">Dashboard</router-link></li>
+                    <li class="py-1" v-if="admin"><router-link to="/admin">Dashboard</router-link></li>
                     <li class="py-1"><router-link to="/about">About</router-link></li>
                     <li class="py-1 cursor-pointer" @click="logout" >logout</li>
                 </ul>
@@ -248,22 +250,56 @@ import { ref } from 'vue'
 import { computed } from 'vue';
 import { useStore } from 'vuex';
 import { useRouter } from 'vue-router';
+import { jwtDecode } from 'jwt-decode';
 const store = useStore();
 const router = useRouter(); 
 const showMenu = ref(false);
+var customer =  ref(false);
+var vendor =  ref(false);
+var admin =  ref(false);
 
 const authenticated = computed(() => store.getters['auth/authenticated']);
 const userRole = computed(() => store.getters['auth/role']);
 const tokenn = computed(() => store.getters['auth/token']);
 
-
 console.log(authenticated.value);
 console.log(userRole.value);
+
+if (userRole.value == 3){
+    customer.value = true;
+    console.log('customer');
+}
+
+if (userRole.value == 2){
+    vendor.value = true;
+    console.log('vendor');
+}
+
+if (userRole.value == 1){
+    admin.value = true;
+    console.log('admin');
+}
+
+
 console.log(tokenn.value);
+
 
 const toggleMenu = () => {
     showMenu.value = !showMenu.value;
 };
+
+/*
+const token = localStorage.getItem('token'); // or get it from a cookie
+
+if (token) {
+    const decodedToken = jwtDecode(token);
+    const userRole = decodedToken.role;
+    console.log(userRole);
+} else {
+  // handle the case where the token is not present or invalid
+}
+*/
+
 
 
 const logout = async () => {
