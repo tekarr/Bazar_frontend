@@ -1,5 +1,5 @@
 import { createRouter, createWebHistory } from 'vue-router'
-
+import { hasRole } from './permissions';
 // customer imports ------------------------------------------------
 import HomeView from '../views/customer/HomeView.vue'
 import AboutView from '../views/customer/AboutView.vue'
@@ -96,6 +96,7 @@ const routes = [
     component:  AdminLayout,
     role: ['admin'],
     meta: { requiresAuth: true, requiresAdmin: true },
+    beforeEnter: hasRole([1]),
     children: [
       {
         path: '/admin/dashboard',
@@ -159,6 +160,7 @@ const routes = [
     component:  vendorLayout,
     requireAuth: true,
     role: ['vendor'],
+    beforeEnter: hasRole([1,2]),
     children: [
       {
         path: '/vendor/dashboard',

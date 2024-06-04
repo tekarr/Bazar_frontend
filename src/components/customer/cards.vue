@@ -10,7 +10,7 @@
         </div>
     </div>
 
-
+    <!-- Navbar -->
     <nav class="bg-white fixed w-full h-28 z-20 top-0 start-0 border-b-4 border-gray-200 rounded-none">
         
         <div class="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-2">
@@ -67,7 +67,7 @@
     </div>
     
     </div>
-    <!--side menu -->
+    <!--Nav menu -->
     <div class="flex justify-end">
             <div v-if="showMenu" class="mt-6 mr-6 py-2 flex justify-center text-white bg-gray-800 w-40 rounded-2xl">
                 <ul>
