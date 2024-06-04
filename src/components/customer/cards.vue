@@ -22,7 +22,7 @@
         
         
         <div class="flex md:order-2 space-x-3 md:space-x-0 rtl:space-x-reverse">
-            <router-link to="/signup" v-if="!authenticated" class="text-white  bg-pink-600 hover:bg-pink-700 focus:ring-4 focus:outline-none focus:ring-pink-400 font-bold rounded-3xl text-sm  px-4 py-2.5 text-center ">Sign up</router-link>
+            <router-link to="/signin" v-if="!authenticated" class="text-white  bg-pink-600 hover:bg-pink-700 focus:ring-4 focus:outline-none focus:ring-pink-400 font-bold rounded-3xl text-sm  px-4 py-2.5 text-center ">Sign in</router-link>
             <button v-if="authenticated" @click="toggleMenu" class="text-gray-800  bg-white border-2 hover:border-pink-600  font-bold rounded-3xl text-base  px-4 py-2.5 text-center ">menu</button>
             <button data-collapse-toggle="navbar-sticky" type="button" class="inline-flex items-center p-2 w-10 h-10 justify-center text-sm text-gray-500 rounded-lg md:hidden hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200 " aria-controls="navbar-sticky" aria-expanded="false">
             <span class="sr-only">Open main menu</span>

@@ -4,7 +4,7 @@ import { createRouter, createWebHistory } from 'vue-router'
 import HomeView from '../views/customer/HomeView.vue'
 import AboutView from '../views/customer/AboutView.vue'
 import Signup from '../views/customer/signup.vue'
-import Login from '../views/customer/login.vue' 
+import signin from '../views/customer/signin.vue'
 import productdetail from '../views/customer/productdetail'
 import checkout from '../views/customer/checkout.vue'
 import cart from '@/views/customer/cart.vue'
@@ -56,9 +56,9 @@ const routes = [
 
   },
   {
-    path: '/login',
-    name: 'login',
-    component: Login,
+    path: '/signin',
+    name: 'signin',
+    component: signin,
 
   },
   {

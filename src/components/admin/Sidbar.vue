@@ -68,7 +68,7 @@
                 </router-link>
             </li>
             <li>
-                <router-link to="/" :class="sidebarLinkClass('/')"  class="flex items-center p-4 text-gray-900 rounded-lg  hover:bg-pink-600 group">
+                <router-link @click="logout" to="/" :class="sidebarLinkClass('/')"  class="flex items-center p-4 text-gray-900 rounded-lg  hover:bg-pink-600 group">
                     <svg width="24" height="24" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <path d="M11 20H6a2 2 0 01-2-2V6a2 2 0 012-2h5M20 12l-4-4m4 4l-4 4m4-4H10" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
                     </svg>
@@ -104,6 +104,17 @@
     },
     },
     }
+</script>
+
+<script setup>
+
+import { useStore } from 'vuex';
+const store = useStore();
+
+const logout = async () => {
+    await store.dispatch('auth/logout');
+};
+
 </script>
 
 <style lang="scss" scoped>

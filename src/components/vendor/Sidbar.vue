@@ -72,7 +72,7 @@
                     <svg width="24" height="24" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <path d="M11 20H6a2 2 0 01-2-2V6a2 2 0 012-2h5M20 12l-4-4m4 4l-4 4m4-4H10" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
                     </svg>
-                    <span class="flex-1 ms-3 whitespace-nowrap">logout</span>
+                    <span @click="logout" class="flex-1 ms-3 whitespace-nowrap">logout</span>
                 </router-link>
             </li>
         </ul>
@@ -104,6 +104,17 @@
     },
     },
     }
+</script>
+
+<script setup>
+
+import { useStore } from 'vuex';
+const store = useStore();
+
+const logout = async () => {
+    await store.dispatch('auth/logout');
+};
+
 </script>
 
 <style lang="scss" scoped>

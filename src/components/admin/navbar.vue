@@ -21,7 +21,7 @@
                     <div v-if="profilMenu" class="bg-white mt-2 p-8 rounded-3xl shadow-md absolute top-20 right-5 z-10 " >
                         <h3 class="text-lg font-bold mb-2">username</h3>
                         <div><router-link to="/admin/profile" class="hover:text-pink-600">Edit profile</router-link></div>
-                        <div class="pt-2"><router-link to="/" class=" text-pink-600 cursor-pointer">logout</router-link></div>
+                        <div @click="logout" class="pt-2"><router-link to="/" class=" text-pink-600 cursor-pointer">logout</router-link></div>
                     </div>
                 </div>
         </div>
@@ -73,6 +73,17 @@
     },
     },
     }
+</script>
+
+<script setup>
+
+import { useStore } from 'vuex';
+const store = useStore();
+
+const logout = async () => {
+    await store.dispatch('auth/logout');
+};
+
 </script>
 
 <style lang="scss" scoped>
