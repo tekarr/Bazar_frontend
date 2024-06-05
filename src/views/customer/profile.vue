@@ -3,7 +3,7 @@
     <navbarr/>
 
     
-    <div class="flex items-start justify-start mt-28 bg-gray-100 py-20 ">
+    <div class="flex items-start justify-start mt-28 bg-gray-100 py-16 ">
         <form @submit.prevent="submitForm" class="max-w-sm mx-10 mt-4 ">
             
         <p class="text-3xl font-medium mb-10 ml-3">Profile</p>
