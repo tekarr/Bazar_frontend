@@ -8,9 +8,9 @@ export default {
     state: {
         user: null,
         token: localStorage.getItem('token') || null,
-        role: localStorage.getItem('role') || null,
-        authenticated: localStorage.getItem('authenticated') === 'true',
-        username: localStorage.getItem('username') || null
+        role:  null,
+        authenticated: false,
+        username: null
 
     },
     getters: {
@@ -40,25 +40,23 @@ export default {
         },
         SET_AUTHENTICATED(state, value){
             state.authenticated = value
-            localStorage.setItem('authenticated', value);
         },
+
         SET_ROLE(state, role){
             state.role = role
-            localStorage.setItem('role', role);
+
         },
         SET_USERNAME(state, username){
             state.username = username
-            localStorage.setItem('username', username);
+
         },
         CLEAR_AUTH(state) {
             state.user = null;
             state.token = null;
             state.authenticated = false;
             state.role = null;
+            state.username = null;
             localStorage.removeItem('token');
-            localStorage.removeItem('role');
-            localStorage.removeItem('username');
-            localStorage.removeItem('authenticated');
         }
     },
     actions: {
@@ -104,7 +102,9 @@ export default {
         async checkAuth({commit}){
             try {
                 const response = await axios.get('http://localhost:8000/api/user')
-                commit('SET_USER', response.data)
+                commit('SET_ROLE', response.data.user.role_id)
+                commit('SET_USER', response.data.user)
+                commit('SET_USERNAME', response.data.user.name)
                 commit('SET_AUTHENTICATED', true)
                 return response
             }catch (e) {

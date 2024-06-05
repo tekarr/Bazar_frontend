@@ -245,12 +245,12 @@ import Navbarr from './Navbarr.vue';
 </script>
 
 <script setup>
-
+import { computed, onMounted } from 'vue';
 import { ref } from 'vue'
-import { computed } from 'vue';
 import { useStore } from 'vuex';
 import { useRouter } from 'vue-router';
-import { jwtDecode } from 'jwt-decode';
+
+
 const store = useStore();
 const router = useRouter(); 
 const showMenu = ref(false);
@@ -258,9 +258,14 @@ var customer =  ref(false);
 var vendor =  ref(false);
 var admin =  ref(false);
 
+onMounted(async () => {
+    await store.dispatch('auth/checkAuth');
+});
+
 const authenticated = computed(() => store.getters['auth/authenticated']);
 const userRole = computed(() => store.getters['auth/role']);
 const tokenn = computed(() => store.getters['auth/token']);
+
 
 console.log(authenticated.value);
 console.log(userRole.value);

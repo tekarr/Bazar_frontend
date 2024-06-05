@@ -9,21 +9,21 @@
             <div class="mb-5 text-start w-80">
                 <label class="" for="storename">Store Name</label>
                 <input type="text" id="storename" v-model="storename" placeholder="Storename" 
-                class="w-full mt-4 bg-white mr-10 pl-4 py-2 rounded-xl focus:outline-none focus:ring focus:ring-pink-500 " required>
+                class="w-full mt-4 bg-white text-black mr-10 pl-4 py-2 rounded-xl focus:outline-none focus:ring focus:ring-pink-500 " required>
             </div>
 
             <!-- phone number -->
             <div class="mb-5 text-start w-80">
                 <label class="" for="storename">Phone number</label>
                 <input type="text" id="Phonenumber" v-model="Phonenumber" placeholder="Phone number" 
-                class="w-full mt-4 bg-white mr-10 pl-4 py-2 rounded-xl focus:outline-none focus:ring focus:ring-pink-500 " required>
+                class="w-full mt-4 bg-white text-black mr-10 pl-4 py-2 rounded-xl focus:outline-none focus:ring focus:ring-pink-500 " required>
             </div>
             
             <!-- catagories -->
             <div class="hidden">Selected: {{ selected }}</div>
             <div class="">
             <p class="">Category</p>    
-            <select v-model="selected" @input="select" class="p-2 my-4 px-4  border-2 border-pink-600 rounded-xl">
+            <select v-model="selected" @input="select" class="p-2 my-4 px-4  border-2 text-black border-pink-600 rounded-xl">
                 <option disabled value="">Please select one</option>
                 <option v-for="category in categories" :key="category.id" :value="category.name">{{ category.name }}</option>
             </select>
