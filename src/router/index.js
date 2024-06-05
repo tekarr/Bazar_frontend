@@ -11,6 +11,7 @@ import cart from '@/views/customer/cart.vue'
 import trackorder from '@/views/customer/trackorder.vue'
 import orderhistory from '@/views/customer/orderhistory.vue'
 import cprofile from '@/views/customer/profile.vue'
+import becomevendor from '@/views/customer/becomevendor.vue'
 
 // admin imports ------------------------------------------------
 import AdminLayout from "../views/admin/adminLayout.vue";
@@ -91,6 +92,11 @@ const routes = [
     path: '/profile',
     name: 'profile',
     component: cprofile
+  },
+  {
+    path: '/becomevendor',
+    name: 'becomevendor',
+    component: becomevendor
   },
 
 

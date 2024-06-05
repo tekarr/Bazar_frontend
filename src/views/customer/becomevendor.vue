@@ -1,12 +1,9 @@
 <template>
-    <sidbar/>
-    
-    
-        <div class="">
-        <form @submit.prevent="submitForm" class="mx-10 ">
 
-            <!-- imageuploader -->
-            <image-uploader/>
+<navbarr/>
+
+        <div class="mt-28 bg-gray-900 py-10 pt-20 flex justify-center">
+        <form @submit.prevent="submitForm" class="mx-10 text-white ">
 
             <!-- name -->
             <div class="mb-5 text-start w-80">
@@ -21,7 +18,7 @@
                 <input type="text" id="Phonenumber" v-model="Phonenumber" placeholder="Phone number" 
                 class="w-full mt-4 bg-white mr-10 pl-4 py-2 rounded-xl focus:outline-none focus:ring focus:ring-pink-500 " required>
             </div>
-
+            
             <!-- catagories -->
             <div class="hidden">Selected: {{ selected }}</div>
             <div class="">
@@ -51,17 +48,16 @@
             <hr>
             
 
-        <button type="submit" class=" m-5 text-white bg-pink-600 hover:bg-gray-800 focus:ring-4 focus:outline-none focus:ring-pink-300 font-medium rounded-3xl text-sm px-5 py-2.5 text-center ">Update</button>
+        <button type="submit" class=" m-5 text-white bg-pink-600 hover:bg-gray-800 focus:ring-4 focus:outline-none focus:ring-pink-300 font-medium rounded-3xl text-sm px-5 py-2.5 text-center ">Become Vendor</button>
     </form>
     </div>
 
 </template>
 
 <script>
-import Sidbar from '@/components/vendor/Sidbar.vue';
-import ImageUploader from '@/components/vendor/ImageUploader.vue';
+import Navbarr from '@/components/customer/Navbarr.vue';
 export default {
-    components: {  Sidbar, ImageUploader },
+  components: { Navbarr },
     data() {
         return {
         storename: '',
