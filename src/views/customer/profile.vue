@@ -1,80 +1,54 @@
 <template>
-
+    
     <navbarr/>
 
-    <div class="container mx-auto p-4 pt-6 md:p-6 lg:p-12 mt-40">
+    <div class="flex items-start justify-start mt-28 bg-gray-100 py-24 ">
+    <form @submit.prevent="submitForm" class="max-w-sm mx-10 mt-4 ">
         
-        <form @submit.prevent="Submit">
-            <div class="flex flex-wrap -mx-3 mb-6">
-                
-                <div class="w-full md:w-1/2 px-3 mb-6 md:mb-0">
-                    <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" for="first-name">
-                        First Name
-                    </label>
-                    <input
-                        class="appearance-none block w-full bg-gray-100 text-gray-700 border border-gray-200 rounded-2xl py-3 px-4 leading-tight focus:outline-none focus:bg-white"
-                        id="first-name" type="text" v-model="profile.firstName" />
-                </div>
+        <div class="mb-5 text-start">
+            <label class="font-normal pl-5" for="username">Name</label>
+            <input type="text" id="username" v-model="username" placeholder="username" 
+            class="w-full mt-4 bg-white px-20 py-2 rounded-3xl focus:outline-none focus:ring focus:ring-pink-500 " required>
+        </div>
 
-                <div class="w-full md:w-1/2 px-3">
-                    <label class="block   tracking-wide text-gray-700 text-xs font-bold mb-2" for="last-name">
-                        Last Name
-                    </label>
-                    <input
-                        class="appearance-none block w-full bg-gray-100 text-gray-700 border border-gray-200 rounded-2xl py-3 px-4 leading-tight focus:outline-none focus:bg-white"
-                        id="last-name" type="text" v-model="profile.lastName" />
-                </div>
-
-            </div>
-
-            <div class="flex flex-wrap -mx-3 mb-6">
-                <div class="w-full px-3">
-                    <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" for="email">
-                        Email
-                    </label>
-                    <input
-                        class="appearance-none block w-full bg-gray-100 text-gray-700 border border-gray-100 rounded-2xl py-3 px-4 leading-tight focus:outline-none focus:bg-white"
-                        id="email" type="email" v-model="profile.email" />
-                </div>
-            </div>
-
-            <div class="flex flex-wrap -mx-3 mb-6">
-                <div class="w-full px-3">
-                    <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" for="bio">
-                        Bio
-                    </label>
-                    <textarea
-                        class="appearance-none block w-full bg-gray-100 text-gray-700 border border-gray-100 rounded-2xl py-3 px-4 leading-tight focus:outline-none focus:bg-white"
-                        id="bio" v-model="profile.bio"></textarea>
-                </div>
-            </div>
-
-            <button class="bg-pink-600 hover:bg-pink-700 text-white font-bold py-2 px-4 rounded-2xl" type="submit">
-                Save Profile
-            </button>
-        </form>
+        <div class="mb-5 text-start">
+            <label class="font-normal pl-5" for="email">Email</label>
+            <input type="email" id="email" v-model="email" placeholder="name@gmail.com" 
+            class="w-full mt-4 bg-white px-20 py-2 rounded-3xl focus:outline-none focus:ring focus:ring-pink-500 " required>
+        </div>
+        
+        <div class="mb-5 text-start">
+            <label class="font-normal pl-5" for="email">Password</label>
+            <input type="password" id="password" v-model="password" placeholder="password" 
+            class="w-full mt-4 bg-white px-20 py-2 rounded-3xl focus:outline-none focus:ring focus:ring-pink-500 " required>
+        </div>
+        <button type="submit" class=" m-5 text-white bg-pink-600 hover:bg-pink-700 focus:ring-4 focus:outline-none focus:ring-pink-300 font-medium rounded-3xl text-sm px-5 py-2.5 text-center ">Save Profile</button>
+    </form>
     </div>
+
 </template>
 
 <script>
-import Navbarr from '@/components/customer/Navbarr.vue'
+import Navbarr from '@/components/customer/Navbarr.vue';
+import navbar from '../../components/vendor/navbar.vue';
+import Sidbar from '../../components/vendor/Sidbar.vue';
 export default {
-    components: { Navbarr },
+    components: { navbar, Sidbar, Navbarr },
     data() {
         return {
-            profile: {
-                firstName: '',
-                lastName: '',
-                email: '',
-                bio: ''
-            }
-        }
+        username:'',    
+        email: '',
+        password: ''
+        };
     },
     methods: {
-        Submit() {
-            // Handle form submission logic here
-            console.log(this.profile)
+        submitForm() {
+        // Perform form submission logic here
+        console.log('Loged in!');
+        console.log('Email:', this.email);
+        console.log('Password:', this.password);
+        
         }
     }
-}
+};
 </script>
