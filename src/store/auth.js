@@ -101,7 +101,7 @@ export default {
         },
         async checkAuth({commit}){
             try {
-                const response = await axios.get('http://localhost:8000/api/user')
+                const response = await axiosClient.get('http://localhost:8000/api/user')
                 commit('SET_ROLE', response.data.user.role_id)
                 commit('SET_USER', response.data.user)
                 commit('SET_USERNAME', response.data.user.name)
