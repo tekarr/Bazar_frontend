@@ -1,117 +1,114 @@
-
-import axios from 'axios'
-import router from "@/router";
+import axios from "axios";
 import axiosClient from "@/axios";
+import router from "@/router";
+import {ref} from "vue";
+import store from "@/store/index";
+
 export default {
     namespaced: true,
-    
-    state: {
-        user: null,
-        token: localStorage.getItem('token') || null,
-        role:  null,
-        authenticated: false,
-        username: null
 
+    state: {
+     user: null,
+        token: localStorage.getItem('token') || '',
     },
     getters: {
-        user(state){
-            return state.user
-        },
-        token(state){
-            return state.token
-        },
-        authenticated(state){
-            return state.authenticated
-        },
-        role(state){
-            return state.role
-        },
-        username(state){
-            return state.username
+
+        user(state) {
+            return state.user;
         }
     },
     mutations: {
-        SET_USER(state, user){
-            state.user = user
-        },
-        SET_TOKEN(state, token){
-            state.token = token
+        SET_TOKEN(state, token) {
             localStorage.setItem('token', token);
+            state.token = token;
         },
-        SET_AUTHENTICATED(state, value){
-            state.authenticated = value
-        },
-
-        SET_ROLE(state, role){
-            state.role = role
+        SET_USER(state, user) {
+            state.user = user;
 
         },
-        SET_USERNAME(state, username){
-            state.username = username
-
-        },
-        CLEAR_AUTH(state) {
-            state.user = null;
-            state.token = null;
-            state.authenticated = false;
-            state.role = null;
-            state.username = null;
+        CLEAR_AUTH_DATA(state) {
             localStorage.removeItem('token');
+            state.token = '';
+            state.user = null;
+        },
+
+        AUTH_USER(state, data) {
+            localStorage.setItem('token', data.token);
+            state.user = data.user;
+
+            let route = '/admin';
+            switch (data.user.role_id) {
+                case 1:
+                    route = '/admin';
+                    break;
+                case 2:
+                    route = '/vendor';
+                    break;
+                case 3:
+                    route = '/';
+                    break;
+            }
+            router.push({ path: route });
+
+
+
         }
     },
-    actions: {
-        async login({commit}, credentials){
-            try {
-                const response = await axios.post('http://localhost:8000/login', credentials)
-                commit('SET_USER', response.data.user)
-                commit('SET_TOKEN', response.data.token)
-                commit('SET_AUTHENTICATED', true)
-                commit('SET_ROLE', response.data.user.role_id)
-                commit('SET_USERNAME', response.data.user.name) 
+    actions:{
+         login({ commit }, credentials) {
+             axios.post('http://localhost:8000/login', credentials)
+                .then((data ) => {
+                   commit('AUTH_USER', data.data);
 
-                return response
-            }catch (e) {
-                commit('CLEAR_AUTH');
-                return e.response
-            }
+                    console.log('User data fetched:', data.data.token);
+
+                    // router.push({ name: 'Admin' });
+                });
         },
-        async logout({commit}){
-            try {
-                const response = await axiosClient.post('/logout')
-                console.log(response)
-                commit('CLEAR_AUTH');
-                return response
-            }catch (e) {
-                console.log(e)
-                return e.response
-            }
+        logout({ commit }) {
+            return axiosClient.post('/logout')
+                .then(() => {
+                    commit('CLEAR_AUTH_DATA');
+
+                });
         },
-        async register({commit}, user){
-            try {
-                const response = await axios.post('http://localhost:8000/register', user)
-                commit('SET_USER', response.data.user)
-                commit('SET_TOKEN', response.data.token)
-                commit('SET_AUTHENTICATED', true)
-                commit('SET_ROLE', response.data.user.role_id)
-                return response
-            }catch (e) {
-                commit('CLEAR_AUTH');
-                return e.response
-            }
+
+        register({ commit }, credentials) {
+            return axios.post('http://localhost:8000/register', credentials)
+                .then(({ data }) => {
+                    commit('AUTH_USER', data.user, data.token);
+
+                });
         },
-        async checkAuth({commit}){
-            try {
-                const response = await axiosClient.get('http://localhost:8000/api/user')
-                commit('SET_ROLE', response.data.user.role_id)
-                commit('SET_USER', response.data.user)
-                commit('SET_USERNAME', response.data.user.name)
-                commit('SET_AUTHENTICATED', true)
-                return response
-            }catch (e) {
-                commit('CLEAR_AUTH');
-                return e.response
-            }
-        },
+
+
+        checkAuth({ commit }) {
+            return new Promise((resolve, reject) => {
+                const token = localStorage.getItem('token');
+                if (!token) {
+                    // If there's no token, reject the promise
+                    reject(new Error('No token found'));
+                    return;
+                }
+
+                // If there's a token, fetch user data
+                axiosClient.get('/api/user')
+                    .then(response => {
+                        // If user data is fetched successfully, commit it to the store
+                          commit('SET_USER', response.data);
+                        console.log('User data fetched:', response.data);
+                        // Resolve the promise to indicate success
+                        resolve();
+                    })
+                    .catch(error => {
+                        // If there's an error while fetching user data, clear the authentication data
+                        commit('CLEAR_AUTH_DATA');
+                        console.error('Error fetching user data:', error);
+                        // Reject the promise to indicate failure
+                        reject(error);
+                    });
+            });
+        }
 
     }
 

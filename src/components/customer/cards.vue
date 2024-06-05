@@ -247,8 +247,9 @@ import Navbarr from './Navbarr.vue';
 <script setup>
 import { computed, onMounted } from 'vue';
 import { ref } from 'vue'
-import { useStore } from 'vuex';
+import {mapActions, useStore} from 'vuex';
 import { useRouter } from 'vue-router';
+import checkout from "@/views/customer/checkout.vue";
 
 
 const store = useStore();
@@ -258,35 +259,12 @@ var customer =  ref(false);
 var vendor =  ref(false);
 var admin =  ref(false);
 
-onMounted(async () => {
-    await store.dispatch('auth/checkAuth');
+onMounted( () => {
+
+  console.log(store.getters["auth/user"]);
 });
 
-const authenticated = computed(() => store.getters['auth/authenticated']);
-const userRole = computed(() => store.getters['auth/role']);
-const tokenn = computed(() => store.getters['auth/token']);
 
-
-console.log(authenticated.value);
-console.log(userRole.value);
-
-if (userRole.value == 3){
-    customer.value = true;
-    console.log('customer');
-}
-
-if (userRole.value == 2){
-    vendor.value = true;
-    console.log('vendor');
-}
-
-if (userRole.value == 1){
-    admin.value = true;
-    console.log('admin');
-}
-
-
-console.log(tokenn.value);
 
 
 const toggleMenu = () => {

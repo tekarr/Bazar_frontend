@@ -40,29 +40,7 @@ const form = ref({
 });
 
 const Signin = async () => {
+    await store.dispatch('auth/login', form.value);
+}
 
-    try {
-        const response = await store.dispatch('auth/login', form.value);
-
-        if (response.status === 200) {
-        const userRole = response.data.user.role_id;
-        if (userRole === 1) {
-            await router.push('/admin');
-            console.log('admin');
-        } else if (userRole === 2) {
-            await router.push('/vendor');
-            console.log('vendor');
-        } else {
-            await router.push('/');
-            console.log('customer');
-        }
-        } else {
-            console.log(response);
-            alert('Login failed. Please check your credentials.');
-        }
-    } catch (error) {
-        console.log(error);
-        alert('Login failed. Please check your credentials.');
-    }
-    };
 </script>
