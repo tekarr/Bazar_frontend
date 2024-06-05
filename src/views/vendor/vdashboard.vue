@@ -13,12 +13,14 @@
                             <path d="m4 14-.89443-1.7889c-.67757.3388-1.10557 1.0314-1.10557 1.7889zm20-10 .8944-1.78885c-.563-.28153-1.2258-.28153-1.7888 0zm20 10h2c0-.7575-.428-1.4501-1.1056-1.7889zm0 20 .8944 1.7889c.6776-.3388 1.1056-1.0314 1.1056-1.7889zm-20 10-.8944 1.7889c.563.2815 1.2258.2815 1.7888 0zm-20-10h-2c0 .7575.428 1.4501 1.10557 1.7889zm.89443-18.2111 19.99997-10.00005-1.7888-3.5777-20.00003 9.99995zm37.10557-1.7889v20h4v-20zm1.1056 18.2111-20 10 1.7888 3.5778 20-10zm-18.2112 10-19.99997-10-1.78886 3.5778 20.00003 10zm-18.8944-8.2111v-20h-4v20zm38.8944-21.7889-20-9.99995-1.7888 3.5777 20 10.00005z" fill="#00C1DC"/><path d="m4 14 20 10" stroke="#00C1DC" stroke-linecap="round" stroke-linejoin="round" stroke-width="4"/><path clip-rule="evenodd" d="m24 24v20z" fill="#00C1DC" fill-rule="evenodd"/><path d="m24 44v-20" stroke="#00C1DC" stroke-linecap="round" stroke-linejoin="round" stroke-width="4"/><path d="m44 14-20 10" stroke="#00C1DC" stroke-linecap="round" stroke-linejoin="round" stroke-width="4"/><path d="m34.8944 10.7889c.988-.494 1.3884-1.69537.8945-2.68333-.494-.98795-1.6954-1.3884-2.6833-.89442zm-21.7888 6.4222c-.988.494-1.3884 1.6954-.8945 2.6833.494.988 1.6954 1.3884 2.6833.8945zm20-9.99995-20 9.99995 1.7888 3.5778 20-10z" fill="#00C1DC"/>
                         </svg>
                     </div>
-                    <div class="my-2">
+
+                    <div>
                         <h2 class="text-4xl font-bold"><span>10 +</span></h2>
                     </div>
                     <p class="mt-2 font-sans text-base font-medium text-gray-500">Products</p>
                 </div>
             </div>
+
 
             <!-- Sales card -->
             <div class="flex justify-center">
@@ -65,7 +67,7 @@
                     <p class="mt-2 font-sans text-base font-medium text-gray-500">Orders</p>
                 </div>
             </div>
-        </div>   
+        </div>  
         </div>
 
 </template> 
@@ -75,7 +77,9 @@ import Navbar from '@/components/vendor/navbar.vue';
 import Sidbar from '/src/components/vendor/Sidbar.vue'
 import Storecard from '@/components/customer/storecard.vue';
 
+
     export default {
+
     components:
     { Sidbar , Navbar, Storecard },
     data() {
