@@ -10,6 +10,7 @@ import checkout from '../views/customer/checkout.vue'
 import cart from '@/views/customer/cart.vue'
 import trackorder from '@/views/customer/trackorder.vue'
 import orderhistory from '@/views/customer/orderhistory.vue'
+import cprofile from '@/views/customer/profile.vue'
 
 // admin imports ------------------------------------------------
 import AdminLayout from "../views/admin/adminLayout.vue";
@@ -85,6 +86,11 @@ const routes = [
     path: '/orderhistory',
     name: 'orderhistory',
     component: orderhistory
+  },
+  {
+    path: '/profile',
+    name: 'profile',
+    component: cprofile
   },
 
 
