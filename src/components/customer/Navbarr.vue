@@ -123,6 +123,13 @@ import cards from './cards.vue';
     
     const authenticated = computed(() => store.state.auth.authenticated);
     console.log(authenticated.value)
+
+    onMounted( async() => {
+    store.dispatch('auth/checkAuth')
+    const userRole = store.state.auth.user.role_id;
+    console.log(userRole);
+
+    });
     
     
     const toggleMenu = () => {
