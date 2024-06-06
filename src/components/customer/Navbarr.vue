@@ -112,13 +112,14 @@ import cards from './cards.vue';
     <script setup>
 
     import { ref } from 'vue'
-    import { computed } from 'vue';
     import { useStore } from 'vuex';
+    import { computed, onMounted } from 'vue';
 
     const store = useStore();
     const showMenu = ref(false);
     
-    const authenticated = computed(() => store.getters['auth/authenticated']);
+    const authenticated = computed(() => store.state.auth.authenticated);
+    console.log(authenticated.value)
     
     
     const toggleMenu = () => {

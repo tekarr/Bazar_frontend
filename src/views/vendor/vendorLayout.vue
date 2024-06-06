@@ -20,6 +20,24 @@ import Navbar from '@/components/vendor/navbar.vue'
     }
 </script>
 
+<script setup>
+import { computed, onMounted } from 'vue';
+import { ref } from 'vue'
+import {mapActions, useStore} from 'vuex';
+import { useRouter } from 'vue-router';
+
+const store = useStore();
+
+onMounted( async() => {
+
+//console.log(store.getters["auth/user"]);
+//console.log(store.state.auth.user);
+store.dispatch('auth/checkAuth')
+const userRole = store.state.auth.user.role_id;
+console.log(userRole);
+});
+</script>
+
 <style lang="scss" scoped>
 
 </style>

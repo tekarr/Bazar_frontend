@@ -249,20 +249,30 @@ import { computed, onMounted } from 'vue';
 import { ref } from 'vue'
 import {mapActions, useStore} from 'vuex';
 import { useRouter } from 'vue-router';
-import checkout from "@/views/customer/checkout.vue";
+
 
 
 const store = useStore();
 const router = useRouter(); 
+const authenticated = computed(() => store.state.auth.authenticated);
+
 const showMenu = ref(false);
 var customer =  ref(false);
 var vendor =  ref(false);
 var admin =  ref(false);
 
-onMounted( () => {
+onMounted( async() => {
 
-  console.log(store.getters["auth/user"]);
+    //console.log(store.getters["auth/user"]);
+    //console.log(store.state.auth.user);
+    store.dispatch('auth/checkAuth')
+    const userRole = store.state.auth.user.role_id;
+    console.log(userRole);
 });
+
+// const userData = store.state.auth.user;
+// console.log(userData.role_id);
+
 
 
 

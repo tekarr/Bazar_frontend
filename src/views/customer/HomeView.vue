@@ -3,7 +3,7 @@
     <banner/>
     <tabs-2/>
     <deals/>
-    <cards/>
+    <navbarr/>
     <pages/>
     <footer-2/>
   </div>

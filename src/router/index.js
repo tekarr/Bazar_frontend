@@ -12,6 +12,7 @@ import trackorder from '@/views/customer/trackorder.vue'
 import orderhistory from '@/views/customer/orderhistory.vue'
 import cprofile from '@/views/customer/profile.vue'
 import becomevendor from '@/views/customer/becomevendor.vue'
+import Customerlayout from '@/views/customer/customerlayout.vue';
 
 // admin imports ------------------------------------------------
 import AdminLayout from "../views/admin/adminLayout.vue";
@@ -38,65 +39,77 @@ import Addproduct from '@/components/vendor/Addproduct.vue'
 import store from "@/store";
 
 
+
 const routes = [
   
   //customer routes --------------------------------------
   {
-    path: '/',
-    name: 'home',
-    component: HomeView
-  },
-  {
-    path: '/about',
-    name: 'about',
-    component: AboutView
-  },
-  {
-    path: '/signup',
-    name: 'signup',
-    component: Signup,
+  path: '/shop',
+  redirect: '/',
+  name: 'shop',
+  component:  Customerlayout,
+  role: ['customer'],
+  // requiresAuth: true,
+  //beforeEnter: hasRole([3]),
+  children: [
+      {
+        path: '/',
+        name: 'home',
+        component: HomeView
+      },
+      {
+        path: '/about',
+        name: 'about',
+        component: AboutView
+      },
+      {
+        path: '/signup',
+        name: 'signup',
+        component: Signup,
 
-  },
-  {
-    path: '/signin',
-    name: 'signin',
-    component: signin,
+      },
+      {
+        path: '/signin',
+        name: 'signin',
+        component: signin,
 
-  },
-  {
-    path: '/product/:id',
-    name: 'productdetail',
-    component: productdetail
-  },
-  {
-    path: '/cart',
-    name: 'cart',
-    component: cart
-  },
-  {
-    path: '/checkout',
-    name: 'checkout',
-    component: checkout
-  },
-  {
-    path: '/trackorder',
-    name: 'trackorder',
-    component: trackorder
-  },
-  {
-    path: '/orderhistory',
-    name: 'orderhistory',
-    component: orderhistory
-  },
-  {
-    path: '/profile',
-    name: 'profile',
-    component: cprofile
-  },
-  {
-    path: '/becomevendor',
-    name: 'becomevendor',
-    component: becomevendor
+      },
+      {
+        path: '/product/:id',
+        name: 'productdetail',
+        component: productdetail
+      },
+      {
+        path: '/cart',
+        name: 'cart',
+        component: cart
+      },
+      {
+        path: '/checkout',
+        name: 'checkout',
+        component: checkout
+      },
+      {
+        path: '/trackorder',
+        name: 'trackorder',
+        component: trackorder
+      },
+      {
+        path: '/orderhistory',
+        name: 'orderhistory',
+        component: orderhistory
+      },
+      {
+        path: '/profile',
+        name: 'profile',
+        component: cprofile
+      },
+      {
+        path: '/becomevendor',
+        name: 'becomevendor',
+        component: becomevendor
+      },
+    ]
   },
 
 

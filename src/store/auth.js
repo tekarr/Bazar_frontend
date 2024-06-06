@@ -8,8 +8,9 @@ export default {
     namespaced: true,
 
     state: {
-     user: null,
+        user: null,
         token: localStorage.getItem('token') || '',
+        authenticated : !!localStorage.getItem('token')
     },
     getters: {
 
@@ -55,10 +56,10 @@ export default {
         }
     },
     actions:{
-         login({ commit }, credentials) {
-             axios.post('http://localhost:8000/login', credentials)
+        login({ commit }, credentials) {
+            axios.post('http://localhost:8000/login', credentials)
                 .then((data ) => {
-                   commit('AUTH_USER', data.data);
+                commit('AUTH_USER', data.data);
 
                     console.log('User data fetched:', data.data.token);
 
@@ -95,7 +96,7 @@ export default {
                 axiosClient.get('/api/user')
                     .then(response => {
                         // If user data is fetched successfully, commit it to the store
-                          commit('SET_USER', response.data);
+                        commit('SET_USER', response.data);
                         console.log('User data fetched:', response.data);
                         // Resolve the promise to indicate success
                         resolve();
