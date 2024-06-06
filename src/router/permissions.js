@@ -8,7 +8,7 @@ import auth from "@/store/auth";
 const hasRole = (roles) => (to, from, next) => {
     store.dispatch("auth/checkAuth").then(() => {
         // const userRole = store.state.auth.user.role_id;
-        const userRole = store.state.auth.user_role;
+        const userRole = store.state.auth.user.role_id;
         if (!roles.includes(userRole)) {
             next('/');
         } else {

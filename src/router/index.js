@@ -42,7 +42,51 @@ import store from "@/store";
 
 
 const routes = [
+
+   //customer routes --------------------------------------
+  {
+    path: '/public',
+    redirect: '/',
+    name: 'public',
+    component:  publiclayout,
+    //role: ['customer'],
+    //requiresAuth: true,
+    //beforeEnter: hasRole([3]),
+    children: [
+        {
+          path: '/',
+          name: 'home',
+          component: HomeView
+        },
+        {
+          path: '/about',
+          name: 'about',
+          component: AboutView
+        },
+        {
+          path: '/signup',
+          name: 'signup',
+          component: Signup,
   
+        },
+        {
+          path: '/signin',
+          name: 'signin',
+          component: signin,
+  
+        },
+        {
+          path: '/product/:id',
+          name: 'productdetail',
+          component: productdetail
+        },
+        {
+          path: '/cart',
+          name: 'cart',
+          component: cart
+        },
+      ]
+    },
   //customer routes --------------------------------------
   {
   path: '/shop',
@@ -50,63 +94,31 @@ const routes = [
   name: 'shop',
   component:  Customerlayout,
   role: ['customer'],
-  // requiresAuth: true,
-  beforeEnter: hasRole([3,0]),
+  //requiresAuth: true,
+  beforeEnter: hasRole([3]),
   children: [
       {
-        path: '/',
-        name: 'home',
-        component: HomeView
-      },
-      {
-        path: '/about',
-        name: 'about',
-        component: AboutView
-      },
-      {
-        path: '/signup',
-        name: 'signup',
-        component: Signup,
-
-      },
-      {
-        path: '/signin',
-        name: 'signin',
-        component: signin,
-
-      },
-      {
-        path: '/product/:id',
-        name: 'productdetail',
-        component: productdetail
-      },
-      {
-        path: '/cart',
-        name: 'cart',
-        component: cart
-      },
-      {
-        path: '/checkout',
+        path: '/customer/checkout',
         name: 'checkout',
         component: checkout
       },
       {
-        path: '/trackorder',
+        path: '/customer/trackorder',
         name: 'trackorder',
         component: trackorder
       },
       {
-        path: '/orderhistory',
+        path: '/customer/orderhistory',
         name: 'orderhistory',
         component: orderhistory
       },
       {
-        path: '/profile',
+        path: '/customer/profile',
         name: 'profile',
         component: cprofile
       },
       {
-        path: '/becomevendor',
+        path: '/customer/becomevendor',
         name: 'becomevendor',
         component: becomevendor
       },
