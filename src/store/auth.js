@@ -9,7 +9,8 @@ export default {
     state: {
         user: null,
         token: localStorage.getItem('token') || '',
-        authenticated : !!localStorage.getItem('token')
+        authenticated : !!localStorage.getItem('token'),
+        user_role: 0,
     },
     getters: {
 
@@ -21,10 +22,14 @@ export default {
         SET_TOKEN(state, token) {
             localStorage.setItem('token', token);
             state.token = token;
+            state.user_role = token ? state.user_role : 0; // Set the role to 0 if there's no token
         },
         SET_USER(state, user) {
             state.user = user;
 
+        },
+        SET_USER_ROLE(state, role) {
+            state.user_role = role;
         },
         CLEAR_AUTH_DATA(state) {
             state.token = '';
@@ -70,7 +75,7 @@ export default {
                 const token = localStorage.getItem('token');
                 if (!token) {
                     // If there's no token, reject the promise
-                    reject(new Error('No token found'));
+                    resolve();
                     return;
                 }
 
@@ -110,8 +115,8 @@ export function redirectToDashboard(user) {
             break;
         case 3:
             route = '/'; // Adjust this route according to your application's structure
-            break;
-        default:
+            break;  
+        default :
             route = '/';
             break;
     }

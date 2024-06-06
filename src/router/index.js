@@ -1,5 +1,6 @@
 import { createRouter, createWebHistory } from 'vue-router'
 import { hasRole } from './permissions';
+
 // customer imports ------------------------------------------------
 import HomeView from '../views/customer/HomeView.vue'
 import AboutView from '../views/customer/AboutView.vue'
@@ -50,7 +51,7 @@ const routes = [
   component:  Customerlayout,
   role: ['customer'],
   // requiresAuth: true,
-  //beforeEnter: hasRole([3]),
+  beforeEnter: hasRole([3,0]),
   children: [
       {
         path: '/',

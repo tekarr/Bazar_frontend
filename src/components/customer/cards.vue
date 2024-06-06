@@ -263,8 +263,6 @@ var admin =  ref(false);
 
 onMounted( async() => {
 
-    //console.log(store.getters["auth/user"]);
-    //console.log(store.state.auth.user);
     store.dispatch('auth/checkAuth')
     const userRole = store.state.auth.user.role_id;
     console.log(userRole);
@@ -272,6 +270,7 @@ onMounted( async() => {
 
 // const userData = store.state.auth.user;
 // console.log(userData.role_id);
+
 
 
 

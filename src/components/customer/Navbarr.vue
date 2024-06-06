@@ -71,7 +71,9 @@
                     <li class="py-1 "><router-link to="/profile">Profile</router-link></li>
                     <li class="py-1"><router-link to="/trackorder">Track Orders</router-link></li>
                     <li class="py-1"><router-link to="/orderhistory">Order History</router-link></li>
-                    <li class="py-1"><router-link to="/becomevendor">Become vendor</router-link></li>
+                    <li class="py-1" v-if="customer"><router-link to="/becomevendor" >Become vendor</router-link></li>
+                    <li class="py-1" v-if="vendor"><router-link to="/vendor">Dashboard</router-link></li>
+                    <li class="py-1" v-if="admin"><router-link to="/admin">Dashboard</router-link></li>
                     <li class="py-1"><router-link to="/about">About</router-link></li>
                     <li class="py-1 cursor-pointer" @click="logout" >logout</li>
                 </ul>
@@ -120,16 +122,30 @@ import cards from './cards.vue';
     const showMenu = ref(false);
     const route = useRoute();
     const hiddenRoutes = ['/signin', '/signup'];
+
+    var customer =  ref(false);
+    var vendor =  ref(false);
+    var admin =  ref(false);
+    
     
     const authenticated = computed(() => store.state.auth.authenticated);
     console.log(authenticated.value)
 
-    onMounted( async() => {
-    store.dispatch('auth/checkAuth')
-    const userRole = store.state.auth.user.role_id;
-    console.log(userRole);
+    if (authenticated.value == true){
 
-    });
+        store.dispatch('auth/checkAuth')
+        const userRole = store.state.auth.user.role_id;
+        console.log(userRole);
+        
+
+        if (userRole == 1) {
+            admin.value = true;
+        } else if (userRole == 2) {
+            vendor.value = true;
+        } else if (userRole == 3) {
+            customer.value = true;
+        }
+    }
     
     
     const toggleMenu = () => {
