@@ -45,13 +45,13 @@ const routes = [
 
    //customer routes --------------------------------------
   {
-    path: '/public',
+    path: '/',
     redirect: '/',
     name: 'public',
     component:  Customerlayout,
     //role: ['customer'],
     //requiresAuth: true,
-    //beforeEnter: hasRole([3]),
+    // beforeEnter: hasRole([0]),
     children: [
         {
           path: '/',
@@ -67,13 +67,13 @@ const routes = [
           path: '/signup',
           name: 'signup',
           component: Signup,
-  
+
         },
         {
           path: '/signin',
           name: 'signin',
           component: signin,
-  
+
         },
         {
           path: '/product/:id',
@@ -89,8 +89,8 @@ const routes = [
     },
   //customer routes --------------------------------------
   {
-  path: '/shop',
-  redirect: '/',
+  path: '/customer',
+  redirect: '/customer/profile',
   name: 'shop',
   component:  Customerlayout,
   role: ['customer'],
@@ -237,7 +237,13 @@ const routes = [
       },
     ]
   },
-];
+
+  {name:'Error', path: '/error',  component: () => import('@/views/Error.vue')},
+
+  { path: '/:pathMatch  (.*)*', name: 'not-found', component: () => import('@/views/Error.vue')}
+    ]
+
+;
 
 
 const router = createRouter({

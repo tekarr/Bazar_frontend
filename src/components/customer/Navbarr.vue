@@ -66,6 +66,8 @@
                             <button  @click="toggleMenu" class="bg-gray-700 w-6 h-6 rounded-3xl">x</button>
                         </div>
                     </li>
+
+
                     <li class="py-1"><router-link to="/">Shop</router-link></li>
                     <li class="py-1"><router-link to="/cart">Cart</router-link></li>
                     <li class="py-1 "><router-link to="/profile">Profile</router-link></li>
@@ -123,28 +125,32 @@ import cards from './cards.vue';
     const route = useRoute();
     const hiddenRoutes = ['/signin', '/signup'];
 
-    var customer =  ref(false);
-    var vendor =  ref(false);
-    var admin =  ref(false);
+    const customer =  ref(false);
+    const vendor = ref(false);
+    const admin =  ref(false);
     
     
     const authenticated = computed(() => store.state.auth.authenticated);
     console.log(authenticated.value)
 
-    if (authenticated.value == true){
+    if (authenticated.value === true){
 
-        store.dispatch('auth/checkAuth')
-        const userRole = store.state.auth.user.role_id;
-        console.log(userRole);
+        store.dispatch('auth/checkAuth').then(() => {
+            const userRole = store.state.auth.user.role_id;
+            console.log(userRole);
+
+            if (userRole === 1) {
+                admin.value = true;
+            } else if (userRole === 2) {
+                vendor.value = true;
+            } else if (userRole === 3) {
+                customer.value = true;
+            }
+        });
+
         
 
-        if (userRole == 1) {
-            admin.value = true;
-        } else if (userRole == 2) {
-            vendor.value = true;
-        } else if (userRole == 3) {
-            customer.value = true;
-        }
+
     }
     
     

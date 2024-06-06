@@ -75,7 +75,7 @@ export default {
                 const token = localStorage.getItem('token');
                 if (!token) {
                     // If there's no token, reject the promise
-                    resolve();
+                    router.push('/');
                     return;
                 }
 

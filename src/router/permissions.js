@@ -10,13 +10,13 @@ const hasRole = (roles) => (to, from, next) => {
         // const userRole = store.state.auth.user.role_id;
         const userRole = store.state.auth.user.role_id;
         if (!roles.includes(userRole)) {
-            next('/');
+            next({name: 'Error'});
         } else {
 
             next();
         }
     }).catch((err) => {
-            next('/');
+            next({name: 'Error'});
         }
     );
 }
