@@ -1,6 +1,6 @@
 <template>
     
-    <nav class="bg-white fixed w-full h-28 z-20 top-0 start-0 border-b-4 border-gray-200 rounded-none">
+    <nav v-if="!hiddenRoutes.includes(route.path)" class="bg-white fixed w-full h-28 z-20 top-0 start-0 border-b-4 border-gray-200 rounded-none">
         
         <div class="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-2">
     
@@ -113,10 +113,13 @@ import cards from './cards.vue';
 
     import { ref } from 'vue'
     import { useStore } from 'vuex';
+    import { useRoute } from 'vue-router';
     import { computed, onMounted } from 'vue';
 
     const store = useStore();
     const showMenu = ref(false);
+    const route = useRoute();
+    const hiddenRoutes = ['/signin', '/signup'];
     
     const authenticated = computed(() => store.state.auth.authenticated);
     console.log(authenticated.value)
