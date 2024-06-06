@@ -48,7 +48,7 @@ const routes = [
     path: '/public',
     redirect: '/',
     name: 'public',
-    component:  publiclayout,
+    component:  Customerlayout,
     //role: ['customer'],
     //requiresAuth: true,
     //beforeEnter: hasRole([3]),
