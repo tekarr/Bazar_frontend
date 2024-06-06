@@ -12,13 +12,12 @@ const hasRole = (roles) => (to, from, next) => {
         if (!roles.includes(userRole)) {
 
             next('/');
-            console.log('Unauthorized');
+
         } else {
 
             next();
         }
     }).catch((err) => {
-            console.log("hasRole error: ", err);
             next('/');
         }
     );
