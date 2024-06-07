@@ -19,7 +19,6 @@
                 </div>
             <div class="mb-4 opacity-80">Prefered image size <span class="text-pink-500">100x50</span></div>
                 
-            <p>Image name: {{ image }}</p>
             
 
             <!-- name -->
@@ -28,7 +27,6 @@
                 <input type="text" id="name" v-model="name" placeholder="Storename" 
                 class="w-full mt-4 bg-white text-black mr-10 pl-4 py-2 rounded-xl focus:outline-none focus:ring focus:ring-pink-500 " required>
             </div>
-            <div><p>{{ name }}</p></div>
 
             <!-- Description -->
             <div class="mb-2 text-start ">
@@ -39,7 +37,6 @@
                 </textarea>
             </div>
 
-            <div><p>{{ description }}</p></div>
 
             <!-- phone number -->
             <!-- <div class="mb-5 text-start w-80">
@@ -60,7 +57,6 @@
                 </select>
             </div>
 
-            <p>{{category}}</p>
 
             <!-- open & close -->
             <!-- <div class="flex justify-between mb-8 w-96">
