@@ -74,12 +74,7 @@ import Navbar from '@/components/vendor/navbar.vue'
     },
     async created() {
     try {
-        const token = localStorage.getItem('token');
-        const response = await axiosClient.get('http://localhost:8000/api/vendor/products', {
-        headers: {
-            Authorization: `Bearer ${token}`
-        }
-        });
+        const response = await axiosClient.get('api/vendor/products');
 
         this.products = response.data.data[0];
         console.log(this.products);
@@ -90,12 +85,7 @@ import Navbar from '@/components/vendor/navbar.vue'
     methods: {
     async deleteProduct(id) {
         try {
-            const token = localStorage.getItem('token');
-            await axiosClient.delete(`http://localhost:8000/api/vendor/products/${id}`, {
-            headers: {
-                Authorization: `Bearer ${token}`
-            }
-            });
+            await axiosClient.delete(`api/vendor/products/${id}`);
 
             // Remove the product from the products array
             this.products = this.products.filter(product => product.id !== id);
