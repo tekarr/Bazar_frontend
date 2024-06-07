@@ -7,19 +7,19 @@
                 <thead class="text-xs text-gray-700 uppercase bg-gray-50 ">
                     <tr>
                         <th scope="col" class="px-6 py-3 text-start">
-                            id
+                            name
                         </th>
                         <th scope="col" class=" py-3 text-start">
-                            name
+                            description
+                        </th>
+                        <th scope="col" class="px-6 py-3 text-start">
+                            category
                         </th>
                         <th scope="col" class="px-6 py-3 text-start">
                             price
                         </th>
                         <th scope="col" class="px-6 py-3 text-start">
-                            Qt
-                        </th>
-                        <th scope="col" class="px-6 py-3 text-start">
-                            active
+                            status
                         </th>
                         <th scope="col" class="px-6 py-3">
                         
@@ -28,24 +28,24 @@
                 </thead>
                 <tbody>
                     <tr v-for="product in products" :key="product.id" class="bg-white " >
-                        <th scope="row" class="px-6 py-4 font-medium ">
-                            {{product.id}}
-                        </th>
-                        <th scope="row" class=" font-medium  ">
+                        <th scope="row" class="px-6 py-8 font-medium text-base">
                             {{product.name}}
                         </th>
+                        <th scope="row" class=" font-normal text-sm">
+                            {{product.description}}
+                        </th>
+                        <td class="px-6  ">
+                            {{ product.category }}
+                        </td>
                         <td class="px-6  ">
                             {{ product.price }}
                         </td>
                         <td class="px-6 ">
-                            {{ product.qt }}
+                            {{ product.status }}
                         </td>
-                        <td class="px-6">
-                            {{ product.active }}
-                        </td>
-                        <td class="flex justify-end">
+                        <td class="flex justify-center">
                             <button class="px-4 py-2 mt-2  bg-gray-100 rounded-3xl">Edit</button>
-                            <button class="px-4 py-2 mx-2 mt-2 rounded-3xl bg-pink-600 text-white">Delete</button>
+                            <button @click="deleteProduct(product.id)" class="px-4 py-2 mx-2 mt-2 rounded-3xl bg-pink-600 text-white">Delete</button>
                         </td>
                     </tr>
                 </tbody>
@@ -62,26 +62,49 @@
 </template>
 
 <script>
+import axiosClient from "@/axios";
 import Sidbar from '@/components/vendor/Sidbar.vue'
 import Navbar from '@/components/vendor/navbar.vue'
     export default {
     components: { Sidbar, Navbar },
     data() {
         return {
-            products:[
-                {
-                    id:'WF3001',
-                    name:'smart phone',
-                    price:'30',
-                    qt:'4',
-                    active:true,
+            products:[],
+        };
+    },
+    async created() {
+    try {
+        const token = localStorage.getItem('token');
+        const response = await axiosClient.get('http://localhost:8000/api/vendor/products', {
+        headers: {
+            Authorization: `Bearer ${token}`
+        }
+        });
 
-                }
-            ],
+        this.products = response.data.data[0];
+        console.log(this.products);
+        } catch (error) {
+        console.error(error);
+        }
+    },
+    methods: {
+    async deleteProduct(id) {
+        try {
+            const token = localStorage.getItem('token');
+            await axiosClient.delete(`http://localhost:8000/api/vendor/products/${id}`, {
+            headers: {
+                Authorization: `Bearer ${token}`
+            }
+            });
+
+            // Remove the product from the products array
+            this.products = this.products.filter(product => product.id !== id);
+        } catch (error) {
+            console.error(error);
+        }
         }
     }
-        
-    }
+    };
 </script>
 
 <style lang="scss" scoped>
