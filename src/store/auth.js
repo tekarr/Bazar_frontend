@@ -26,7 +26,9 @@ export default {
         },
         SET_USER(state, user) {
             state.user = user;
-
+        },
+        SET_Authenticated(state, authenticated) {
+            state.authenticated = authenticated;
         },
         SET_USER_ROLE(state, role) {
             state.user_role = role;
@@ -34,6 +36,7 @@ export default {
         CLEAR_AUTH_DATA(state) {
             state.token = '';
             localStorage.removeItem('token');
+            state.authenticated = false;
             state.user = null;
         },
 
@@ -45,6 +48,7 @@ export default {
                 .then((response ) => {
                     commit('SET_TOKEN', response.data.token);
                     commit('SET_USER', response.data.user);
+                    commit('SET_Authenticated', true);
                     redirectToDashboard(response.data.user);
                     console.log('User data fetched:', response.data.user);
 

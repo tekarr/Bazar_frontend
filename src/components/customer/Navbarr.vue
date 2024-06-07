@@ -70,10 +70,10 @@
 
                     <li class="py-1"><router-link to="/">Shop</router-link></li>
                     <li class="py-1"><router-link to="/cart">Cart</router-link></li>
-                    <li class="py-1 "><router-link to="/profile">Profile</router-link></li>
-                    <li class="py-1"><router-link to="/trackorder">Track Orders</router-link></li>
-                    <li class="py-1"><router-link to="/orderhistory">Order History</router-link></li>
-                    <li class="py-1" v-if="customer"><router-link to="/becomevendor" >Become vendor</router-link></li>
+                    <li class="py-1 "><router-link to="/customer/profile">Profile</router-link></li>
+                    <li class="py-1"><router-link to="/customer/trackorder">Track Orders</router-link></li>
+                    <li class="py-1"><router-link to="/customer/orderhistory">Order History</router-link></li>
+                    <li class="py-1" v-if="customer"><router-link to="/customer/becomevendor" >Become vendor</router-link></li>
                     <li class="py-1" v-if="vendor"><router-link to="/vendor">Dashboard</router-link></li>
                     <li class="py-1" v-if="admin"><router-link to="/admin">Dashboard</router-link></li>
                     <li class="py-1"><router-link to="/about">About</router-link></li>
@@ -87,7 +87,8 @@
 </template>
     
     <script>
-import cards from './cards.vue';
+    import { mapGetters } from 'vuex';
+    import cards from './cards.vue';
     export default {
     components: { cards },
     data() {
@@ -110,7 +111,10 @@ import cards from './cards.vue';
             behavior: 'smooth' // Smooth scroll transition
         });
         }
-    } 
+    },
+    computed: {
+    ...mapGetters('auth', ['authenticated'])
+    }
 }
     </script>
     <script setup>

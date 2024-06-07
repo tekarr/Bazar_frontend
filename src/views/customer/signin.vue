@@ -7,7 +7,7 @@
     </div>
 
     <p class="text-xl font-bold text-center pt-2 mb-4">Sign in</p>    
-    <div class="flex items-center justify-center ">
+    <div v-bind="$attrs" class="flex items-center justify-center ">
     <form @submit.prevent="Signin" class="max-w-sm w-96 ">
         
         <div class="mb-5 text-start">
