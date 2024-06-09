@@ -62,19 +62,24 @@
                 <ul>
                     <li class="py-1">
                         <div class="flex justify-between">
-                            <span class="w-18">{{username}}</span>
-                            <button  @click="toggleMenu" class="bg-gray-700 w-6 h-6 rounded-3xl">x</button>
+                            <div class="grid grid-col-1">
+                                <span class="w-18 font-bold">{{username}}</span>
+                                <p v-if="vendor" class="">vendor</p>
+                            </div>
+                            
+                            <button  @click="toggleMenu" class="bg-gray-700 w-6 h-6 rounded-3xl ml-4">x</button>
                         </div>
                     </li>
 
-
+                    <hr class="my-2">
                     <li class="py-1"><router-link to="/">Shop</router-link></li>
                     <li class="py-1"><router-link to="/cart">Cart</router-link></li>
-                    <li class="py-1 "><router-link to="/customer/profile">Profile</router-link></li>
-                    <li class="py-1"><router-link to="/customer/trackorder">Track Orders</router-link></li>
-                    <li class="py-1"><router-link to="/customer/orderhistory">Order History</router-link></li>
+                    <li class="py-1 " v-if="customer"><router-link to="/customer/profile">Profile</router-link></li>
+                    <li class="py-1" v-if="customer"><router-link to="/customer/trackorder">Track Orders</router-link></li>
+                    <li class="py-1" v-if="customer"><router-link to="/customer/orderhistory">Order History</router-link></li>
                     <li class="py-1" v-if="customer"><router-link to="/customer/becomevendor" >Become vendor</router-link></li>
                     <li class="py-1" v-if="vendor"><router-link to="/vendor">Dashboard</router-link></li>
+                    <li class="py-1" v-if="vendor"><router-link to="/store-page">Store page</router-link></li>
                     <li class="py-1" v-if="admin"><router-link to="/admin">Dashboard</router-link></li>
                     <li class="py-1"><router-link to="/about">About</router-link></li>
                     <li class="py-1 cursor-pointer" @click="logout" >logout</li>
@@ -94,7 +99,7 @@
     data() {
         return {
         searchTerm: '',
-        username: localStorage.getItem('username'),
+        username:'',
         };
     },
     methods: {
@@ -129,6 +134,7 @@
     const route = useRoute();
     const hiddenRoutes = ['/signin', '/signup'];
 
+    var username = ref('');
     const customer =  ref(false);
     const vendor = ref(false);
     const admin =  ref(false);
@@ -141,6 +147,8 @@
 
         store.dispatch('auth/checkAuth').then(() => {
             const userRole = store.state.auth.user.role_id;
+            username = store.state.auth.user.name;
+            console.log(username);
             console.log(userRole);
 
             if (userRole === 1) {

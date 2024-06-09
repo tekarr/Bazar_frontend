@@ -1,32 +1,91 @@
 <template>
 
     <div>
-        <!-- store -->
-        <div class="flex justify-center">
-            <div class="mx-8 my-1  w-full flex justify-center h-80 bg-gray-100 rounded-3xl"></div>
-        </div>
-        <div class="ml-12 m-4"><span class="text-2xl font-bold">Storename</span></div>
-        <div class="ml-12 m-4 flex justify-between w-60 mb-8 ">
-            <span>Open: 2am</span>
-            <span>Close: 4pm </span>
-            <span class=" bg-gray-200 cursor-pointer rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2 mb-2">Edit</span>
+        <!-- Alerts: Success -->
+        <div v-if="showPopup" class="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50">
+            <div class="bg-white p-6 rounded-3xl">
+            <p class="text-lg"> added successfully!</p>
+            <button @click="closePopup" class="mt-4 bg-pink-600 hover:bg-pink-700 text-white font-bold py-2 px-4 rounded-3xl">Close</button>
+            </div>
         </div>
 
-        <!-- Add Product -->
-        <div class="ml-8 bg-gray-100  grid grid-cols-6 gap-1 justify-between ">
-            <div class="h-40 w-40 bg-gray-200 rounded-3xl cursor-pointer flex justify-center items-center text-3xl text-bold text-gray-500">+</div>
-            <div class="h-40 w-40 bg-gray-200 rounded-3xl cursor-pointer flex justify-center items-center text-3xl text-bold text-gray-500">+</div>
+        <!-- store -->
+        <div>
+        <div class="flex justify-center mt-36">
+            <div class="mx-8 my-1  w-full flex justify-center h-96 bg-gray-900 rounded-3xl overflow-hidden">
+                <img :style="{ transform: `scale(${imageScale})` }" class="rounded-3xl w-full h-full object-cover" src="../../assets/icons/BMW.jpg" alt="">
+            </div>
+        </div>
+
+        <!-- <div class="mt-4">
+            <input type="range" min="1" max="2" step="0.01" v-model.number="imageScale" class="w-full">
+        </div> -->
+
+        <div class="ml-12 m-4"><span class="text-2xl font-bold">Storename</span></div>
+        <div class="mt-4">
+            <p class="ml-12 ">description</p>
+        </div>
+        <div class="ml-12 m-4 flex justify-between w-48 mb-8 ">
+            <span>Open : 2am</span>
+            <span>Close : 4pm </span>
         </div>
     </div>
 
+        <!-- Cards -->
+        <div ref="specificSection" class="grid grid-cols-2 md:grid-cols-1 lg:grid-cols-3 gap-10 p-4 md:p-8"> 
+            <router-link :to="`/product/${card.name}`" class="bg-gray-100 rounded-3xl cursor-pointer hover:shadow-lg transition-all" v-for="card in cards" :key="card.id">
+                <img class="h-auto w-full rounded-t-3xl md:rounded-3xl" :src="card.image" alt="">
+                <div class="p-4 md:pl-10">
+                    <p class="text-lg md:text-2xl font-bold pt-4 md:text-start text-center">{{ card.name }}</p>
+                    <p class="pb-1 text-sm md:text-start">{{ card.desc }}</p>
+                    <div class="flex flex-col md:flex-row justify-between items-center">
+                    <span class="text-lg md:text-2xl font-bold pb-3 md:pb-0">{{ card.price }}$</span>
+                    <span class="text-lg md:text-2xl font-bold opacity-30 pb-3 md:pb-0">{{ card.store }}</span>
+                    <button class="text-pink-600 hover:text-white border border-pink-600 bg-white hover:bg-pink-600 focus:ring-4 focus:outline-none focus:ring-pink-300 rounded-full text-base font-medium px-5 py-2.5 text-center me-3 mb-3 " 
+                    @click="showPopup = true">Add to Cart
+                    </button>
+                    </div>
+                </div>
+            </router-link>
+        </div>
+
+    </div>
 </template>
 
 <script>
-    export default {
-        
-    }
+import { ref } from 'vue'
+import store from '@/store'
+
+export default {
+    data(){
+        return{ 
+        imageScale: 1,
+        cards:[
+        {
+            id: 1,
+            name: 'Bag',
+            desc: 'This is the description for it.',
+            price: '20',
+            store: 'Store-name'
+        },
+        {
+            id: 2,
+            name: 'watch',
+            desc: 'This is the description for it.',
+            price: '10',
+            store: 'Store-name'
+        }
+        ],
+        methods:{
+            closePopup() {
+            this.showPopup = false;
+            },
+        },
+    };
+    },
+}
 </script>
 
-<style lang="scss" scoped>
-
+<style scoped>
+/* Add your custom styles here */
 </style>

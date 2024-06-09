@@ -249,8 +249,7 @@ import { computed, onMounted } from 'vue';
 import { ref } from 'vue'
 import {mapActions, useStore} from 'vuex';
 import { useRouter } from 'vue-router';
-
-
+import useProducts from "@/comp/products.js";
 
 const store = useStore();
 const router = useRouter(); 
@@ -262,60 +261,33 @@ var vendor =  ref(false);
 var admin =  ref(false);
 
 onMounted( async() => {
-
     store.dispatch('auth/checkAuth')
     const userRole = store.state.auth.user.role_id;
     console.log(userRole);
 });
 
-// const userData = store.state.auth.user;
-// console.log(userData.role_id);
-
-
-
-
-
-
 const toggleMenu = () => {
     showMenu.value = !showMenu.value;
 };
-
-/*
-const token = localStorage.getItem('token'); // or get it from a cookie
-
-if (token) {
-    const decodedToken = jwtDecode(token);
-    const userRole = decodedToken.role;
-    console.log(userRole);
-} else {
-  // handle the case where the token is not present or invalid
-}
-*/
-
-
 
 const logout = async () => {
     await store.dispatch('auth/logout');
     showMenu.value = false;
 };
 
-/*
-import useProducts from "@/comp/products.js";
-import { onMounted, ref } from "vue";
+// const { products, getProducts } = useProducts();
+// const searchTerm = ref('');
 
-const { products, getProducts } = useProducts();
-const searchTerm = ref('');
+// onMounted(() => {
+//     getProducts() 
+// })
 
-onMounted(() => {
-    getProducts() 
-})
+// const filteredItems = () => {
+//     return products.value.filter(card =>
+//     card.name.toLowerCase().includes(searchTerm.value.toLowerCase())
+//     );
+// };
 
-const filteredItems = () => {
-    return products.value.filter(card =>
-    card.name.toLowerCase().includes(searchTerm.value.toLowerCase())
-    );
-};
-*/
 </script>
 
 <style lang="scss" scoped>

@@ -12,6 +12,7 @@ export default function useProducts() {
             products.value = response.data.data;
             console.log('res:', response)
         })};
+        
     const getProduct = async (id) => {
         const response = await axiosClient.get(`/products/`+id);
         product.value = response.data;
