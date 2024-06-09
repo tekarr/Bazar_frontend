@@ -37,6 +37,7 @@ import vorders from '@/views/vendor/vorders.vue'
 import vnotification from '@/views/vendor/vnotification.vue'
 import vprofile from '@/views/vendor/vprofile.vue'
 import Addproduct from '@/components/vendor/Addproduct.vue'
+import Editproduct from '@/components/vendor/Editproduct.vue'
 import store from "@/store";
 
 
@@ -219,6 +220,12 @@ const routes = [
         path: '/vendor/products/add',
         name: 'Add Product',
         component: Addproduct
+      },
+      {
+        path: '/vendor/edit-product/:id',
+        name: 'EditProduct',
+        component: Editproduct,
+        props: true,
       },
       {
         path: '/vendor/store',

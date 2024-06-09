@@ -2,8 +2,8 @@
     <sidbar/>
     
     
-        <div v-bind="$attrs" class="">
-        <form @submit.prevent="submitForm" class="  mx-10 " >
+        <div v-if="product"  class="">
+        <form @submit.prevent="submitForm" v-bind="$attrs" class="  mx-10 " >
 
 
             <!-- imageuploader -->
@@ -46,8 +46,8 @@
             <!-- catagories -->
             <div class="">
                 <p class="">Category</p>    
-                <select v-model="product.category_id" @input="select" class="p-2 my-4 px-4  border-2 border-pink-600 rounded-xl">
-                    <option disabled value="">Please select one</option>
+                <select v-model="product.category_id" @input="select" class="p-2 my-4 px-4  border-2 border-pink-600 rounded-xl" required>
+                    <option disabled value="">Please select onese</option>
                     <option v-for="(category, index) in categories" :key="index" :value="category.id">
                     {{ category.name }}
                     </option>
@@ -57,9 +57,13 @@
 
             <!-- Status -->
             <div class="mb-5 text-start w-80">
-            <label for="status">Active</label>
-            <input type="checkbox" id="status" v-model="product.status" 
-                class="ml-4 mt-2">
+            <label for="status">Status</label><br>
+            <select v-model="product.status"  class="p-2 my-4 px-4  border-2 border-pink-600 rounded-xl" required>
+                    <option disabled value="">Please select onese</option>
+                    <option value="active">active</option>
+                    <option value="inactive">inactive</option>
+                    <option value="out_of_stock">out_of_stock</option>
+            </select>
             </div>
             {{product.status}}
 
@@ -98,7 +102,7 @@
 
             <hr>
             
-        <button type="submit" class=" m-5 text-white bg-pink-600 hover:bg-gray-800 focus:ring-4 focus:outline-none focus:ring-pink-300 font-medium rounded-3xl text-sm px-5 py-2.5 text-center ">Add</button>
+        <button type="submit" class=" m-5 text-white bg-pink-600 hover:bg-gray-800 focus:ring-4 focus:outline-none focus:ring-pink-300 font-medium rounded-3xl text-sm px-5 py-2.5 text-center ">Update</button>
     </form>
     </div>
 
@@ -113,22 +117,27 @@ export default {
     data() {
         return {
         product: {
-            name: '',
-            description: '',
-            quantity: 0,
-            category_id:'',
-            price: '',
-            status: true,
-            variations: [],
+        variations: [],
         },
+        categories: [],
         attributes: [],
         checked: false,
-        categories: [],
         };
     },
     async created() {
-
-    try {
+        //fetching product 
+        try {
+            const id = this.$route.params.id;
+            const response = await axiosClient.get(`api/vendor/products/${id}`);
+            this.product = response.data.data;
+            console.log(this.product);
+            console.log(this.product.category_id.name);
+            
+        } catch (error) {
+            console.error(error);
+        }
+        //fetching categories
+        try {
         const response = await axiosClient.get('api/categories');
         this.categories = response.data;
         const categoryNames = this.categories.map(category => category.id);
@@ -136,8 +145,8 @@ export default {
         } catch (error) {
         console.error(error);
         }
-
-    try {
+         //fetching variations
+        try {
         const response = await axiosClient.get('api/variations');
         this.attributes = response.data.map(attribute => ({
             ...attribute,
@@ -147,18 +156,16 @@ export default {
         } catch (error) {
         console.error(error);
         }
+        this.product.variations.length = 0;
+
     },
     methods: {
-        
         async submitForm() {
-        try {
-        const response = await axiosClient.post('api/vendor/products', this.product);
-        console.log(response.data);
-        // handle successful submission
-        } catch (error) {
-        console.error(error);
-        // handle error during submission
-        }
+        console.log(this.product);    
+        const id = this.$route.params.id;
+        await axiosClient.put(`api/vendor/products/${id}`, this.product);
+
+        // handle successful update
         },
         onAttributeChange(attribute) {
         if (!attribute.checked) {
