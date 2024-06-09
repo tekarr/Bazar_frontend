@@ -15,7 +15,7 @@
                 <input type="text" id="productname" v-model="product.name" placeholder="product name" 
                 class="w-full mt-4 bg-white px-10 py-2 rounded-xl focus:outline-none focus:ring focus:ring-pink-500 " required>
             </div>
-            <p>{{ product.name }}</p>
+            <p class="hidden">{{ product.name }}</p>
 
             <!-- Description -->
             <div class="mb-2 text-start ">
@@ -25,7 +25,7 @@
                     placeholder="Enter your text here...">
                 </textarea>
             </div>
-            <p>{{ product.description }}</p>
+            <p class="hidden">{{ product.description }}</p>
 
 
             <!-- Price -->
@@ -33,13 +33,13 @@
                 <div>
                     <label for="price" class="text-gray-700">Price $:</label>
                     <input type="number" min="1" id="price" v-model="product.price" placeholder="$"  class="block w-full px-4 py-2 mt-2 mb-4 border border-gray-300 rounded-md focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm">
-                    <p class="mt-2 mb-2 text-gray-500 ">Entered price: {{ product.price }}</p>
+                    <p class="mt-2 mb-2 text-gray-500 hidden">Entered price: {{ product.price }}</p>
                 </div>
 
                 <div class="">
                     <label for="quantity" class="text-gray-700">Quantity:</label>
                     <input type="number" min="1" id="quantity" v-model="product.quantity" class="block w-full px-4 py-2 mt-2 mb-4 border border-gray-300 rounded-md focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm">
-                    <p class="mt-2 text-gray-500 ">Entered price: {{ product.quantity }}</p>  
+                    <p class="mt-2 text-gray-500 hidden">Entered price: {{ product.quantity }}</p>  
                 </div>
             </div>
 
@@ -53,7 +53,7 @@
                     </option>
                 </select>
             </div>
-            <p>{{ product.category_id }}</p>
+            <p class="hidden">{{ product.category_id }}</p>
 
             <!-- Status -->
             <div class="mb-5 text-start w-80">
@@ -65,12 +65,12 @@
                     <option value="out_of_stock">out_of_stock</option>
             </select>
             </div>
-            {{product.status}}
+            <p class="hidden">{{product.status}}</p>
 
 
             <!-- Attributes -->
             <div class="p-6 bg-white shadow-md rounded-lg">
-                <p class="mb-4 text-lg font-bold">{{product.variations}}</p>
+                <p class="mb-4 text-lg font-bold hidden">{{product.variations}}</p>
                 <p class="mb-4 text-lg font-bold">Attributes</p>
                 <div v-for="(attribute, index) in attributes" :key="index" class="mb-4">
                         <input type="checkbox" :id="attribute.name" v-model="attribute.checked" @change="onAttributeChange(attribute)" class="hidden">
