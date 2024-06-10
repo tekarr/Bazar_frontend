@@ -1,9 +1,10 @@
 <template>
   <div>
+    <navbarr/>
     <banner/>
     <tabs-2/>
     <deals/>
-    <navbarr/>
+    <cards/>
     <pages/>
     <footer-2/>
   </div>
