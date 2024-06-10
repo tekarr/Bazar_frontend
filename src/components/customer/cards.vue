@@ -169,8 +169,8 @@ onMounted( async() => {
 
 onMounted(async () => {
     try {
-        const response = await axiosClient.get('api/vendor/stores');
-        cards.value = Array.of(response.data.data);
+        const response = await axiosClient.get('api/stores');
+        cards.value = response.data.data
         console.log(cards.value);
     } catch (error) {
         console.error(`There was an error fetching the data: ${error}`);
