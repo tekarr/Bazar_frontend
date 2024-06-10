@@ -14,7 +14,7 @@ import orderhistory from '@/views/customer/orderhistory.vue'
 import cprofile from '@/views/customer/profile.vue'
 import becomevendor from '@/views/customer/becomevendor.vue'
 import Customerlayout from '@/views/customer/customerlayout.vue';
-import storepage from '@/views/customer/storepage.vue';
+import StorePage from '@/views/customer/storepage.vue';
 
 // admin imports ------------------------------------------------
 import AdminLayout from "../views/admin/adminLayout.vue";
@@ -61,6 +61,11 @@ const routes = [
           component: HomeView
         },
         {
+          path: '/store/:id', // Define a route parameter
+          name: 'StorePage',
+          component: StorePage
+        },
+        {
           path: '/about',
           name: 'about',
           component: AboutView
@@ -86,11 +91,6 @@ const routes = [
           path: '/cart',
           name: 'cart',
           component: cart
-        },
-        {
-          path: '/store-page',
-          name: 'store page',
-          component: storepage
         },
       ]
     },
