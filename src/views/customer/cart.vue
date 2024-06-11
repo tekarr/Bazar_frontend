@@ -1,20 +1,21 @@
 <template>
 
 
-    <navbarr/>
 
     <div class="relative overflow-x-auto flex justify-center bg-gray-100 pt-28">
         <table class="w-3/4 text-sm overflow-hidden  text-left rtl:text-right text-gray-500  border-8 rounded-3xl m-10  bg-white">
             <thead class="text-xs text-gray-800 rounded-3xl ">
                 <tr>
-                    <th scope="col" class="px-10 py-3 text-3xl p-5 font-semibold">
+                    <th scope="col" class="px-10 py-3 text-3xl p-5 font-semibold ">
                         Shopping Cart
                     </th>
                 </tr>
             </thead>
-            <tbody v-for="product in products" :key="product.id" >
-                <tr class="bg-white border-b" @click="increaseQuantity(product)"  >
-                    <div class="flex justify-start items-center ">
+            <transition-group name="list" tag="tbody">
+            <!-- products -->
+            <tbody v-for="product in products" :key="product.id" class="transition-all duration-500 ease-in-out" >
+                <tr class="bg-white border-b"  >
+                    <div class="flex justify-start items-center mt-8">
                         <td class="p-4 ">
                             <img :src="product.imageSrc" :alt="product.imageAlt" class="w-28 md:w-32 max-w-full max-h-full rounded-3xl" >
                         </td>
@@ -24,41 +25,38 @@
                         </td>
                     </div>
                     <td>
-                        <p class="flex justify-start p-10">{{product.stock}} available</p>
+                        <p class="flex justify-start p-10">{{product.quantity}} available</p>
                     </td>
                     <td class="px-6 py-4">
                         <div class="flex items-center">
                             <div>
-                                <input type="number" min="1" :max="product.stock" id="first_product" class="bg-gray-50 w-16 border border-gray-300 text-gray-900 text-base rounded-xl focus:outline-none focus:ring focus:ring-pink-500 block px-2.5 py-1"
-                                v-model="product.quantity" @click="increaseQuantity(product)"  placeholder="Qt" required />
+                                <input type="number" min="1" :max="product.quantity" id="first_product" class="bg-gray-50 w-16 border border-gray-300 text-gray-900 text-base rounded-xl focus:outline-none focus:ring focus:ring-pink-500 block px-2.5 py-1"
+                                v-model="qt[product.id]"  placeholder="Qt" required @input="updateTotal(product)" />
                             </div>
                         </div>
                     </td>
                     <td class="px-6 py-4 font-semibold text-gray-700 ">
-                        ${{ product.total }}
+                        ${{ product.price }}
                     </td>
                     <td class="px-6 py-4">
-                        <a href="#" class="font-medium text-base text-pink-600 no-underline">Remove</a>
+                        <button @click="removeFromCart(product.id)" class="font-medium text-base text-pink-600 no-underline">Remove</button>
                     </td>
                 </tr>
             </tbody>
-            <tfoot>
-                <tr>
-                    <td class="text-xl text-start font-bold text-gray-900 pl-10 pb-5 pt-10 "> 
-                        Subtotal : <span>${{ totalPrice }}</span>
-                        <p class="mt-0.5 text-sm text-gray-500">Shipping and taxes calculated at checkout.</p>
-                    </td>
-                </tr>
-                <tr class="flex justify-start pl-10 pb-10">
-                    <td class="">
-                        <router-link to="/" class="flex items-center mr-5 rounded-3xl border-2 border-pink-300 bg-white px-10 py-3 text-base font-medium  text-gray-800 shadow-sm hover:bg-pink-600 hover:text-white">Continue Shopping</router-link>
-                    </td>
-                    <td class="">
-                        <router-link to="/checkout" class="flex items-center rounded-3xl border border-transparent bg-pink-600 px-10 py-3 mr-5 text-base font-medium text-white shadow-sm hover:bg-pink-700">Checkout</router-link>
-                    </td>
-                </tr>
-            </tfoot>
+        </transition-group>
         </table>
+    </div>
+    <!-- total -->
+    <div>
+        <div class="text-xl text-start font-bold text-gray-900 pl-10 pb-5 pt-10 "> 
+            Subtotal : <span>${{ finalTotal }}</span>
+            <p class="mt-0.5 text-sm text-gray-500">Shipping and taxes calculated at checkout.</p>
+        </div>
+        <div class="flex justify-start pl-10 pb-10">
+            <div class="">
+                <router-link to="/" class="flex items-center mr-5 rounded-3xl border-2 border-pink-300 bg-white px-10 py-3 text-base font-medium  text-gray-800 shadow-sm hover:bg-pink-600 hover:text-white">Continue Shopping</router-link>
+            </div>
+        </div>
     </div>
 
 
@@ -66,85 +64,44 @@
 </template>
 
 <script>
-import Navbarr from '/src/components/customer/Navbarr.vue'
-import Footer2 from '/src/components/customer/footer2.vue'
+import axiosClient from '@/axios'
+
         export default {
-        components: { Navbarr, Footer2 },
         data(){
             return{
             total: 0,
             quantity: 0,
-            selectedQuantity:0,
-            unit:1,
-            products:[
-            {
-                id: 1 ,
-                name: 'Throwback Hip Bag',
-                href: '#',
-                store: 'Store name',
-                price: 90.00,
-                total:90.00,
-                quantity: 1,
-                stock:10,
-                imageSrc: 'https://tailwindui.com/img/ecommerce-images/shopping-cart-page-04-product-01.jpg',
-                imageAlt: 'Salmon orange fabric pouch with match zipper, gray zipper pull, and adjustable hip belt.',
-            },
-            {
-                id: 2,
-                name: 'Medium Stuff Satchel',
-                href: '#',
-                store: 'Store name',
-                price: 32.00,
-                total:32.00,
-                quantity: 1,
-                stock:5,
-                imageSrc: 'https://tailwindui.com/img/ecommerce-images/shopping-cart-page-04-product-02.jpg',
-                imageAlt:
-                'Front of satchel with blue canvas body, black straps and handle, drawstring top, and front zipper pouch.',
-            },
-            {
-                id: 3,
-                name: 'Medium Stuff Satchel',
-                href: '#',
-                store: 'Store name',
-                price: 32.00,
-                quantity: 1,
-                stock:3,
-                total:32.00,
-                imageSrc: 'https://flowbite.s3.amazonaws.com/docs/gallery/square/image.jpg',
-                imageAlt:
-                'Front of satchel with blue canvas body, black straps and handle, drawstring top, and front zipper pouch.',
-            },
-            {
-                id: 4,
-                name: 'Medium Stuff Satchel',
-                href: '#',
-                store: 'Store name',
-                price: 32.00,
-                quantity: 1,
-                stock:6,
-                total:32.00,
-                imageSrc: 'https://flowbite.s3.amazonaws.com/docs/gallery/square/image-1.jpg',
-                imageAlt:
-                'Front of satchel with blue canvas body, black straps and handle, drawstring top, and front zipper pouch.',
-            },
-            {
-                id: 5,
-                name: 'Medium Stuff Satchel',
-                href: '#',
-                store: 'Store name',
-                price: 32.00,
-                quantity: 1,
-                stock:9,
-                total:32.00,
-                imageSrc: 'https://flowbite.s3.amazonaws.com/docs/gallery/square/image-2.jpg',
-                imageAlt:
-                'Front of satchel with blue canvas body, black straps and handle, drawstring top, and front zipper pouch.',
-            },
-            ]
+            products:[],
+            qt: {},
+            totals: {},
         }
     },
+    created() {
+        this.fetchProducts();
+    },
     methods: {
+        updateTotal(product) {
+            this.totals[product.id] = this.qt[product.id] * product.price;
+            console.log(this.totals);
+        },
+        async fetchProducts() {
+            this.products = [];
+            let cart = JSON.parse(localStorage.getItem('cart')) || [];
+            for (let id of cart) {
+                let response = await axiosClient.get(`api/products/${id}`);
+                this.products.push(response.data.product);
+            }
+            console.log(this.products);
+        },
+        removeFromCart(productId) {
+            let cart = JSON.parse(localStorage.getItem('cart')) || [];
+            let index = cart.indexOf(productId);
+            if (index > -1) {
+                cart.splice(index, 1);
+            }
+            localStorage.setItem('cart', JSON.stringify(cart));
+            this.fetchProducts() // refresh the products list
+        },
         increaseQuantity(product) { 
             if (product.quantity == 0 )
             { product.quantity = 1 }
@@ -154,10 +111,10 @@ import Footer2 from '/src/components/customer/footer2.vue'
         },
     },
     computed: {
-        totalPrice() {
-        return this.products.reduce((total, product) => total + product.total, 0);
+        finalTotal() {
+            return Object.values(this.totals).reduce((a, b) => a + b, 0).toFixed(1);
         },
-    }
+    },
 }
 </script>
 

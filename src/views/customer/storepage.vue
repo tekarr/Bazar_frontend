@@ -1,11 +1,19 @@
 <template>
 
     <div>
-        <!-- Alerts: Success -->
-        <div v-if="showPopup" class="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50">
+        <!-- Alert: Success -->
+        <div v-if="success" class="fixed inset-0 flex items-center justify-center z-20 bg-black bg-opacity-50">
             <div class="bg-white p-6 rounded-3xl">
             <p class="text-lg"> added successfully!</p>
-            <button @click="showPopup = false" class="mt-4 bg-pink-600 hover:bg-pink-700 text-white font-bold py-2 px-4 rounded-3xl">Close</button>
+            <button @click="success = false" class="mt-4 bg-pink-600 hover:bg-pink-700 text-white font-bold py-2 px-4 rounded-3xl">Close</button>
+            </div>
+        </div>
+
+        <!-- Alert: error -->
+        <div v-if="error" class="fixed inset-0 flex items-center justify-center z-20 bg-black bg-opacity-50">
+            <div class="bg-white p-6 rounded-3xl">
+            <p class="text-lg"> already in your cart</p>
+            <button @click="error = false" class="mt-4 bg-pink-600 hover:bg-pink-700 text-white font-bold py-2 px-4 rounded-3xl">Close</button>
             </div>
         </div>
 
@@ -37,7 +45,7 @@
                     <span class="text-lg md:text-2xl font-bold pb-3 md:pb-0">{{ product.price }}$</span>
                     <span class="text-lg md:text-2xl font-bold opacity-30 pb-3 md:pb-0">{{ product.store }}</span>
                     <button class="text-pink-600 hover:text-white border border-pink-600 bg-white hover:bg-pink-600 focus:ring-4 focus:outline-none focus:ring-pink-300 rounded-full text-base font-medium px-5 py-2.5 text-center me-3 mb-3 " 
-                    @click="showPopup = true">Add to Cart
+                    @click.prevent="addToCart(product)">Add to Cart
                     </button>
                     </div>
                 </div>
@@ -58,6 +66,8 @@ export default {
             products: [],
             store: [], 
             showPopup:false,
+            success: false,
+            error: false,
             // your existing data properties
         };
     },
@@ -73,6 +83,29 @@ export default {
             console.error(`There was an error fetching the products: ${error}`);
         }
     },
+    methods:{
+        addToCart(product) {
+            // Store product ID in localStorage
+            let cartItem = localStorage.getItem('cart');
+            let cart = [];
+            if (cartItem) {
+                try {
+                    cart = JSON.parse(cartItem);
+                } catch (error) {
+                    console.error('Error parsing cart data from localStorage:', error);
+                }
+            }
+            if (!cart.includes(product.id)) {
+            cart.push(product.id);
+            localStorage.setItem('cart', JSON.stringify(cart));
+            console.log(cart);
+            this.success = true;
+            }else{
+            this.error = true;
+            }
+
+        },
+    }
     // your existing methods
 }
 

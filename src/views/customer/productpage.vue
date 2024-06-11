@@ -1,12 +1,19 @@
 <template>
 
-    <navbarr/>
 
-    <!-- Alerts: Success -->
-    <div v-if="showPopup" class="fixed inset-0 flex items-center justify-center z-20 bg-black bg-opacity-50">
+    <!-- Alert: Success -->
+    <div v-if="success" class="fixed inset-0 flex items-center justify-center z-20 bg-black bg-opacity-50">
         <div class="bg-white p-6 rounded-3xl">
         <p class="text-lg"> added successfully!</p>
-        <button @click="showPopup = false" class="mt-4 bg-pink-600 hover:bg-pink-700 text-white font-bold py-2 px-4 rounded-3xl">Close</button>
+        <button @click="success = false" class="mt-4 bg-pink-600 hover:bg-pink-700 text-white font-bold py-2 px-4 rounded-3xl">Close</button>
+        </div>
+    </div>
+
+    <!-- Alert: error -->
+    <div v-if="error" class="fixed inset-0 flex items-center justify-center z-20 bg-black bg-opacity-50">
+        <div class="bg-white p-6 rounded-3xl">
+        <p class="text-lg"> already in your cart</p>
+        <button @click="error = false" class="mt-4 bg-pink-600 hover:bg-pink-700 text-white font-bold py-2 px-4 rounded-3xl">Close</button>
         </div>
     </div>
 
@@ -41,12 +48,12 @@
         <div class="w-full md:w-full lg:w-1/3 xl:w-1/2 mt-5 md:mt-0">
             <div class="p-10 mt-20 md:pr-10 w-96">
                 <p class="text-lg md:text-3xl font-extrabold pb-1 text-start">{{ product.name }}</p>
-                <p class="text-lg md:text-base text-start  font-bold opacity-30 mb-1 md:pb-0">{{ product.name }}</p>
+                <p class="text-lg md:text-base text-start  font-bold opacity-30 mb-1 md:pb-0">{{ product.status }}</p>
                 <div class="text-lg md:text-2xl font-bold p-3 text-start">{{ product.price }}$</div>
                 <p class="pb-1 text-base md:text-start w-80">{{ product.description }}</p>
                 <div class="flex flex-col md:flex-row justify-start w-80 p-1 pt-10">
-                    <router-link to="/product/:id" class="text-pink-600 hover:text-white border border-pink-600 bg-white hover:bg-pink-600 focus:ring-4 focus:outline-none focus:ring-pink-300 rounded-full text-base font-medium px-5 py-2.5 text-center me-3 mb-3 "
-                    @click="showPopup = true"> Add to Cart</router-link>
+                    <button  class="text-pink-600 hover:text-white border border-pink-600 bg-white hover:bg-pink-600 focus:ring-4 focus:outline-none focus:ring-pink-300 rounded-full text-base font-medium px-5 py-2.5 text-center me-3 mb-3 "
+                    @click="addToCart(product)"> Add to Cart</button>
                 </div>
             </div>
         </div>
@@ -72,7 +79,8 @@ import axiosClient from '@/axios';
                 'https://via.placeholder.com/300',
             ],   
             product: [],
-            showPopup: false,
+            success: false,
+            error: false,
             };
         },
 
@@ -90,6 +98,27 @@ import axiosClient from '@/axios';
         }
         },
         methods:{
+            addToCart(product) {
+            // Store product ID in localStorage
+            let cartItem = localStorage.getItem('cart');
+            let cart = [];
+            if (cartItem) {
+                try {
+                    cart = JSON.parse(cartItem);
+                } catch (error) {
+                    console.error('Error parsing cart data from localStorage:', error);
+                }
+            }
+            if (!cart.includes(product.id)) {
+            cart.push(product.id);
+            localStorage.setItem('cart', JSON.stringify(cart));
+            console.log(cart);
+            this.success = true;
+            }else{
+            this.error = true;
+            }
+
+        },
             previousImage() {
             let index = this.images.indexOf(this.mainImage);
             if (index <= 0) {
