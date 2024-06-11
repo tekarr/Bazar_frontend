@@ -6,7 +6,7 @@ import HomeView from '../views/customer/HomeView.vue'
 import AboutView from '../views/customer/AboutView.vue'
 import Signup from '../views/customer/signup.vue'
 import signin from '../views/customer/signin.vue'
-import productdetail from '../views/customer/productdetail'
+import productpage from '../views/customer/productpage.vue'
 import checkout from '../views/customer/checkout.vue'
 import cart from '@/views/customer/cart.vue'
 import trackorder from '@/views/customer/trackorder.vue'
@@ -84,8 +84,8 @@ const routes = [
         },
         {
           path: '/product/:id',
-          name: 'productdetail',
-          component: productdetail
+          name: 'productpage',
+          component: productpage
         },
         {
           path: '/cart',
