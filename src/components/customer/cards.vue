@@ -26,6 +26,25 @@
         </div>
     </div>
 
+    <!-- pages -->
+    <div class="flex justify-center p-5">
+        <ul class="flex flex-wrap text-sm font-medium text-center text-gray-500 ">
+            <li class="me-2" v-for="page in 5" :key="page">
+                <button 
+                    class="inline-block px-4 py-2.5 rounded-3xl font-bold" 
+                    :class="{
+                        'text-white bg-pink-600 active focus:bg-pink-600 focus:text-white': page === activePage,
+                        'hover:text-gray-900 hover:bg-gray-100': page !== 5,
+                        'text-gray-400 cursor-not-allowed': page === 5
+                    }"
+                    @click="changePage(page)"
+                >
+                    {{ page }}
+                </button>
+            </li>
+        </ul>
+    </div>
+
 </template>
 
 <script>
@@ -38,7 +57,8 @@ data() {
     return {
     categories: [],
     stores: [],
-    selectedCategoryId: null
+    selectedCategoryId: null,
+    activePage: 1
     }
 },
 async created() {
@@ -52,9 +72,13 @@ async created() {
     this.$refs.focusButton.focus();
 },
 methods: {
+    changePage(page) {
+        this.activePage = page;
+        this.allCategories();
+    },
     async allCategories() {
         try {
-            const response = await axiosClient.get('api/stores');
+            const response = await axiosClient.get(`api/stores?page=${this.activePage}`);
             this.stores = response.data.data;
             console.log(this.stores)
         } catch (error) {
