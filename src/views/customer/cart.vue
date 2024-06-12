@@ -101,16 +101,10 @@ import axiosClient from '@/axios'
             let index = cart.indexOf(productId);
             if (index > -1) {
                 cart.splice(index, 1);
+                this.totals[productId] = 0;
             }
             localStorage.setItem('cart', JSON.stringify(cart));
             this.fetchProducts() // refresh the products list
-        },
-        increaseQuantity(product) { 
-            if (product.quantity == 0 )
-            { product.quantity = 1 }
-            if ( product.quantity > product.stock)
-            { product.quantity = product.stock }
-            product.total = product.quantity * product.price
         },
     },
     computed: {
