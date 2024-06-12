@@ -12,7 +12,7 @@
         </div>
 
         <!-- Stores -->
-        <transition name="fade" mode="out-in">
+        
         <div ref="specificSection" class="grid grid-cols-2 md:grid-cols-1 lg:grid-cols-3 gap-10 p-4 md:p-8" :key="activePage"> 
             <router-link :to="{ name: 'StorePage', params: { id: store.id } }" class="bg-gray-100 rounded-3xl cursor-pointer hover:shadow-lg transition-all" v-for="store in stores" :key="store.id">
                     <img class="h-auto w-full rounded-t-3xl md:rounded-3xl" :src="store.image" alt="">
@@ -25,7 +25,7 @@
                     </div>
             </router-link>
         </div>
-        </transition>
+        
     </div>
 
     <!-- pages -->
@@ -77,7 +77,7 @@ methods: {
     changePage(page) {
         this.activePage = page;
         this.allCategories();
-        window.scrollTo({ top: 400, behavior: 'smooth' });
+        window.scrollTo({ top: 400 });
     },
     async allCategories() {
         try {
@@ -103,10 +103,5 @@ methods: {
 </script>
 
 <style  scoped>
-.fade-enter-active, .fade-leave-active {
-  transition: opacity 0.5s;
-}
-.fade-enter, .fade-leave-to {
-  opacity: 0;
-}
+
 </style>
