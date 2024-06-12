@@ -32,8 +32,14 @@
             </li>
             
             <li>
-                <router-link to="/cart"><img class="px-3 w-14 hover:cursor-pointer" src="../../assets/icons/carts/shopping-bag.png" alt="cart1"></router-link>
+                <router-link to="/cart">
+                    <img class="px-3 w-14 hover:cursor-pointer" src="../../assets/icons/carts/shopping-bag.png" alt="cart1">
+                    <div class="ml-8">
+                        <div  v-show="$route.path !== '/cart' && cart.length > 0"  class="absolute top-14 bg-pink-600 rounded-full w-5 h-5 z-40 flex justify-center items-center text-sm text-white">{{cart.length}}</div>
+                    </div>
+                </router-link>
             </li>
+            
 
             <li>
                 <input
@@ -100,6 +106,7 @@
         return {
         searchTerm: '',
         username:'',
+        cart: JSON.parse(localStorage.getItem('cart')) || [],
         };
     },
     methods: {
@@ -119,7 +126,15 @@
     },
     computed: {
     ...mapGetters('auth', ['authenticated'])
-    }
+    },
+    created() {
+    this.cartUpdateInterval = setInterval(() => {
+        this.cart = JSON.parse(localStorage.getItem('cart')) || [];
+    }, 2000);
+    },
+    beforeDestroy() {
+        clearInterval(this.cartUpdateInterval);
+    },
 }
     </script>
     <script setup>
@@ -159,10 +174,6 @@
                 customer.value = true;
             }
         });
-
-        
-
-
     }
     
     

@@ -13,7 +13,7 @@
             </thead>
             <transition-group name="list" tag="tbody">
             <!-- products -->
-            <tbody v-for="product in products" :key="product.id" class="transition-all duration-500 ease-in-out" >
+            <tbody v-for="product in products" :key="product.id" class="transition-all duration-500 ease-in-out opacity-100 translate-y-2" >
                 <tr class="bg-white border-b"  >
                     <div class="flex justify-start items-center mt-8">
                         <td class="p-4 ">
@@ -39,7 +39,7 @@
                         ${{ product.price }}
                     </td>
                     <td class="px-6 py-4">
-                        <button @click="removeFromCart(product.id)" class="font-medium text-base text-pink-600 no-underline">Remove</button>
+                        <button @click="removeFromCart(product.id)" class="font-medium text-base text-pink-600 focus:bg-gray-800  focus:text-white px-4 rounded-3xl no-underline">Remove</button>
                     </td>
                 </tr>
             </tbody>
@@ -104,7 +104,10 @@ import axiosClient from '@/axios'
                 this.totals[productId] = 0;
             }
             localStorage.setItem('cart', JSON.stringify(cart));
-            this.fetchProducts() // refresh the products list
+            let productIndex = this.products.findIndex(product => product.id === productId);
+            if (productIndex > -1) {
+                this.products.splice(productIndex, 1);
+            }
         },
     },
     computed: {
@@ -115,6 +118,16 @@ import axiosClient from '@/axios'
 }
 </script>
 
-<style lang="scss" scoped>
-
+<style scoped>
+.list-enter-active, .list-leave-active {
+    transition: all .5s;
+}
+.list-enter-from, .list-leave-to {
+    opacity: 0;
+    transform: translateY(2rem);
+}
+.list-enter-to, .list-leave-from {
+    opacity: 1;
+    transform: translateY(0);
+}
 </style>
