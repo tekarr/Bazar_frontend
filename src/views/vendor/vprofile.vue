@@ -35,35 +35,38 @@ export default {
     components: { navbar, Sidbar },
     data() {
         return {
-        user:[],
-        password:'',
+            selectedFile: null,
+            user: [],
+            // other data properties...
         };
     },
     methods: {
         async submitForm() {
-        try {
-        const formData = new FormData();
+            try {
+                let formData = new FormData();
+                formData.append('name', this.name);
+                formData.append('description', this.description);
+                formData.append('category', this.category);
+                formData.append('image', this.selectedFile);
 
-        formData.append('name', this.name);
-        formData.append('description', this.description);
-        formData.append('category', this.category);
-        formData.append('image', this.selectedFile);
-
-        // Send a POST request to the API
-        const response = await axiosClient.post('api/customer/become-vendor', formData)
-        console.log(response.data);
-        } catch (error) {
-            console.error(error);
+                // Send a POST request to the API
+                const response = await axiosClient.post('api/customer/become-vendor', formData);
+                console.log(response.data);
+            } catch (error) {
+                console.error(error);
             }
+        },
+        // other methods...
     },
     async created() {
-    try {
-        const response = await axiosClient.get('api/user');
-        this.user = response.data;
+        try {
+            const response = await axiosClient.get('api/user');
+            this.user = response.data;
+            console.log(this.user);
         } catch (error) {
-        console.error(error);
+            console.error(error);
         }
-        }
-    }
-    }
+    },
+    // other component options...
+};
 </script>
