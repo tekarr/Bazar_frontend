@@ -5,35 +5,83 @@
         <div class="">
         <form @submit.prevent="submitForm" class="mx-10 ">
 
-            <!-- imageuploader -->
-            <image-uploader/>
+
+            <!-- image preview -->
+            <div v-if="imageUrl" class="my-8 flex justify-start pt-8">
+                <img :src="imageUrl" alt="Selected Image" class="max-w-md max-h-md rounded-3xl hover:shadow-md" />
+            </div>
+
+            <hr class="mb-8">
+
+            <!-- Choose image button -->
+            <div class=" h-20 ">    
+                <label class="mb-4 p-2 px-4 bg-pink-600 text-white rounded-3xl shadow-md hover:bg-gray-800 cursor-pointer">
+                    Choose image
+                    <input type="file" @change="onFileChange" class="hidden" />
+                </label>
+            </div>
+            <div class="mb-4 opacity-80">Prefered image size <span class="text-pink-500">100x50</span></div>
+
+
+            <!-- id -->
+                <p class="">Store ID : {{ store.id }}</p>
+
+                <hr class="my-4">
 
             <!-- name -->
             <div class="mb-5 text-start w-80">
-                <label class="" for="storename">Store Name</label>
-                <input type="text" id="storename" v-model="storename" placeholder="Storename" 
+                <label class="" for="storename">Store name</label>
+                <input type="text" id="storename" v-model="store.name" placeholder="Storename" 
                 class="w-full mt-4 bg-white mr-10 pl-4 py-2 rounded-xl focus:outline-none focus:ring focus:ring-pink-500 " required>
             </div>
 
+
+
+            <!-- Description -->
+            <div class="mb-2 text-start ">
+                <div><label class=" " for="storename" >Description</label></div>
+                <textarea v-model="store.description"
+                    class="w-full max-w-lg p-4 bg-white my-4 border rounded-lg border-gray-300 shadow-sm focus:outline-none focus:ring focus:ring-pink-500" rows="5" 
+                    placeholder="Enter your text here...">
+                </textarea>
+            </div>
+            <p class="hidden">{{ store.description }}</p>
+
             <!-- phone number -->
-            <div class="mb-5 text-start w-80">
+            <!-- <div class="mb-5 text-start w-80">
                 <label class="" for="storename">Phone number</label>
                 <input type="text" id="Phonenumber" v-model="Phonenumber" placeholder="Phone number" 
                 class="w-full mt-4 bg-white mr-10 pl-4 py-2 rounded-xl focus:outline-none focus:ring focus:ring-pink-500 " required>
-            </div>
+            </div> -->
+
 
             <!-- catagories -->
-            <div class="hidden">Selected: {{ selected }}</div>
             <div class="">
-            <p class="">Category</p>    
-            <select v-model="selected" @input="select" class="p-2 my-4 px-4  border-2 border-pink-600 rounded-xl">
-                <option disabled value="">Please select one</option>
-                <option v-for="category in categories" :key="category.id" :value="category.name">{{ category.name }}</option>
-            </select>
+                <p class="">Category </p>    
+                <select v-model="store.category" @input="select" class="p-2 my-4 px-4  border-2 border-pink-600 rounded-xl">
+                    <option disabled value="">Please select one</option>
+                    <option v-for="category in categories" :key="category.id" :value="category.name">
+                    {{ category.name }}
+                    </option>
+                </select>
             </div>
+            <p class="hidden">{{ store.category }}</p>
+
+
+            <!-- Status -->
+            <div class="">
+            <p class="">Status </p>    
+            <select v-model="store.status" @input="select" class="p-2 my-4 px-4  border-2 border-pink-600 rounded-xl">
+                <option disabled value="">Please select one</option>
+                <option value="active">active</option>
+                <option value="inactive">inactive</option>
+            </select>
+        </div>
+        <p class="hidden">{{ store.status }}</p>
+            
 
             <!-- open & close -->
-            <div class="flex justify-between mb-8 w-96">
+            <!-- <div class="flex justify-between mb-8 w-96">
             <div>
                 <label for="start-time" class=" mb-2 ml-4 text-sm font-medium  flex justify-start">Open </label>
                 <div class="relative">
@@ -46,7 +94,9 @@
                     <input type="time" id="end-time" class="bg-white px-8 py-2 border-2 leading-none border-gray-300 text-gray-900 text-md rounded-3xl focus:outline-none focus:ring-pink-600 focus:border-pink-600 block w-full p-2.5" min="09:00" max="18:00" value="00:00" required />
                 </div>
             </div>
-            </div>
+            </div> -->
+
+            <p class="mb-4" >Products Count : {{ store.products_count }}</p>
 
             <hr>
             
@@ -58,38 +108,82 @@
 </template>
 
 <script>
+import axiosClient from "@/axios";
 import Sidbar from '@/components/vendor/Sidbar.vue';
-import ImageUploader from '@/components/vendor/ImageUploader.vue';
+
+
 export default {
-    components: {  Sidbar, ImageUploader },
+    components: {  Sidbar },
     data() {
         return {
-        storename: '',
         fileSelected: true,
-        startime:'09:00',
-        endtime:'18:00',
-        selected:'',
-        Phonenumber:'',
-
-        categories: [
-        { id: 1, name: 'Category 1' },
-        { id: 2, name: 'Category 2' },
-        { id: 3, name: 'Category 3' },
-        // Add more categories as needed
-        ],
+        store: { },
+        categories: [],
+        selectedFile: null,
+        imageUrl: null,
         };
     },
     methods: {
-        submitForm() {
-        // Perform form submission logic here
-        console.log('Added');
-        console.log('name:', this.storename);
-        console.log('startime:', this.startime);
-        console.log('endtime:', this.endtime);
+        onFileChange(e) {
+            this.selectedFile = e.target.files[0];
+            this.imageUrl = this.selectedFile;
+            if (this.selectedFile) {
+            const reader = new FileReader();
+            reader.onload = (e) => {
+                this.imageUrl = e.target.result;
+            };
+            reader.readAsDataURL(this.selectedFile);
+            }
         },
-        select(category){
-            category.name = this.selected
+        async fetchStores() {
+        try {
+            const response = await axiosClient.get('api/vendor/stores');
+            this.store = response.data.data;
+            console.log(this.store.name)
+            this.imageUrl = `http://localhost:8000/storage/${this.store.image}`;
+        } catch (error) {
+            console.error(`There was an error fetching the stores: ${error}`);
         }
+        },
+        async fetchCategories() {
+        try {
+            const response = await axiosClient.get('api/categories');
+            this.categories = response.data;
+        } catch (error) {
+            console.error(`There was an error fetching the categories: ${error}`);
+        }
+        },
+        async submitForm() {
+        try {
+        const formData = new FormData();
+
+        formData.append('name', this.store.name);
+        formData.append('description', this.store.description);
+        formData.append('status', this.store.status);
+        formData.append('image', this.selectedFile);
+
+        const response = await axiosClient.post('api/vendor/stores', formData, {
+        headers: {
+            'Content-Type': 'multipart/form-data',
+            },
+        });
+        
+        console.log(response.data);
+        // handle successful submission
+        } catch (error) {
+            if (error.response) {
+            console.log('Error status:', error.response.status);
+            console.log('Error details:', error.response.data);
+        } else {
+            console.log('Error', error.message);
+        }
+        }
+        },
     },
-};
+    created() {
+        this.fetchStores();
+        this.fetchCategories();
+        },
+    // other component options...
+    };
 </script>

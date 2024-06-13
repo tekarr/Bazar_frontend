@@ -46,7 +46,6 @@
             </div> -->
             
             <!-- catagories -->
-            <div class="hidden">Selected: {{ selected }}</div>
             <div class="">
                 <p class="">Category</p>    
                 <select v-model="category" @input="select" class="p-2 my-4 px-4  border-2 text-black border-pink-600 rounded-xl">
@@ -56,6 +55,8 @@
                     </option>
                 </select>
             </div>
+
+            <p>{{category}}</p>
 
 
             <!-- open & close -->
@@ -136,13 +137,9 @@ export default {
         formData.append('category', this.category);
         formData.append('image', this.selectedFile);
 
-        // Get the user token from local storage
-        const token = localStorage.getItem('token');
-
         // Send a POST request to the API
         const response = await axiosClient.post('api/customer/become-vendor', formData, {
         headers: {
-        Authorization: `Bearer ${token}`,
         'Content-Type': 'multipart/form-data'
         }
         });
