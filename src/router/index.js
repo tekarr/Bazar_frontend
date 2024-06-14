@@ -7,14 +7,14 @@ import AboutView from '../views/customer/AboutView.vue'
 import Signup from '../views/customer/signup.vue'
 import signin from '../views/customer/signin.vue'
 import productpage from '../views/customer/productpage.vue'
-import checkout from '../views/customer/checkout.vue'
 import cart from '@/views/customer/cart.vue'
 import trackorder from '@/views/customer/trackorder.vue'
-import orderhistory from '@/views/customer/orderhistory.vue'
+import ordersc from '@/views/customer/ordersc.vue'
 import cprofile from '@/views/customer/profile.vue'
 import becomevendor from '@/views/customer/becomevendor.vue'
 import Customerlayout from '@/views/customer/customerlayout.vue';
 import StorePage from '@/views/customer/storepage.vue';
+import thanks from '@/views/customer/thanks.vue'
 
 // admin imports ------------------------------------------------
 import AdminLayout from "../views/admin/adminLayout.vue";
@@ -92,6 +92,11 @@ const routes = [
           name: 'cart',
           component: cart
         },
+        {
+          path: '/thanks',
+          name: 'thanks',
+          component: thanks
+        },
       ]
     },
   //customer routes --------------------------------------
@@ -107,17 +112,17 @@ const routes = [
       {
         path: '/customer/checkout',
         name: 'checkout',
-        component: checkout
+        component: cart
       },
       {
-        path: '/customer/trackorder',
+        path: '/customer/orders/:id',
         name: 'trackorder',
         component: trackorder
       },
       {
-        path: '/customer/orderhistory',
-        name: 'orderhistory',
-        component: orderhistory
+        path: '/customer/orders',
+        name: 'orders',
+        component: ordersc
       },
       {
         path: '/customer/profile',

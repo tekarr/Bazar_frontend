@@ -1,101 +1,84 @@
 <template>
 
-    <navbarr/>
 
     <div class="flex justify-center">
-        <div class="flex justify-between w-3/4 my-5 mt-36 mx-72">
-            <h1 class="text-2xl font-bold ">Track Order #54879</h1>
-            <p class=" text-pink-600">Order placed March 22, 2021</p> 
+        <div class="flex justify-between w-3/4 my-5 mt-60 mx-72">
+            <h1 class="text-2xl font-bold ">Track Order  #{{ order.id }}</h1>
+            <p class=" text-pink-600">Order placed {{ order.created_at }}</p>
         </div>
     </div>
     
 
 <div class="flex justify-center">
     <div class="  grid grid-cols-1 w-3/4 gap-2  rounded-3xl py-4">
-        <table class="w-fulll text-sm overflow-hidden  text-left rtl:text-right text-gray-500 rounded-3xl mx-20 bg-gray-100">
-            <tr class="flex justify-between bg-gray-100 p-10  border-white" v-for="product in products" :key="product.id">
-                <td>
-                    <img :src="product.image" alt="" class="w-56 rounded-3xl" >
-                </td>
-                <td class="pl-5">
-                    <p class="text-lg font-bold text-gray-700">{{product.name}}</p>
-                    <p class="text-base  text-gray-700" >Store name</p><br>
-                    <p class="w-32">Lorem ipsum dolor sit amet consectetur adipisicing elit. Animi, iusto?</p>
-                </td>
-                <td>
-                    <p class="text-lg font-bold text-gray-700">${{product.price}}</p><br>
-                </td>
-                <td>
-                    <p class="text-lg font-bold text-gray-400">{{ product.state }}</p><br>
-                </td>
-                <td class="px-10" v-for="user in users" :key="user.id" >
-                    <p class="text-lg font-bold text-gray-700 ">Delivery address</p>
-                    <p>{{ user.Address }}</p>
-                </td>
-            </tr>
-        </table>
-        <div class="text-start pt-4 mx-32 bg-white ">
-            <div class="py-6"> Preparing to ship on March 24, 2021</div>
+        
 
-            <div class="bg-gray-200 rounded-3xl ">
-                <div id="Order placed" class="bg-pink-600 rounded-3xl text-pink-600 h-4 text-xs w-24  ">.</div>
-                <div id="Processing" class="bg-pink-600 rounded-3xl text-pink-600 h-4 text-xs w-[40%] hidden  ">.</div>
-                <div id="Shipping" class="bg-pink-600 rounded-3xl text-pink-600 h-4 text-xs w-3/4 hidden ">.</div>
-                <div id="Delivered" class="bg-pink-600 rounded-3xl text-pink-600 h-4 text-xs w-full hidden ">.</div>
+        <div class="text-start pt-4 mx-32 bg-white ">
+            
+            <div class="bg-gray-200 rounded-3xl h-2 ">
+                <div :class="getWidthClass(order.order_status)"  class="bg-pink-600 rounded-3xl text-pink-600 text-xs  h-2 flex justify-start items-center 
+                transform translate-x-100 translate-y-0 ">
+                </div>
             </div>
 
+
             <div class="py-6 flex justify-between">
-                <p class="font-bold">Order placed</p>
-                <p class="">Processing</p>
-                <p class="">Shipping</p>
-                <p class="">Delivered</p>
+                <p>Pending</p>
+                <p>Processing</p>
+                <p>Shipping</p>
+                <p>Delivered</p>
             </div>
         </div>
     </div>
 </div>
 
-    <div class="grid justify-center p-10  grid-cols-1 " >
-        <p class="text-xl font-bold pb-5 ">Order Status  <span class="p-2">|</span>  <span class=" text-pink-600">{{ state }}</span></p>
-        <p class="text-xl font-bold ">Subtotal : 70</p>
+
+    <div class="flex justify-center p-10 ">
+        <p class="text-xl font-bold pb-5 ">Order Status  <span class="p-2">|</span>  <span class=" text-pink-600">{{ order.order_status }}</span></p>
+        <p class="text-xl font-bold pl-10">Subtotal : {{ order.order_total }}</p>
     </div>
 
+    <div class="flex justify-center cursor-pointer hover:text-pink-600">
+        <router-link to="/customer/orders">Back</router-link>
+    </div>
 
 </template>
 
 <script>
-import Navbarr from '/src/components/customer/Navbarr.vue'
+import axiosClient from '@/axios';
+
     export default {
-  components: { Navbarr },
         data(){
             return{
-                state:'  Order Placed',
-            products:[
-                {
-                    id:1,
-                    name:'product name',
-                    price:'35',
-                    image:'https://tailwindui.com/img/ecommerce-images/shopping-cart-page-04-product-01.jpg',
-                    desc:'',
-                    state:'Order Placed'
-                },
-                    {
-                    id:2,
-                    name:'product name',
-                    price:'35',
-                    image:'https://tailwindui.com/img/ecommerce-images/shopping-cart-page-04-product-02.jpg',
-                    desc:'',
-                    state:'Order Placed'
-                }
-            ],
-            users:[
-                {
-                    id:1,
-                    Address:'tripoli , street ...',
-
-                }
-            ]
+                order:[],
             }
+        },
+        async created() {
+            const id = this.$route.params.id;
+            try {
+            const response = await axiosClient.get(`api/customer/orders/${id}`);
+            this.order = response.data.data;
+            console.log(this.order.order_total);
+            } catch (error) {
+            console.error(`There was an error fetching the order: ${error}`);
+            }
+    },
+    methods: {
+    getWidthClass(status) {
+        switch (status) {
+            case 'pending':
+            return 'w-[4%]';
+            case 'Processing':
+            return 'w-[35%]';
+            case 'Shipping':
+            return 'w-[65%]';
+            case 'Delivered':
+            return 'w-[100%]';
+            default:
+            return 'w-[4%]';
         }
+        },
+    },
     }
 </script>
 

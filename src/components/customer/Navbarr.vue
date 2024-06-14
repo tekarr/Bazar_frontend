@@ -71,6 +71,8 @@
                             <div class="grid grid-col-1">
                                 <span class="w-18 font-bold">{{username}}</span>
                                 <p v-if="vendor" class="">vendor</p>
+                                <p v-if="customer" class="">customer</p>
+                                <p v-if="admin" class="">admin</p>
                             </div>
                             
                             <button  @click="toggleMenu" class="bg-gray-700 w-6 h-6 rounded-3xl ml-4">x</button>
@@ -81,8 +83,7 @@
                     <li class="py-1"><router-link to="/">Shop</router-link></li>
                     <li class="py-1"><router-link to="/cart">Cart</router-link></li>
                     <li class="py-1 " v-if="customer"><router-link to="/customer/profile">Profile</router-link></li>
-                    <li class="py-1" v-if="customer"><router-link to="/customer/trackorder">Track Orders</router-link></li>
-                    <li class="py-1" v-if="customer"><router-link to="/customer/orderhistory">Order History</router-link></li>
+                    <li class="py-1" v-if="customer"><router-link to="/customer/orders">Orders</router-link></li>
                     <li class="py-1" v-if="customer"><router-link to="/customer/becomevendor" >Become vendor</router-link></li>
                     <li class="py-1" v-if="vendor"><router-link to="/vendor">Dashboard</router-link></li>
                     <li class="py-1" v-if="vendor"><router-link to="/store-page">Store page</router-link></li>
@@ -127,10 +128,13 @@
     computed: {
     ...mapGetters('auth', ['authenticated'])
     },
-    created() {
+    created() {    
     this.cartUpdateInterval = setInterval(() => {
         this.cart = JSON.parse(localStorage.getItem('cart')) || [];
     }, 2000);
+    },
+    onMounted(){
+        location.reload();  
     },
     beforeDestroy() {
         clearInterval(this.cartUpdateInterval);
@@ -154,12 +158,10 @@
     const vendor = ref(false);
     const admin =  ref(false);
     
-    
     const authenticated = computed(() => store.state.auth.authenticated);
     console.log(authenticated.value)
 
     if (authenticated.value === true){
-
         store.dispatch('auth/checkAuth').then(() => {
             const userRole = store.state.auth.user.role_id;
             username = store.state.auth.user.name;
