@@ -9,12 +9,11 @@
 
       <div v-if="errMsg" class=" flex items-center justify-between p-3 my-2 bg-red-500 text-white rounded">
         {{errMsg}}
-        <span @click="errMsg=''" class="w-8 h-8 flex items-center justify-center rounded-full cursor-pointer transition-colors hover:bg-[rgba(0,0,0,0.2)]">
-                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
-  <path stroke-linecap="round" stroke-linejoin="round" d="M6 18 18 6M6 6l12 12" />
-</svg>
-
-                </span>
+          <span @click="errMsg=''" class="w-8 h-8 flex items-center justify-center rounded-full cursor-pointer transition-colors hover:bg-[rgba(0,0,0,0.2)]">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M6 18 18 6M6 6l12 12" />
+            </svg>
+          </span>
       </div>
       <div>
         <label for="email" class="block text-sm font-medium leading-6 text-gray-900">Email address</label>
@@ -49,7 +48,7 @@
     <p class="mt-10 text-center text-sm text-gray-500">
       Not a member?
 
-      <router-link :to="{name:'Signup'}" class="font-semibold leading-6 text-indigo-600 hover:text-indigo-500">SignUp</router-link>
+      <router-link :to="{name:'Signup2'}" class="font-semibold leading-6 text-indigo-600 hover:text-indigo-500">SignUp</router-link>
     </p>
   </div>
 </template>
