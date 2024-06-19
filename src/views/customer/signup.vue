@@ -40,7 +40,7 @@
             v-model="form.password"
             placeholder="password"
             class="w-full mt-4 bg-slate-50 pl-4 py-2 rounded-3xl focus:outline-none focus:ring focus:ring-pink-500"
-            pattern=".{8,}" @change="checkPassword" @blur="checkPasswordsMatch" title="Password must be at least 8 characters long" required
+            pattern=".{8,}" @blur="checkPassword" title="Password must be at least 8 characters long" required
           />
         </div>
         <!-- password_confirmation -->
@@ -54,7 +54,7 @@
             v-model="form.password_confirmation"
             placeholder="password"
             class="w-full mt-4 bg-slate-50 pl-4 py-2 rounded-3xl focus:outline-none focus:ring focus:ring-pink-500"
-            @change="checkPasswordsMatch"  required
+            @blur="checkPasswordsMatch"  required
           />
         </div>
         <!-- <p> {{ form.password }}</p>

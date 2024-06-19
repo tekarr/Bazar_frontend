@@ -19,11 +19,7 @@
         <div class="mb-5 text-start">
             <label class=" pl-5" for="email">Password</label>
             <input type="password" id="password" v-model="form.password" placeholder="password" 
-            class="w-full mt-4 bg-slate-50 pl-4  py-2 rounded-3xl focus:outline-none focus:ring focus:ring-pink-500 " pattern=".{8,}"  @change="checkPassword" title="Password must be at least 8 characters long" required>
-        </div>
-
-        <div v-if="err2" class=" my-4 p-2 bg-pink-600 text-white rounded-xl text-sm">
-                Password must be at least 8 characters long
+            class="w-full mt-4 bg-slate-50 pl-4  py-2 rounded-3xl focus:outline-none focus:ring focus:ring-pink-500 " pattern=".{8,}"  title="Password must be at least 8 characters long" required>
         </div>
 
         <div v-if="err" class=" my-4 p-2 bg-pink-600 text-white rounded-xl text-sm">
@@ -50,14 +46,7 @@ const form = ref({
         'g@g.g','s@s.s'
     ]
 });
-
-    const err2 = ref(false);
     const err = ref(false);
-
-    const checkPassword = () => {
-        err2.value = form.value.password.length < 8;
-    };
-    
     const errorMessage = computed(() => store.state.auth ? store.state.auth.errorMessage : null);    //console.log('Error Message:', errorMessage.value);
     
 
