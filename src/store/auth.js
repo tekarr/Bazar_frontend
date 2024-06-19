@@ -57,7 +57,7 @@ export default {
                     // router.push({ name: 'Admin' });
                 })
                 .catch(error => {
-                    commit('SET_ERROR_MESSAGE', error.response.data.errors);
+                    throw error;
                     //localStorage.setItem('errorMessage', error.response.data.message);
                     //console.log('Error:', error.response.data.message);
                 });
