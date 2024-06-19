@@ -31,7 +31,6 @@
       <!-- <p> {{ form.email }}</p> -->
       
       <!-- password -->
-      <div class="grid grid-cols-2 gap-2">
         <div class="mb-5 text-start">
           <label class="pl-5" for="password">Password</label>
           <input
@@ -59,7 +58,6 @@
         </div>
         <!-- <p> {{ form.password }}</p>
         <p> {{ form.password_confirmation }}</p> -->
-      </div>
 
       <!-- terms and conditions -->
       <div class="flex items-start mb-5">

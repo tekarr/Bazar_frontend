@@ -42,6 +42,9 @@ import Editproduct from '@/components/vendor/Editproduct.vue'
 import store from "@/store";
 
 
+import Signup2 from '@/views/customer/Signup2.vue';
+
+
 
 const routes = [
 
