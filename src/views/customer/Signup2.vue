@@ -6,25 +6,20 @@ import {useRouter} from "vue-router";
 import {ref} from "vue";
 
 const routerr =useRouter();
-const errMsg = ref('');
-const user = {
+const errMsg = ref('')
+const user = ref({
   name: '',
   email: '',
   password: '',
   password_confirmation: ''
   // password_confirmation: ''
-};
-function register(ev){
-  ev.preventDefault();
-  store
-  this.$store.dispatch('register', user).then((response) => {
+});
+const register = async (ev) => {
+  ev.preventDefault()
+  await store.dispatch("auth/register", user.value).catch((err) => {
+    console.log(err)
+    errMsg.value = err.response.data.errors;
   })
-      .catch((error) => {
-        errMsg.value = error.response.data.errors;
-
-
-        console.log(error);
-      });
 
 
 
@@ -54,11 +49,11 @@ function register(ev){
     </svg>
   </span>
       </div>      <div>
-        <label for="name" class="block text-sm font-medium leading-6 text-gray-900">Name</label>
-        <div class="mt-2">
-          <input v-model="user.name" id="name" name="name" type="text" autocomplete="name" required="" class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6" />
-        </div>
+      <label for="name" class="block text-sm font-medium leading-6 text-gray-900">Name</label>
+      <div class="mt-2">
+        <input v-model="user.name" id="name" name="name" type="text" autocomplete="name" required="" class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6" />
       </div>
+    </div>
       <div>
         <label for="email" class="block text-sm font-medium leading-6 text-gray-900">Email address</label>
         <div class="mt-2">

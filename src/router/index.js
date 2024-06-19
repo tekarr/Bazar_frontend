@@ -259,10 +259,13 @@ const routes = [
     ]
   },
 
+  {name: 'Signup2', path: '/signup2',  component: () => import('@/views/customer/Signup2.vue')},
+
   {name:'Error', path: '/error',  component: () => import('@/views/Error.vue')},
 
   { path: '/:pathMatch  (.*)*', name: 'not-found', component: () => import('@/views/Error.vue')}
     ]
+
 
 ;
 

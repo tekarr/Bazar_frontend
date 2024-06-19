@@ -34,9 +34,7 @@ export default {
         SET_USER_ROLE(state, role) {
             state.user_role = role;
         },
-        SET_ERROR_MESSAGE(state, errorMessage) {
-            state.errorMessage = errorMessage;
-        },
+
         CLEAR_AUTH_DATA(state) {
             state.token = '';
             localStorage.removeItem('token');
@@ -59,7 +57,7 @@ export default {
                     // router.push({ name: 'Admin' });
                 })
                 .catch(error => {
-                    commit('SET_ERROR_MESSAGE', error.response.data.message);
+                    commit('SET_ERROR_MESSAGE', error.response.data.errors);
                     //localStorage.setItem('errorMessage', error.response.data.message);
                     //console.log('Error:', error.response.data.message);
                 });
@@ -73,7 +71,7 @@ export default {
         },
 
         register({ commit }, credentials) {
-            return axios.post('http://localhost:8000/register', credentials)
+            return axios.post('http://localhost:8000/register', credentials )
                 .then(( response ) => {
                     commit('SET_USER', response.data.user);
                     commit('SET_TOKEN', response.data.token);
@@ -82,10 +80,12 @@ export default {
                     console.log('User data fetched:', response.data.user);
                 })
                 .catch(error => {
+                    throw error;
                     //console.log('Error:', error.response.data);
-                    if (error.response.data.errors.email) {
-                        commit('SET_ERROR_MESSAGE', error.response.data.errors.email[0]);
-                        //console.log('Error:', error.response.data.errors.email[0]);
+                    if (error.response.data.errors) {
+                        // console.log('Error:', error.response.data.errors);
+
+                        // console.log('Error:', error.response.data.errors);
                     }
                 });
         },
