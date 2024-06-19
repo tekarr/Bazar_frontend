@@ -1,4 +1,3 @@
-
 <template>
   <div class="sm:mx-auto sm:w-full sm:max-w-sm">
     <img class="mx-auto h-10 w-auto" src="https://tailwindui.com/img/logos/mark.svg?color=indigo&shade=600" alt="Your Company" />
@@ -67,8 +66,8 @@ const errMsg = ref('')
 const login = async (ev) => {
   ev.preventDefault()
   await store.dispatch("auth/login", user.value).catch((err) => {
-    console.log(err)
-    errMsg.value = err.response.data.errors;
+    errMsg.value = err.response.data.message;
+    console.log('errMsg',errMsg.value)
   })
 
 

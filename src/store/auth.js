@@ -46,7 +46,7 @@ export default {
     },
     actions:{
         login({ commit }, credentials) {
-            axios.post('http://localhost:8000/login', credentials)
+       return      axios.post('http://localhost:8000/login', credentials)
                 .then((response ) => {
                     commit('SET_TOKEN', response.data.token);
                     commit('SET_USER', response.data.user);
@@ -57,6 +57,7 @@ export default {
                     // router.push({ name: 'Admin' });
                 })
                 .catch(error => {
+                    console.log('Error:', error.response.data);
                     throw error;
                     //localStorage.setItem('errorMessage', error.response.data.message);
                     //console.log('Error:', error.response.data.message);
