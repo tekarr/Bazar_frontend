@@ -141,11 +141,7 @@ const errorMessage = computed(() => store.state.auth ? store.state.auth.errorMes
 
 const register = async () => {
     await store.dispatch("auth/register", form.value);
-    //console.log(form.value)
-    setTimeout(() => {
-            //console.log('Error Message:', errorMessage.value);
-            err.value = true;
-    }, 500);
+    err.value = true;
 };
 
 
