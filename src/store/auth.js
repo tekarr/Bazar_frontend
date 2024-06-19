@@ -11,6 +11,7 @@ export default {
         token: localStorage.getItem('token') || '',
         authenticated : !!localStorage.getItem('token'),
         user_role: 0,
+        errorMessage: null,
     },
     getters: {
 
@@ -33,6 +34,9 @@ export default {
         SET_USER_ROLE(state, role) {
             state.user_role = role;
         },
+        SET_ERROR_MESSAGE(state, errorMessage) {
+            state.errorMessage = errorMessage;
+        },
         CLEAR_AUTH_DATA(state) {
             state.token = '';
             localStorage.removeItem('token');
@@ -53,6 +57,11 @@ export default {
                     console.log('User data fetched:', response.data.user);
 
                     // router.push({ name: 'Admin' });
+                })
+                .catch(error => {
+                    commit('SET_ERROR_MESSAGE', error.response.data.message);
+                    //localStorage.setItem('errorMessage', error.response.data.message);
+                    //console.log('Error:', error.response.data.message);
                 });
         },
         logout({ commit }) {
@@ -68,8 +77,16 @@ export default {
                 .then(( response ) => {
                     commit('SET_USER', response.data.user);
                     commit('SET_TOKEN', response.data.token);
+                    commit('SET_Authenticated', true);
                     redirectToDashboard(response.data.user);
                     console.log('User data fetched:', response.data.user);
+                })
+                .catch(error => {
+                    //console.log('Error:', error.response.data);
+                    if (error.response.data.errors.email) {
+                        commit('SET_ERROR_MESSAGE', error.response.data.errors.email[0]);
+                        //console.log('Error:', error.response.data.errors.email[0]);
+                    }
                 });
         },
 

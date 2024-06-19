@@ -58,10 +58,10 @@
             <!-- Status -->
             <div class="mb-5 text-start w-80">
             <label for="status">Active</label>
-            <input type="checkbox" id="status" v-model="product.status" 
+            <input type="checkbox" id="status" true-value="active" false-value="inactive" v-model="product.status" 
                 class="ml-4 mt-2">
             </div>
-            <p class="hidden">{{product.status}}</p>
+            <p class="">{{product.status}}</p>
 
 
             <!-- Attributes -->
@@ -118,7 +118,7 @@ export default {
             quantity: 0,
             category_id:'',
             price: '',
-            status: true,
+            status: 'active',
             variations: [],
         },
         attributes: [],
@@ -149,9 +149,9 @@ export default {
         }
     },
     methods: {
-        
         async submitForm() {
         try {
+        console.log(this.product)
         const response = await axiosClient.post('api/vendor/products', this.product);
         console.log(response.data);
         // handle successful submission

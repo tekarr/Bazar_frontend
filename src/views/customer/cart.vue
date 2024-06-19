@@ -73,12 +73,19 @@
             </h1>
 
             <!-- Shipping Address -->
-            <div class="mb-6">
+            <div class="my-4">
+            <label for="address" class="block text-gray-700 mb-1 pl-1">Address</label>
+                <select id="address" v-model="addr" class="w-full border py-2 px-3 rounded-lg">
+                    <option value="true">Add new address</option>
+                </select>
+            </div>
+
+            <div v-if="addr" class="mb-6">
             <h2 class="text-xl font-semibold text-gray-700 mb-4">Shipping Address</h2>
 
             <div class="mt-4">
                 <label for="address" class="block text-gray-700 mb-1">Address</label>
-                <input type="text" id="address" v-model="address" class="w-full rounded-lg border py-2 px-3"/>
+                <input type="text" id="address" v-model="address" class="w-full rounded-lg border py-2 px-3 "/>
             </div>
 
             <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 mt-4">
@@ -150,6 +157,7 @@ import axiosClient from '@/axios'
         export default {
         data(){
             return{
+            addr:false,
             total: 0,
             quantity: {},
             products:[],

@@ -28,14 +28,10 @@
 
 <script>
 import axiosClient from '@/axios';
-import navbar from '../../components/vendor/navbar.vue';
-import Sidbar from '../../components/vendor/Sidbar.vue';
 
 export default {
-    components: { navbar, Sidbar },
     data() {
         return {
-            selectedFile: null,
             user: [],
             // other data properties...
         };
@@ -43,14 +39,8 @@ export default {
     methods: {
         async submitForm() {
             try {
-                let formData = new FormData();
-                formData.append('name', this.name);
-                formData.append('description', this.description);
-                formData.append('category', this.category);
-                formData.append('image', this.selectedFile);
-
                 // Send a POST request to the API
-                const response = await axiosClient.post('api/customer/become-vendor', formData);
+                const response = await axiosClient.post('api/customer/become-vendor', this.user);
                 console.log(response.data);
             } catch (error) {
                 console.error(error);

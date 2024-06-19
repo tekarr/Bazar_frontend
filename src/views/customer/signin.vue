@@ -19,7 +19,15 @@
         <div class="mb-5 text-start">
             <label class=" pl-5" for="email">Password</label>
             <input type="password" id="password" v-model="form.password" placeholder="password" 
-            class="w-full mt-4 bg-slate-50 pl-4  py-2 rounded-3xl focus:outline-none focus:ring focus:ring-pink-500 " required>
+            class="w-full mt-4 bg-slate-50 pl-4  py-2 rounded-3xl focus:outline-none focus:ring focus:ring-pink-500 " pattern=".{8,}"  @change="checkPassword" title="Password must be at least 8 characters long" required>
+        </div>
+
+        <div v-if="err2" class=" my-4 p-2 bg-pink-600 text-white rounded-xl text-sm">
+                Password must be at least 8 characters long
+        </div>
+
+        <div v-if="err" class=" my-4 p-2 bg-pink-600 text-white rounded-xl text-sm">
+        {{ errorMessage}}
         </div>
 
         <button type="submit" class=" m-5 text-white bg-pink-600 hover:bg-pink-700 focus:ring-4 focus:outline-none focus:ring-pink-300 font-medium rounded-3xl text-sm px-5 py-2.5 text-center ">Sign in</button>
@@ -29,18 +37,35 @@
 </template>
 
 <script setup>
-import { ref } from 'vue';
+import { ref , computed} from 'vue';
 import { useStore } from 'vuex';
+import { mapState } from 'vuex';
 import router from "@/router";
 
 const store = useStore();
 const form = ref({
     email: '',
-    password: ''
+    password: '',
+    emails:[
+        'g@g.g','s@s.s'
+    ]
 });
 
-const Signin = async () => {
-    await store.dispatch('auth/login', form.value);
-}
+    const err2 = ref(false);
+    const err = ref(false);
 
+    const checkPassword = () => {
+        err2.value = form.value.password.length < 8;
+    };
+    
+    const errorMessage = computed(() => store.state.auth ? store.state.auth.errorMessage : null);    //console.log('Error Message:', errorMessage.value);
+    
+
+    const Signin = async () => {
+        await store.dispatch('auth/login', form.value);
+        setTimeout(() => {
+            console.log('Error Message:', errorMessage.value);
+            err.value = true;
+        }, 500);
+    }
 </script>

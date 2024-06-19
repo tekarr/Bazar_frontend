@@ -65,10 +65,9 @@
 <script>
 import Navbarr from '/src/components/customer/Navbarr.vue';
 import Footer2 from '/src/components/customer/footer2.vue';
-import axiosRetry from 'axios-retry';
 import axiosClient from '@/axios';
 
-axiosRetry(axiosClient, { retries: 3 });
+
 
     export default {
     components: { Navbarr, Footer2 },

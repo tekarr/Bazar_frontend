@@ -12,11 +12,11 @@ const hasRole = (roles) => (to, from, next) => {
         if (!roles.includes(userRole)) {
             next({name: 'Error'});
         } else {
-
             next();
         }
     }).catch((err) => {
             next({name: 'Error'});
+            console.log(err)
         }
     );
 }
