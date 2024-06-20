@@ -6,7 +6,7 @@
         <form @submit.prevent="submitForm" class="mx-10 text-white ">
 
             <!-- error massege -->
-            <div v-if="errMsg" class="flex items-center justify-between p-3 my-2 bg-pink-600 text-white rounded">
+            <div v-if="errMsg" class="flex items-center justify-between p-3 my-2 mb-6 bg-pink-600 text-white rounded">
                 <div>
                     <div v-for="(errors, field) in errMsg" :key="field" class="text-sm">
                     <strong>{{ field }}:</strong>
@@ -174,7 +174,7 @@ export default {
 
         } catch (error) {
         console.log(error.response.data.errors);
-        errMsg.value = err.response.data.errors;
+        this.errMsg = error.response.data.errors;
         }
     },
         select(category){
