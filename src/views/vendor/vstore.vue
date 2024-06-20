@@ -144,7 +144,11 @@ export default {
     },
     methods: {
         onFileChange(e) {
-            this.selectedFile = e.target.files[0];
+            if (e.target.files.length > 0) {    
+            this.selectedFile = e.target.files[0]
+            } else {
+            this.selectedFile = null;
+            }
             //this.imageUrl = this.selectedFile;
             if (this.selectedFile) {
             const reader = new FileReader();
@@ -160,7 +164,7 @@ export default {
             const response = await axiosClient.get('api/vendor/stores');
             this.store = response.data.data;
             //console.log(this.store.image)
-            this.selectedFile = this.store.image;
+            //this.selectedFile = this.store.image;
             console.log(this.selectedFile)
             this.imageUrl = `http://localhost:8000/storage/${this.store.image}`;
         } catch (error) {
@@ -182,7 +186,12 @@ export default {
         formData.append('name', this.store.name);
         formData.append('description', this.store.description);
         formData.append('status', this.store.status);
-        formData.append('image', this.selectedFile);
+        if (this.selectedFile != null){
+            formData.append('image', this.selectedFile);
+        }
+        //
+
+        console.log(this.selectedFile);
 
         const response = await axiosClient.post('api/vendor/stores', formData, {
         headers: {
