@@ -206,11 +206,7 @@ export default {
             console.log(pair[0]+ ', ' + pair[1]); 
         }
 
-        const response = await axiosClient.put(`api/vendor/products/${id}`, formData, {
-        headers: {
-            'Content-Type': 'multipart/form-data',
-            },
-        });
+        const response = await axiosClient.put(`api/vendor/products/${id}`, formData)
 
         console.log(response.data);
         // handle successful submission
