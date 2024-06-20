@@ -7,7 +7,7 @@
   <div class="mt-10 sm:mx-auto sm:w-full sm:max-w-sm">
     <form @submit.prevent="login">
 
-      <div v-if="errMsg" class=" flex items-center justify-between p-3 my-2 bg-pink-600 text-white rounded">
+      <div v-if="errMsg" class=" flex items-center justify-between p-3 my-2 bg-red-600 text-white rounded">
         {{errMsg}}
           <span @click="errMsg=''" class="w-8 h-8 flex items-center justify-center rounded-full cursor-pointer transition-colors hover:bg-[rgba(0,0,0,0.2)]">
             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">

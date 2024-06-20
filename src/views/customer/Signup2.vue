@@ -6,7 +6,7 @@
   </div>
   <div class="mt-10 sm:mx-auto sm:w-full sm:max-w-sm">
     <form class="space-y-6" @submit="register" >
-      <div v-if="errMsg" class="flex items-center justify-between p-3 my-2 bg-pink-600 text-white rounded">
+      <div v-if="errMsg" class="flex items-center justify-between p-3 my-2 bg-red-600 text-white rounded">
           <div>
             <div v-for="(errors, field) in errMsg" :key="field" class="text-sm">
               <strong>{{ field }}:</strong>
