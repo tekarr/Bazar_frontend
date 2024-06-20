@@ -6,6 +6,8 @@ import HomeView from '../views/customer/HomeView.vue'
 import AboutView from '../views/customer/AboutView.vue'
 import Signup from '../views/customer/signup.vue'
 import signin from '../views/customer/signin.vue'
+import Signup2 from '@/views/customer/Signup2.vue';
+import Login2 from '@/views/customer/Login2.vue';
 import productpage from '../views/customer/productpage.vue'
 import cart from '@/views/customer/cart.vue'
 import trackorder from '@/views/customer/trackorder.vue'
@@ -42,7 +44,6 @@ import Editproduct from '@/components/vendor/Editproduct.vue'
 import store from "@/store";
 
 
-import Signup2 from '@/views/customer/Signup2.vue';
 
 
 
@@ -75,14 +76,14 @@ const routes = [
         },
         {
           path: '/signup',
-          name: 'signup',
-          component: Signup,
+          name: 'Signup2',
+          component: Signup2,
 
         },
         {
           path: '/signin',
-          name: 'signin',
-          component: signin,
+          name: 'Login2',
+          component: Login2,
 
         },
         {
@@ -259,8 +260,6 @@ const routes = [
     ]
   },
 
-  {name: 'Signup2', path: '/signup2',  component: () => import('@/views/customer/Signup2.vue')},
-  {name: 'Login2', path: '/login2',  component: () => import('@/views/customer/Login2.vue')},
 
   {name:'Error', path: '/error',  component: () => import('@/views/Error.vue')},
 

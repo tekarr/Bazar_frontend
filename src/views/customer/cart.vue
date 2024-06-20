@@ -210,7 +210,7 @@ import axiosClient from '@/axios'
             let cart = JSON.parse(localStorage.getItem('cart')) || [];
             for (let id of cart) {
                 let response = await axiosClient.get(`api/products/${id}`);
-                this.products.push(response.data.product);
+                this.products.push(response.data.data);
             }
             console.log(this.products);
             this.products.forEach(product => {

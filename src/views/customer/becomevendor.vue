@@ -5,6 +5,23 @@
         <div v-bind="$attrs" class="mt-28 bg-gray-900 py-10 pt-20 flex justify-center">
         <form @submit.prevent="submitForm" class="mx-10 text-white ">
 
+            <!-- error massege -->
+            <div v-if="errMsg" class="flex items-center justify-between p-3 my-2 bg-pink-600 text-white rounded">
+                <div>
+                    <div v-for="(errors, field) in errMsg" :key="field" class="text-sm">
+                    <strong>{{ field }}:</strong>
+                    <ul>
+                        <li v-for="(error, index) in errors" :key="index">{{ error }}</li>
+                    </ul>
+                    </div>
+                </div>
+                <span @click="errMsg=''" class="w-8 h-8 flex items-center justify-center rounded-full cursor-pointer transition-colors hover:bg-[rgba(0,0,0,0.2)]">
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M6 18 18 6M6 6l12 12" />
+                    </svg>
+                </span>
+            </div>
+
             <!-- image preview -->
             <div v-if="imageUrl" class="my-8 flex justify-center pt-8">
                 <img :src="imageUrl" alt="Selected Image" class="max-w-md max-h-md rounded-3xl hover:shadow-md" />
@@ -85,11 +102,9 @@
 </template>
 
 <script>
-import Navbarr from '@/components/customer/Navbarr.vue';
 import axiosClient from "@/axios";
-import ImageUploader from '@/components/vendor/ImageUploader.vue';
+
 export default {
-    components: { Navbarr , ImageUploader },
     data() {
         
         return {
@@ -104,6 +119,7 @@ export default {
         selectedFile: null,
         categories: [],
         category: '',
+        errMsg: '',
         };
     },
     async created() {
@@ -111,7 +127,7 @@ export default {
         const response = await axiosClient.get('api/categories');
         this.categories = response.data;
         const categoryNames = this.categories.map(category => category.id);
-        console.log(categoryNames);
+        //console.log(categoryNames);
         } catch (error) {
         console.error(error);
         }
@@ -157,7 +173,8 @@ export default {
         this.$router.push('/vendor');
 
         } catch (error) {
-        console.error(error);
+        console.log(error.response.data.errors);
+        errMsg.value = err.response.data.errors;
         }
     },
         select(category){
