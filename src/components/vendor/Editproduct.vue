@@ -194,13 +194,8 @@ export default {
         formData.append('quantity', this.product.quantity);
         formData.append('category_id', this.product.category_id);
         formData.append('price', this.product.price);
-        this.product.variations.forEach((variation, index) => {
-            formData.append(`variations[${index}]`, variation);
-        });
-        for (let i = 0; i < this.files.length; i++) {
-            console.log(this.files[i]);
-            formData.append(`images[${i}]`, this.files[i]);
-        }  
+        formData.append('variations', this.product.variations);
+        formData.append('images', this.images);
         
         for (let pair of formData.entries()) {
             console.log(pair[0]+ ', ' + pair[1]); 
