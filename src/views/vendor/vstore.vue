@@ -4,10 +4,27 @@
     
         <div class="">
         <form @submit.prevent="submitForm" class="mx-10 ">
+            <div class="mt-4">.</div>
 
+            <!-- error massege -->
+            <div v-if="errMsg" class="flex items-center justify-between p-3 my-2 mb-6 bg-red-600 text-white rounded">
+                <div>
+                    <div v-for="(errors, field) in errMsg" :key="field" class="text-sm">
+                    <strong>{{ field }}:</strong>
+                    <ul>
+                        <li v-for="(error, index) in errors" :key="index">{{ error }}</li>
+                    </ul>
+                    </div>
+                </div>
+                <span @click="errMsg=''" class="w-8 h-8 flex items-center justify-center rounded-full cursor-pointer transition-colors hover:bg-[rgba(0,0,0,0.2)]">
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M6 18 18 6M6 6l12 12" />
+                    </svg>
+                </span>
+            </div>
 
             <!-- image preview -->
-            <div v-if="imageUrl" class="my-8 flex justify-start pt-8">
+            <div v-if="imageUrl" class="my-4 flex justify-start pt-8">
                 <img :src="imageUrl" alt="Selected Image" class="max-w-md max-h-md rounded-3xl hover:shadow-md" />
             </div>
 
@@ -75,6 +92,7 @@
                 <option disabled value="">Please select one</option>
                 <option value="active">active</option>
                 <option value="inactive">inactive</option>
+                <option value="none">none</option>
             </select>
         </div>
         <p class="hidden">{{ store.status }}</p>
@@ -121,12 +139,13 @@ export default {
         categories: [],
         selectedFile: null,
         imageUrl: null,
+        errMsg: '',
         };
     },
     methods: {
         onFileChange(e) {
             this.selectedFile = e.target.files[0];
-            this.imageUrl = this.selectedFile;
+            //this.imageUrl = this.selectedFile;
             if (this.selectedFile) {
             const reader = new FileReader();
             reader.onload = (e) => {
@@ -134,12 +153,15 @@ export default {
             };
             reader.readAsDataURL(this.selectedFile);
             }
+            console.log(this.selectedFile)
         },
         async fetchStores() {
         try {
             const response = await axiosClient.get('api/vendor/stores');
             this.store = response.data.data;
-            console.log(this.store.name)
+            //console.log(this.store.image)
+            this.selectedFile = this.store.image;
+            console.log(this.selectedFile)
             this.imageUrl = `http://localhost:8000/storage/${this.store.image}`;
         } catch (error) {
             console.error(`There was an error fetching the stores: ${error}`);
@@ -172,8 +194,8 @@ export default {
         // handle successful submission
         } catch (error) {
             if (error.response) {
-            console.log('Error status:', error.response.status);
-            console.log('Error details:', error.response.data);
+            console.log(error.response.data.errors);
+            this.errMsg = error.response.data.errors;
         } else {
             console.log('Error', error.message);
         }

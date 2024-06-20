@@ -6,8 +6,29 @@
         <form @submit.prevent="submitForm" v-bind="$attrs" class="  mx-10 " >
 
 
-            <!-- imageuploader -->
-            <image-uploader-2/>
+            <div class="flex flex-col items-center justify-center   p-4 rounded-3xl mb-4">
+                <hr>
+
+                <!-- Preview images -->
+                <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 my-2 p-2">
+                <div v-for="(image, index) in images" :key="index" class="relative">
+                    <img :src="image.url" :alt="'Image ' + index" class="w-full h-auto rounded-xl shadow-md" />
+                    <button 
+                    @click="removeImage(index)" 
+                    class="absolute top-1 right-1 bg-pink-600 text-white rounded-full w-6 h-6 hover:bg-pink-700 focus:outline-none">
+                    &times;
+                    </button>
+                </div>
+                </div>
+            </div>
+
+            <!-- File input -->
+            <div class="mb-8 mt-8 ">
+                <label class="mb-4 p-2 bg-pink-600 text-white rounded-3xl px-4 shadow-md hover:bg-pink-700 cursor-pointer">
+                Choose Images
+                <input type="file" multiple @change="onFileChange" class="hidden" />
+                </label>
+            </div>
 
             <!-- name -->
             <div class="mb-5 text-start w-80">
@@ -15,7 +36,7 @@
                 <input type="text" id="productname" v-model="product.name" placeholder="product name" 
                 class="w-full mt-4 bg-white px-10 py-2 rounded-xl focus:outline-none focus:ring focus:ring-pink-500 " required>
             </div>
-            <p class="hidden">{{ product.name }}</p>
+            <p class="">{{ product.name }}</p>
 
             <!-- Description -->
             <div class="mb-2 text-start ">
@@ -25,7 +46,7 @@
                     placeholder="Enter your text here...">
                 </textarea>
             </div>
-            <p class="hidden">{{ product.description }}</p>
+            <p class="">{{ product.description }}</p>
 
 
             <!-- Price -->
@@ -109,11 +130,8 @@
 </template>
 
 <script>
-import Sidbar from '@/components/vendor/Sidbar.vue';
-import ImageUploader2 from './ImageUploader2.vue';
 import axiosClient from "@/axios";
 export default {
-    components: {  Sidbar, ImageUploader2 },
     data() {
         return {
         product: {
@@ -122,16 +140,19 @@ export default {
         categories: [],
         attributes: [],
         checked: false,
+        images: [],
+        files: null,
         };
     },
     async created() {
         //fetching product 
         try {
             const id = this.$route.params.id;
+            console.log(id)
             const response = await axiosClient.get(`api/vendor/products/${id}`);
             this.product = response.data.data;
             console.log(this.product);
-            console.log(this.product.category_id.name);
+            //console.log(this.product.category_id);
             
         } catch (error) {
             console.error(error);
@@ -141,7 +162,7 @@ export default {
         const response = await axiosClient.get('api/categories');
         this.categories = response.data;
         const categoryNames = this.categories.map(category => category.id);
-        console.log(categoryNames);
+        //console.log(categoryNames);
         } catch (error) {
         console.error(error);
         }
@@ -160,12 +181,61 @@ export default {
 
     },
     methods: {
-        async submitForm() {
-        console.log(this.product);    
-        const id = this.$route.params.id;
-        await axiosClient.put(`api/vendor/products/${id}`, this.product);
 
-        // handle successful update
+        async submitForm() {
+        try {   
+        const id = this.$route.params.id;  
+        const formData = new FormData();
+        this.product = this.product
+
+        formData.append('name', this.product.name);
+        formData.append('description', this.product.description);
+        formData.append('status', this.product.status);
+        formData.append('quantity', this.product.quantity);
+        formData.append('category_id', this.product.category_id);
+        formData.append('price', this.product.price);
+        this.product.variations.forEach((variation, index) => {
+            formData.append(`variations[${index}]`, variation);
+        });
+        for (let i = 0; i < this.files.length; i++) {
+            console.log(this.files[i]);
+            formData.append(`images[${i}]`, this.files[i]);
+        }  
+        
+        for (let pair of formData.entries()) {
+            console.log(pair[0]+ ', ' + pair[1]); 
+        }
+
+        const response = await axiosClient.put(`api/vendor/products/${id}`, formData, {
+        headers: {
+            'Content-Type': 'multipart/form-data',
+            },
+        });
+
+        console.log(response.data);
+        // handle successful submission
+        } catch (error) {
+            if (error.response) {
+            console.log(error.response);
+            //this.errMsg = error.response.data.errors;
+        } else {
+            console.log('Error', error.message);
+        }
+        }
+        },
+        onFileChange(event) {
+        this.files = event.target.files;
+        for (let i = 0; i < this.files.length; i++) {
+            const file = this.files[i];
+            const reader = new FileReader();
+            reader.onload = (e) => {
+            this.images.push({ url: e.target.result });
+            };
+            reader.readAsDataURL(file);
+        }
+        },
+        removeImage(index) {
+        this.images.splice(index, 1);
         },
         onAttributeChange(attribute) {
         if (!attribute.checked) {
