@@ -6,13 +6,38 @@
         <form @submit.prevent="submitForm" class="  mx-10 ">
 
 
-            <div class="flex flex-col items-center justify-center   p-4 rounded-3xl mb-4">
-                <hr>
+            <!-- error massege -->
+            <div v-if="errMsg" class="flex items-center justify-between p-3 my-2 mb-6 bg-red-600 text-white rounded">
+                <div>
+                    <div v-for="(errors, field) in errMsg" :key="field" class="text-sm">
+                    <strong>{{ field }}:</strong>
+                    <ul>
+                        <li v-for="(error, index) in errors" :key="index">{{ error }}</li>
+                    </ul>
+                    </div>
+                </div>
+                <span @click="errMsg=''" class="w-8 h-8 flex items-center justify-center rounded-full cursor-pointer transition-colors hover:bg-[rgba(0,0,0,0.2)]">
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M6 18 18 6M6 6l12 12" />
+                    </svg>
+                </span>
+            </div>
 
-                <!-- Preview images -->
+            <!-- sucsses massege -->
+            <div v-if="scMsg" class=" flex items-center justify-between p-3 my-2 bg-green-600 text-white rounded">
+                {{scMsg}}
+                <span @click="scMsg=''" class="w-8 h-8 flex items-center justify-center rounded-full cursor-pointer transition-colors hover:bg-[rgba(0,0,0,0.2)]">
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M6 18 18 6M6 6l12 12" />
+                    </svg>
+                </span>
+            </div>
+
+            <!-- Preview images -->
+            <div class="flex flex-col items-center justify-center   p-4 rounded-3xl mb-4">
                 <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 my-2 p-2">
-                <div v-for="(image, index) in images" :key="index" class="relative">
-                    <img :src="image.url" :alt="'Image ' + index" class="w-full h-auto rounded-xl shadow-md" />
+                <div v-for="(imageObj, index) in images" :key="index" class="relative">
+                    <img :src="imageObj.url" :alt="'Image ' + index" class="w-full h-auto rounded-xl shadow-md" />
                     <button 
                     @click="removeImage(index)" 
                     class="absolute top-1 right-1 bg-pink-600 text-white rounded-full w-6 h-6 hover:bg-pink-700 focus:outline-none">
@@ -20,7 +45,8 @@
                     </button>
                 </div>
                 </div>
-            </div>
+            </div> 
+            <hr>
 
             <!-- File input -->
             <div class="mb-8 mt-8 ">
@@ -78,11 +104,14 @@
 
             <!-- Status -->
             <div class="mb-5 text-start w-80">
-            <label for="status">Active</label>
-            <input type="checkbox" id="status" true-value="active" false-value="inactive" v-model="product.status" 
-                class="ml-4 mt-2">
+            <label for="status">Status</label><br>
+            <select v-model="product.status"  class="p-2 my-4 px-4  border-2 border-pink-600 rounded-xl" required>
+                    <option disabled value="">Please select onese</option>
+                    <option value="active">active</option>
+                    <option value="inactive">inactive</option>
+            </select>
             </div>
-            <p class="">{{product.status}}</p>
+            <p class="hidden">{{product.status}}</p>
 
 
             <!-- Attributes -->
@@ -134,19 +163,17 @@ export default {
     data() {
         return {
         product: {
-            name: '',
-            description: '',
-            quantity: 0,
-            category_id:'',
-            price: '',
-            status: 'active',
             variations: [],
         },
+        formData : new FormData(),
         attributes: [],
         checked: false,
         categories: [],
         images: [],
-        files:null,
+        files: [],
+        errMsg: '',
+        scMsg: '',
+        imageUrl: null,
         };
     },
     async created() {
@@ -172,21 +199,10 @@ export default {
         }
     },
     methods: {
-        async submitForm() {
-        try {
-        console.log(this.product)
-        const response = await axiosClient.post('api/vendor/products', this.product);
-        console.log(response.data);
-        // handle successful submission
-        } catch (error) {
-        console.error(error);
-        // handle error during submission
-        }
-        },
         onFileChange(event) {
-        const files = event.target.files;
-        for (let i = 0; i < files.length; i++) {
-            const file = files[i];
+        this.files = event.target.files;
+        for (let i = 0; i < this.files.length; i++) {
+            const file = this.files[i];
             const reader = new FileReader();
             reader.onload = (e) => {
             this.images.push({ url: e.target.result });
@@ -197,6 +213,47 @@ export default {
         removeImage(index) {
         this.images.splice(index, 1);
         },
+
+        async submitForm() {
+        try {
+        this.scMsg = ''
+        this.errMsg = ''  
+        
+        this.formData.append('name', this.product.name);
+        this.formData.append('description', this.product.description);
+        this.formData.append('status', this.product.status);
+        this.formData.append('quantity', this.product.quantity);
+        this.formData.append('category_id', this.product.category_id);
+        this.formData.append('price', this.product.price);
+
+        for (let i = 0; i < this.product.variations.length; i++) {
+            this.formData.append(`variations[${i}]`, JSON.stringify(this.product.variations[i]));
+        }
+         // Append files to formData
+        for (let i = 0; i < this.files.length; i++) {
+            this.formData.append(`images[${i}]`, this.files[i]);
+        }
+
+        for (let pair of this.formData.entries()) {
+            console.log(pair[0]+ ', ' + pair[1]); 
+        }
+
+        const response = await axiosClient.post(`api/vendor/products`, this.formData, {
+        headers: {
+            'Content-Type': 'multipart/form-data',
+            },
+        });
+        console.log(response.data);
+        this.scMsg = response.data.message
+        // handle successful submission
+        } catch (error) {
+        console.log(error.response.data);
+        this.errMsg = error.response.data.errors;
+        // handle error during submission
+        }
+        window.scrollTo({ top: 50 });
+        },
+        
         onAttributeChange(attribute) {
         if (!attribute.checked) {
             attribute.variations.forEach(variation => {

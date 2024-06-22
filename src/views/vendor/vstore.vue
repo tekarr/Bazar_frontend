@@ -23,6 +23,16 @@
                 </span>
             </div>
 
+            <!-- sucsses massege -->
+            <div v-if="scMsg" class=" flex items-center justify-between p-3 my-2 bg-green-600 text-white rounded">
+                {{scMsg}}
+                <span @click="scMsg=''" class="w-8 h-8 flex items-center justify-center rounded-full cursor-pointer transition-colors hover:bg-[rgba(0,0,0,0.2)]">
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M6 18 18 6M6 6l12 12" />
+                    </svg>
+                </span>
+            </div>
+
             <!-- image preview -->
             <div v-if="imageUrl" class="my-4 flex justify-start pt-8">
                 <img :src="imageUrl" alt="Selected Image" class="max-w-md max-h-md rounded-3xl hover:shadow-md" />
@@ -140,6 +150,7 @@ export default {
         selectedFile: null,
         imageUrl: null,
         errMsg: '',
+        scMsg: '',
         };
     },
     methods: {
@@ -181,6 +192,8 @@ export default {
         },
         async submitForm() {
         try {
+        this.scMsg = ''
+        this.errMsg = ''    
         const formData = new FormData();
 
         formData.append('name', this.store.name);
@@ -189,7 +202,7 @@ export default {
         if (this.selectedFile != null){
             formData.append('image', this.selectedFile);
         }
-        //
+        
 
         console.log(this.selectedFile);
 
@@ -200,6 +213,8 @@ export default {
         });
         
         console.log(response.data);
+        this.scMsg = response.data.message
+
         // handle successful submission
         } catch (error) {
             if (error.response) {
@@ -209,6 +224,7 @@ export default {
             console.log('Error', error.message);
         }
         }
+        window.scrollTo({ top: 50 });
         },
     },
     created() {

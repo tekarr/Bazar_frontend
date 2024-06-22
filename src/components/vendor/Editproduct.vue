@@ -5,14 +5,38 @@
         <div v-if="product"  class="">
         <form @submit.prevent="submitForm" v-bind="$attrs" class="  mx-10 " >
 
+            <!-- error massege -->
+            <div v-if="errMsg" class="flex items-center justify-between p-3 my-2 mb-6 bg-red-600 text-white rounded">
+                <div>
+                    <div v-for="(errors, field) in errMsg" :key="field" class="text-sm">
+                    <strong>{{ field }}:</strong>
+                    <ul>
+                        <li v-for="(error, index) in errors" :key="index">{{ error }}</li>
+                    </ul>
+                    </div>
+                </div>
+                <span @click="errMsg=''" class="w-8 h-8 flex items-center justify-center rounded-full cursor-pointer transition-colors hover:bg-[rgba(0,0,0,0.2)]">
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M6 18 18 6M6 6l12 12" />
+                    </svg>
+                </span>
+            </div>
 
+            <!-- sucsses massege -->
+            <div v-if="scMsg" class=" flex items-center justify-between p-3 my-2 bg-green-600 text-white rounded">
+                {{scMsg}}
+                <span @click="scMsg=''" class="w-8 h-8 flex items-center justify-center rounded-full cursor-pointer transition-colors hover:bg-[rgba(0,0,0,0.2)]">
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M6 18 18 6M6 6l12 12" />
+                    </svg>
+                </span>
+            </div>
+
+            <!-- Preview images -->
             <div class="flex flex-col items-center justify-center   p-4 rounded-3xl mb-4">
-                <hr>
-
-                <!-- Preview images -->
                 <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 my-2 p-2">
-                <div v-for="(image, index) in images" :key="index" class="relative">
-                    <img :src="image.url" :alt="'Image ' + index" class="w-full h-auto rounded-xl shadow-md" />
+                <div v-for="(imageObj, index) in images" :key="index" class="relative">
+                    <img :src="imageObj.url" :alt="'Image ' + index" class="w-full h-auto rounded-xl shadow-md" />
                     <button 
                     @click="removeImage(index)" 
                     class="absolute top-1 right-1 bg-pink-600 text-white rounded-full w-6 h-6 hover:bg-pink-700 focus:outline-none">
@@ -20,7 +44,8 @@
                     </button>
                 </div>
                 </div>
-            </div>
+            </div> 
+            <hr>
 
             <!-- File input -->
             <div class="mb-8 mt-8 ">
@@ -36,7 +61,7 @@
                 <input type="text" id="productname" v-model="product.name" placeholder="product name" 
                 class="w-full mt-4 bg-white px-10 py-2 rounded-xl focus:outline-none focus:ring focus:ring-pink-500 " required>
             </div>
-            <p class="">{{ product.name }}</p>
+            <p class="hidden">{{ product.name }}</p>
 
             <!-- Description -->
             <div class="mb-2 text-start ">
@@ -46,7 +71,7 @@
                     placeholder="Enter your text here...">
                 </textarea>
             </div>
-            <p class="">{{ product.description }}</p>
+            <p class="hidden">{{ product.description }}</p>
 
 
             <!-- Price -->
@@ -67,9 +92,9 @@
             <!-- catagories -->
             <div class="">
                 <p class="">Category</p>    
-                <select v-model="product.category_id" @input="select" class="p-2 my-4 px-4  border-2 border-pink-600 rounded-xl" required>
+                <select v-model="product.category_id" @input="select" class="p-2 my-4 px-4  border-2 border-pink-600 rounded-xl" >
                     <option disabled value="">Please select onese</option>
-                    <option v-for="(category, index) in categories" :key="index" :value="category.id">
+                    <option v-for="category in categories" :key="category.id" :value="category.id">
                     {{ category.name }}
                     </option>
                 </select>
@@ -137,11 +162,16 @@ export default {
         product: {
         variations: [],
         },
+        formData : new FormData(),
         categories: [],
         attributes: [],
+        deletedImageIds: [],
         checked: false,
         images: [],
-        files: null,
+        files: [],
+        errMsg: '',
+        scMsg: '',
+        imageUrl: null,
         };
     },
     async created() {
@@ -151,6 +181,12 @@ export default {
             console.log(id)
             const response = await axiosClient.get(`api/vendor/products/${id}`);
             this.product = response.data.data;
+            this.images = this.product.images.map(img => ({
+            id: img.id,
+            url: `http://localhost:8000/storage/${img.image}`
+            }));
+            //this.images.push({ url: e.target.result });
+            console.log(this.images)
             console.log(this.product);
             //console.log(this.product.category_id);
             
@@ -182,43 +218,6 @@ export default {
     },
     methods: {
 
-        async submitForm() {
-        try {   
-        const id = this.$route.params.id;  
-        const formData = new FormData();
-        this.product = this.product
-
-        formData.append('name', this.product.name);
-        formData.append('description', this.product.description);
-        formData.append('status', this.product.status);
-        formData.append('quantity', this.product.quantity);
-        formData.append('category_id', this.product.category_id);
-        formData.append('price', this.product.price);
-        this.product.variations.forEach((variation, index) => {
-            formData.append(`variations[${index}]`, variation);
-        });
-        for (let i = 0; i < this.files.length; i++) {
-            console.log(this.files[i]);
-            formData.append(`images[${i}]`, this.files[i]);
-        }  
-        
-        for (let pair of formData.entries()) {
-            console.log(pair[0]+ ', ' + pair[1]); 
-        }
-
-        const response = await axiosClient.put(`api/vendor/products/${id}`, formData)
-
-        console.log(response.data);
-        // handle successful submission
-        } catch (error) {
-            if (error.response) {
-            console.log(error.response);
-            //this.errMsg = error.response.data.errors;
-        } else {
-            console.log('Error', error.message);
-        }
-        }
-        },
         onFileChange(event) {
         this.files = event.target.files;
         for (let i = 0; i < this.files.length; i++) {
@@ -231,8 +230,65 @@ export default {
         }
         },
         removeImage(index) {
+        if (this.images[index].id) {
+
+        this.deletedImageIds.push(this.images[index].id);
         this.images.splice(index, 1);
+
+        } else {
+        this.images.splice(index, 1);
+        }},
+
+        async submitForm() {
+        try {   
+        this.scMsg = ''
+        this.errMsg = ''      
+        const id = this.$route.params.id;  
+
+        this.formData.append('name', this.product.name);
+        this.formData.append('description', this.product.description);
+        this.formData.append('status', this.product.status);
+        this.formData.append('quantity', this.product.quantity);
+        this.formData.append('category_id', this.product.category_id);
+        this.formData.append('price', this.product.price);
+
+        for (let i = 0; i < this.product.variations.length; i++) {
+            this.formData.append(`variations[${i}]`, JSON.stringify(this.product.variations[i]));
+        }
+
+        for (let i = 0; i < this.files.length; i++) {
+            this.formData.append(`images[${i}]`, this.files[i]);
+        }
+
+        this.deletedImageIds.forEach((id, index) => {
+            this.formData.append(`deleted_images[${index}]`, id);
+        });
+        
+        for (let pair of this.formData.entries()) {
+            console.log(pair[0]+ ', ' + pair[1]); 
+        }
+
+        const response = await axiosClient.post(`api/vendor/products/${id}`, this.formData, {
+        headers: {
+            'Content-Type': 'multipart/form-data',
+            },
+        });
+
+        console.log(response.data.message);
+        this.scMsg = response.data.message;
+        // handle successful submission
+        } catch (error) {
+            if (error.response) {
+            console.log(error.response.data.message);
+            this.errMsg = error.response.data.message;
+            //this.errMsg = error.response.data.errors;
+        } else {
+            console.log('Error', error.message);
+        }
+        }
+        window.scrollTo({ top: 50 });
         },
+
         onAttributeChange(attribute) {
         if (!attribute.checked) {
             attribute.variations.forEach(variation => {
@@ -244,6 +300,7 @@ export default {
             });
         }
         },
+
         onVariationChange(variation) {
         if (variation.checked) {
             this.product.variations.push(variation.id);

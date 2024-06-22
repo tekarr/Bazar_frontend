@@ -9,6 +9,9 @@
                         <th scope="col" class="px-6 py-3 text-start">
                             name
                         </th>
+                        <th scope="col" class="px-6 py-3 text-start">
+                            id
+                        </th>
                         <th scope="col" class=" py-3 text-center">
                             Quantity
                         </th>
@@ -30,6 +33,9 @@
                     <tr v-for="product in products" :key="product.id" class="bg-white " >
                         <td scope="row" class="px-6 py-8 font-medium text-base w-20">
                             {{product.name}}
+                        </td>
+                        <td scope="row" class="px-6 py-8 text-base w-20">
+                            {{product.id}}
                         </td>
                         <td scope="row" class=" font-normal text-sm text-center">
                             {{product.quantity}}
