@@ -79,13 +79,13 @@
             <div class="flex justify-between w-96">
                 <div>
                     <label for="price" class="text-gray-700">Price $:</label>
-                    <input type="number" min="1" id="price" v-model="product.price" placeholder="$"  class="block w-full px-4 py-2 mt-2 mb-4 border border-gray-300 rounded-md focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm">
+                    <input type="number" min="1" id="price" v-model="product.price" placeholder="$" required class="block w-full px-4 py-2 mt-2 mb-4 border border-gray-300 rounded-md focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm">
                     <p class="mt-2 mb-2 text-gray-500 hidden">Entered price: {{ product.price }}</p>
                 </div>
 
                 <div class="">
                     <label for="quantity" class="text-gray-700">Quantity:</label>
-                    <input type="number" min="1" id="quantity" v-model="product.quantity" class="block w-full px-4 py-2 mt-2 mb-4 border border-gray-300 rounded-md focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm">
+                    <input type="number" min="1" id="quantity" v-model="product.quantity" required class="block w-full px-4 py-2 mt-2 mb-4 border border-gray-300 rounded-md focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm">
                     <p class="mt-2 text-gray-500 hidden">Entered price: {{ product.quantity }}</p>  
                 </div>
             </div>
@@ -248,7 +248,7 @@ export default {
         // handle successful submission
         } catch (error) {
         console.log(error.response.data);
-        this.errMsg = error.response.data.errors;
+        this.errMsg = error.response.data.message;
         // handle error during submission
         }
         window.scrollTo({ top: 50 });
