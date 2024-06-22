@@ -1,6 +1,17 @@
 <template>
 
 
+        <!-- delete message -->
+        <div v-if="showConfirmationDialog" class="fixed inset-0 flex items-center justify-center z-20 bg-black bg-opacity-50">
+            <div class="bg-white p-6 rounded-3xl">
+            <p class="text-lg"> Are u sure u want to delete ? </p>
+                <div class="flex justify-between">
+                    <button  @click="confirmDelete" class="mt-4 bg-pink-600 hover:bg-pink-700 text-white font-bold py-2 px-4 rounded-3xl">Delete</button>
+                    <button @click="cancelDelete" class="mt-4 bg-pink-600 hover:bg-pink-700 text-white font-bold py-2 px-4 rounded-3xl">Cancel</button>
+                </div>
+            </div>
+        </div>
+
         <!-- products table -->
         <div class="relative overflow-x-auto">
             <table class="w-full text-sm text-left rtl:text-right text-gray-700  rounded-3xl overflow-hidden">
@@ -52,8 +63,7 @@
                         <td>
                             <div class="px-2 flex justify-center items-center">
                                 <button  @click="editProduct(product.id)" class="px-4 py-2 mt-2  bg-gray-100 hover:bg-pink-600 hover:text-white rounded-3xl">Edit</button>
-                                <button @click="deleteProduct(product.id)" class="px-4 py-2 mx-2 mt-2 rounded-3xl text-base hover:bg-pink-600 bg-gray-700 text-white">x</button>
-                            </div>
+                                <button @click="showConfirmDialog(product.id)" class="px-4 py-2 mx-2 mt-2 rounded-3xl text-base hover:bg-pink-600 bg-gray-700 text-white">x</button>                            </div>
                         </td>
                     </tr>
                 </tbody>
@@ -78,6 +88,8 @@ import Navbar from '@/components/vendor/navbar.vue'
     data() {
         return {
             products:[],
+            showConfirmationDialog: false,
+            productIdToDelete: null,
         };
     },
     async created() {
@@ -91,19 +103,30 @@ import Navbar from '@/components/vendor/navbar.vue'
         }
     },
     methods: {
-    async deleteProduct(id) {
+    async deleteProduct(productId) {
         try {
-            await axiosClient.delete(`api/vendor/products/${id}`);
+            await axiosClient.delete(`api/vendor/products/${productId}`);
 
             // Remove the product from the products array
-            this.products = this.products.filter(product => product.id !== id);
+            this.products = this.products.filter(product => product.id !== productId);
         } catch (error) {
             console.error(error);
         }
         },
         editProduct(id) {
             this.$router.push({ name: 'EditProduct', params: { id } });
-        },    
+        },
+        showConfirmDialog(productId) {
+            this.productIdToDelete = productId;
+            this.showConfirmationDialog = true;
+        },
+        confirmDelete() {
+            this.deleteProduct(this.productIdToDelete);
+            this.showConfirmationDialog = false;
+        },
+        cancelDelete() {
+            this.showConfirmationDialog = false;
+        },
     }
 };
 </script>
