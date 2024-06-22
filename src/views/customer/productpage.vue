@@ -90,7 +90,7 @@ import axiosClient from '@/axios';
         const id = this.$route.params.id;
         try {
             const response = await axiosClient.get(`api/products/${id}`);
-            this.product = response.data.product;
+            this.product = response.data.data;
             console.log(this.product);
         } catch (error) {
             console.error(`There was an error fetching the product: ${error}`);
