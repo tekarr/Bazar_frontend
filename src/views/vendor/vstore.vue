@@ -82,19 +82,6 @@
             </div> -->
 
 
-            <!-- catagories -->
-            <div class="">
-                <p class="">Category </p>    
-                <select v-model="store.category" @input="select" class="p-2 my-4 px-4  border-2 border-pink-600 rounded-xl">
-                    <option disabled value="">Please select one</option>
-                    <option v-for="category in categories" :key="category.id" :value="category.name">
-                    {{ category.name }}
-                    </option>
-                </select>
-            </div>
-            <p class="hidden">{{ store.category }}</p>
-
-
             <!-- Status -->
             <div class="">
             <p class="">Status </p>    

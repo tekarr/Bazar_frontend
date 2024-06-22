@@ -109,6 +109,7 @@
                     <option disabled value="">Please select onese</option>
                     <option value="active">active</option>
                     <option value="inactive">inactive</option>
+                    <option value="out_of_stock">out_of_stock</option>
             </select>
             </div>
             <p class="hidden">{{product.status}}</p>
