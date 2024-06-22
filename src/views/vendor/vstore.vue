@@ -89,7 +89,6 @@
                 <option disabled value="">Please select one</option>
                 <option value="active">active</option>
                 <option value="inactive">inactive</option>
-                <option value="none">none</option>
             </select>
         </div>
         <p class="hidden">{{ store.status }}</p>

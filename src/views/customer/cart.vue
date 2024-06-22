@@ -206,19 +206,24 @@ import axiosClient from '@/axios'
             console.log(this.totals);
         },
         async fetchProducts() {
-            this.products = [];
-            let cart = JSON.parse(localStorage.getItem('cart')) || [];
-            for (let id of cart) {
+        this.products = [];
+        let cart = JSON.parse(localStorage.getItem('cart')) || [];
+        for (let id of cart) {
+            try {
                 let response = await axiosClient.get(`api/products/${id}`);
                 this.products.push(response.data.data);
+            } catch (error) {
+                localStorage.setItem('cart', null); // Set cart to null in case of an error
+                return; // Exit the function early
             }
-            console.log(this.products);
-            this.products.forEach(product => {
+        }
+        console.log(this.products);
+        this.products.forEach(product => {
             this.qt[product.id] = 1;
             this.totals[product.id] = this.qt[product.id] * product.price;
-            });
+        });
 
-            this.finalTotal();
+        this.finalTotal();
         },
         removeFromCart(productId) {
             let cart = JSON.parse(localStorage.getItem('cart')) || [];
