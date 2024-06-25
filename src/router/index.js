@@ -27,7 +27,7 @@ import stores from '@/views/admin/stores.vue'
 import orders from '@/views/admin/orders.vue'
 import profile from '@/views/admin/profile.vue'
 import Add from '@/components/admin/Add.vue'
-import edit from '@/components/admin/edit.vue'
+import EditUser from '@/components/admin/edit-user.vue';
 import addStore from '@/components/admin/add-store.vue'
 import editStore from '@/components/admin/edit-store.vue'
 
@@ -42,6 +42,7 @@ import vprofile from '@/views/vendor/vprofile.vue'
 import Addproduct from '@/components/vendor/Addproduct.vue'
 import Editproduct from '@/components/vendor/Editproduct.vue'
 import store from "@/store";
+
 
 
 
@@ -169,13 +170,13 @@ const routes = [
       },
       {
         path: '/admin/users/add',
-        name: 'Add User',
+        name: 'AddUser',
         component: Add
       },
       {
-        path: '/admin/users/edit',
-        name: 'Edit User',
-        component: edit
+        path: '/admin/users/edit/:id',
+        name: 'EditUser',
+        component: EditUser
       },
       {
         path: '/admin/stores',
@@ -188,8 +189,8 @@ const routes = [
         component: addStore
       },
       {
-        path: '/admin/store/edit',
-        name: 'Edit Store',
+        path: '/admin/store/edit/:id',
+        name: 'EditStore',
         component: editStore
       },
       {

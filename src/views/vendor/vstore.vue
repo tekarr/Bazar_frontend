@@ -1,7 +1,4 @@
 <template>
-    <sidbar/>
-    
-    
         <div class="">
         <form @submit.prevent="submitForm" class="mx-10 ">
             <div class="mt-4">.</div>
@@ -11,9 +8,9 @@
                 <div>
                     <div v-for="(errors, field) in errMsg" :key="field" class="text-sm">
                     <strong>{{ field }}:</strong>
-                    <ul>
-                        <li v-for="(error, index) in errors" :key="index">{{ error }}</li>
-                    </ul>
+                        <ul>
+                            <li v-for="(error, index) in errors" :key="index">{{ error }}</li>
+                        </ul>
                     </div>
                 </div>
                 <span @click="errMsg=''" class="w-8 h-8 flex items-center justify-center rounded-full cursor-pointer transition-colors hover:bg-[rgba(0,0,0,0.2)]">
@@ -123,11 +120,9 @@
 
 <script>
 import axiosClient from "@/axios";
-import Sidbar from '@/components/vendor/Sidbar.vue';
 
 
 export default {
-    components: {  Sidbar },
     data() {
         return {
         fileSelected: true,

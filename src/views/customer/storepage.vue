@@ -90,9 +90,10 @@ export default {
             let cart = [];
             if (cartItem) {
                 try {
-                    cart = JSON.parse(cartItem);
+                    cart = JSON.parse(cartItem)|| [];
                 } catch (error) {
                     console.error('Error parsing cart data from localStorage:', error);
+                    cart = [];
                 }
             }
             if (!cart.includes(product.id)) {

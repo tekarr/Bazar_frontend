@@ -63,14 +63,11 @@
 </template>
 
 <script>
-import Navbarr from '/src/components/customer/Navbarr.vue';
-import Footer2 from '/src/components/customer/footer2.vue';
 import axiosClient from '@/axios';
 
 
 
     export default {
-    components: { Navbarr, Footer2 },
         data(){
             return{
             mainImage: '', 
