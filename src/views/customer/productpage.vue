@@ -30,7 +30,7 @@
                         </svg>
                     </button>
                 </div>
-                <img class="w-full object-cover rounded-3xl  hover:cursor-pointer transition-all" 
+                <img class="h-96 w-96 object-cover rounded-3xl  hover:cursor-pointer transition-all" 
                     :src="mainImage" alt="">
                 <!-- Previous and next buttons -->
                 <div class="flex justify-center items-center">
@@ -45,7 +45,7 @@
         </div>
         <!-- Rest of your code... -->
 
-        <div class="w-full md:w-full lg:w-1/3 xl:w-1/2 mt-5 md:mt-0">
+        <div class="w-full  md:w-full lg:w-1/3 xl:w-1/2 mt-5 md:mt-0">
             <div class="p-10 mt-20 md:pr-10 w-96">
                 <p class="text-lg md:text-3xl font-extrabold pb-1 text-start">{{ product.name }}</p>
                 <p class="text-lg md:text-base text-start  font-bold opacity-30 mb-1 md:pb-0">{{ product.status }}</p>
@@ -65,18 +65,11 @@
 <script>
 import axiosClient from '@/axios';
 
-
-
     export default {
         data(){
             return{
             mainImage: '', 
-            images: [
-                'https://via.placeholder.com/150',
-                'https://via.placeholder.com/200',
-                'https://via.placeholder.com/250',
-                'https://via.placeholder.com/300',
-            ],   
+            images: [],   
             product: [],
             success: false,
             error: false,
@@ -88,6 +81,7 @@ import axiosClient from '@/axios';
         try {
             const response = await axiosClient.get(`api/products/${id}`);
             this.product = response.data.data;
+            this.images = this.product.images;
             console.log(this.product);
         } catch (error) {
             console.error(`There was an error fetching the product: ${error}`);

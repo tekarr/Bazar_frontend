@@ -71,7 +71,7 @@ import axiosClient from '@/axios';
     async fetchStatistics() {
         try {
         const response = await axiosClient.get('api/admin/admins');
-        this.admins = response.data
+        this.admins = response.data.data
         console.log(this.admins)
         } catch (error) {
         console.error(error);

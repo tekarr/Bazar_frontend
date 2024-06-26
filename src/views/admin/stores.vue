@@ -62,9 +62,6 @@
                     </tr>
                 </tbody>
             </table>
-            <router-link to="/admin/store/add">
-                <button class="px-4 mx-4 py-2 mt-2 text-pink-600 rounded-3xl font-medium">Add Store</button>
-            </router-link>
         </div>
         
 </template>

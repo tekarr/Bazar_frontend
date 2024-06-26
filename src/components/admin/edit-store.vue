@@ -162,12 +162,7 @@ methods: {
         //console.log(this.store.image)
         //this.selectedFile = this.store.image;
         console.log(this.selectedFile)
-        if (this.store.image.startsWith('http')) {
-            this.imageUrl = this.store.image;
-            console.log(this.imageUrl)
-        } else {
-            this.imageUrl = `http://localhost:8000/storage/${this.store.image}`;
-        }
+        this.imageUrl = this.store.image;
     } catch (error) {
         console.error(`There was an error fetching the stores: ${error}`);
     }

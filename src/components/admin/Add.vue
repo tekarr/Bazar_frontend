@@ -27,11 +27,12 @@
         <div class="">
         <p class="">Role </p>    
             <select v-model="user.role_id"  class="p-2 my-4 px-4  border-2 border-pink-600 rounded-xl" required>
-                <option disabled value ="Please select one">Please select one</option>
-                <option value="3">customer</option>
-                <option value="2">vendor</option>
-                <option value="1">admin</option>
+                <option disabled value ="">Please select one</option>
+                <option value=3>customer</option>
+                <option value=2>vendor</option>
+                <option value=1 >admin</option>
             </select>
+            <p>{{user.role_id}}</p>
         </div>
 
         <button type="submit" class=" m-5 text-white bg-pink-600 hover:bg-pink-700 focus:ring-4 focus:outline-none focus:ring-pink-300 font-medium rounded-3xl text-sm px-5 py-2.5 text-center ">Add</button>
@@ -47,7 +48,7 @@ export default {
     data() {
         return {
         user:{
-            role_id: 'Please select one',
+            role_id: '',
         },
         };
     },

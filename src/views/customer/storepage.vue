@@ -37,7 +37,7 @@
         <!-- products -->
         <div ref="specificSection" class="grid grid-cols-2 md:grid-cols-1 lg:grid-cols-3 gap-10 p-4 md:p-8"> 
             <router-link :to="{ name: 'productpage', params: { id: product.id } }" class="bg-gray-100 rounded-3xl cursor-pointer hover:shadow-lg transition-all" v-for="product in products" :key="product.id">
-                <img class="h-auto w-full rounded-t-3xl md:rounded-3xl" :src="product.image" alt="">
+                <img class="h-auto w-full rounded-t-3xl md:rounded-3xl" :src="product.images[0]" alt="">
                 <div class="p-4 md:pl-10">
                     <p class="text-lg md:text-2xl font-bold pt-4 md:text-start text-center">{{ product.name }}</p>
                     <p class="pb-1 text-sm md:text-start">{{ product.desc }}</p>
@@ -77,8 +77,7 @@ export default {
             const response = await axiosClient.get(`api/stores/${id}/products`);
             this.products = response.data.data.products;
             this.store = response.data.data;
-            console.log(this.products)
-            console.log(this.stores)
+            console.log(this.store)
         } catch (error) {
             console.error(`There was an error fetching the products: ${error}`);
         }
