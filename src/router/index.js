@@ -17,6 +17,8 @@ import becomevendor from '@/views/customer/becomevendor.vue'
 import Customerlayout from '@/views/customer/customerlayout.vue';
 import StorePage from '@/views/customer/storepage.vue';
 import thanks from '@/views/customer/thanks.vue'
+import Reset from '@/views/customer/reset.vue';
+
 
 // admin imports ------------------------------------------------
 import AdminLayout from "../views/admin/adminLayout.vue";
@@ -43,6 +45,7 @@ import vprofile from '@/views/vendor/vprofile.vue'
 import Addproduct from '@/components/vendor/Addproduct.vue'
 import Editproduct from '@/components/vendor/Editproduct.vue'
 import store from "@/store";
+
 
 
 
@@ -105,6 +108,11 @@ const routes = [
           component: thanks
         },
       ]
+    },
+    {
+      path: '/reset-password',
+      component: Reset,
+      props: true
     },
   //customer routes --------------------------------------
   {
