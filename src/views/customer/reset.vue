@@ -25,7 +25,13 @@
         </div>
 
         <div>
+            
         <h2 class="mt-6 text-center text-3xl font-extrabold text-gray-900">Reset your password</h2>
+        <div>
+            <div class="mt-10">
+            <input v-model="email" placeholder="Email address" id="email" name="email" type="email" autocomplete="email" required="" class="block w-full pl-4 rounded-lg border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6" />
+            </div>
+        </div>
         </div>
         <form class="mt-8 space-y-6" @submit.prevent="submitResetPassword">
         <div class="rounded-md shadow-sm -space-y-px">
@@ -63,7 +69,7 @@ export default {
         password: '',
         passwordConfirmation: '',
         token: '',
-        email: localStorage.getItem('emailForPasswordReset') || '',
+        email: '',
         scMsg:'',
         errMsg:''
         };

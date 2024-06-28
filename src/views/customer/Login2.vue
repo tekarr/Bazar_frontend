@@ -97,7 +97,7 @@ const isLoading = ref(false);
   const forgetPassword = async () => {
     try {
       isLoading.value = true;
-      localStorage.setItem('emailForPasswordReset', user.value.email);
+      console.log(user.value.email)
       const response = await axiosClient.post(`/forgot-password?email=${user.value.email}`);
       // Handle success, e.g., showing a success message
       console.log(response.data);
@@ -105,7 +105,7 @@ const isLoading = ref(false);
     } catch (error) {
       // Handle error, e.g., showing an error message
       console.log(error.response.data);
-      errMsg.value = error.response.data.errors.email[0];
+      errMsg.value = error.response.data.errors.email;
     }finally {
       isLoading.value = false; // Reset loading state whether the request succeeds or fails
     }
