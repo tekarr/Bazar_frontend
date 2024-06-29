@@ -2,7 +2,9 @@
 <template>
 
     <div ref="tableContainer">
-    <router-link to="/customer/orders"><p class="text-2xl font-bold pt-48  pl-24 text-start ">Order : #{{ orders.id }}<br>
+        <p class="flex justify-center items-center mt-10 text-4xl font-bold">Bazar</p>
+        <p class="flex justify-center items-center  text-lg" style="letter-spacing: 0.25em">invoice</p>
+    <router-link to="/customer/orders"><p class="text-2xl font-bold pt-16  pl-24 text-start ">Order : #{{ orders.id }}<br>
     </p></router-link>
 
     <div  class="relative overflow-x-auto rounded-3xl sm:rounded-lg mt-10  mx-20 z-10 ">
