@@ -1,11 +1,11 @@
 
 <template>
 
-
-    <router-link to="/customer/orders"><p class="text-2xl font-bold pt-48 pl-24 text-start ">Orders<br>
+    <div ref="tableContainer">
+    <router-link to="/customer/orders"><p class="text-2xl font-bold pt-48  pl-24 text-start ">Order : #{{ orders.id }}<br>
     </p></router-link>
 
-    <div class="relative overflow-x-auto rounded-3xl sm:rounded-lg mt-10  mx-20 ">
+    <div  class="relative overflow-x-auto rounded-3xl sm:rounded-lg mt-10  mx-20 z-10 ">
         <table class="w-full text-base text-left rtl:text-right text-gray-500 rounded-3xl mb-20 ">
             <thead class="bg-gray-50 h-32" >
                 <tr class="text-gray-700 text-center">
@@ -54,15 +54,25 @@
             </tbody>
         </table>
     </div>
-
-    <div class="flex justify-center cursor-pointer hover:text-pink-600">
-        <router-link to="/customer/orders">Back</router-link>
     </div>
+    
+    <div class="flex justify-center">
+        <div class="flex justify-center cursor-pointer hover:text-pink-600">
+            <router-link to="/customer/orders">Back</router-link>
+        </div>
+        <div class="mx-4">|</div>
+        <div class="flex justify-center cursor-pointer hover:text-pink-600">
+            <button @click="printTableAsPDF">Print Invoice </button>
+        </div>
+    </div>
+
 
 </template>
 
 <script>
 import axiosClient from '@/axios';
+import html2canvas from 'html2canvas';
+import jsPDF from 'jspdf';
 
     export default {
         data(){
@@ -83,7 +93,27 @@ import axiosClient from '@/axios';
             console.error(`There was an error fetching the order: ${error}`);
             }
         },
-};
+        methods: {
+        printTableAsPDF() {
+        // Ensure the selector matches your table's container
+        html2canvas(this.$refs.tableContainer).then(canvas => {
+            const pdf = new jsPDF({
+            orientation: 'landscape',
+            });
+
+            const imgData = canvas.toDataURL('image/png');
+            const imgProps = pdf.getImageProperties(imgData);
+            const pdfWidth = pdf.internal.pageSize.getWidth();
+            const pdfHeight = (imgProps.height * pdfWidth) / imgProps.width;
+            pdf.addImage(imgData, 'PNG', 0, 0, pdfWidth, pdfHeight);
+
+            pdf.save("table.pdf");
+
+        }).catch(error => {
+        console.error("Error generating PDF", error);
+        });
+    }
+}}
 </script>
 
 <style lang="scss" scoped>
