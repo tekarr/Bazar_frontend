@@ -107,7 +107,7 @@ import jsPDF from 'jspdf';
             const pdfHeight = (imgProps.height * pdfWidth) / imgProps.width;
             pdf.addImage(imgData, 'PNG', 0, 0, pdfWidth, pdfHeight);
 
-            pdf.save("table.pdf");
+            pdf.save("invoice.pdf");
 
         }).catch(error => {
         console.error("Error generating PDF", error);
