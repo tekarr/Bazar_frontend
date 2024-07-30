@@ -1,7 +1,7 @@
 <template>
     <sidbar/>
     
-    <div class="sm:ml-64"> 
+    <div :class="locale === 'en' ? 'sm:ml-64' : 'sm:mr-64'"> 
         <navbar/>  
 
         <div class="m-3 bg-gray-100 w-full h-full rounded-3xl ">
@@ -16,7 +16,23 @@ import Sidbar from '@/components/vendor/Sidbar.vue'
 import Navbar from '@/components/vendor/navbar.vue'
     export default {
     components: { Sidbar, Navbar },
-        
+    data() {
+    return {
+        locale: localStorage.getItem('locale') || 'en', 
+    };
+    },
+    mounted() {
+        this.updateDirection();
+    },
+    methods: {
+        updateDirection() {
+            if (this.locale === 'ar') {
+                document.body.setAttribute('dir', 'rtl');
+            } else {
+                document.body.removeAttribute('dir');
+            }
+        }
+    }
     }
 </script>
 

@@ -1,5 +1,5 @@
 <template>
-    
+        
 
     <div class="flex justify-start ml-8 ">
     <form @submit.prevent="submitForm" class="mt-8 ">
@@ -61,8 +61,7 @@ export default {
     } catch (error) {
         console.error(error);
     }
-        
-        }
+    }
     }
 };
 </script>

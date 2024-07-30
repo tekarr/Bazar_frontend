@@ -3,7 +3,7 @@
     <nav v-if="!hiddenRoutes.includes(route.path)" class="bg-white fixed w-full h-28 z-20 top-0 start-0 border-b-4 border-gray-200 rounded-none">
         
         <div class="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-2">
-    
+        
         <router-link class="flex items-center space-x-3 rtl:space-x-reverse" to="/">
             <img src="../../assets/icons/BAZAR (2).png" class=" h-16" alt="Bazar Logo">
             <span class=" text-black hover:text-pink-600 transition-all duration-200 self-center text-2xl font-semibold whitespace-nowrap ">Bazar</span>
@@ -25,11 +25,22 @@
         <div class="items-center justify-between hidden w-full md:flex md:w-auto md:order-1" id="navbar-sticky">
         <ul class="flex flex-col p-4 md:p-0 mt-4 font-medium border border-gray-100 rounded-lg bg-gray-50 md:space-x-8 rtl:space-x-reverse md:flex-row md:mt-0 md:border-0 md:bg-white ">
             <li>
-            <router-link to="/" class="block mt-1 py-2 px-3 text-white bg-pink-700  rounded md:bg-transparent md:text-gray-900 md:p-0   transition-all duration-300 hover:border-b-2 " aria-current="page">Shop</router-link>
+            <router-link to="/" class="block mt-1 py-2 px-3 text-white bg-pink-700  rounded md:bg-transparent md:text-gray-900 md:p-0   transition-all duration-300 hover:border-b-2 " aria-current="page">{{ $t('home') }}</router-link>
             </li>
+            
             <li>
-            <router-link class="block py-2 px-3 mt-1 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-pink-700 md:p-0   transition-all duration-300 " to="/about">About</router-link>
+            <router-link class="block py-2 px-3 mt-1 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-pink-700 md:p-0   transition-all duration-300 " to="/about">{{ $t('about') }}</router-link>
             </li>
+
+            <li class="block py-2 px-3 mt-2 text-gray-900 rounded  md:p-0   transition-all duration-300 ">
+                <button class="font-bold w-16 hover:text-pink-600 " @click="toggleDropdown">{{ $t('language') }}</button>
+                <!-- language menu -->
+                <div v-if="showDropdown" class="absolute grid grid-cols-1 bg-white w-24  mt-6 rounded-lg h-16 ">
+                    <button class="hover:text-pink-600" @click="changeLocale('en')">English</button>
+                    <button class="hover:text-pink-600 mb-2" @click="changeLocale('ar')">Arabic</button>
+                </div>
+            </li> 
+            
             
             <li>
                 <router-link to="/cart">
@@ -62,6 +73,9 @@
     </div>
     
     </div>
+
+  
+
     <!--side menu -->
     <div class="flex justify-end">
             <div v-if="showMenu" class="mt-6 mr-6 py-2 flex justify-center text-white bg-gray-800 w-40 rounded-2xl">
@@ -108,9 +122,31 @@
         searchTerm: '',
         username:'',
         cart: JSON.parse(localStorage.getItem('cart')) || [],
+        selectedLanguage: localStorage.getItem('locale') || 'en',
+        showDropdown: false,
+        
         };
     },
     methods: {
+        toggleDropdown() {
+            this.showDropdown = !this.showDropdown;
+        },
+        changeLocale(locale) {
+        this.$i18n.locale = locale;
+        if (locale === 'ar') {
+            document.body.setAttribute('dir', 'rtl');
+            localStorage.setItem('locale', 'ar');
+
+        } else {
+            document.body.removeAttribute('dir');
+            localStorage.setItem('locale', 'en');
+        }
+        },
+        applyLocaleSettings() {
+            // Apply the locale settings from localStorage when the component is created
+            const storedLocale = localStorage.getItem('locale') || 'en';
+            this.changeLocale(storedLocale);
+        },
         clearSearch() {
         this.searchTerm = '';
         },
@@ -128,7 +164,8 @@
     computed: {
     ...mapGetters('auth', ['authenticated'])
     },
-    created() {    
+    created() {  
+    this.applyLocaleSettings();
     this.cartUpdateInterval = setInterval(() => {
         this.cart = JSON.parse(localStorage.getItem('cart')) || [];
     }, 2000);

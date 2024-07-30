@@ -33,6 +33,8 @@ import EditUser from '@/components/admin/edit-user.vue';
 import addStore from '@/components/admin/add-store.vue'
 import editStore from '@/components/admin/edit-store.vue'
 import Products from '@/views/admin/products.vue';
+import Orderedit from '@/views/admin/orderedit.vue';
+import Invoices from '@/views/admin/invoices.vue';
 
 // vendor imports ------------------------------------------------
 import vendorLayout from '@/views/vendor/vendorLayout.vue'
@@ -45,6 +47,8 @@ import vprofile from '@/views/vendor/vprofile.vue'
 import Addproduct from '@/components/vendor/Addproduct.vue'
 import Editproduct from '@/components/vendor/Editproduct.vue'
 import store from "@/store";
+
+
 
 
 
@@ -219,6 +223,16 @@ const routes = [
         path: '/admin/orders',
         name: 'Orders',
         component: orders
+      },
+      {
+        path: '/admin/orders/:id',
+        name: 'Update Order',
+        component: Orderedit
+      },
+      {
+        path: '/admin/orders/:id/invoices',
+        name: 'invoices',
+        component: Invoices
       },
       {
         path: '/admin/profile',

@@ -4,6 +4,7 @@
             <div class=""> 
                 <navbarr/> 
 
+
                 <div class="">
                     <router-view class=""></router-view>
                 </div>
@@ -16,7 +17,16 @@
 import Navbarr from '@/components/customer/Navbarr.vue'
     export default {
     components: { Navbarr },
-        
+    methods: {
+        changeLocale(locale) {
+        this.$i18n.locale = locale;
+        if (locale === 'ar') {
+            document.body.setAttribute('dir', 'rtl');
+        } else {
+            document.body.removeAttribute('dir');
+        }
+        }
+    }
     }
 </script>
 

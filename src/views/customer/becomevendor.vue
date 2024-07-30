@@ -54,7 +54,6 @@
                 </textarea>
             </div>
 
-
             <!-- phone number -->
             <!-- <div class="mb-5 text-start w-80">
                 <label class="" for="storename">Phone number</label>
@@ -74,7 +73,6 @@
             </div>
 
             <p>{{category}}</p>
-
 
             <!-- open & close -->
             <!-- <div class="flex justify-between mb-8 w-96">

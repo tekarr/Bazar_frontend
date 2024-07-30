@@ -63,7 +63,8 @@
                         <td>
                             <div class="px-2 flex justify-center items-center">
                                 <button  @click="editProduct(product.id)" class="px-4 py-2 mt-2  bg-gray-100 hover:bg-pink-600 hover:text-white rounded-3xl">Edit</button>
-                                <button @click="showConfirmDialog(product.id)" class="px-4 py-2 mx-2 mt-2 rounded-3xl text-base hover:bg-pink-600 bg-gray-700 text-white">x</button>                            </div>
+                                <button @click="showConfirmDialog(product.id)" class="px-4 py-2 mx-2 mt-2 rounded-3xl text-base hover:bg-pink-600 bg-gray-700 text-white">x</button> 
+                            </div>
                         </td>
                     </tr>
                 </tbody>

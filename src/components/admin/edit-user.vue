@@ -1,70 +1,64 @@
 <template>
-    <sidbar/>
     
-    <div class="p-4 sm:ml-64 mt-20"> 
-
-    <p class="text-3xl font-bold text-center pt-5 ">{{ $route.name }}</p>       
-    <div class="flex items-center justify-center min-h-screen">
-    <form @submit.prevent="submitForm" class="max-w-sm mx-auto mb-40">
+    <div class="flex justify-start ml-8 ">
+    <form @submit.prevent="submitForm" class="mt-8 ">
         
         <div class="mb-5 text-start">
             <label class="font-bold pl-5" for="username">Name</label>
-            <input type="text" id="username" v-model="username" placeholder="username" 
-            class="w-full mt-4 bg-slate-50 px-20 py-2 rounded-3xl focus:outline-none focus:ring focus:ring-pink-500 " required>
+            <input type="text" id="username" v-model="user.name" placeholder="username" 
+            class="w-full mt-4 bg-slate-50 mr-10 pl-4 py-2 rounded-3xl focus:outline-none focus:ring focus:ring-pink-500 " required>
         </div>
+
 
         <div class="mb-5 text-start">
             <label class="font-bold pl-5" for="email">Email</label>
-            <input type="email" id="email" v-model="email" placeholder="name@gmail.com" 
-            class="w-full mt-4 bg-slate-50 px-20 py-2 rounded-3xl focus:outline-none focus:ring focus:ring-pink-500 " required>
+            <input type="email" id="email" v-model="user.email" placeholder="name@gmail.com" 
+            class="w-full mt-4 bg-slate-50 mr-10 pl-4 py-2 rounded-3xl focus:outline-none focus:ring focus:ring-pink-500 " required>
         </div>
         
         <div class="mb-5 text-start">
             <label class="font-bold pl-5" for="email">Password</label>
-            <input type="password" id="password" v-model="password" placeholder="password" 
-            class="w-full mt-4 bg-slate-50 px-20 py-2 rounded-3xl focus:outline-none focus:ring focus:ring-pink-500 " required>
+            <input type="password" id="password" v-model="user.password" placeholder="password" 
+            class="w-full mt-4 bg-slate-50 mr-10 pl-4 py-2 rounded-3xl focus:outline-none focus:ring focus:ring-pink-500 " >
         </div>
 
-        <div class="mb-5 text-start ml-4">
-            <label class="font-semibold flex items-center mb-4" for="mySelect">Role</label>
-            
-            <label>
-            <input class="p-10" type="radio" v-model="selectedOption" value="vendor"><span class="px-2">Vendor</span>
-            </label>
-
-            <label>
-            <input class="" type="radio" v-model="selectedOption" value="customer"><span class="px-2">Customer</span>
-            </label>
+        <!-- Role -->
+        <div class="">
+        <p class="">Role </p>    
+            <select v-model="user.role_id"  class="p-2 my-4 px-4  border-2 border-pink-600 rounded-xl" required>
+                <option disabled value ="Please select one">Please select one</option>
+                <option value="3">customer</option>
+                <option value="2">vendor</option>
+                <option value="1">admin</option>
+            </select>
         </div>
 
-        <button type="submit" class=" m-5 text-white bg-pink-600 hover:bg-pink-700 focus:ring-4 focus:outline-none focus:ring-pink-300 font-medium rounded-3xl text-sm px-5 py-2.5 text-center ">Update</button>
+        <button type="submit" class=" m-5 text-white bg-pink-600 hover:bg-pink-700 focus:ring-4 focus:outline-none focus:ring-pink-300 font-medium rounded-3xl text-sm px-5 py-2.5 text-center ">Add</button>
     </form>
-    </div>
     </div>
 
 </template>
 
 <script>
-import navbar from './navbar.vue';
-import Sidbar from './Sidbar.vue';
+import axiosClient from '@/axios';
+
 export default {
-    components: { navbar, Sidbar },
     data() {
         return {
-        username:'',
-        email: '',
-        password: '',
-        selectedOption: '' 
+        user:{
+            role_id: 'Please select one',
+        },
         };
     },
     methods: {
-        submitForm() {
-        // Perform form submission logic here
-        console.log('updated');
-        console.log('username:', this.username);
-        console.log('Email:', this.email);
-        console.log('Password:', this.password);
-        console.log('selectedOption:', this.selectedOption);
+        async submitForm() {
+        try {
+        const response = await axiosClient.post('api/admin/admins',this.user);
+        this.user = response.data;
+        console.log(this.user);
+    } catch (error) {
+        console.error(error);
+    }
         
         }
     }
