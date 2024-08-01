@@ -103,7 +103,7 @@ import axiosClient from '@/axios';
                 orders:[],
                 products:[],
                 status:[
-                'pending','ready_for_shipment', 'shipped' , 'delivered' , 'cancelled'
+                'pending','ready_for_shipment', 'in_the_way' , 'delivered' , 'cancelled'
                 ],
                 product_status :['pending','in_stock']
             }
@@ -134,6 +134,7 @@ import axiosClient from '@/axios';
                 }
             }
 
+            if (orderStatus !== 'pending') {
             try {
                 const response = await axiosClient.put(`api/admin/orders/${orderId}/status`, {
                     status: orderStatus,
@@ -141,9 +142,27 @@ import axiosClient from '@/axios';
 
                 console.log(response);
                 console.log('Order status updated successfully!');
+
+            // Update product status
+            this.orders.products.forEach(async (product) => {
+                if (product.product_status !== 'pending') {
+                try {
+                    const response = await axiosClient.put(`api/admin/orders/${orderId}/products/${product.product_id}/status`, {
+                    status: product.product_status,
+                    });
+
+                    console.log(response);
+                    console.log(`Product ${product.product_id} status updated successfully!`);
+                } catch (error) {
+                    console.error(`There was an error updating the product ${product.product_id} status: ${error}`);
+                }
+                }
+            });
+            
+
             } catch (error) {
                 console.error(`There was an error updating the order status: ${error}`);
-            }
+            }}
         },
 }}
 
