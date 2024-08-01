@@ -5,11 +5,20 @@
 
     <p class="text-2xl font-bold pt-16  pl-24 text-start ">Order : #{{ orders.id }}<br></p>
 
+    <div class="grid grid-cols-2">
+    <button @click="updateStatus" class="bg-pink-600 hover:bg-pink-700 text-white font-bold py-2 px-4 my-8 mx-2 w-80 ml-20 rounded-md">
+                        Update
+    </button>
+    <router-link :to="{ name: 'invoices', params: { id: orders.id }}" class="bg-white text-pink-600 hover:bg-pink-700 hover:text-white  font-bold py-2 px-4 my-8 h-10 w-80 text-center rounded-md">
+                    invoices
+    </router-link>
+    </div>
 
-    <div  class="relative overflow-x-auto rounded-3xl sm:rounded-lg mt-10  mx-20 z-10 ">
+    <div  class="relative overflow-x-auto rounded-3xl sm:rounded-lg mt-2  mx-20 z-10 ">
         <table class="w-full text-base  text-gray-500 rounded-3xl  " >
             <thead class="bg-gray-800 " >
                 <tr class="text-gray-50 text-center">
+                    <td></td>
                     <td class="font-bold pt-5 w-60">Date placed</td>
                     <td class="font-bold pt-5  w-10">ID</td>
                     <td class="font-bold pt-5 w-40">Total amount</td>
@@ -18,7 +27,8 @@
                     <td></td>
                 </tr>
                 <tr class="text-gray-50 text-center">
-                    <td class="font-normal  pb-5">{{ orders.created_at }}</td>
+                    <td></td>
+                    <td class="font-normal  pb-5 ">{{ orders.created_at }}</td>
                     <td class="font-normal pb-5 ">{{ orders.id }}</td>
                     <td class="font-normal pb-5">${{ orders.order_total }}</td>
                     <td class="w-4"></td>
@@ -36,6 +46,9 @@
             <tbody>
                 <div class="my-4 text-center font-bold text-lg"></div>   
                 <tr class="text-center">
+                    <th scope="col" class="px-6 py-3 w-10">
+                        Product id
+                    </th>
                     <th scope="col" class="px-6 py-3 bg-gray-50">
                         Product name
                     </th>
@@ -56,6 +69,9 @@
                     </th>
                 </tr>
                 <tr class="border-b border-gray-200 text-center" v-for="product in orders.products" :key="product.id">
+                    <td>
+                        {{ product.product_id }}
+                    </td>
                     <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap bg-gray-50">
                         {{ product.product_name }}
                     </th>
@@ -82,12 +98,6 @@
                 </tr>
             </tbody>
         </table>
-        <button @click="updateStatus" class="bg-pink-600 hover:bg-pink-700 text-white font-bold py-2 px-4 my-8 mx-2 rounded-md">
-                        Update
-        </button>
-        <router-link :to="{ name: 'invoices', params: { id: orders.id }}" class="bg-white text-pink-600 hover:bg-pink-700 hover:text-white  font-bold py-2 px-4  rounded-md">
-                        invoices
-        </router-link>
     </div>
 
 

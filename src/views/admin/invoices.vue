@@ -4,8 +4,15 @@
 
     <p class="text-2xl font-bold pt-16  pl-24 text-start ">Order : #{{ orders.id }}<br></p>
 
+    <div class="grid grid-cols-1">
+    <!-- print -->
+    <button @click="printTableAsPDF" class="bg-pink-600 hover:bg-pink-700 text-white font-bold py-1 px-6 m-8 w-80 ml-20 rounded-md">
+        Print
+    </button>
+    
+    </div>
 
-    <div ref="tableContainer" class="relative overflow-x-auto rounded-3xl sm:rounded-lg mt-10  mx-20 z-10 ">
+    <div ref="tableContainer" class="relative overflow-x-auto rounded-3xl sm:rounded-lg mt-2  mx-20 z-10 ">
         <table class="w-full text-base  text-gray-500 rounded-3xl  " >
             <thead class="bg-gray-800 " >
                 <tr class="text-gray-50 text-center">
@@ -65,13 +72,6 @@
         </table>
     </div>
 
-    <div class="flex justify-start">
-    <!-- print -->
-    <button @click="printTableAsPDF" class="bg-pink-600 hover:bg-pink-700 text-white font-bold py-1 px-6 m-8 rounded-md">
-        Print
-    </button>
-    
-    </div>
 
 
 </template>
