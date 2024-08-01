@@ -129,7 +129,7 @@ import axiosClient from '@/axios';
             if (orderStatus === 'ready_for_shipment') {
                 const allProductsInStock = this.orders.products.every(product => product.product_status === 'in_stock');
                 if (!allProductsInStock) {
-                    alert('Please set all product statuses to "in_stock" before updating the order status to "ready_for_shipment"');
+                    alert('Please set all product statuses to "in_stock" ');
                     return;
                 }
             }
