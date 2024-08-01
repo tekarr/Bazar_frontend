@@ -17,7 +17,7 @@
                     <td class="font-bold pt-5 w-40">Order status</td>
                     <td></td>
                 </tr>
-                <tr class="text-gray-50 text-center">
+                <tr class=" text-center">
                     <td class="font-normal  pb-5">{{ orders.created_at }}</td>
                     <td class="font-normal pb-5 ">{{ orders.id }}</td>
                     <td class="font-normal pb-5">${{ orders.order_total }}</td>
