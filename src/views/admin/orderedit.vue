@@ -13,29 +13,34 @@
                     <td class="font-bold pt-5 w-60">Date placed</td>
                     <td class="font-bold pt-5  w-10">ID</td>
                     <td class="font-bold pt-5 w-40">Total amount</td>
+                    <td class="w-4"></td>
                     <td class="font-bold pt-5 w-40">Order status</td>
                     <td></td>
                 </tr>
                 <tr class="text-gray-50 text-center">
                     <td class="font-normal  pb-5">{{ orders.created_at }}</td>
                     <td class="font-normal pb-5 ">{{ orders.id }}</td>
-                    <td class="font-normal pb-5">${{ orders.total }}</td>
+                    <td class="font-normal pb-5">${{ orders.order_total }}</td>
+                    <td class="w-4"></td>
                     <td class="font-normal pb-5 text-gray-700 ">
-                        <select v-model="orders.status" @input="select" class="p-2 my-4 px-4 border-2 border-pink-600 rounded-xl">
+                        <select v-model="orders.order_status" @input="select" class="p-2 my-4 px-4 border-2 border-pink-600 rounded-xl">
                             <option disabled value="">Please select one</option>
                             <option v-for="statusOption in status" :key="statusOption" :value="statusOption">
                                 {{ statusOption }}
                             </option>
                         </select>
                     </td>
-                    <td class=""></td>
+                    <td></td>
                 </tr>
             </thead>
-            <tbody  v-for="store in orders.products" :key="store.store_id">
-                <div class="my-4 text-center font-bold text-lg">Store id :{{ store.store_id }}</div>   
+            <tbody>
+                <div class="my-4 text-center font-bold text-lg"></div>   
                 <tr class="text-center">
                     <th scope="col" class="px-6 py-3 bg-gray-50">
-                        Product id
+                        Product name
+                    </th>
+                    <th scope="col" class="px-6 py-3 w-80">
+                        Store name
                     </th>
                     <th scope="col" class="px-6 py-3">
                         Price
@@ -44,27 +49,35 @@
                         Quantity
                     </th>
                     <th scope="col" class="px-6 py-3 bg-gray-50">
-                        
+                        Status
                     </th>
-                    <th scope="col" class="px-6 py-3 w-20 bg-gray-50">
+                    <th scope="col" class="px-6 py-3 bg-gray-50">
                         
                     </th>
                 </tr>
-                <tr class="border-b border-gray-200 text-center" v-for="product in store.products" :key="product.id">
+                <tr class="border-b border-gray-200 text-center" v-for="product in orders.products" :key="product.id">
                     <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap bg-gray-50">
-                        {{ product.product_id }}
+                        {{ product.product_name }}
                     </th>
+                    <td>
+                        {{ product.store_name }}
+                    </td>
                     <td class="px-6 py-4">
                         {{ product.price }}
                     </td>
                     <td class="px-6 py-4 bg-gray-50">
                         {{ product.quantity }}
                     </td>
+                    <td>
+                        <select v-model="product.product_status" @input="select" class="p-2 my-4 px-2 border-2 w-32 border-pink-600 rounded-xl">
+                            <option disabled value="">Please select one</option>
+                            <option v-for="statusOption in product_status" :key="statusOption" :value="statusOption">
+                                {{ statusOption }}
+                            </option>
+                        </select>
+                    </td>
                     <td class="px-6 py-4 " >
                         <router-link :to="{ name: 'productpage', params: { id: product.product_id } }" class="text-pink-600">view</router-link>
-                    </td>
-                    <td>
-                        <button class="font-bold">x</button>
                     </td>
                 </tr>
             </tbody>
@@ -90,36 +103,50 @@ import axiosClient from '@/axios';
                 orders:[],
                 products:[],
                 status:[
-                'pending', 'processing','ready_for_shipment', 'shipped' , 'delivered'
+                'pending','ready_for_shipment', 'shipped' , 'delivered' , 'cancelled'
                 ],
+                product_status :['pending','in_stock']
             }
         },
         async created() {
             const id = this.$route.params.id;
             try {
             const response = await axiosClient.get(`api/admin/orders/${id}`);
-            this.products = response.data.data.products;
+            this.products = response.data.products;
             this.orders = response.data.data;
-            console.log(this.products);
+            //console.log(this.products);
             console.log(this.orders);
+            //console.log(response.data);
             } catch (error) {
             console.error(`There was an error fetching the order: ${error}`);
             }
         },
         methods: {
-            updateStatus() {
-                console.log(this.orders.status);
-                this.order.products = this.orders.products.filter(product => product.id !== productId);
+            async updateStatus() {
+            const orderId = this.$route.params.id;
+            const orderStatus = this.orders.order_status;
 
-                // After deletion, print the order
-                console.log('Order:', this.orders);
-                // this.products.forEach(store => {
-                //     store.products.forEach(product => {
-                //         console.log(`Product ID: ${product.product_id}, Status: ${product.status}`);
-                //     });
-                // });
-            },
+            if (orderStatus === 'ready_for_shipment') {
+                const allProductsInStock = this.orders.products.every(product => product.product_status === 'in_stock');
+                if (!allProductsInStock) {
+                    alert('Please set all product statuses to "in_stock" before updating the order status to "ready_for_shipment"');
+                    return;
+                }
+            }
+
+            try {
+                const response = await axiosClient.put(`api/admin/orders/${orderId}/status`, {
+                    status: orderStatus,
+                });
+
+                console.log(response);
+                console.log('Order status updated successfully!');
+            } catch (error) {
+                console.error(`There was an error updating the order status: ${error}`);
+            }
+        },
 }}
+
 </script>
 
 <style lang="scss" scoped>
