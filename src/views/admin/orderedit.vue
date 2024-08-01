@@ -152,7 +152,14 @@ import axiosClient from '@/axios';
 
                 console.log(response);
                 console.log('Order status updated successfully!');
-
+                
+                
+                
+            } catch (error) {
+                console.error(`There was an error updating the order status: ${error}`);
+            }
+            }
+            
             // Update product status
             this.orders.products.forEach(async (product) => {
                 if (product.product_status !== 'pending') {
@@ -168,11 +175,6 @@ import axiosClient from '@/axios';
                 }
                 }
             });
-            
-
-            } catch (error) {
-                console.error(`There was an error updating the order status: ${error}`);
-            }}
         },
 }}
 
