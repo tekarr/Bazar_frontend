@@ -20,16 +20,12 @@
                     <td class="font-bold pt-5  w-10">ID</td>
                     <td class="font-bold pt-5 w-40">Total amount</td>
                     <td class="w-4"></td>
-                    <td class="font-bold pt-5 w-40">Order status</td>
                 </tr>
                 <tr class="text-gray-50 text-center">
                     <td class="font-normal  pb-5">{{ orders.created_at }}</td>
                     <td class="font-normal pb-5 ">{{ orders.id }}</td>
                     <td class="font-normal pb-5">${{ orders.order_total }}</td>
                     <td class="w-4"></td>
-                    <td class="font-normal pb-5 text-white ">
-                        {{ orders.order_status }}
-                    </td>
                 </tr>
             </thead>
             <tbody>
@@ -47,9 +43,6 @@
                     <th scope="col" class="px-6 py-3 bg-gray-50">
                         Quantity
                     </th>
-                    <th scope="col" class="px-6 py-3 bg-gray-50">
-                        Status
-                    </th>
                 </tr>
                 <tr class="border-b border-gray-200 text-center" v-for="product in orders.products" :key="product.id">
                     <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap bg-gray-50">
@@ -63,9 +56,6 @@
                     </td>
                     <td class="px-6 py-4 bg-gray-50">
                         {{ product.quantity }}
-                    </td>
-                    <td>
-                        {{product.product_status}}
                     </td>
                 </tr>
             </tbody>
