@@ -5,11 +5,39 @@
 
     <p class="text-2xl font-bold pt-16  pl-24 text-start ">Order : #{{ orders.id }}<br></p>
 
+    <!-- error massege -->
+    <div v-if="errMsg" class="flex items-center justify-between p-3 my-2 mb-6 bg-red-600 text-white rounded">
+        <div>
+            <div v-for="(errors, field) in errMsg" :key="field" class="text-sm">
+            <strong>{{ field }}:</strong>
+            <ul>
+                <li v-for="(error, index) in errors" :key="index">{{ error }}</li>
+            </ul>
+            </div>
+        </div>
+        <span @click="errMsg=''" class="w-8 h-8 flex items-center justify-center rounded-full cursor-pointer transition-colors hover:bg-[rgba(0,0,0,0.2)]">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M6 18 18 6M6 6l12 12" />
+            </svg>
+        </span>
+    </div>
+
+    <!-- sucsses massege -->
+    <div v-if="scMsg" class=" flex items-center justify-between p-3 mx-20 mt-4 bg-green-600 text-white rounded">
+        {{scMsg}}
+        <span @click="scMsg=''" class="w-8 h-8 flex items-center justify-center rounded-full cursor-pointer transition-colors hover:bg-[rgba(0,0,0,0.2)]">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M6 18 18 6M6 6l12 12" />
+            </svg>
+        </span>
+    </div>
+
+
     <div class="flex justify-start">
-    <button @click="updateStatus" class="bg-pink-600 hover:bg-pink-700 text-white font-bold py-2  my-8 mx-2  w-80 ml-20 rounded-md">
+    <button @click="updateStatus" class="bg-pink-600 hover:bg-pink-700 text-white font-bold py-2  my-4 mx-2 h-10  w-80 ml-20 rounded-md">
                         Update
     </button>
-    <router-link :to="{ name: 'invoices', params: { id: orders.id }}" class="bg-white text-pink-600 hover:bg-pink-700 hover:text-white  font-bold py-2  my-8 h-10 w-80  text-center rounded-md">
+    <router-link :to="{ name: 'invoices', params: { id: orders.id }}" class="bg-white text-pink-600 hover:bg-pink-700 hover:text-white  font-bold py-2  my-4 h-10 w-80  text-center rounded-md">
                     invoices
     </router-link>
     </div>
@@ -106,6 +134,7 @@
 </template>
 
 <script>
+
 import axiosClient from '@/axios';
 
     export default {
@@ -116,7 +145,11 @@ import axiosClient from '@/axios';
                 status:[
                 'ready_for_shipment', 'in_the_way' , 'delivered' , 'cancelled',
                 ],
-                product_status :['in_stock']
+                product_status :['in_stock'],
+                errMsg: '',
+                scMsg: '',
+                originalOrderStatus: '',
+                originalProductStatuses: [],
             }
         },
         async created() {
@@ -125,6 +158,8 @@ import axiosClient from '@/axios';
             const response = await axiosClient.get(`api/admin/orders/${id}`);
             this.products = response.data.products;
             this.orders = response.data.data;
+            this.originalOrderStatus = this.orders.order_status;
+            this.originalProductStatuses = this.orders.products.map(product => product.product_status);
             //console.log(this.products);
             console.log(this.orders);
             //console.log(response.data);
@@ -145,14 +180,15 @@ import axiosClient from '@/axios';
                 }
             }
 
-            if (orderStatus !== 'pending') {
+            if (orderStatus !== this.originalOrderStatus) {
             try {
                 const response = await axiosClient.put(`api/admin/orders/${orderId}/status`, {
                     status: orderStatus,
                 });
 
-                console.log(response);
+                
                 console.log('Order status updated successfully!');
+                this.scMsg = response.data.message
                 
                 
                 
@@ -162,15 +198,16 @@ import axiosClient from '@/axios';
             }
 
             // Update product status
-            this.orders.products.forEach(async (product) => {
-                if (product.product_status !== 'pending') {
+            this.orders.products.forEach(async (product, index) => {
+                if (product.product_status !== this.originalProductStatuses[index]) {
                 try {
                     const response = await axiosClient.put(`api/admin/orders/${orderId}/products/${product.product_id}/status`, {
                     status: product.product_status,
                     });
 
-                    console.log(response);
                     console.log(`Product ${product.product_id} status updated successfully!`);
+                    this.scMsg = response.data.message
+
                 } catch (error) {
                     console.error(`There was an error updating the product ${product.product_id} status: ${error}`);
                 }
