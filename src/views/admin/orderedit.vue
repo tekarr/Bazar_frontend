@@ -34,7 +34,7 @@
 
 
     <div class="flex justify-start">
-    <button @click="updateStatus" class="bg-pink-600 hover:bg-pink-700 text-white font-bold py-2  my-4 mx-2 h-10  w-80 ml-20 rounded-md">
+    <button @click="updateStatus" :disabled="!hasChanges" :class="{ 'bg-gray-400': !hasChanges, 'bg-pink-600 hover:bg-pink-700': hasChanges }" class="bg-pink-600 hover:bg-pink-700 text-white font-bold py-2  my-4 mx-2 h-10  w-80 ml-20 rounded-md">
                         Update
     </button>
     <router-link :to="{ name: 'invoices', params: { id: orders.id }}" class="bg-white text-pink-600 hover:bg-pink-700 hover:text-white  font-bold py-2  my-4 h-10 w-80  text-center rounded-md">
@@ -152,6 +152,14 @@ import axiosClient from '@/axios';
                 originalProductStatuses: [],
             }
         },
+        computed: {
+            hasChanges() {
+            return (
+                this.orders.order_status !== this.originalOrderStatus ||
+                this.orders.products.some((product, index) => product.product_status !== this.originalProductStatuses[index])
+            );
+            },
+        },    
         async created() {
             const id = this.$route.params.id;
             try {
@@ -189,8 +197,8 @@ import axiosClient from '@/axios';
                 
                 console.log('Order status updated successfully!');
                 this.scMsg = response.data.message
-                
-                
+
+                this.originalOrderStatus = this.orders.order_status;
                 
             } catch (error) {
                 console.error(`There was an error updating the order status: ${error}`);
@@ -207,6 +215,8 @@ import axiosClient from '@/axios';
 
                     console.log(`Product ${product.product_id} status updated successfully!`);
                     this.scMsg = response.data.message
+
+                    this.originalProductStatuses[index] = product.product_status;
 
                 } catch (error) {
                     console.error(`There was an error updating the product ${product.product_id} status: ${error}`);
