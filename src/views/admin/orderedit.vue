@@ -34,7 +34,7 @@
                     <td class="w-4"></td>
                     <td class="font-normal pb-5 text-gray-700 ">
                         <select v-model="orders.order_status" @input="select" class="p-2 my-4 px-4 border-2 border-pink-600 rounded-xl">
-                            <option disabled value="">Please select one</option>
+                            <option disabled value="pending">pending</option>
                             <option v-for="statusOption in status" :key="statusOption" :value="statusOption">
                                 {{ statusOption }}
                             </option>
@@ -86,7 +86,7 @@
                     </td>
                     <td>
                         <select v-model="product.product_status" @input="select" class="p-2 my-4 px-2 border-2 w-32 border-pink-600 rounded-xl">
-                            <option disabled value="">Please select one</option>
+                            <option disabled value="pending">pending</option>
                             <option v-for="statusOption in product_status" :key="statusOption" :value="statusOption">
                                 {{ statusOption }}
                             </option>
