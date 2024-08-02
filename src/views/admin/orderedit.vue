@@ -34,7 +34,7 @@
 
 
     <div class="flex justify-start">
-    <button @click="updateStatus" :disabled="!hasChanges" :class="{ 'bg-gray-400': !hasChanges, 'bg-pink-600 hover:bg-pink-700': hasChanges }" class="bg-pink-600 hover:bg-pink-700 text-white font-bold py-2  my-4 mx-2 h-10  w-80 ml-20 rounded-md">
+    <button @click="updateStatus" :disabled="!hasChanges" :class="{ 'bg-gray-300': !hasChanges, 'bg-pink-600 hover:bg-pink-700': hasChanges }" class="bg-pink-600 text-white font-bold py-2  my-4 mx-2 h-10  w-80 ml-20 rounded-md">
                         Update
     </button>
     <router-link :to="{ name: 'invoices', params: { id: orders.id }}" class="bg-white text-pink-600 hover:bg-pink-700 hover:text-white  font-bold py-2  my-4 h-10 w-80  text-center rounded-md">
