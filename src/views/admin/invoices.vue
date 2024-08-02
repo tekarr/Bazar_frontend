@@ -6,7 +6,7 @@
 
     <div class="grid grid-cols-1">
     <!-- print -->
-    <button @click="printTableAsPDF" class="bg-pink-600 hover:bg-pink-700 text-white font-bold py-1 px-6 m-8 w-80 ml-20 rounded-md">
+    <button @click="printTableAsPDF" class="bg-pink-600 hover:bg-pink-700 text-white font-bold py-1 px-6 my-4 w-80 h-10 ml-20 rounded-md">
         Print
     </button>
     
@@ -16,12 +16,14 @@
         <table class="w-full text-base  text-gray-500 rounded-3xl  " >
             <thead class="bg-gray-800 " >
                 <tr class="text-gray-50 text-center">
+                    <td></td>
                     <td class="font-bold pt-5 w-60">Date placed</td>
                     <td class="font-bold pt-5  w-10">ID</td>
                     <td class="font-bold pt-5 w-40">Total amount</td>
                     <td class="w-4"></td>
                 </tr>
                 <tr class="text-gray-50 text-center">
+                    <td></td>
                     <td class="font-normal  pb-5">{{ orders.created_at }}</td>
                     <td class="font-normal pb-5 ">{{ orders.id }}</td>
                     <td class="font-normal pb-5">${{ orders.order_total }}</td>
@@ -31,6 +33,9 @@
             <tbody>
                 <div class="my-4 text-center font-bold text-lg"></div>   
                 <tr class="text-center">
+                    <th scope="col" class="px-6 py-3 w-10">
+                        Product id
+                    </th>
                     <th scope="col" class="px-6 py-3 bg-gray-50">
                         Product name
                     </th>
@@ -45,6 +50,9 @@
                     </th>
                 </tr>
                 <tr class="border-b border-gray-200 text-center" v-for="product in orders.products" :key="product.id">
+                    <td>
+                        {{ product.product_id }}
+                    </td>
                     <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap bg-gray-50">
                         {{ product.product_name }}
                     </th>
