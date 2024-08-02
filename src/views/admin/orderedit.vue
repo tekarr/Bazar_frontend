@@ -5,11 +5,11 @@
 
     <p class="text-2xl font-bold pt-16  pl-24 text-start ">Order : #{{ orders.id }}<br></p>
 
-    <div class="grid grid-cols-2">
-    <button @click="updateStatus" class="bg-pink-600 hover:bg-pink-700 text-white font-bold py-2 px-4 my-8 mx-2 w-80 ml-20 rounded-md">
+    <div class="flex justify-start">
+    <button @click="updateStatus" class="bg-pink-600 hover:bg-pink-700 text-white font-bold py-2  my-8 mx-2  w-80 ml-20 rounded-md">
                         Update
     </button>
-    <router-link :to="{ name: 'invoices', params: { id: orders.id }}" class="bg-white text-pink-600 hover:bg-pink-700 hover:text-white  font-bold py-2 px-4 my-8 h-10 w-80 text-center rounded-md">
+    <router-link :to="{ name: 'invoices', params: { id: orders.id }}" class="bg-white text-pink-600 hover:bg-pink-700 hover:text-white  font-bold py-2  my-8 h-10 w-80  text-center rounded-md">
                     invoices
     </router-link>
     </div>
@@ -159,7 +159,7 @@ import axiosClient from '@/axios';
                 console.error(`There was an error updating the order status: ${error}`);
             }
             }
-            
+
             // Update product status
             this.orders.products.forEach(async (product) => {
                 if (product.product_status !== 'pending') {
