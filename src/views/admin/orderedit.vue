@@ -113,9 +113,9 @@ import axiosClient from '@/axios';
                 orders:[],
                 products:[],
                 status:[
-                'pending','ready_for_shipment', 'in_the_way' , 'delivered' , 'cancelled'
+                'ready_for_shipment', 'in_the_way' , 'delivered' , 'cancelled'
                 ],
-                product_status :['pending','in_stock']
+                product_status :['in_stock']
             }
         },
         async created() {
