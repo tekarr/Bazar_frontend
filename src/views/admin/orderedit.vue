@@ -35,6 +35,7 @@
                     <td class="font-normal pb-5 text-gray-700 ">
                         <select v-model="orders.order_status" @input="select" class="p-2 my-4 px-4 border-2 border-pink-600 rounded-xl">
                             <option disabled value="pending">pending</option>
+                            <option disabled value="processing">processing</option>
                             <option v-for="statusOption in status" :key="statusOption" :value="statusOption">
                                 {{ statusOption }}
                             </option>
@@ -113,7 +114,7 @@ import axiosClient from '@/axios';
                 orders:[],
                 products:[],
                 status:[
-                'ready_for_shipment', 'in_the_way' , 'delivered' , 'cancelled'
+                'ready_for_shipment', 'in_the_way' , 'delivered' , 'cancelled',
                 ],
                 product_status :['in_stock']
             }
