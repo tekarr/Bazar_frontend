@@ -2,6 +2,7 @@
         
 
     <div class="flex justify-start ml-8 ">
+
     <form @submit.prevent="submitForm" class="mt-8 ">
         
         <div class="mb-5 text-start">
@@ -49,7 +50,7 @@
                 <p class="pl-5">Category </p>    
                 <select v-model="user.category"  class=" p-2 my-4 px-4  border-2 border-pink-600 rounded-xl" required>
                     <option disabled value ="">Please select one</option>
-                    <option v-for="category in categories" :key="category.id" :value="category.id">{{ category.name }}</option>
+                    <option v-for="category in categories" :key="category.id" :value="category.id.toString()">{{ category.name }}</option>
                 </select>
             </div>
         </div>
@@ -91,7 +92,6 @@ export default {
         delete this.user.store_name;
         delete this.user.category;
     }
-    this.user.category = this.user.category.toString();
     try {
         const response = await axiosClient.post('api/admin/users',this.user);
         this.user = response.data;
