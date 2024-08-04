@@ -3,7 +3,36 @@
 
     <div class="flex justify-start ml-8 ">
 
+
+        
     <form @submit.prevent="submitForm" class="mt-8 ">
+        
+        <!-- error massege -->
+        <div v-if="errMsg" class="flex items-center justify-between p-3 my-2 mb-6 bg-red-600 text-white rounded">
+            <div>
+                <div v-for="(errors, field) in errMsg" :key="field" class="text-sm">
+                <strong>{{ field }}:</strong>
+                    <ul>
+                        <li v-for="(error, index) in errors" :key="index">{{ error }}</li>
+                    </ul>
+                </div>
+            </div>
+            <span @click="errMsg=''" class="w-8 h-8 flex items-center justify-center rounded-full cursor-pointer transition-colors hover:bg-[rgba(0,0,0,0.2)]">
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M6 18 18 6M6 6l12 12" />
+                </svg>
+            </span>
+        </div>
+
+        <!-- sucsses massege -->
+        <div v-if="scMsg" class=" flex items-center justify-between p-3 my-2 bg-green-600 text-white rounded">
+            {{scMsg}}
+            <span @click="scMsg=''" class="w-8 h-8 flex items-center justify-center rounded-full cursor-pointer transition-colors hover:bg-[rgba(0,0,0,0.2)]">
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M6 18 18 6M6 6l12 12" />
+                </svg>
+            </span>
+        </div>
         
         <div class="mb-5 text-start">
             <label class="font-bold pl-5" for="username">Name</label>
@@ -74,6 +103,8 @@ export default {
             category:'',
         },
         categories: [],
+        errMsg: '',
+        scMsg: '',
         };
     },
     methods: {
@@ -96,11 +127,14 @@ export default {
         const response = await axiosClient.post('api/admin/users',this.user);
         this.user = response.data;
         console.log(this.user);
+        console.log(response.data.message);
+        this.scMsg = response.data.message;
     }
     catch (error) {
         console.error(error);
         console.log(this.user);
-        console.log(this.userData);
+        console.log(error.response.data);
+        this.errMsg = error.response.data.errors;
     }
     }
     },
