@@ -13,7 +13,7 @@
 
         <!-- users table -->
         <div class="relative overflow-x-auto p-4">
-            <h1 class="text-2xl ml-4 mt-2 mb-4 font-bold text-gray-900">Admins</h1>
+            <h1 class="text-2xl ml-4 mt-2 mb-4 font-bold text-gray-900">Users</h1>
             <table class="w-full text-sm text-left rtl:text-right text-gray-900  rounded-3xl overflow-hidden">
                 <thead class="text-xs text-gray-900 uppercase bg-gray-50 ">
                     <tr>
@@ -34,16 +34,16 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <tr v-for="admin in admins" :key="admin.id" class="bg-white " >
+                    <tr v-for="user in users"  :key="user.id" class="bg-white " >
                         <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                            {{admin.id}}
+                            {{user.id}}
                         </th>
-                        <td>{{ admin.name }}</td>
-                        <td>{{ admin.email }}</td>
-                        <td>{{ admin.role_id }}</td>
+                        <td>{{ user.name }}</td>
+                        <td>{{ user.email }}</td>
+                        <td>{{ user.role_id }}</td>
                         <td class="px-1 py-4 flex justify-end">
                             <div class="px-2 flex justify-center items-center">
-                                <button @click="showConfirmDialog(admin.id)" class="px-4 py-2 mx-2 mt-2 rounded-3xl text-base hover:bg-pink-600 bg-gray-700 text-white">x</button> 
+                                <button @click="showConfirmDialog(user.id)" class="px-4 py-2 mx-2 mt-2 rounded-3xl text-base hover:bg-pink-600 bg-gray-700 text-white">x</button> 
                             </div>
                         </td>
                     </tr>
@@ -61,20 +61,21 @@ import axiosClient from '@/axios';
     export default {
     data(){
         return{
-            admins:[],
+            users:[],
             imageUrl: null,
             showConfirmationDialog: false,
             userIdToDelete: null,
         }
     },
     methods: {
-    async fetchStatistics() {
+        async fetchUsers() {
         try {
-        const response = await axiosClient.get('api/admin/admins');
-        this.admins = response.data.data
-        console.log(this.admins)
+            const response = await axiosClient.get('api/admin/users');
+            this.users = response.data
+            console.log(response);
+            console.log(this.users);
         } catch (error) {
-        console.error(error);
+            console.error(error);
         }
     },
     async deletestore(userId) {
@@ -82,7 +83,7 @@ import axiosClient from '@/axios';
             await axiosClient.delete(`api/admin/users/${userId}`);
 
             // Remove the product from the products array
-            this.admins = this.admins.filter(admin => admin.id !== userId);
+            this.users = this.users.filter(user => user.id !== userId);
         } catch (error) {
             console.error(error);
         }
@@ -105,8 +106,8 @@ import axiosClient from '@/axios';
     },
     },
     mounted() {
-        this.fetchStatistics();
-    },
+        this.fetchUsers();
+        },
     }
 
 </script>

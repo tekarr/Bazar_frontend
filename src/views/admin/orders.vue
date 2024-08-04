@@ -49,7 +49,6 @@
                 </tbody>
             </table>
         </div>
-        
 </template>
 
 <script>
@@ -71,7 +70,6 @@ import axiosClient from '@/axios';
         console.error(error);
         }
     },
-        
     }
 </script>
 

@@ -1,7 +1,5 @@
 <template>
 
-
-
     <p class="text-2xl font-bold pt-16  pl-24 text-start ">Order : #{{ orders.id }}<br></p>
 
     <div class="grid grid-cols-1">

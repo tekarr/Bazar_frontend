@@ -55,7 +55,7 @@ export default {
     methods: {
         async submitForm() {
         try {
-        const response = await axiosClient.post('api/admin/admins',this.user);
+        const response = await axiosClient.post('api/admin/users',this.user);
         this.user = response.data;
         console.log(this.user);
     } catch (error) {
