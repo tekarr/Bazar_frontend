@@ -15,7 +15,7 @@
                     <td class="font-normal pb-5 text-center">{{ orders.id }}</td>
                     <td class="font-normal  pb-5">{{ orders.created_at }}</td>
                     <td class="font-normal pb-5 ">{{ orders.order_status }}</td>
-                    <td class="font-normal pb-5">${{ orders.order_total }}</td>
+                    <td class="font-normal pb-5">${{  calculateTotalAmount }}</td>
                     <td class=""></td>
                 </tr>
                 <tr class="bg-gray-100">.</tr>
@@ -75,6 +75,15 @@ import axiosClient from '@/axios';
             console.error(`There was an error fetching the order: ${error}`);
             }
         },
+        computed: {
+            calculateTotalAmount() {
+                let total = 0;
+                this.products.forEach(product => {
+                    total += product.price * product.quantity;
+                });
+                return total.toFixed(2);
+            }
+        }
     }
 </script>
 
