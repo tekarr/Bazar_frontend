@@ -47,6 +47,9 @@ import vprofile from '@/views/vendor/vprofile.vue'
 import Addproduct from '@/components/vendor/Addproduct.vue'
 import Editproduct from '@/components/vendor/Editproduct.vue'
 import store from "@/store";
+import Vieworder from '@/views/vendor/vieworder.vue';
+
+
 
 
 
@@ -288,6 +291,11 @@ const routes = [
         path: '/vendor/orders',
         name: 'Orders ',
         component: vorders
+      },
+      {
+        path: '/vendor/order/:id',
+        name: 'view order',
+        component: Vieworder
       },
       {
         path: '/vendor/profile',
