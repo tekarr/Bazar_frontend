@@ -9,9 +9,6 @@
                             id
                         </th>
                         <th scope="col" class="px-6 py-3 text-center">
-                            order_total
-                        </th>
-                        <th scope="col" class="px-6 py-3 text-center">
                             payment_method
                         </th>
                         <th scope="col" class="px-6 py-3 text-center">
@@ -33,9 +30,6 @@
                         <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
                             {{order.id}}
                         </th>
-                        <td class="px-1 py-4 flex justify-center">
-                            {{ order.order_total }}
-                        </td>
                         <td class="text-center">
                             {{ order.payment_method }}
                         </td>
