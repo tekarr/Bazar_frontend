@@ -1,5 +1,5 @@
 <template>
-    <sidbar/>
+
     
     
         <div v-bind="$attrs" class="">
