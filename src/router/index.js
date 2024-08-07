@@ -48,6 +48,8 @@ import Addproduct from '@/components/vendor/Addproduct.vue'
 import Editproduct from '@/components/vendor/Editproduct.vue'
 import store from "@/store";
 import Vieworder from '@/views/vendor/vieworder.vue';
+import Editproduct2 from '@/components/admin/editproduct2.vue';
+
 
 
 
@@ -221,6 +223,12 @@ const routes = [
         path: '/admin/products',
         name: 'products',
         component: Products
+      },
+      {
+        path: '/admin/edit-product/:id',
+        name: 'EditProduct ',
+        component: Editproduct2,
+        props: true,
       },
       {
         path: '/admin/orders',

@@ -26,6 +26,11 @@
                     </tr>
                 </thead>
                 <tbody>
+                    <tr v-if="orders.length === 0">
+                        <td colspan="6" class="text-center pt-4">
+                            <p class="text-lg font-bold">No orders found.</p>
+                        </td>
+                    </tr>
                     <tr v-for="order in orders" :key="order.id" class="bg-white " >
                         <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
                             {{order.id}}
@@ -61,14 +66,20 @@ import axiosClient from '@/axios'
     components: { Sidbar, Navbar },
     data(){
         return{
-            orders:{},
+            orders:[],
         }
     },
     async created() {
+
     try {
         const response = await axiosClient.get('api/vendor/orders');
 
-        this.orders = response.data;
+        if (Array.isArray(response.data)) {
+            this.orders = response.data;
+        } else {
+            this.orders = []; // or some other default value
+        }
+
         console.log(this.orders);
         } catch (error) {
         console.error(error);

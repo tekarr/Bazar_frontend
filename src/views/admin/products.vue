@@ -1,9 +1,20 @@
 <template>
 
 
+    <!-- delete message -->
+    <div v-if="showConfirmationDialog" class="fixed inset-0 flex items-center justify-center z-20 bg-black bg-opacity-50">
+        <div class="bg-white p-6 rounded-3xl">
+        <p class="text-lg"> Are u sure u want to delete ? </p>
+            <div class="flex justify-between">
+                <button  @click="confirmDelete" class="mt-4 bg-pink-600 hover:bg-pink-700 text-white font-bold py-2 px-4 rounded-3xl">Delete</button>
+                <button @click="cancelDelete" class="mt-4 bg-pink-600 hover:bg-pink-700 text-white font-bold py-2 px-4 rounded-3xl">Cancel</button>
+            </div>
+        </div>
+    </div>
+
     <!-- products table -->
-    <div class="relative overflow-x-auto p-4">
-        <table class="w-full text-sm text-left rtl:text-right text-gray-700  rounded-3xl overflow-hidden">
+    <div class="relative overflow-x-auto">
+        <table class="w-full text-sm text-left rtl:text-right text-gray-700  rounded-3xl overflow-hidden m-4">
             <thead class="text-xs text-gray-700 uppercase bg-gray-50 ">
                 <tr>
                     <th scope="col" class="px-6 py-3 text-start">
@@ -12,14 +23,20 @@
                     <th scope="col" class="px-6 py-3 text-start">
                         name
                     </th>
-                    <th scope="col" class=" py-3 text-center">
-                        Store
-                    </th>
+                    <!-- <th scope="col" class=" py-3 text-center">
+                        image
+                    </th> -->
                     <th scope="col" class="px-6 py-3 text-center">
                         category
                     </th>
                     <th scope="col" class="px-6 py-3 text-center">
                         price
+                    </th>
+                    <th scope="col" class="px-6 py-3 text-center">
+                        created_at
+                    </th>
+                    <th scope="col" class="px-6 py-3">
+                    
                     </th>
                 </tr>
             </thead>
@@ -28,22 +45,30 @@
                     <td scope="row" class="px-6 py-8 font-medium text-base w-20">
                         {{product.id}}
                     </td>
-                    <td scope="row" class="px-6 py-8  text-base w-60">
+                    <td scope="row" class="px-6 py-8  text-base w-40">
                         {{product.name}}
                     </td>
-                    <td scope="row" class=" font-normal text-sm text-center">
-                        {{product.store}}
-                    </td>
+                    <!-- <td scope="row" class="font-normal text-sm text-center">
+                        <img :src="product.image" alt="Product Image" />
+                    </td> -->
                     <td class="px-6 text-center ">
                         {{ product.category }}
                     </td>
                     <td class="px-6 text-center ">
                         {{ product.price }} $
                     </td>
+                    <td class="px-6 text-center">
+                        {{ product.created_at }}
+                    </td>
+                    <td>
+                        <div class="px-2 flex justify-center items-center">
+                            <button  @click="editProduct(product.id)" class="px-4 py-2 mt-2  bg-gray-100 hover:bg-pink-600 hover:text-white rounded-3xl">Edit</button>
+                            <button @click="showConfirmDialog(product.id)" class="px-4 py-2 mx-2 mt-2 rounded-3xl text-base hover:bg-pink-600 bg-gray-700 text-white">x</button> 
+                        </div>
+                    </td>
                 </tr>
             </tbody>
         </table>
-
 
     </div>
 
@@ -53,10 +78,15 @@
 
 <script>
 import axiosClient from "@/axios";
+import Sidbar from '@/components/admin/Sidbar.vue'
+import Navbar from '@/components/admin/navbar.vue'
 export default {
+components: { Sidbar, Navbar },
 data() {
     return {
         products:[],
+        showConfirmationDialog: false,
+        productIdToDelete: null,
     };
 },
 async created() {
@@ -70,6 +100,30 @@ try {
     }
 },
 methods: {
+async deleteProduct(productId) {
+    try {
+        await axiosClient.delete(`api/admin/products/${productId}`);
+
+        // Remove the product from the products array
+        this.products = this.products.filter(product => product.id !== productId);
+    } catch (error) {
+        console.error(error);
+    }
+    },
+    editProduct(id) {
+        this.$router.push({ name: 'EditProduct ', params: { id } });
+    },
+    showConfirmDialog(productId) {
+        this.productIdToDelete = productId;
+        this.showConfirmationDialog = true;
+    },
+    confirmDelete() {
+        this.deleteProduct(this.productIdToDelete);
+        this.showConfirmationDialog = false;
+    },
+    cancelDelete() {
+        this.showConfirmationDialog = false;
+    },
 }
 };
 </script>

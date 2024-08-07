@@ -1,5 +1,5 @@
 <template>
-    <sidbar/>
+
     
     
         <div v-if="product"  class="">
@@ -116,7 +116,7 @@
 
             <!-- Attributes -->
             <div class="p-6 bg-white shadow-md rounded-lg">
-                <p class="mb-4 text-lg font-bold hidden">{{product.variations}}</p>
+                <p class="mb-4 text-lg font-bold hidden">{{variations}}</p>
                 <p class="mb-4 text-lg font-bold">Attributes</p>
                 <div v-for="(attribute, index) in attributes" :key="index" class="mb-4">
                         <input type="checkbox" :id="attribute.name" v-model="attribute.checked" @change="onAttributeChange(attribute)" class="hidden">
@@ -155,13 +155,15 @@
 </template>
 
 <script>
+
 import axiosClient from "@/axios";
 export default {
     data() {
         return {
         product: {
-        variations: [],
+            variations: [],
         },
+        variations: [],
         formData : new FormData(),
         categories: [],
         attributes: [],
@@ -179,12 +181,16 @@ export default {
         try {
             const id = this.$route.params.id;
             console.log(id)
-            const response = await axiosClient.get(`api/vendor/products/${id}`);
+            const response = await axiosClient.get(`api/admin/products/${id}`);
+            console.log(response);
             this.product = response.data.data;
-            this.images = this.product.images.map(img => ({
-            id: img.id,
-            url: `http://localhost:8000/storage/${img.image}`
-            }));
+            this.images = this.product.image.map(img => {
+            if (img.image.startsWith('http')) {
+                return { id: img.id, url: `${img.image}` };
+            } else {
+                return { id: img.id, url: `http://localhost:8000/storage/${img.image}` };
+            }
+            });
             //this.images.push({ url: e.target.result });
             console.log(this.images)
             console.log(this.product);
@@ -210,10 +216,10 @@ export default {
         checked: false,
         values: attribute.variations.map(variation => variation.value)
         }));
+        console.log(this.attributes);
         } catch (error) {
         console.error(error);
         }
-        this.product.variations.length = 0;
 
     },
     methods: {
@@ -252,8 +258,8 @@ export default {
         this.formData.append('category_id', this.product.category_id);
         this.formData.append('price', this.product.price);
 
-        for (let i = 0; i < this.product.variations.length; i++) {
-            this.formData.append(`variations[${i}]`, JSON.stringify(this.product.variations[i]));
+        for (let i = 0; i < this.variations.length; i++) {
+            this.formData.append(`variations[${i}]`, JSON.stringify(this.variations[i]));
         }
 
         for (let i = 0; i < this.files.length; i++) {
@@ -268,7 +274,7 @@ export default {
             console.log(pair[0]+ ', ' + pair[1]); 
         }
 
-        const response = await axiosClient.post(`api/vendor/products/${id}`, this.formData, {
+        const response = await axiosClient.post(`api/admin/products/${id}`, this.formData, {
         headers: {
             'Content-Type': 'multipart/form-data',
             },
@@ -292,9 +298,9 @@ export default {
         onAttributeChange(attribute) {
         if (!attribute.checked) {
             attribute.variations.forEach(variation => {
-            const index = this.product.variations.indexOf(variation.id);
+            const index = this.variations.indexOf(variation.id);
             if (index !== -1) {
-                this.product.variations.splice(index, 1);
+                this.variations.splice(index, 1);
             }
             variation.checked = false; 
             });
@@ -302,13 +308,13 @@ export default {
         },
 
         onVariationChange(variation) {
-            console.log (this.product.variations)
+        console.log(this.variations)    
         if (variation.checked) {
-            this.product.variations.push(variation.id);
+            this.variations.push(variation.id);
         } else {
-            const index = this.product.variations.indexOf(variation.id);
+            const index = this.variations.indexOf(variation.id);
             if (index !== -1) {
-            this.product.variations.splice(index, 1);
+            this.variations.splice(index, 1);
             }
         }
         }
