@@ -298,11 +298,10 @@ import axiosClient from '@/axios'
             console.log(response);
 
             if (this.PaymentMethod == 'localBankCards'){
-                const redirectUrl = response.data.data;
-                console.log(redirectUrl);
-                return;
-                //window.location.href = redirectUrl;
-                
+                const redirectUrl = response.data.data.data.result.redirect_url;                ;
+                window.location.href = redirectUrl;
+                this.removeAllFromCart();
+                return
             }
 
             if (otpCode) {
