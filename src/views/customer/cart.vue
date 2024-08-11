@@ -1,6 +1,7 @@
 <template>
 
 
+
     <!-- cart -->
     <div v-if="$route.path === '/cart'">
         <div  class="relative overflow-x-auto flex justify-center bg-gray-100 pt-28">
@@ -109,9 +110,85 @@
                 <label for="creditCard" class="text-gray-700">Credit Card</label>
             </div>
 
+            <div class="flex items-center mb-4">
+                <input type="radio" name="localBankCards" value="localBankCards" v-model="PaymentMethod" class="mr-2 text-pink-600 w-5 h-5 rounded-full"/>
+                <label for="localBankCards" class="text-gray-700">localBankCards</label>
+            </div>
+
+            <div class="flex items-center mb-4">
+                <input type="radio" name="Adfali" value="Adfali" v-model="PaymentMethod" class="mr-2 text-pink-600 w-5 h-5 rounded-full"/>
+                <label for="Adfali" class="text-gray-700">Adfali</label>
+            </div>
+
+
+            <div class="flex items-center mb-4">
+                <input type="radio" name="Sadad" value="Sadad" v-model="PaymentMethod" class="mr-2 text-pink-600 w-5 h-5 rounded-full"/>
+                <label for="Sadad" class="text-gray-700">Sadad</label>
+            </div>
+
             <div class="flex items-center">
-                <input type="radio" name="paymentMethod" value="payOnDelivery" v-model="PaymentMethod" class="mr-2 text-pink-600 w-5 h-5 rounded-full"/>
-                <label for="payOnDelivery" class="text-gray-700">Pay on Delivery</label>
+                <input type="radio" name="paymentMethod" value="pay_on_deliver" v-model="PaymentMethod" class="mr-2 text-pink-600 w-5 h-5 rounded-full"/>
+                <label for="pay_on_deliver" class="text-gray-700">Pay on Delivery</label>
+            </div>
+
+            <hr class="my-6">
+
+            <div v-if="PaymentMethod === 'Adfali'" class="mt-4">
+                <header class="mb-8 text-center">
+                    <h1 class="text-2xl font-bold mb-1">OTP Code</h1>
+                    <p class="text-[15px] text-slate-500">Enter the 4-digit verification code that was sent to your phone number.</p>
+                </header>
+                <div class="flex items-center justify-center gap-3">
+                    <input v-model="code[0]"
+                        type="text"
+                        class="w-14 h-14 text-center text-2xl font-extrabold text-slate-900 bg-slate-100 border border-transparent hover:border-slate-200 appearance-none rounded p-4 outline-none focus:bg-white focus:border-pink-400 focus:ring-2 focus:ring-pink-100"
+                        pattern="\d*" maxlength="1" />
+                    <input v-model="code[1]"
+                        type="text"
+                        class="w-14 h-14 text-center text-2xl font-extrabold text-slate-900 bg-slate-100 border border-transparent hover:border-slate-200 appearance-none rounded p-4 outline-none focus:bg-white focus:border-pink-400 focus:ring-2 focus:ring-pink-100"
+                        maxlength="1" />
+                    <input v-model="code[2]"
+                        type="text"
+                        class="w-14 h-14 text-center text-2xl font-extrabold text-slate-900 bg-slate-100 border border-transparent hover:border-slate-200 appearance-none rounded p-4 outline-none focus:bg-white focus:border-pink-400 focus:ring-2 focus:ring-pink-100"
+                        maxlength="1" />
+                    <input v-model="code[3]"
+                        type="text"
+                        class="w-14 h-14 text-center text-2xl font-extrabold text-slate-900 bg-slate-100 border border-transparent hover:border-slate-200 appearance-none rounded p-4 outline-none focus:bg-white focus:border-pink-400 focus:ring-2 focus:ring-pink-100"
+                        maxlength="1" />
+                </div>
+            </div>
+
+            <div v-if="PaymentMethod === 'Sadad'" class="mt-4">
+                <header class="mb-8 text-center">
+                    <h1 class="text-2xl font-bold mb-1">OTP Code</h1>
+                    <p class="text-[15px] text-slate-500">Enter the 6-digit verification code that was sent to your phone number.</p>
+                </header>
+                <div class="flex items-center justify-center gap-3">
+                    <input v-model="code2[0]"
+                        type="text"
+                        class="w-14 h-14 text-center text-2xl font-extrabold text-slate-900 bg-slate-100 border border-transparent hover:border-slate-200 appearance-none rounded p-4 outline-none focus:bg-white focus:border-pink-400 focus:ring-2 focus:ring-pink-100"
+                        pattern="\d*" maxlength="1" />
+                    <input v-model="code2[1]"
+                        type="text"
+                        class="w-14 h-14 text-center text-2xl font-extrabold text-slate-900 bg-slate-100 border border-transparent hover:border-slate-200 appearance-none rounded p-4 outline-none focus:bg-white focus:border-pink-400 focus:ring-2 focus:ring-pink-100"
+                        maxlength="1" />
+                    <input v-model="code2[2]"
+                        type="text"
+                        class="w-14 h-14 text-center text-2xl font-extrabold text-slate-900 bg-slate-100 border border-transparent hover:border-slate-200 appearance-none rounded p-4 outline-none focus:bg-white focus:border-pink-400 focus:ring-2 focus:ring-pink-100"
+                        maxlength="1" />
+                    <input v-model="code2[3]"
+                        type="text"
+                        class="w-14 h-14 text-center text-2xl font-extrabold text-slate-900 bg-slate-100 border border-transparent hover:border-slate-200 appearance-none rounded p-4 outline-none focus:bg-white focus:border-pink-400 focus:ring-2 focus:ring-pink-100"
+                        maxlength="1" />
+                    <input v-model="code2[4]"
+                        type="text"
+                        class="w-14 h-14 text-center text-2xl font-extrabold text-slate-900 bg-slate-100 border border-transparent hover:border-slate-200 appearance-none rounded p-4 outline-none focus:bg-white focus:border-pink-400 focus:ring-2 focus:ring-pink-100"
+                        maxlength="1" />    
+                    <input v-model="code2[5]"
+                        type="text"
+                        class="w-14 h-14 text-center text-2xl font-extrabold text-slate-900 bg-slate-100 border border-transparent hover:border-slate-200 appearance-none rounded p-4 outline-none focus:bg-white focus:border-pink-400 focus:ring-2 focus:ring-pink-100"
+                        maxlength="1" />  
+                </div>
             </div>
 
             <div v-if="PaymentMethod === 'creditCard'" class="mt-4">
@@ -144,7 +221,10 @@
                 Place Order
             </button>
             </div>
+
         </div>
+
+
         </div>
     </form>
 
@@ -169,31 +249,85 @@ import axiosClient from '@/axios'
             address: '',
             Phone: '',
             city: '',
+            code: ['', '', '', ''],
+            code2: ['', '', '', '', '', '']
         }
     },
     created() {
         this.fetchProducts();
     },
     methods: {
-        async sendOrder() {
-        const order = {
-        city: this.city,
-        shipping_address: this.address,
-        products: this.products.map(product => ({
-            product_id: product.id,
-            quantity: this.qt[product.id],
-        })),
-        };
 
-        try {
-        const response = await axiosClient.post('api/customer/orders', order);
-        console.log(response.data);
-        this.removeAllFromCart();
-        this.$router.push('/thanks');
-        } catch (error) {
-        console.error(error);
+    async sendOrder() {
+        let otpCode;
+        console.log(this.PaymentMethod);
+        if (this.PaymentMethod != 'pay_on_deliver' && this.PaymentMethod != 'localBankCards') {
+            if (this.PaymentMethod == 'Adfali') {
+                otpCode = this.code.join('');
+                if (otpCode != 1111) {
+                    alert('Invalid OTP code');
+                    return;
+                }
+            } else {
+                otpCode = this.code2.join('');
+                if (otpCode != 111111) {
+                    alert('Invalid OTP code');
+                    return;
+                }
+            }
+            this.placeOrder(otpCode);
+        } else {
+            this.placeOrder();
         }
     },
+
+    async placeOrder(otpCode = null) {
+        const order = {
+            mobile_number: this.Phone,
+            payment_method: this.PaymentMethod,
+            shipping_address: this.address,
+            products: this.products.map(product => ({
+                product_id: product.id,
+                quantity: this.qt[product.id],
+            })),
+        };
+
+
+        try {
+            const response = await axiosClient.post('api/customer/orders', order);
+            console.log(response);
+
+            if (this.PaymentMethod == 'localBankCards'){
+                const redirectUrl = response.data.data;
+                console.log(redirectUrl);
+                return;
+                //window.location.href = redirectUrl;
+                
+            }
+
+            if (otpCode) {
+                const paymentData = {
+                    process_id: response.data.processId.toString(),
+                    amount: this.finalTotal(),
+                    code: otpCode,
+                };
+
+                try {
+                    const confirmResponse = await axiosClient.post(`api/customer/payment/${this.PaymentMethod.toLowerCase()}/confirm`, paymentData);
+                    console.log(confirmResponse);
+                    alert(confirmResponse.data.data.message);
+                } catch (error) {
+                    console.error('Error confirming payment:', error);
+                }
+            }
+
+            this.removeAllFromCart();
+            this.$router.push('/thanks');
+        } catch (error) {
+            console.error(error);
+        }
+    },
+        
         updateTotal(product) {
             if (this.qt[product.id] === 0) {
                 this.qt[product.id] = 1;
@@ -245,7 +379,7 @@ import axiosClient from '@/axios'
         this.totals = {}; // reset totals
         },
         finalTotal() {
-            return Object.values(this.totals).reduce((a, b) => a + b, 0).toFixed(1);
+            return Object.values(this.totals).reduce((a, b) => a + b, 0).toFixed(2);
         },
     },
 }
