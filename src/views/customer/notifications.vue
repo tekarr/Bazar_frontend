@@ -1,6 +1,6 @@
 <template>
     <div class="relative overflow-x-auto mt-40 ml-10">
-        <p class="text-2xl text-gray-900 my-10">Notifications</p>
+        <p class="pl-4 text-2xl text-gray-900 my-10">Notifications</p>
     <table class="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400 rounded-3xl overflow-hidden">
         <thead class="text-xs  text-gray-700 uppercase bg-gray-50 ">
         <tr>
