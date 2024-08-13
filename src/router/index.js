@@ -19,6 +19,7 @@ import StorePage from '@/views/customer/storepage.vue';
 import thanks from '@/views/customer/thanks.vue'
 import Reset from '@/views/customer/reset.vue';
 import Orderview from '@/views/customer/orderview.vue';
+import Notifications from '@/views/customer/notifications.vue';
 
 // admin imports ------------------------------------------------
 import AdminLayout from "../views/admin/adminLayout.vue";
@@ -49,6 +50,7 @@ import Editproduct from '@/components/vendor/Editproduct.vue'
 import store from "@/store";
 import Vieworder from '@/views/vendor/vieworder.vue';
 import Editproduct2 from '@/components/admin/editproduct2.vue';
+
 
 
 
@@ -154,11 +156,15 @@ const routes = [
         name: 'orderview',
         component: Orderview
       },
-
       {
         path: '/customer/profile',
         name: 'profile',
         component: cprofile
+      },
+      {
+        path: '/customer/notifications',
+        name: 'notifications',
+        component: Notifications
       },
       {
         path: '/customer/becomevendor',

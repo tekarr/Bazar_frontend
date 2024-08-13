@@ -74,7 +74,7 @@
     
     </div>
 
-  
+
 
     <!--side menu -->
     <div class="flex justify-end">
@@ -97,6 +97,7 @@
                     <li class="py-1"><router-link to="/">Shop</router-link></li>
                     <li class="py-1"><router-link to="/cart">Cart</router-link></li>
                     <li class="py-1 " v-if="customer"><router-link to="/customer/profile">Profile</router-link></li>
+                    <li class="py-1 " v-if="customer"><router-link to="/customer/notifications">notification</router-link></li>
                     <li class="py-1" v-if="customer"><router-link to="/customer/orders">Orders</router-link></li>
                     <li class="py-1" v-if="customer"><router-link to="/customer/becomevendor" >Become vendor</router-link></li>
                     <li class="py-1" v-if="vendor"><router-link to="/vendor">Dashboard</router-link></li>
