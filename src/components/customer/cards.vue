@@ -11,6 +11,20 @@
         </button>
         </div>
 
+        <!-- search bar -->
+        <div class="max-w-md mx-auto rounded-3xl" @click="scrollToSpecificPosition">    
+            <label for="default-search" class="mb-2 text-sm font-medium text-gray-900 sr-only">Search</label>
+            <div class="relative mb-2">
+                <div class="absolute inset-y-0 start-0 flex items-center ps-3 pointer-events-none" >
+                    <svg class="w-4 h-4 text-gray-500 dark:text-gray-400" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 20">
+                        <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m19 19-4-4m0-7A7 7 0 1 1 1 8a7 7 0 0 1 14 0Z"/>
+                    </svg>
+                </div>
+                <input type="search" v-model="searchvalue" id="default-search" class="block w-full p-4 ps-10 text-sm text-gray-900 border-2 border-gray-300 rounded-3xl bg-gray-50 focus:outline-none focus:ring focus:ring-pink-500 " placeholder="Search Stores, Products..." required @input="search"/>
+            </div>
+        </div>    
+
+
         <!-- Stores -->
         
         <div ref="specificSection" class="grid grid-cols-2 md:grid-cols-1 lg:grid-cols-3 gap-10 p-4 md:p-8" :key="activePage"> 
@@ -60,7 +74,8 @@ data() {
     categories: [],
     stores: [],
     selectedCategoryId: null,
-    activePage: 1
+    activePage: 1,
+    searchvalue:''
     }
 },
 async created() {
@@ -74,6 +89,20 @@ async created() {
     this.$refs.focusButton.focus();
 },
 methods: {
+    search() {
+    if (this.searchvalue) {
+        this.searchQuery = this.searchvalue;
+        this.fetchStores();
+        }
+    },
+    async fetchStores() {
+        try {
+            const response = await axiosClient.get(`api/stores?search=${this.searchQuery}`);
+            this.stores = response.data.data;
+        } catch (error) {
+            console.error(`There was an error fetching the stores: ${error}`);
+        }
+    },
     changePage(page) {
         this.activePage = page;
         this.allCategories();
@@ -97,6 +126,13 @@ methods: {
     } catch (error) {
         console.error(`There was an error fetching the stores: ${error}`);
     }
+    },
+    scrollToSpecificPosition() {
+        const targetPosition = 560; // Desired scroll position in pixels from the top
+        window.scrollTo({
+            top: targetPosition,
+            behavior: 'smooth' // Smooth scroll transition
+        });
     }
 }
 }
