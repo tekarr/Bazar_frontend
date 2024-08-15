@@ -20,6 +20,7 @@ import thanks from '@/views/customer/thanks.vue'
 import Reset from '@/views/customer/reset.vue';
 import Orderview from '@/views/customer/orderview.vue';
 import Notifications from '@/views/customer/notifications.vue';
+import ChangePassword from '@/views/customer/change-password.vue';
 
 // admin imports ------------------------------------------------
 import AdminLayout from "../views/admin/adminLayout.vue";
@@ -50,6 +51,7 @@ import Editproduct from '@/components/vendor/Editproduct.vue'
 import store from "@/store";
 import Vieworder from '@/views/vendor/vieworder.vue';
 import Editproduct2 from '@/components/admin/editproduct2.vue';
+
 
 
 
@@ -160,6 +162,11 @@ const routes = [
         path: '/customer/profile',
         name: 'profile',
         component: cprofile
+      },
+      {
+        path: '/customer/profile/change-password',
+        name: 'change-password',
+        component: ChangePassword
       },
       {
         path: '/customer/notifications',
