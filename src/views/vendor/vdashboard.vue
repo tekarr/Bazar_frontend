@@ -1,7 +1,9 @@
 <template>
 
+
         <!-- Statistic cards -->
-        <div class=" p-6 rounded-3xl">   
+        <div class=" p-6 rounded-3xl">  
+        
         
         <div class="grid grid-cols-5 gap-2 mb-4 md:grid-cols-2 lg:grid-cols-3 ">
             
@@ -17,7 +19,7 @@
                     <div>
                         <h2 class="text-4xl font-bold"><span>10 +</span></h2>
                     </div>
-                    <p class="mt-2 font-sans text-base font-medium text-gray-500">Products</p>
+                    <p class="mt-2 font-sans text-base font-medium text-gray-500">{{ $t('Products') }}</p>
                 </div>
             </div>
 
@@ -34,7 +36,7 @@
                     <div class="my-2">
                         <h2 class="text-4xl font-bold"><span class="">180$</span></h2>
                     </div>
-                    <p class="mt-2 font-sans text-base font-medium text-gray-500">Sales</p>
+                    <p class="mt-2 font-sans text-base font-medium text-gray-500">{{ $t('Sales') }}</p>
                 </div>
             </div>
 
@@ -49,7 +51,7 @@
                     <div class="my-2">
                         <h2 class="text-4xl font-bold"><span class="">2 +</span></h2>
                     </div>
-                    <p class="mt-2 font-sans text-base font-medium text-gray-500">Low in stock</p>
+                    <p class="mt-2 font-sans text-base font-medium text-gray-500">{{ $t('Low in stock') }}</p>
                 </div>
             </div>
             
@@ -64,7 +66,7 @@
                     <div class="my-2">
                         <h2 class="text-4xl font-bold"><span class="">9 +</span></h2>
                     </div>
-                    <p class="mt-2 font-sans text-base font-medium text-gray-500">Orders</p>
+                    <p class="mt-2 font-sans text-base font-medium text-gray-500">{{ $t('Orders') }}</p>
                 </div>
             </div>
         </div>  

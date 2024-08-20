@@ -1,5 +1,5 @@
 <template>
-    <sidbar/>
+    <sidbar />
     
     <div :class="locale === 'en' ? 'sm:ml-64' : 'sm:mr-64'"> 
         <navbar/>  
@@ -22,14 +22,16 @@ import Navbar from '@/components/vendor/navbar.vue'
     };
     },
     mounted() {
-        this.updateDirection();
+        this.changeLocale();
+        console.log(this.locale)
     },
     methods: {
-        updateDirection() {
+        changeLocale() {
+            this.$i18n.locale = this.locale;
             if (this.locale === 'ar') {
-                document.body.setAttribute('dir', 'rtl');
+            document.body.setAttribute('dir', 'rtl');
             } else {
-                document.body.removeAttribute('dir');
+            document.body.removeAttribute('dir');
             }
         }
     }

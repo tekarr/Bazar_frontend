@@ -24,13 +24,11 @@
                     <img class="rounded-3xl w-full h-full object-cover" :src="store.image" alt="">
                 </div>
             </div>
-            <div class="ml-12 m-4"><span class="text-2xl font-bold">{{ store.name }}</span></div>
+            <div class="mx-12 m-4"><span class="text-2xl font-bold">{{ store.name }}</span></div>
             <div class="mt-4">
-                <p class="ml-12 ">{{ store.description }}</p>
+                <p class="mx-12 ">{{ store.description }}</p>
             </div>
-            <div class="ml-12 m-4 flex justify-between w-48 mb-8 ">
-                <span>Open : 2am</span>
-                <span>Close : 4pm </span>
+            <div class="mx-12 m-4 flex justify-between w-48 mb-8 ">
             </div>
         </div>
 
@@ -78,6 +76,7 @@ export default {
             this.products = response.data.data.products;
             this.store = response.data.data;
             console.log(this.store)
+            console.log(this.products)
         } catch (error) {
             console.error(`There was an error fetching the products: ${error}`);
         }

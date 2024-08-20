@@ -6,19 +6,19 @@
                 <thead class="text-sm text-gray-700 uppercase bg-gray-50 ">
                     <tr class="text-center">
                         <th scope="col" class="px-6 py-3 w-10">
-                            id
+                            #
                         </th>
                         <th scope="col" class="px-6 py-3 w-60">
-                            status
+                            {{ $t('status') }}
                         </th>
                         <th scope="col" class="px-6 py-3 ">
-                            order total
+                            {{ $t('order total') }}
                         </th>
                         <th scope="col" class="px-6 py-3 ">
-                            payment_method
+                            {{ $t('payment_method') }}
                         </th>
                         <th scope="col" class="px-6 py-3 ">
-                            created_at
+                            {{ $t('created') }}
                         </th>
                         <th scope="col" class="px-6 py-3">
                         </th>
@@ -43,7 +43,7 @@
                         </td>
                         <td class="flex justify-center w-20">
                             <button class="px-4 py-2 mr-4 my-2  bg-gray-50 text-pink-600 hover:bg-pink-600 hover:text-white rounded-3xl"> 
-                                <router-link :to="{ name: 'Update Order', params: { id: order.id }}">Edit</router-link></button>
+                                <router-link :to="{ name: 'Update Order', params: { id: order.id }}"> {{ $t('Edit') }}</router-link></button>
                         </td>
                     </tr>
                 </tbody>

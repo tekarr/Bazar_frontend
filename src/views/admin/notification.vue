@@ -4,10 +4,10 @@
             <thead class="text-xs  text-gray-700 uppercase bg-gray-50 ">
             <tr>
                 <th scope="col" class="px-6 py-3 ">
-                Message
+                {{ $t('Message') }}
                 </th>
                 <th scope="col" class="px-6 py-3 ">
-                Time
+                {{ $t('Time') }}
                 </th>
                 <!-- <th scope="col" class="px-6 py-3">
                 Status

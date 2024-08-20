@@ -15,6 +15,8 @@
                     <td class="font-bold pt-5">Date placed</td>
                     <td class="font-bold pt-5">Order status</td>
                     <td class="font-bold pt-5">Total amount</td>
+                    <td></td>
+                    <td></td>
                 </tr>
                 <tr class="text-center">
                     <td class="font-normal pb-5 text-center">{{ orders.id }}</td>
@@ -22,11 +24,12 @@
                     <td class="font-normal pb-5 ">{{ orders.order_status }}</td>
                     <td class="font-normal pb-5">${{ orders.order_total }}</td>
                     <td class=""></td>
+                    <td></td>
                 </tr>
                 <tr class="bg-white">.</tr>
             </thead>
             <thead class="text-base text-gray-700 uppercase">
-                <tr class="text-center">
+                <tr v-for="product in products" :key="product.product_id" class="text-center">
                     <th scope="col" class="px-6 py-3 bg-gray-50">
                         Product name
                     </th>
@@ -36,18 +39,25 @@
                     <th scope="col" class="px-6 py-3 bg-gray-50">
                         Quantity
                     </th>
+                    <th v-for="(variation, index) in product.variations" :key="index" scope="col" class="px-6 py-3 bg-gray-50">
+                        {{ variation.attribute }}
+                    </th>
+                    <th class="px-6 py-3 bg-gray-50"></th>
                 </tr>
             </thead>
             <tbody>
                 <tr class="border-b border-gray-200 text-center" v-for="product in products" :key="product.product_id">
-                    <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap bg-gray-50">
-                        {{ product.name }}
+                    <th scope="row" class="px-6 py-4 font-normal text-gray-900 whitespace-nowrap bg-gray-50">
+                        {{ product.product_name }}
                     </th>
                     <td class="px-6 py-4">
                         {{ product.price }}
                     </td>
                     <td class="px-6 py-4 bg-gray-50">
                         {{ product.quantity }}
+                    </td>
+                    <td class="px-6 py-4" v-for="(variation, index) in product.variations" :key="index">
+                        {{ variation.value }}<br v-if="index < product.variations.length - 1">
                     </td>
                     <td class="px-6 py-4" >
                         <router-link :to="{ name: 'productpage', params: { id: product.product_id } }" class="text-pink-600">view</router-link>
@@ -75,6 +85,7 @@
 import axiosClient from '@/axios';
 import html2canvas from 'html2canvas';
 import jsPDF from 'jspdf';
+import { mapActions } from 'vuex';
 
     export default {
         data(){

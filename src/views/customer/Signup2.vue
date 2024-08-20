@@ -2,7 +2,7 @@
   <div class="flex flex-col items-center justify-center h-screen">
   <div class="sm:mx-auto sm:w-full sm:max-w-sm">
     <router-link to="/"><img class="mx-auto h-24 w-auto" src="../../assets/icons/logo.png" alt="Your Company" /></router-link>
-    <h2 class="mt-4 text-center text-2xl font-bold leading-9 tracking-tight text-gray-900">Sign Up </h2>
+    <h2 class="mt-4 text-center text-2xl font-bold leading-9 tracking-tight text-gray-900">{{ $t('Sign up') }}</h2>
   </div>
   <div class="mt-10 sm:mx-auto sm:w-full sm:max-w-sm">
     <form class="space-y-6" @submit="register" >
@@ -22,46 +22,45 @@
           </span>
       </div>
       <div>
-      <label for="name" class="block text-sm font-medium leading-6 text-gray-900">Name</label>
+      <label for="name" class="block text-sm font-medium leading-6 text-gray-900">{{ $t('name') }}</label>
       <div class="mt-2">
-        <input v-model="user.name" id="name" name="name" type="text" autocomplete="name" required="" class="block pl-4 w-full rounded-lg border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6" />
+        <input v-model="user.name" id="name" name="name" type="text" autocomplete="name" required="" class="block px-4 w-full rounded-lg border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6" />
       </div>
     </div>
       <div>
-        <label for="email" class="block text-sm font-medium leading-6 text-gray-900">Email address</label>
+        <label for="email" class="block text-sm font-medium leading-6 text-gray-900">{{ $t('Email address') }}</label>
         <div class="mt-2">
-          <input v-model="user.email" id="email" name="email" type="email" autocomplete="email" required="" class="block pl-4 w-full rounded-lg border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6" />
+          <input v-model="user.email" id="email" name="email" type="email" autocomplete="email" required="" class="block px-4 w-full rounded-lg border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6" />
         </div>
       </div>
 
       <div>
         <div class="flex items-center justify-between">
-          <label for="password" class="block text-sm font-medium leading-6 text-gray-900">Password</label>
+          <label for="password" class="block text-sm font-medium leading-6 text-gray-900">{{ $t('Password') }}</label>
 
         </div>
         <div class="mt-2">
-          <input v-model="user.password" id="password" name="password" type="password" autocomplete="current-password" required="" class="block w-full pl-4 rounded-lg border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6" />
+          <input v-model="user.password" id="password" name="password" type="password" autocomplete="current-password" required="" class="block w-full px-4 rounded-lg border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6" />
         </div>
       </div>
       <div>
         <div class="flex items-center justify-between">
-          <label for="password_conformation" class="block  text-sm font-medium leading-6 text-gray-900">Password Confirmation</label>
+          <label for="password_conformation" class="block  text-sm font-medium leading-6 text-gray-900">{{ $t('Password confirmation') }}</label>
 
         </div>
         <div class="mt-2">
-          <input v-model="user.password_confirmation" id="password_conformation" name="password_conformation" type="password" autocomplete="current-password_confirmation" required="" class="block pl-4 w-full rounded-lg border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6" />
+          <input v-model="user.password_confirmation" id="password_conformation" name="password_conformation" type="password" autocomplete="current-password_confirmation" required="" class="block px-4 w-full rounded-lg border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6" />
         </div>
       </div>
 
       <div>
-        <button type="submit" class="flex w-full justify-center rounded-lg bg-pink-600 px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-gray-700 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">Sign up</button>
+        <button type="submit" class="flex w-full justify-center rounded-lg bg-pink-600 px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-gray-700 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">{{ $t('Sign up') }}</button>
       </div>
     </form>
 
     <p class="mt-10 text-center text-sm text-gray-500">
-      Already have an Account?
-      {{ ' ' }}
-      <router-link :to="{name:'Login2'}"  class="font-semibold leading-6 text-pink-600 hover:text-pink-500">Sing in</router-link>
+      {{ $t('Already have an Account') }}
+      <router-link :to="{name:'Login2'}"  class="font-semibold leading-6 text-pink-600 hover:text-pink-500">{{$t('Sign in')}}</router-link>
     </p>
   </div>
   </div>

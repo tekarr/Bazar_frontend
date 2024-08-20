@@ -13,21 +13,20 @@
 
         <!-- users table -->
         <div class="relative overflow-x-auto p-4">
-            <h1 class="text-2xl ml-4 mt-2 mb-4 font-bold text-gray-900">Users</h1>
             <table class="w-full text-sm text-left rtl:text-right text-gray-900  rounded-3xl overflow-hidden">
                 <thead class="text-xs text-gray-900 uppercase bg-gray-50 ">
                     <tr>
                         <th scope="col" class="px-6 py-3">
-                            id
+                            #
                         </th>
                         <th scope="col" class="px-6 py-3">
-                            name
+                            {{ $t('name') }}
                         </th>
                         <th scope="col" class="">
-                            Email
+                            {{ $t('Email') }}
                         </th>
                         <th scope="col" class="">
-                            Role
+                            {{ $t('Role') }}
                         </th>
                         <th scope="col" class="">
                         </th>
@@ -50,7 +49,7 @@
                 </tbody>
             </table>
             <router-link to="/admin/users/add">
-                <button class="px-4 mx-4 py-2 mt-2 bg-pink-600 rounded-3xl text-white">Add User</button>
+                <button class="px-4 mx-4 py-2 mt-2 bg-pink-600 rounded-3xl text-white">{{ $t('Add User') }}</button>
             </router-link>
         </div>
         

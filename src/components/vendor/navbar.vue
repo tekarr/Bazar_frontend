@@ -2,7 +2,7 @@
     
     <!-- navbar -->
     <div class="flex justify-between p-4 m-4 rounded-2xl">
-        <p class="p-2 font-semibold text-lg ">{{ $route.name }}</p>
+        <p class="p-2 font-semibold text-lg ">{{ $t($route.name) }}</p>
         <div class="flex justify-between">
             
         </div>
@@ -20,11 +20,6 @@ import axiosClient from '@/axios';
         notifiMenu: false,
         profilMenu: false,
         user:[],
-        messages: [
-        { id: 1, text: 'Message 1' },
-        { id: 2, text: 'Message 2' },
-        { id: 3, text: 'Message 3' },
-        ],
     };
     },
     async created() {

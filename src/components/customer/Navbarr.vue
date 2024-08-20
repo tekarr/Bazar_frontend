@@ -6,14 +6,13 @@
         
         <router-link class="flex items-center space-x-3 rtl:space-x-reverse" to="/">
             <img src="../../assets/icons/BAZAR (2).png" class=" h-16" alt="Bazar Logo">
-            <span class=" text-black hover:text-pink-600 transition-all duration-200 self-center text-2xl font-semibold whitespace-nowrap ">Bazar</span>
+            <span class=" text-black hover:text-pink-600 transition-all duration-200 self-center text-2xl font-semibold whitespace-nowrap ">{{ $t('Bazar') }}</span>
         </router-link>
         
         
         <div class="flex md:order-2 space-x-3 md:space-x-0 rtl:space-x-reverse">
-            <router-link to="/signin" v-if="!authenticated" class="text-white  bg-pink-600 hover:bg-pink-700 focus:ring-4 focus:outline-none focus:ring-pink-400 font-bold rounded-3xl text-sm  px-4 py-2.5 text-center ">Sign in</router-link>
-            <button v-if="authenticated" @click="toggleMenu" class="text-gray-800  bg-white border-2 hover:border-pink-600  font-bold rounded-3xl text-base  px-4 py-2.5 text-center ">menu</button>
-            <button data-collapse-toggle="navbar-sticky" type="button" class="inline-flex items-center p-2 w-10 h-10 justify-center text-sm text-gray-500 rounded-lg md:hidden hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200 " aria-controls="navbar-sticky" aria-expanded="false">
+            <router-link to="/signin" v-if="!authenticated" class="text-white  bg-pink-600 hover:bg-pink-700 focus:ring-4 focus:outline-none focus:ring-pink-400 font-bold rounded-3xl text-sm  px-4 py-2.5 text-center ">{{ $t('Sign in') }}</router-link>
+            <button v-if="authenticated" @click="toggleMenu" data-collapse-toggle="navbar-sticky" type="button" class="inline-flex items-center p-2 w-10 h-10 justify-center text-sm text-gray-500 rounded-xl  hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-pink-600 " aria-controls="navbar-sticky" aria-expanded="false">
             <span class="sr-only">Open main menu</span>
             <svg class="w-5 h-5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 17 14">
                 <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M1 1h15M1 7h15M1 13h15"/>
@@ -40,7 +39,6 @@
                     <button class="hover:text-pink-600 mb-2" @click="changeLocale('ar')">Arabic</button>
                 </div>
             </li> 
-            
             
             <li>
                 <router-link to="/cart">
@@ -84,27 +82,27 @@
                         <div class="flex justify-between">
                             <div class="grid grid-col-1">
                                 <span class="w-18 font-bold">{{username}}</span>
-                                <p v-if="vendor" class="">vendor</p>
-                                <p v-if="customer" class="">customer</p>
-                                <p v-if="admin" class="">admin</p>
+                                <p v-if="vendor" class="">{{ $t('vendor') }}</p>
+                                <p v-if="customer" class="">{{ $t('customer') }}</p>
+                                <p v-if="admin" class="">{{ $t('admin') }}</p>
                             </div>
                             
-                            <button  @click="toggleMenu" class="bg-gray-700 w-6 h-6 rounded-3xl ml-4">x</button>
+                            <button  @click="toggleMenu" class="bg-gray-700 w-6 h-6 rounded-3xl mx-4">x</button>
                         </div>
                     </li>
 
                     <hr class="my-2">
-                    <li class="py-1"><router-link to="/">Shop</router-link></li>
-                    <li class="py-1"><router-link to="/cart">Cart</router-link></li>
-                    <li class="py-1 " v-if="customer"><router-link to="/customer/profile">Profile</router-link></li>
-                    <li class="py-1 " v-if="customer"><router-link to="/customer/notifications">notification</router-link></li>
-                    <li class="py-1" v-if="customer"><router-link to="/customer/orders">Orders</router-link></li>
-                    <li class="py-1" v-if="customer"><router-link to="/customer/becomevendor" >Become vendor</router-link></li>
-                    <li class="py-1" v-if="vendor"><router-link to="/vendor">Dashboard</router-link></li>
-                    <li class="py-1" v-if="vendor"><router-link to="/store-page">Store page</router-link></li>
-                    <li class="py-1" v-if="admin"><router-link to="/admin">Dashboard</router-link></li>
-                    <li class="py-1"><router-link to="/about">About</router-link></li>
-                    <li class="py-1 cursor-pointer" @click="logout" >logout</li>
+                    <li class="py-1"><router-link to="/">{{ $t('Shop') }}</router-link></li>
+                    <li class="py-1"><router-link to="/cart">{{ $t('Cart') }}</router-link></li>
+                    <li class="py-1 " v-if="customer"><router-link to="/customer/profile">{{ $t('Profile') }}</router-link></li>
+                    <li class="py-1 " v-if="customer"><router-link to="/customer/notifications">{{ $t('notification') }}</router-link></li>
+                    <li class="py-1" v-if="customer"><router-link to="/customer/orders">{{ $t('Orders') }}</router-link></li>
+                    <li class="py-1" v-if="customer"><router-link to="/customer/becomevendor" >{{ $t('Become vendor') }}</router-link></li>
+                    <li class="py-1" v-if="vendor"><router-link to="/vendor">{{ $t('Dashboard') }}</router-link></li>
+                    <li class="py-1" v-if="admin"><router-link to="/admin"></router-link></li>
+                    <li class="py-1" v-if="admin"><router-link to="/admin/dashboard">{{ $t('Dashboard') }}</router-link></li>
+                    <li class="py-1"><router-link to="/about">{{ $t('about') }}</router-link></li>
+                    <li class="py-1 cursor-pointer" @click="logout" >{{ $t('logout') }}</li>
                 </ul>
             </div>
         </div>
@@ -141,6 +139,9 @@
         } else {
             document.body.removeAttribute('dir');
             localStorage.setItem('locale', 'en');
+        }
+        if (this.showDropdown) {
+        location.reload();
         }
         },
         applyLocaleSettings() {

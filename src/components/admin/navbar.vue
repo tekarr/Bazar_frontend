@@ -2,7 +2,7 @@
     
     <!-- navbar -->
     <div class="flex justify-between p-5  bg-white">
-        <p class="p-2 font-semibold text-lg ">{{ $route.name }}</p>
+        <p class="p-2 font-semibold text-lg ">{{ $t($route.name) }}</p>
         <div class="flex justify-between">
         </div>
     </div>
@@ -17,11 +17,6 @@
         profilMenu: false,
         nborderColor: '',
         pborderColor: '',
-        messages: [
-        { id: 1, text: 'Message 1' },
-        { id: 2, text: 'Message 2' },
-        { id: 3, text: 'Message 3' },
-        ],
     };
     },
     methods: {

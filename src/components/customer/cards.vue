@@ -79,8 +79,9 @@ data() {
     }
 },
 async created() {
+    const lang = localStorage.getItem('locale');
     try {
-    const response = await axiosClient.get('api/categories');
+    const response = await axiosClient.get(`api/categories?lang=${lang}`);
     this.categories = response.data;
     } catch (error) {
     console.error(`There was an error fetching the categories: ${error}`);

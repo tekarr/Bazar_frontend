@@ -9,7 +9,7 @@
                 <thead class="text-xs text-gray-800 rounded-3xl ">
                     <tr>
                         <th scope="col" class="px-10 py-3 text-3xl p-5 font-semibold ">
-                            Shopping Cart
+                            {{ $t('Shopping Cart') }}
                         </th>
                     </tr>
                 </thead>
@@ -27,7 +27,7 @@
                             </td>
                         </div>
                         <td>
-                            <p class="flex justify-start p-10">{{product.quantity}} available</p>
+                            <p class="flex justify-start p-10">{{product.quantity}} {{ $t('available') }}</p>
                         </td>
                         <td class="px-6 py-4">
                             <div class="flex items-center">
@@ -41,7 +41,7 @@
                             ${{ product.price }}
                         </td>
                         <td class="px-6 py-4">
-                            <button @click="removeFromCart(product.id)" class="font-medium text-base text-pink-600 focus:bg-gray-800  focus:text-white px-4 rounded-3xl no-underline">Remove</button>
+                            <button @click="removeFromCart(product.id)" class="font-medium text-base text-pink-600 focus:bg-gray-800  focus:text-white px-4 rounded-3xl no-underline">x</button>
                         </td>
                     </tr>
                 </tbody>
@@ -50,16 +50,16 @@
         </div>
         <!-- total -->
         <div>
-            <div class="text-xl text-start font-bold text-gray-900 pl-10 pb-5 pt-10 "> 
-                Subtotal : <span>${{ finalTotal() }}</span>
-                <p class="mt-0.5 text-sm text-gray-500">Shipping and taxes calculated at checkout.</p>
+            <div class="text-xl text-start mx-6 font-bold text-gray-900 pl-10 pb-5 pt-10 "> 
+                {{ $t('Subtotal') }} : <span>${{ finalTotal() }}</span>
+                <p class="mt-0.5 text-sm text-gray-500">{{ $t('Shipping and taxes calculated at checkout.') }}</p>
             </div>
             <div class="flex justify-start items-center pl-10 pb-10">
                 <div class="">
-                    <router-link to="/" class="flex items-center mr-5 rounded-3xl border-2 border-pink-300 bg-white px-10 py-3 text-base font-medium  text-gray-800 shadow-sm hover:bg-pink-600 hover:text-white">Continue Shopping</router-link>
+                    <router-link to="/" class="flex items-center mr-5 rounded-3xl border-2 border-pink-300 bg-white px-10 py-3 text-base font-medium  text-gray-800 shadow-sm hover:bg-pink-600 hover:text-white">{{ $t('Continue Shopping') }}</router-link>
                 </div>
                 <div class="">
-                    <router-link  to="/customer/checkout" v-if="finalTotal() > 0" class="flex items-center mr-5 rounded-3xl border-2 border-pink-300 bg-white px-10 py-3 text-base font-medium text-gray-800 shadow-sm hover:bg-pink-600 hover:text-white">Checkout</router-link> 
+                    <router-link  to="/customer/checkout" v-if="finalTotal() > 0" class="flex items-center mr-5 rounded-3xl border-2 border-pink-300 bg-white px-10 py-3 text-base font-medium text-gray-800 shadow-sm hover:bg-pink-600 hover:text-white">{{ $t('Checkout') }}</router-link> 
                 </div>
             </div>
         </div>
@@ -70,32 +70,26 @@
         <div class="w-full max-w-3xl mx-auto lg:p-28 md:p-28 sm:p-28">
         <div class="bg-white p-4 sm:p-8 rounded-3xl shadow-md border text-start">
             <h1 class="text-xl sm:text-2xl font-bold text-gray-800 mb-4">
-            Checkout
+            {{ $t('Checkout') }}
             </h1>
 
             <!-- Shipping Address -->
-            <div class="my-4">
-            <label for="address" class="block text-gray-700 mb-1 pl-1">Address</label>
-                <select id="address" v-model="addr" class="w-full border py-2 px-3 rounded-lg">
-                    <option value="true">Add new address</option>
-                </select>
-            </div>
 
-            <div v-if="addr" class="mb-6">
-            <h2 class="text-xl font-semibold text-gray-700 mb-4">Shipping Address</h2>
+            <div class="my-8">
+            <h2 class="text-xl font-semibold text-gray-700 mb-4">{{ $t('Shipping Address') }}</h2>
 
             <div class="mt-4">
-                <label for="address" class="block text-gray-700 mb-1">Address</label>
+                <label for="address" class="block text-gray-700 mb-1">{{ $t('Address') }}</label>
                 <input type="text" id="address" v-model="address" class="w-full rounded-lg border py-2 px-3 "/>
             </div>
 
             <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 mt-4">
                 <div>
-                    <label for="Phone" class="block text-gray-700 mb-1">Phone number</label>
+                    <label for="Phone" class="block text-gray-700 mb-1">{{ $t('Phone number') }}</label>
                     <input type="text" id="Phone" v-model="Phone" class="w-full rounded-lg border py-2 px-3"/>
                 </div>
                 <div class="mt-4 sm:mt-0">
-                    <label for="city" class="block text-gray-700 mb-1">City</label>
+                    <label for="city" class="block text-gray-700 mb-1">{{ $t('City') }}</label>
                     <input type="text" id="city" v-model="city" class="w-full rounded-lg border py-2 px-3"/>
                 </div>
             </div>
@@ -103,31 +97,31 @@
 
             <!-- Payment Information -->
             <div>
-            <h2 class="text-xl font-semibold text-gray-700 mb-4"> Payment Method</h2>
+            <h2 class="text-xl font-semibold text-gray-700 mb-4">{{ $t('Payment Method') }}</h2>
 
-            <div class="flex items-center mb-4">
+            <!-- <div class="flex items-center mb-4">
                 <input type="radio" name="paymentMethod" value="creditCard" v-model="PaymentMethod" class="mr-2 text-pink-600 w-5 h-5 rounded-full"/>
                 <label for="creditCard" class="text-gray-700">Credit Card</label>
-            </div>
+            </div> -->
 
             <div class="flex items-center mb-4">
-                <input type="radio" name="localBankCards" value="localBankCards" v-model="PaymentMethod" class="mr-2 text-pink-600 w-5 h-5 rounded-full"/>
+                <input type="radio" name="localBankCards" value="localBankCards" v-model="PaymentMethod" class="mx-2 text-pink-600 w-5 h-5 rounded-full"/>
                 <label for="localBankCards" class="text-gray-700">localBankCards</label>
             </div>
 
             <div class="flex items-center mb-4">
-                <input type="radio" name="Adfali" value="Adfali" v-model="PaymentMethod" class="mr-2 text-pink-600 w-5 h-5 rounded-full"/>
+                <input type="radio" name="Adfali" value="Adfali" v-model="PaymentMethod" class="mx-2 text-pink-600 w-5 h-5 rounded-full"/>
                 <label for="Adfali" class="text-gray-700">Adfali</label>
             </div>
 
 
             <div class="flex items-center mb-4">
-                <input type="radio" name="Sadad" value="Sadad" v-model="PaymentMethod" class="mr-2 text-pink-600 w-5 h-5 rounded-full"/>
+                <input type="radio" name="Sadad" value="Sadad" v-model="PaymentMethod" class="mx-2 text-pink-600 w-5 h-5 rounded-full"/>
                 <label for="Sadad" class="text-gray-700">Sadad</label>
             </div>
 
             <div class="flex items-center">
-                <input type="radio" name="paymentMethod" value="pay_on_deliver" v-model="PaymentMethod" class="mr-2 text-pink-600 w-5 h-5 rounded-full"/>
+                <input type="radio" name="paymentMethod" value="pay_on_deliver" v-model="PaymentMethod" class="mx-2 text-pink-600 w-5 h-5 rounded-full"/>
                 <label for="pay_on_deliver" class="text-gray-700">Pay on Delivery</label>
             </div>
 
@@ -214,11 +208,11 @@
             <div class="mt-8 flex justify-end">
                 <router-link to="/cart">
                     <button type="submit" class="bg-white text-gray-900 border-pink-400 border-2 px-4 py-2 rounded-3xl hover:bg-pink-600 hover:text-white focus:ring-4 focus:outline-none focus:ring-pink-300">
-                        Back
+                        {{ $t('Back') }}
                     </button>
                 </router-link>
-            <button type="submit" @click="sendOrder" class="bg-pink-600 text-white ml-2 px-4 py-2 rounded-3xl hover:bg-pink-700 focus:ring-4 focus:outline-none focus:ring-pink-300">
-                Place Order
+            <button type="submit" @click="sendOrder" class="bg-pink-600 text-white mx-2 px-4 py-2 rounded-3xl hover:bg-pink-700 focus:ring-4 focus:outline-none focus:ring-pink-300">
+                {{ $t('Place Order') }}
             </button>
             </div>
 
@@ -237,7 +231,6 @@ import axiosClient from '@/axios'
         export default {
         data(){
             return{
-            addr:false,
             total: 0,
             quantity: {},
             products:[],
@@ -250,7 +243,8 @@ import axiosClient from '@/axios'
             Phone: '',
             city: '',
             code: ['', '', '', ''],
-            code2: ['', '', '', '', '', '']
+            code2: ['', '', '', '', '', ''],
+            variations:[]
         }
     },
     created() {
@@ -289,6 +283,7 @@ import axiosClient from '@/axios'
             products: this.products.map(product => ({
                 product_id: product.id,
                 quantity: this.qt[product.id],
+                variations: this.variations
             })),
         };
 
@@ -341,9 +336,14 @@ import axiosClient from '@/axios'
         async fetchProducts() {
             this.products = [];
             let cart = JSON.parse(localStorage.getItem('cart')) || [];
-            for (let id of cart) {
+            for (let item of cart) {
+                let productId = item.id;
+                this.variations = item.variations;
+                console.log(productId)
+                console.log(this.variations)
+                console.log("hi")
                 try {
-                    let response = await axiosClient.get(`api/products/${id}`);
+                    let response = await axiosClient.get(`api/products/${productId}`);
                     this.products.push(response.data.data);
                 } catch (error) {
                     console.error("Error fetching products:", error);
@@ -361,10 +361,9 @@ import axiosClient from '@/axios'
         },
         removeFromCart(productId) {
             let cart = JSON.parse(localStorage.getItem('cart')) || [];
-            let index = cart.indexOf(productId);
+            let index = cart.findIndex(item => item.id === productId);
             if (index > -1) {
                 cart.splice(index, 1);
-                this.totals[productId] = 0;
             }
             localStorage.setItem('cart', JSON.stringify(cart));
             let productIndex = this.products.findIndex(product => product.id === productId);

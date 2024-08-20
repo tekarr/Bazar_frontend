@@ -18,7 +18,7 @@
                 </div>
                 <span @click="errMsg=''" class="w-8 h-8 flex items-center justify-center rounded-full cursor-pointer transition-colors hover:bg-[rgba(0,0,0,0.2)]">
                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
-                    <path stroke-linecap="round" stroke-linejoin="round" d="M6 18 18 6M6 6l12 12" />
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M6 18 18 6M6 6l12 12" />
                     </svg>
                 </span>
             </div>
@@ -51,14 +51,14 @@
             <!-- File input -->
             <div class="mb-8 mt-8 ">
                 <label class="mb-4 p-2 bg-pink-600 text-white rounded-3xl px-4 shadow-md hover:bg-pink-700 cursor-pointer">
-                Choose Images
+                {{ $t('Choose Images') }}
                 <input type="file" multiple @change="onFileChange" class="hidden" />
                 </label>
             </div>
 
             <!-- name -->
             <div class="mb-5 text-start w-80">
-                <label class="" for="storename">Name</label>
+                <label class="" for="storename">{{ $t('name') }}</label>
                 <input type="text" id="productname" v-model="product.name" placeholder="product name" 
                 class="w-full mt-4 bg-white px-10 py-2 rounded-xl focus:outline-none focus:ring focus:ring-pink-500 " required>
             </div>
@@ -66,7 +66,7 @@
 
             <!-- Description -->
             <div class="mb-2 text-start ">
-                <div><label class=" " for="storename" >Description</label></div>
+                <div><label class=" " for="storename" >{{ $t('Description') }}</label></div>
                 <textarea v-model="product.description"
                     class="w-full max-w-lg p-4 bg-white my-4 border rounded-lg border-gray-300 shadow-sm focus:outline-none focus:ring focus:ring-pink-500" rows="5" 
                     placeholder="Enter your text here...">
@@ -78,13 +78,13 @@
             <!-- Price -->
             <div class="flex justify-between w-96">
                 <div>
-                    <label for="price" class="text-gray-700">Price $:</label>
+                    <label for="price" class="text-gray-700">{{ $t('price') }} $:</label>
                     <input type="number" min="1" id="price" v-model="product.price" placeholder="$" required class="block w-full px-4 py-2 mt-2 mb-4 border border-gray-300 rounded-md focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm">
                     <p class="mt-2 mb-2 text-gray-500 hidden">Entered price: {{ product.price }}</p>
                 </div>
 
                 <div class="">
-                    <label for="quantity" class="text-gray-700">Quantity:</label>
+                    <label for="quantity" class="text-gray-700">{{ $t('Quantity') }}:</label>
                     <input type="number" min="1" id="quantity" v-model="product.quantity" required class="block w-full px-4 py-2 mt-2 mb-4 border border-gray-300 rounded-md focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm">
                     <p class="mt-2 text-gray-500 hidden">Entered price: {{ product.quantity }}</p>  
                 </div>
@@ -92,7 +92,7 @@
 
             <!-- catagories -->
             <div class="">
-                <p class="">Category</p>    
+                <p class="">{{ $t('Category') }}</p>    
                 <select v-model="product.category_id" @input="select" class="p-2 my-4 px-4  border-2 border-pink-600 rounded-xl">
                     <option disabled value="">Please select one</option>
                     <option v-for="(category, index) in categories" :key="index" :value="category.id">
@@ -104,7 +104,7 @@
 
             <!-- Status -->
             <div class="mb-5 text-start w-80">
-            <label for="status">Status</label><br>
+            <label for="status">{{ $t('Status') }}</label><br>
             <select v-model="product.status"  class="p-2 my-4 px-4  border-2 border-pink-600 rounded-xl" required>
                     <option disabled value="">Please select onese</option>
                     <option value="active">active</option>
@@ -149,7 +149,7 @@
 
             <hr>
             
-        <button type="submit" class=" m-5 text-white bg-pink-600 hover:bg-gray-800 focus:ring-4 focus:outline-none focus:ring-pink-300 font-medium rounded-3xl text-sm px-5 py-2.5 text-center ">Add</button>
+        <button type="submit" class=" m-5 text-white bg-pink-600 hover:bg-gray-800 focus:ring-4 focus:outline-none focus:ring-pink-300 font-medium rounded-3xl text-sm px-5 py-2.5 text-center ">{{ $t('Add product') }}</button>
     </form>
     </div>
 

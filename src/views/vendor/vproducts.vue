@@ -18,22 +18,22 @@
                 <thead class="text-xs text-gray-700 uppercase bg-gray-50 ">
                     <tr>
                         <th scope="col" class="px-6 py-3 text-start">
-                            id
+                            #
                         </th>
                         <th scope="col" class="px-6 py-3 text-start">
-                            name
+                            {{ $t('name') }}
                         </th>
                         <th scope="col" class=" py-3 text-center">
-                            Quantity
+                            {{ $t('Quantity') }}
                         </th>
                         <th scope="col" class="px-6 py-3 text-center">
-                            category
+                            {{ $t('category') }}
                         </th>
                         <th scope="col" class="px-6 py-3 text-center">
-                            price
+                            {{ $t('price') }}
                         </th>
                         <th scope="col" class="px-6 py-3 text-center">
-                            status
+                            {{ $t('status') }}
                         </th>
                         <th scope="col" class="px-6 py-3">
                         
@@ -71,7 +71,7 @@
             </table>
 
             <div class="ml-10 mt-4 pb-4"> 
-                <router-link to="/vendor/products/add" class=" ml-2 p-2 px-4 rounded-full bg-pink-600 text-white cursor-pointer">Add product</router-link>
+                <router-link to="/vendor/products/add" class=" ml-2 p-2 px-4 rounded-full bg-pink-600 text-white cursor-pointer">{{ $t('Add product') }}</router-link>
             </div>
 
         </div>

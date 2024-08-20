@@ -53,13 +53,31 @@
                 <p class="pb-1 text-base md:text-start w-80">{{ product.description }}</p>
                 <div class="flex flex-col md:flex-row justify-start w-80 p-1 pt-10">
                     <button  class="text-pink-600 hover:text-white border border-pink-600 bg-white hover:bg-pink-600 focus:ring-4 focus:outline-none focus:ring-pink-300 rounded-full text-base font-medium px-5 py-2.5 text-center me-3 mb-3 "
-                    @click="addToCart(product)"> Add to Cart</button>
+                    @click="addToCart(product)">{{ $t('Add to Cart') }}</button>
                 </div>
             </div>
         </div>
+
     </div>
 
-    <footer-2/>
+
+        <!-- varations -->
+        <div class="flex justify-center mb-16">
+        <div class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-4 justify-items-center ">
+            <div v-for="(attribute, index) in variationAttributes" :key="index" class="bg-white rounded-3xl p-6 shadow-md w-full md:w-80 xl:w-64 mx-4 ">
+            <h3 class="text-xl font-bold mb-2">{{ attribute }}</h3>
+            <ul class="list-none mb-0 ">
+                <li v-for="variation in getVariationsByAttribute(attribute)" :key="variation.variation_id" class="flex items-center mb-2 ">
+                <input type="radio" :id="variation.variation_id" :value="variation.value" v-model="selectedVariations[attribute]" class="mr-2">
+                <label :for="variation.variation_id" class="text-gray-600 mx-2">{{ variation.value }}</label>
+                </li>
+            </ul>
+            </div>
+        </div>
+        </div>
+
+
+
 </template>
 
 <script>
@@ -73,6 +91,13 @@ import axiosClient from '@/axios';
             product: [],
             success: false,
             error: false,
+            selectedVariations: {},
+            variationAttributes: [],
+            selectedVariation: null,
+            props: {
+                attribute: String,
+                variations: Array
+            },
             };
         },
 
@@ -82,6 +107,7 @@ import axiosClient from '@/axios';
             const response = await axiosClient.get(`api/products/${id}`);
             this.product = response.data.data;
             this.images = this.product.images;
+            this.variationAttributes = [...new Set(this.product.variations.map(v => v.attribute))]
             console.log(this.product);
         } catch (error) {
             console.error(`There was an error fetching the product: ${error}`);
@@ -91,26 +117,50 @@ import axiosClient from '@/axios';
         }
         },
         methods:{
+            getVariationsByAttribute(attribute) {
+                return this.product.variations.filter(v => v.attribute === attribute)
+            },
             addToCart(product) {
             // Store product ID in localStorage
             let cartItem = localStorage.getItem('cart');
             let cart = [];
             if (cartItem) {
                 try {
-                    cart = JSON.parse(cartItem);
+                    cart = JSON.parse(cartItem)|| [];
                 } catch (error) {
                     console.error('Error parsing cart data from localStorage:', error);
+                    cart = [];
                 }
             }
-            if (!cart.includes(product.id)) {
-            cart.push(product.id);
-            localStorage.setItem('cart', JSON.stringify(cart));
-            console.log(cart);
-            this.success = true;
-            }else{
-            this.error = true;
-            }
 
+            const selectedItem = {
+                id: product.id,
+                variations: Object.keys(this.selectedVariations).map((attribute) => ({
+                attribute,
+                value: this.selectedVariations[attribute],
+                })),
+            };
+
+            const existingItem = cart.find((item) => {
+                return (
+                item.id === product.id &&
+                item.variations.every((variation, index) => {
+                    return (
+                    variation.attribute === selectedItem.variations[index].attribute &&
+                    variation.value === selectedItem.variations[index].value
+                    );
+                })
+                );
+            });
+
+                if (!existingItem) {
+                cart.push(selectedItem);
+                localStorage.setItem('cart', JSON.stringify(cart));
+                console.log(cart);
+                this.success = true;
+            } else {
+                this.error = true;
+            }
         },
             previousImage() {
             let index = this.images.indexOf(this.mainImage);

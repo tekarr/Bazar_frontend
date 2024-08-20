@@ -17,19 +17,19 @@
                 <thead class="text-xs text-gray-700 uppercase bg-gray-50 ">
                     <tr>
                         <th scope="col" class="px-6 py-3 text-start">
-                            id
+                            #
                         </th>
                         <th scope="col" class="px-6 py-3">
-                            name
+                            {{ $t('name') }}
                         </th>
                         <th scope="col" class="px-6">
-                            category
+                            {{ $t('category') }}
                         </th>
                         <th scope="col" class="px-6">
-                            products
+                            {{ $t('Products') }}
                         </th>
                         <th scope="col" class="px-6">
-                            orders
+                            {{ $t('Orders') }}
                         </th>
                         <th scope="col" class="">
                             
@@ -55,7 +55,7 @@
                         </td>
                         <td class="px-1 py-4 flex justify-end">
                             <div class="px-2 flex justify-center items-center">
-                                <button  @click="editStore(store.id)" class="px-4 py-2 mt-2  bg-gray-100 hover:bg-pink-600 hover:text-white rounded-3xl">Edit</button>
+                                <button  @click="editStore(store.id)" class="px-4 py-2 mt-2  bg-gray-100 hover:bg-pink-600 hover:text-white rounded-3xl">{{ $t('Edit') }}</button>
                                 <button @click="showConfirmDialog(store.id)" class="px-4 py-2 mx-2 mt-2 rounded-3xl text-base hover:bg-pink-600 bg-gray-700 text-white">x</button> 
                             </div>
                         </td>

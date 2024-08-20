@@ -16,7 +16,7 @@
                     <div class="my-2">
                         <h2 class="text-4xl font-bold"><span>{{statistics.total_users}}</span></h2>
                     </div>
-                    <p class="mt-2 font-sans text-base font-medium text-gray-500">Users</p>
+                    <p class="mt-2 font-sans text-base font-medium text-gray-500">{{ $t('Users') }}</p>
                 </div>
             </div>
 
@@ -32,7 +32,7 @@
                     <div class="my-2">
                         <h2 class="text-4xl font-bold"><span class="">{{statistics.total_sales}}</span></h2>
                     </div>
-                    <p class="mt-2 font-sans text-base font-medium text-gray-500">Sales</p>
+                    <p class="mt-2 font-sans text-base font-medium text-gray-500">{{ $t('Sales') }}</p>
                 </div>
             </div>
 
@@ -47,7 +47,7 @@
                     <div class="my-2">
                         <h2 class="text-4xl font-bold"><span class="">{{statistics.total_products}}</span></h2>
                     </div>
-                    <p class="mt-2 font-sans text-base font-medium text-gray-500">Products</p>
+                    <p class="mt-2 font-sans text-base font-medium text-gray-500">{{ $t('Products') }}</p>
                 </div>
             </div>
 
@@ -62,7 +62,7 @@
                     <div class="my-2">
                         <h2 class="text-4xl font-bold"><span class="">{{statistics.total_orders}}</span></h2>
                     </div>
-                    <p class="mt-2 font-sans text-base font-medium text-gray-500">Orders</p>
+                    <p class="mt-2 font-sans text-base font-medium text-gray-500">{{ $t('Orders') }}</p>
                 </div>
             </div>
 
@@ -77,7 +77,7 @@
                     <div class="my-2">
                         <h2 class="text-4xl font-bold"><span class="">{{statistics.total_stores}}</span></h2>
                     </div>
-                    <p class="mt-2 font-sans text-base font-medium text-gray-500">Stores</p>
+                    <p class="mt-2 font-sans text-base font-medium text-gray-500">{{ $t('Stores') }}</p>
                 </div>
             </div>
 

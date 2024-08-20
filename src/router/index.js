@@ -194,7 +194,7 @@ const routes = [
     children: [
       {
         path: '/admin/dashboard',
-        name: 'Dashboard',
+        name: 'Dashboard ',
         component: dashboard
       },
       {
@@ -245,7 +245,7 @@ const routes = [
       },
       {
         path: '/admin/orders',
-        name: 'Orders',
+        name: 'Orders ',
         component: orders
       },
       {
@@ -260,7 +260,7 @@ const routes = [
       },
       {
         path: '/admin/profile',
-        name: 'Profile',
+        name: 'Profile ',
         component: profile
       },
     ]
@@ -279,12 +279,12 @@ const routes = [
     children: [
       {
         path: '/vendor/dashboard',
-        name: 'Dashboard ',
+        name: 'Dashboard' ,
         component: vdashboard
       },
       {
         path: '/vendor/notification',
-        name: 'Notification ',
+        name: 'Notifications',
         component: vnotification
       },
       {
@@ -294,7 +294,7 @@ const routes = [
       },
       {
         path: '/vendor/products/add',
-        name: 'Add Product',
+        name: 'Add product',
         component: Addproduct
       },
       {
@@ -310,7 +310,7 @@ const routes = [
       },
       {
         path: '/vendor/orders',
-        name: 'Orders ',
+        name: 'Orders',
         component: vorders
       },
       {
@@ -320,7 +320,7 @@ const routes = [
       },
       {
         path: '/vendor/profile',
-        name: 'Profile ',
+        name: 'Profile',
         component: vprofile
       },
     ]

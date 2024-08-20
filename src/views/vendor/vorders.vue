@@ -6,19 +6,19 @@
                 <thead class="text-xs text-gray-700 uppercase bg-gray-50 ">
                     <tr>
                         <th scope="col" class="px-6 py-3">
-                            id
+                            # 
                         </th>
                         <th scope="col" class="px-6 py-3 text-center">
-                            payment_method
+                            {{ $t('payment_method') }}
                         </th>
                         <th scope="col" class="px-6 py-3 text-center">
-                            payment_status
+                            {{ $t('payment_status') }}
                         </th>
                         <th scope="col" class="px-6 py-3 text-center">
-                            created_att
+                            {{ $t('created') }}
                         </th>
                         <th scope="col" class="px-6 py-3 text-center">
-                            status
+                            {{ $t('status') }}
                         </th>
                         <th scope="col" class="px-6 py-3 text-center">
 
@@ -28,7 +28,7 @@
                 <tbody>
                     <tr v-if="orders.length === 0">
                         <td colspan="6" class="text-center pt-4">
-                            <p class="text-lg font-bold">No orders found.</p>
+                            <p class="text-lg font-bold">{{ $t('No orders found.') }}</p>
                         </td>
                     </tr>
                     <tr v-for="order in orders" :key="order.id" class="bg-white " >
@@ -48,7 +48,7 @@
                             {{ order.status }}
                         </td>
                         <td class="text-center">
-                            <button @click="vieworder(order.id)" class="px-4 py-2 mt-2  bg-gray-100 hover:bg-pink-600 hover:text-white rounded-3xl">view</button>
+                            <button @click="vieworder(order.id)" class="px-4 py-2 mt-2  bg-gray-100 hover:bg-pink-600 hover:text-white rounded-3xl">view{{ $t('view') }}</button>
                         </td>
                     </tr>
                 </tbody>

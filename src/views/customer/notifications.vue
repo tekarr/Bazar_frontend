@@ -1,14 +1,14 @@
 <template>
-    <div class="relative overflow-x-auto mt-40 ml-10">
-        <p class="pl-4 text-2xl text-gray-900 my-10">Notifications</p>
+    <div class="relative overflow-x-auto mt-40 mx-10">
+        <p class="px-4 text-2xl text-gray-900 my-10">{{ $t('Notifications') }}</p>
     <table class="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400 rounded-3xl overflow-hidden">
         <thead class="text-xs  text-gray-700 uppercase bg-gray-50 ">
         <tr>
             <th scope="col" class="px-6 py-3 ">
-            Message
+            {{ $t('Message') }}
             </th>
             <th scope="col" class="px-6 py-3 ">
-            Time
+            {{ $t('Time') }}
             </th>
             <!-- <th scope="col" class="px-6 py-3">
             Status
