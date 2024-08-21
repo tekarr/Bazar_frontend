@@ -22,9 +22,26 @@
                 </div>
                 <input type="search" v-model="searchvalue" id="default-search" class="block w-full p-3 ps-10 text-sm text-gray-900 border-2 border-gray-300 rounded-3xl bg-gray-50 focus:outline-none focus:ring focus:ring-pink-500 " placeholder="Search Stores, Products..." required @input="search"/>
             </div>
-        </div>    
-
-
+        </div> 
+        
+        
+        <!-- Filter options -->
+        <div class="flex flex-wrap lg:flex-nowrap">
+        <div class="w-full lg:w-1/4 xl:w-1/5 p-4 lg:p-6 shadow-md bg-white rounded-xl">
+            <h2 class="text-lg font-bold mb-4">Filters</h2>
+            <div v-for="attribute in attributes" :key="attribute.name" class="mb-4">
+            <div class="bg-white shadow-md rounded-3xl p-4">
+                <h3 class="text-sm font-bold mb-2">{{ attribute.name }}</h3>
+                <div v-for="value in attribute.values" :key="value" class="flex items-center mb-2">
+                <input type="radio" :id="`${attribute.name}-${value}`" :name="attribute.name" :value="value" @input="updateFilter(attribute.name, value)" class="mr-2">
+                <label :for="`${attribute.name}-${value}`" class="text-sm">{{ value }}</label>
+                </div>
+            </div>
+            </div>
+            <button @click="resetFilters" class="bg-pink-600 hover:bg-pink-700 text-white font-bold py-2 px-4 rounded-full">Reset Filters</button>
+        </div>
+        <!-- Products list will go here -->
+        <div class="w-full lg:w-3/4 xl:w-4/5 p-4 lg:p-6">
         <!-- Stores -->
         
         <div ref="specificSection" class="grid grid-cols-2 md:grid-cols-1 lg:grid-cols-3 gap-10 p-4 md:p-8" :key="activePage"> 
@@ -40,6 +57,9 @@
             </router-link>
         </div>
         
+        </div>
+        </div>
+
     </div>
 
     <!-- pages -->
@@ -75,7 +95,50 @@ data() {
     stores: [],
     selectedCategoryId: null,
     activePage: 1,
-    searchvalue:''
+    searchvalue:'',
+    filters: {},
+    attributes: [
+        {
+        name: "Brand",
+        values: ["adidas", "nike", "puma"]
+        },
+        {
+        name: "Color",
+        values: ["Beige", "Black", "Blue", "Bronze", "Brown", "Deep", "Gold", "Gray", "Green", "Ivory", "Natural", "Red", "Rose", "Silver", "White", "Yellow"]
+        },
+        {
+        name: "Material",
+        values: ["Canvas", "Cotton", "Fabric", "Glass", "Gold", "Leather", "Metal", "Plastic", "Platinum", "Polyester", "Rose Gold", "Silver", "Synthetic", "Wood", "Non-organic", "Organic"]
+        },
+        {
+        name: "Packaging",
+        values: ["Bag", "Bottle", "Box", "Can"]
+        },
+        {
+        name: "Size",
+        values: ["1kg", "2kg", "500g", "5kg", "Extra Large", "L", "Large", "M", "Medium", "S", "Small", "XL"]
+        },
+        {
+        name: "Storage",
+        values: ["128GB", "16GB", "32GB", "64GB"]
+        },
+        {
+        name: "Style",
+        values: ["Modern", "Rustic", "Traditional"]
+        },
+        {
+        name: "Type",
+        values: ["Blush", "Bracelet", "Concealer", "Earrings", "Foundation", "Mascara", "Necklace", "Ring"]
+        },
+        {
+        name: "Warranty",
+        values: ["1 year", "2 years", "3 years"]
+        },
+        {
+        name: "Weight",
+        values: ["1kg", "2kg", "3kg", "4kg", "5kg", "6kg", "7kg", "8kg", "9kg"]
+        }
+    ]
     }
 },
 async created() {
@@ -104,7 +167,35 @@ methods: {
             console.error(`There was an error fetching the stores: ${error}`);
         }
     },
-    changePage(page) {
+    updateFilter(attributeName, value) {
+    this.filters[attributeName] = value;
+    this.filterProducts();
+    },
+    async filterProducts() {
+    try {
+        const queryParams = {};
+        for (const attributeName in this.filters) {
+        queryParams[`variations[${attributeName}]`] = this.filters[attributeName];
+        }
+        const queryString = Object.keys(queryParams).map(key => `${key}=${queryParams[key]}`).join('&');
+        const response = await axiosClient.get(`api/products?${queryString}`);
+        this.stores = response.data.data;
+        console.log(this.stores)
+    } catch (error) {
+        console.error(`There was an error fetching the products: ${error}`);
+    }
+    // ...
+    },
+    resetFilters() {
+    this.filters = {};
+    // Reset radio button selections
+    const radioButtons = document.querySelectorAll('input[type="radio"]');
+    radioButtons.forEach(button => {
+        button.checked = false;
+    });
+    this.filterProducts();
+    },
+        changePage(page) {
         this.activePage = page;
         this.allCategories();
         window.scrollTo({ top: 400 });
