@@ -106,7 +106,7 @@ export default {
     },
     async created() {
     try {
-        const response = await axiosClient.get('api/categories');
+        const response = await axiosClient.get('api/customer/categories?type=store');
         this.categories = response.data;
         const categoryNames = this.categories.map(category => category.id);
         //console.log(categoryNames);
