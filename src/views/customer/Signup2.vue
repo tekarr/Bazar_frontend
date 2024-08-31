@@ -54,6 +54,20 @@
       </div>
 
       <div>
+        <label for="address" class="block text-sm font-medium leading-6 text-gray-900">{{ $t('Address') }}</label>
+        <div class="mt-2">
+          <input v-model="user.address" id="address" name="address" type="text"  required="" class="block px-4 w-full rounded-lg border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6" />
+        </div>
+      </div>
+
+      <div>
+        <label for="Phone" class="block text-sm font-medium leading-6 text-gray-900">{{ $t('Phone number') }}</label>
+        <div class="mt-2">
+          <input v-model="user.phone" id="Phone" name="Phone" type="text"  required="" class="block px-4 w-full rounded-lg border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6" />
+        </div>
+      </div>
+
+      <div>
         <button type="submit" class="flex w-full justify-center rounded-lg bg-pink-600 px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-gray-700 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">{{ $t('Sign up') }}</button>
       </div>
     </form>
@@ -79,7 +93,9 @@ const user = ref({
   name: '',
   email: '',
   password: '',
-  password_confirmation: ''
+  password_confirmation: '',
+  address:'',
+  phone:''
   // password_confirmation: ''
 });
 const register = async (ev) => {
