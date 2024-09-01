@@ -49,6 +49,10 @@
 
         <!-- id -->
             <p class="">Store ID : {{ store.id }}</p>
+            <p class="">   <router-link :to="{ name: 'EditUser', params: { id: store.user } }" class='text-blue-500 hover:text-pink-700 hover:underline'>
+            User ID  {{store.user}}
+            </router-link>
+            </p>
 
             <hr class="my-4">
 

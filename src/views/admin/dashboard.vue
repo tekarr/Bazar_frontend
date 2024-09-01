@@ -6,7 +6,7 @@
         <div class="grid grid-cols-4 gap-4 mb-4 md:grid-cols-1 lg:grid-cols-3 rounded-3xl ">
 
             <!-- client card -->
-            <div class="flex justify-center">
+            <router-link to="/admin/users" class="flex justify-center">
                 <div class="w-80 mt-2 rounded-3xl bg-white p-10 hover:shadow-2xl transition-all aspect">
                     <div class="h-10">
                         <svg class="h-full fill-white stroke-blue-600" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
@@ -18,10 +18,10 @@
                     </div>
                     <p class="mt-2 font-sans text-base font-medium text-gray-500">{{ $t('Users') }}</p>
                 </div>
-            </div>
+            </router-link>
 
             <!-- Sales card -->
-            <div class="flex justify-center">
+            <router-link to="/admin/" class="flex justify-center">
                 <div class="w-80 mt-2 rounded-3xl bg-white p-10  hover:shadow-2xl transition-all aspect">
                     <div class="h-10">
                         <svg class="h-full fill-white"  stroke-width="1.5" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -34,10 +34,10 @@
                     </div>
                     <p class="mt-2 font-sans text-base font-medium text-gray-500">{{ $t('Sales') }}</p>
                 </div>
-            </div>
+            </router-link>
 
             <!-- vendor card -->
-            <div class="flex justify-center">
+            <router-link to="/admin/products" class="flex justify-center">
                 <div class="w-80 mt-2 rounded-3xl bg-white p-10 hover:shadow-2xl transition-all aspect">
                     <div class="h-10">
                         <svg  class="flex-shrink-0 w-8 h-8 hover:text-gray-100 transition duration-75  group-hover:text-gray-100 " fill="currentColor" height="48" viewBox="0 0 48 48" width="48" xmlns="http://www.w3.org/2000/svg"><path d="m0 0h48v48h-48z" fill="currentColor" fill-opacity=".01"/>
@@ -49,10 +49,10 @@
                     </div>
                     <p class="mt-2 font-sans text-base font-medium text-gray-500">{{ $t('Products') }}</p>
                 </div>
-            </div>
+            </router-link>
 
             <!-- Orders card -->
-            <div class="flex justify-center">
+            <router-link to="/admin/orders" class="flex justify-center">
                 <div class="w-80 mt-2 rounded-3xl bg-white p-10 hover:shadow-2xl transition-all aspect">
                     <div class="h-10 ">
                         <svg class="flex-shrink-0 w-14 h-14 " enable-background="new 0 0 100 100" height="100" viewBox="0 0 100 110" width="100" xmlns="http://www.w3.org/2000/svg" fill="currentColor"><g>
@@ -64,10 +64,10 @@
                     </div>
                     <p class="mt-2 font-sans text-base font-medium text-gray-500">{{ $t('Orders') }}</p>
                 </div>
-            </div>
+            </router-link>
 
             <!-- Stores card -->
-            <div class="flex justify-center">
+            <router-link to="/admin/stores" class="flex justify-center">
                 <div class="w-80 mt-2 rounded-3xl bg-white p-10 hover:shadow-2xl transition-all aspect ">
                     <div class="h-10">
                         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="flex-shrink-0  h-10 ">
@@ -79,7 +79,7 @@
                     </div>
                     <p class="mt-2 font-sans text-base font-medium text-gray-500">{{ $t('Stores') }}</p>
                 </div>
-            </div>
+            </router-link>
 
         </div>
         </div>

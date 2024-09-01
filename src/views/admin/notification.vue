@@ -35,21 +35,26 @@
 import Sidbar from '@/components/admin/Sidbar.vue'
 import Navbar from '@/components/admin/navbar.vue'
 import axiosClient from '@/axios';
+import {mapState} from "vuex";
 
     export default {
     components: { Sidbar, Navbar },
     data(){
         return{
-            notifications: [],
+            // notifications: [],
             unread:''
         }
     },
+      computed: {
+      ...mapState(['notifications'])
+      },
     async created() {
     try {
-        const response = await axiosClient.get('api/admin/notifications');
+        // const response = await axiosClient.get('api/admin/notifications');
 
-        this.notifications  = response.data.data;
-        this.unread = response.data.data.filter(message => message.read_at === 'Unread').length
+        // this.notifications  = response.data.data;
+        this.unread = notifications.filter(message => message.read_at === 'Unread').length
+      console.log(this.unread)
         } catch (error) {
         console.error(error);
         }
@@ -61,10 +66,13 @@ import axiosClient from '@/axios';
         const resource = urlParts[1];
 
         // Construct the new URL with the admin prefix
-        const url = `/admin/${resource}`;
+      const url = `/admin/${resource}`;
         this.$router.push(url);
         }
-    }
+    },
+      mounted() {
+        this.$store.dispatch('fetchNotifications');
+      }
 
         
     }

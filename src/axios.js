@@ -22,4 +22,22 @@ axiosClient.interceptors.request.use(config => {
     return Promise.reject(error);
 });
 
+axiosClient.interceptors.response.use(
+    response => response,
+    error => {
+        if (error.response && error.response.status === 401) {
+            console.error('Unauthorized access - redirecting to login.');
+            localStorage.removeItem('token');
+        } else if (error.response && error.response.status === 403) {
+            console.error('Forbidden access.');
+        } else {
+            // Handle other types of errors
+            console.error('An unexpected error occurred:', error);
+        }
+
+
+        return Promise.reject(error);
+    }
+);
+
 export default axiosClient;

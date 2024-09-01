@@ -3,7 +3,7 @@
 
 
 
-    <p class="text-2xl font-bold pt-16  pl-24 text-start ">Order : #{{ orders.id }}<br></p>
+    <p class="text-2xl font-bold pt-16   text-start ">Order : #{{ orders.id }}<br></p>
 
     <!-- error massege -->
     <div v-if="errMsg" class="flex items-center justify-between p-3 my-2 mb-6 bg-red-600 text-white rounded">
@@ -41,8 +41,24 @@
                     invoices
     </router-link>
     </div>
+  <div class="bg-white p-2 border border-gray-200 rounded-lg shadow-sm mb-2">
 
-    <div  class="relative overflow-x-auto rounded-3xl sm:rounded-lg mt-2  mx-20 z-10 ">
+    <div class="flex gap-2 flex-nowrap items-center whitespace-nowrap">
+      <input v-model="filters.id" type="text" placeholder="Filter by ID" class="p-2 border rounded w-full sm:w-32">
+      <input v-model="filters.name" type="text" placeholder="Filter by name" class="p-2 border rounded w-full sm:w-32">
+      <input v-model="filters.store_id" type="text" placeholder="Filter by store" class="p-2 border rounded w-full sm:w-32">
+      <select v-model="filters.product_status" class="p-2 border rounded w-full sm:w-48">
+        <option value="">Select Status</option>
+        <option value="pending">Pending</option>
+        <option value="in_stock">In Stock</option>
+      </select>
+
+    </div>
+
+  </div>
+
+    <div  class="relative overflow-x-auto rounded-3xl sm:rounded-lg mt-2  mx-4 z-10 ">
+
         <table class="w-full text-base  text-gray-500 rounded-3xl  " >
             <thead class="bg-gray-800 " >
                 <tr class="text-gray-50 text-center">
@@ -55,6 +71,7 @@
                     <td></td>
                 </tr>
                 <tr class="text-gray-50 text-center">
+
                     <td></td>
                     <td class="font-normal  pb-5 ">{{ orders.created_at }}</td>
                     <td class="font-normal pb-5 ">{{ orders.id }}</td>
@@ -71,9 +88,15 @@
                     </td>
                     <td></td>
                 </tr>
+
+
             </thead>
             <tbody>
-                <div class="my-4 text-center font-bold text-lg"></div>   
+
+                <div class="my-4 text-center font-bold text-lg">
+
+                </div>
+
                 <tr class="text-center">
                     <th scope="col" class="px-6 py-3 w-10">
                         Product id
@@ -82,7 +105,7 @@
                         Product name
                     </th>
                     <th scope="col" class="px-6 py-3 w-80">
-                        Store name
+                        Store ID
                     </th>
                     <th scope="col" class="px-6 py-3">
                         Price
@@ -97,7 +120,9 @@
                         
                     </th>
                 </tr>
-                <tr class="border-b border-gray-200 text-center" v-for="product in orders.products" :key="product.id">
+
+
+                <tr class="border-b border-gray-200 text-center" v-for="product in filteredProducts" :key="product.product_id">
                     <td>
                         {{ product.product_id }}
                     </td>
@@ -105,7 +130,9 @@
                         {{ product.product_name }}
                     </th>
                     <td>
-                        {{ product.store_name }}
+                      <router-link :to="{ name: 'EditStore', params: { id: product.store_id } }" class='text-blue-500 hover:text-pink-700 hover:underline'>
+                        {{product.store_id}}
+                      </router-link>
                     </td>
                     <td class="px-6 py-4">
                         {{ product.price }}
@@ -150,7 +177,13 @@ import axiosClient from '@/axios';
                 scMsg: '',
                 originalOrderStatus: '',
                 originalProductStatuses: [],
+              filters: {
+                id: '',
+                store_id: '',
+                name: '',
+                product_status: '',
             }
+        }
         },
         computed: {
             hasChanges() {
@@ -159,12 +192,21 @@ import axiosClient from '@/axios';
                 this.orders.products.some((product, index) => product.product_status !== this.originalProductStatuses[index])
             );
             },
+          filteredProducts(){
+            return this.products.filter(product => {
+                return product.product_id.toString().includes(this.filters.id) &&
+                product.store_id.toString().includes(this.filters.store_id) &&
+                product.product_name.toLowerCase().includes(this.filters.name.toLowerCase()) &&
+                   product.product_status.toLowerCase().includes(this.filters.product_status.toLowerCase())
+                    ;
+            });
+          }
         },    
         async created() {
             const id = this.$route.params.id;
             try {
             const response = await axiosClient.get(`api/admin/orders/${id}`);
-            this.products = response.data.products;
+            this.products = response.data.data.products;
             this.orders = response.data.data;
             this.originalOrderStatus = this.orders.order_status;
             this.originalProductStatuses = this.orders.products.map(product => product.product_status);
@@ -175,6 +217,7 @@ import axiosClient from '@/axios';
             console.error(`There was an error fetching the order: ${error}`);
             }
         },
+
         methods: {
             async updateStatus() {
             const orderId = this.$route.params.id;
@@ -224,7 +267,9 @@ import axiosClient from '@/axios';
                 }
             });
         },
-}}
+}
+
+    }
 
 </script>
 

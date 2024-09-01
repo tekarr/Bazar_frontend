@@ -12,6 +12,21 @@
         </div>
     </div>
 
+  <div class="bg-white p-2 border border-gray-200 rounded-lg shadow-sm mb-2">
+    <router-link to="/admin/products/add">
+      <button class="px-4 mx-4 py-2 m-2 bg-pink-600 rounded text-white">{{ $t('Add Product') }}</button>
+    </router-link>
+
+    <div class="flex gap-2 flex-nowrap items-center whitespace-nowrap">
+      <input v-model="filters.id" type="text" placeholder="Filter by ID" class="p-2 border rounded w-full sm:w-32">
+      <input v-model="filters.store" type="text" placeholder="Filter by store" class="p-2 border rounded w-full sm:w-32">
+      <input v-model="filters.name" type="text" placeholder="Filter by name" class="p-2 border rounded w-full sm:w-32">
+      <select v-model="filters.category" class="p-2 border rounded w-full sm:w-48">
+        <option value="">Select Category</option>
+        <option v-for="category in categories" :key="category" :value="category.name">{{ category.name }}</option>
+      </select>
+    </div>
+  </div>
     <!-- products table -->
     <div class="relative overflow-x-auto">
         <table class="w-full text-sm text-left rtl:text-right text-gray-700  rounded-3xl overflow-hidden m-4">
@@ -20,6 +35,12 @@
                     <th scope="col" class="px-6 py-3 text-start">
                         #
                     </th>
+                  <th scope="col" class="px-6 py-3 text-start">
+                        image
+                    </th>
+                  <th scope="col" class="px-6 py-3 text-center">
+                    store
+                  </th>
                     <th scope="col" class="px-6 py-3 text-start">
                         {{ $t('name') }}
                     </th>
@@ -29,22 +50,36 @@
                     <th scope="col" class="px-6 py-3 text-center">
                         {{ $t('category') }}
                     </th>
+
                     <th scope="col" class="px-6 py-3 text-center">
                         {{ $t('price') }}
                     </th>
+                  <th scope="col" class="px-6 py-3 text-center">
+                    quantity
+                  </th>
                     <th scope="col" class="px-6 py-3 text-center">
                         {{ $t('created') }}
                     </th>
+
                     <th scope="col" class="px-6 py-3">
                     
                     </th>
                 </tr>
             </thead>
             <tbody>
-                <tr v-for="product in products" :key="product.id" class="bg-white " >
+                <tr v-for="product in filteredProducts" :key="product.id" class="bg-white " >
                     <td scope="row" class="px-6 py-8 font-medium text-base w-20">
                         {{product.id}}
                     </td>
+                  <td scope="row" class="px-4 py-4 text-base w-10">
+                    <img :src="product.image[0]?.image" alt="Product Image" />
+                  </td>
+                  <td scope="row" class="px-6 py-8  text-base w-40">
+                    <router-link :to="{ name: 'EditStore', params: { id: product.store_id } }" class='text-blue-500 hover:text-pink-700 hover:underline'>
+                      {{product.store_id}}
+                    </router-link>
+                  </td>
+
                     <td scope="row" class="px-6 py-8  text-base w-40">
                         {{product.name}}
                     </td>
@@ -55,8 +90,12 @@
                         {{ product.category }}
                     </td>
                     <td class="px-6 text-center ">
-                        {{ product.price }} $
+                        {{ product.price }}$
                     </td>
+                  <td class="px-6 text-center">
+                        {{ product.quantity }}
+                    </td>
+
                     <td class="px-6 text-center">
                         {{ product.created_at }}
                     </td>
@@ -80,16 +119,26 @@
 import axiosClient from "@/axios";
 import Sidbar from '@/components/admin/Sidbar.vue'
 import Navbar from '@/components/admin/navbar.vue'
+import {mapState} from "vuex";
 export default {
 components: { Sidbar, Navbar },
 data() {
     return {
-        products:[],
+        // products:[],
         showConfirmationDialog: false,
         productIdToDelete: null,
+      filters: {
+          id: '',
+        name: '',
+        store: '',
+        category: '',
+        price: '',
+        quantity: '',
+        // created_at: '',
+      },
     };
 },
-async created() {
+/*async created() {
 try {
     const response = await axiosClient.get('api/admin/products');
 
@@ -98,8 +147,23 @@ try {
     } catch (error) {
     console.error(error);
     }
-},
-methods: {
+},*/
+  computed: {
+    ...mapState(['products']),
+    ...mapState(['categories']),
+    filteredProducts() {
+      return this.products.filter(product => {
+            return (
+                (this.filters.name === '' || product.name.toLowerCase().includes(this.filters.name.toLowerCase())) &&
+                (this.filters.id === '' || product.id.toString().includes(this.filters.id)) &&
+                (this.filters.store === '' || product.store.toLowerCase().includes(this.filters.store.toLowerCase())) &&
+                (this.filters.category === '' || product.category.toLowerCase().includes(this.filters.category.toLowerCase()))
+            );
+    });
+    },
+  },
+
+  methods: {
 async deleteProduct(productId) {
     try {
         await axiosClient.delete(`api/admin/products/${productId}`);
@@ -124,8 +188,12 @@ async deleteProduct(productId) {
     cancelDelete() {
         this.showConfirmationDialog = false;
     },
+
+},
+mounted() {
+  this.$store.dispatch('fetchProducts');
 }
-};
+}
 </script>
 
 <style lang="scss" scoped>

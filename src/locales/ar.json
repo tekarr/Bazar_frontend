@@ -60,8 +60,8 @@
     "Users":"المستخدمون",
     "Dashboard ":"لوحة التحكم",
     "Notification":"الإشعارات",
-    "Email":"بريد إلكتروني",
-    "Role":"دور",
+    "Email":"البريد الإلكتروني",
+    "Role":"الدور",
     "order total":"مجموع الطلب",
     "Edit":"تعديل",
     "products":"منتجات",
@@ -98,7 +98,15 @@
     "Already have an Account":"لديك حساب بالفعل",
     "Payment Method":"طريقة الدفع",
     "Place Order":"طلب",
-    "Back":"رجوع"
+    "Back":"رجوع",
+
+    "payment method":"طريقة الدفع",
+    "payment status":"حالة الدفع",
+    "order status":"حالة الطلبية",
+    "Update Profile": "تحديث الملف الشخصي",
+    "Confirm New Password": "تأكيد كلمة المرور الجديدة",
+    "New Password": "كلمة المرور الجديدة"
+
 
 
 }
