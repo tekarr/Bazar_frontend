@@ -1,5 +1,6 @@
 <template>
-  <div class="flex items-start justify-start min-h-screen">
+
+  <div class=" items-start justify-start min-h-screen">
 
     <!-- Success Message Display -->
     <div v-if="message" class="flex items-center justify-between p-3 my-2 bg-green-700 text-white rounded">
@@ -29,6 +30,7 @@
     </div>
 
     <!-- Profile Update Form -->
+
     <form @submit.prevent="submitForm" class="max-w-sm mx-10 mt-4">
       <h2 class="text-lg font-bold mb-4">{{ $t('Update Profile') }}</h2>
       <div class="mb-5">
@@ -36,6 +38,12 @@
         <input type="text" id="name" v-model="user.name" placeholder="Name"
                class="w-full bg-white px-5 py-2 rounded-3xl border border-gray-300 focus:outline-none focus:ring focus:ring-pink-500"
                required>
+      </div>
+      <div class="mb-5">
+        <label class="font-normal pl-5" for="email">{{ $t('Email') }}</label>
+        <input type="text" id="email" v-model="user.email" placeholder="Email"
+               class="w-full bg-gray-200 px-5 py-2 rounded-3xl border border-gray-300 focus:outline-none focus:ring focus:ring-pink-500"
+               disabled>
       </div>
 
       <div class="mb-5">

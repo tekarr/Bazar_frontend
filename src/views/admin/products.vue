@@ -132,8 +132,7 @@ data() {
         name: '',
         store: '',
         category: '',
-        price: '',
-        quantity: '',
+
         // created_at: '',
       },
     };
@@ -156,7 +155,7 @@ try {
             return (
                 (this.filters.name === '' || product.name.toLowerCase().includes(this.filters.name.toLowerCase())) &&
                 (this.filters.id === '' || product.id.toString().includes(this.filters.id)) &&
-                (this.filters.store === '' || product.store.toLowerCase().includes(this.filters.store.toLowerCase())) &&
+                (this.filters.store === '' || product.store_id.toString().includes(this.filters.store.toString())) &&
                 (this.filters.category === '' || product.category.toLowerCase().includes(this.filters.category.toLowerCase()))
             );
     });

@@ -4,6 +4,7 @@
     <div class="bg-white p-2 border border-gray-200 w-fit rounded-lg shadow-sm  ">
   <div class="flex gap-2 flex-nowrap items-center whitespace-nowrap ">
     <input v-model="filters.id" type="text" placeholder="Filter by ID" class="p-1 border rounded w-full sm:w-32">
+    <input v-model="filters.user_id" type="text" placeholder="Filter by User" class="p-1 border rounded w-full sm:w-32">
     <select v-model="filters.status" class="p-1 border rounded w-full sm:w-32">
       <option value=""> {{ $t('order status') }}</option>
       <option value="pending">Pending</option>
@@ -110,6 +111,7 @@ import {mapState} from "vuex";
           filters: {
             id: '',
             status: '',
+            user_id: '',
             payment_method: '',
             payment_status: ''
           }
@@ -121,6 +123,7 @@ import {mapState} from "vuex";
           console.log(this.orders.data);
         return  this.orders.filter(order => {
           return order.id.toString().includes(this.filters.id) &&
+          order.user_id.toString().includes(this.filters.user_id) &&
           order.status.includes(this.filters.status) &&
           order.payment_method.includes(this.filters.payment_method) &&
           order.payment_status.includes(this.filters.payment_status);

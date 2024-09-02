@@ -140,7 +140,7 @@ import {mapGetters, mapState} from "vuex";
                 return (
                     (this.filters.name === '' || store.name.toLowerCase().includes(this.filters.name.toLowerCase())) &&
                     (this.filters.id === '' || store.id.toString().includes(this.filters.id)) &&
-                    (this.filters.user === '' || store.user.toLowerCase().includes(this.filters.user.toLowerCase())) &&
+                    (this.filters.user === '' || store.user.toString().includes(this.filters.user.toString())) &&
                     (this.filters.category === '' || store.category.toLowerCase().includes(this.filters.category.toLowerCase())) &&
                     (this.filters.status === '' || store.status.toString().includes(this.filters.status))
                 );

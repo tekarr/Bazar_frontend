@@ -99,15 +99,19 @@ export default {
         return {
         user:{
             role_id: '',
+          name: '',
+            email: '',
+          phone: '',
             store_name: '',
             category:'',
         },
-        categories: [],
+        // categories: [],
         errMsg: '',
         scMsg: '',
         };
     },
     methods: {
+      //abnd
         async fetchCategories() {
             try {
                 const response = await axiosClient.get('api/admin/categories');

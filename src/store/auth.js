@@ -53,7 +53,7 @@ export default {
                 })
                 .catch(error => {
                     console.error('Error fetching user data:', error);
-                    throw error;
+                    router.push('/error');
                 });
 
         },

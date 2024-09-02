@@ -101,9 +101,10 @@ import {mapState} from "vuex";
         ...mapState(['users']),
         filteredUsers() {
           return this.users.filter(user => {
-            return user.id.toString().includes(this.filters.id) &&
-              user.name.toLowerCase().includes(this.filters.name.toLowerCase()) &&
+            return user.id.toString().toLowerCase().includes(this.filters.id) &&
+              user.name.toString().toLowerCase().includes(this.filters.name.toString().toLowerCase()) &&
               user.email.toLowerCase().includes(this.filters.email.toLowerCase()) &&
+
 user.role_name.toLowerCase().includes(this.filters.role.toLowerCase());
           });
         },
