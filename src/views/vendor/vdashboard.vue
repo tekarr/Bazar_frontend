@@ -17,7 +17,7 @@
                     </div>
 
                     <div>
-                        <h2 class="text-4xl font-bold"><span>10 +</span></h2>
+                        <h2 class="text-4xl font-bold"><span>{{statistics.total_products}}</span></h2>
                     </div>
                     <p class="mt-2 font-sans text-base font-medium text-gray-500">{{ $t('Products') }}</p>
                 </div>
@@ -34,7 +34,7 @@
                         </svg>
                     </div>
                     <div class="my-2">
-                        <h2 class="text-4xl font-bold"><span class="">180$</span></h2>
+                        <h2 class="text-4xl font-bold"><span class="">{{statistics.$totalSales}}</span></h2>
                     </div>
                     <p class="mt-2 font-sans text-base font-medium text-gray-500">{{ $t('Sales') }}</p>
                 </div>
@@ -49,7 +49,7 @@
                         </svg>
                     </div>
                     <div class="my-2">
-                        <h2 class="text-4xl font-bold"><span class="">2 +</span></h2>
+                        <h2 class="text-4xl font-bold"><span class="">{{statistics.low_stock_products}}</span></h2>
                     </div>
                     <p class="mt-2 font-sans text-base font-medium text-gray-500">{{ $t('Low in stock') }}</p>
                 </div>
@@ -64,7 +64,7 @@
                         </svg>
                     </div>
                     <div class="my-2">
-                        <h2 class="text-4xl font-bold"><span class="">9 +</span></h2>
+                        <h2 class="text-4xl font-bold"><span class="">{{statistics.orders}}</span></h2>
                     </div>
                     <p class="mt-2 font-sans text-base font-medium text-gray-500">{{ $t('Orders') }}</p>
                 </div>
@@ -75,32 +75,29 @@
 </template> 
 
 <script>
-import Navbar from '@/components/vendor/navbar.vue';
-import Sidbar from '/src/components/vendor/Sidbar.vue'
-import Storecard from '@/components/customer/storecard.vue';
-
+import axiosClient from '@/axios';
 
     export default {
-
-    components:
-    { Sidbar , Navbar, Storecard },
-    data() {
-    return {
-        cards: [
-        {
-            id: 1,
-            image: 'https://flowbite.s3.amazonaws.com/docs/gallery/square/image.jpg',
-            title: 'Weed',
-            description: 'good for ur health',
-            price: '95',
-            store: 'Store-name'
+        data() {
+        return {
+            statistics: [],
+        };
         },
-    ]
-    };
-    },
-    methods: {
-    },
-    }
+        methods: {
+        async fetchStatistics() {
+            try {
+            const response = await axiosClient.get('api/vendor/statistics');
+            this.statistics = response.data
+            console.log(this.statistics)
+            } catch (error) {
+            console.error(error);
+            }
+        },
+        },
+        mounted() {
+            this.fetchStatistics();
+        },
+        }
 
 </script>
 

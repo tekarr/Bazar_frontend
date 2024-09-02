@@ -252,7 +252,14 @@ methods: {
     selectOption(option) {
         this.selectedOption = option;
         this.showOptions = false;
+        this.allCategories();
+        this.resetFilters();
     },
+    resetFilters() {
+    this.filters = {}; // Reset the filters object
+    this.queryString = ''; // Reset the query string
+    },
+    
     search() {
     if (this.searchvalue) {
         this.searchQuery = this.searchvalue;
@@ -281,7 +288,7 @@ methods: {
         }
     },
     async updateFilter(attributeName, value) {
-        try {
+    try {
         if (value === '') { // default option selected, remove filter value
         delete this.filters[attributeName];
         } else {
@@ -289,38 +296,15 @@ methods: {
         }
         const queryString = Object.keys(this.filters).map(key => `variations[${key}]=${this.filters[key]}`).join('&');
         console.log(queryString);
+        if (this.selectedCategory) { // Call fetchProductsByCategory if a category is selected
+        await this.fetchProductsByCategory(this.selectedCategory.id);
+        } else {
         const response = await axiosClient.get(`api/products?${queryString}`);
         this.products = response.data.data;
-        console.log(attributeName)
-        console.log("update filter :")
-        console.log(this.products)
-        } catch (error) {
-        console.error(`There was an error fetching the products: ${error}`);
         }
-    },
-    async filterProducts() {
-    try {
-        const queryParams = {};
-        for (const attributeName in this.filters) {
-        queryParams[`variations[${attributeName}]`] = this.filters[attributeName];
-        }
-        const queryString = Object.keys(queryParams).map(key => `${key}=${queryParams[key]}`).join('&');
-        const response = await axiosClient.get(`api/products?${queryString}`);
-        this.products = response.data.data;
-        console.log(this.products)
     } catch (error) {
         console.error(`There was an error fetching the products: ${error}`);
     }
-    // ...
-    },
-    resetFilters() {
-    this.filters = {};
-    // Reset radio button selections
-    const radioButtons = document.querySelectorAll('input[type="radio"]');
-    radioButtons.forEach(button => {
-        button.checked = false;
-    });
-    this.filterProducts();
     },
         changePage(page) {
         this.activePage = page;
@@ -353,7 +337,21 @@ methods: {
     this.showCategories = false;
     this.selectCategory(category.id);
     console.log(this.selectedCategory.name)
+    this.fetchProductsByCategory(category.id);
 
+    },
+    async fetchProductsByCategory(categoryId) {
+    try {
+        let queryParams = `category_id=${categoryId}`;
+        for (const attributeName in this.filters) {
+        queryParams += `&variations[${attributeName}]=${this.filters[attributeName]}`;
+        }
+        const response = await axiosClient.get(`api/products?${queryParams}`);
+        this.products = response.data.data;
+        console.log(this.products)
+    } catch (error) {
+        console.error(`There was an error fetching products for category ${categoryId}: ${error}`);
+    }
     },
     async selectCategory(id) {
     this.selectedCategoryId = id;
