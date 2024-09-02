@@ -144,7 +144,6 @@ import {mapState} from "vuex";
     },
 */
       mounted() {
-        this.$store.dispatch('fetchOrders');
       },
       }
 

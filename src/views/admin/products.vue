@@ -69,7 +69,9 @@
             <tbody>
                 <tr v-for="product in filteredProducts" :key="product.id" class="bg-white " >
                     <td scope="row" class="px-6 py-8 font-medium text-base w-20">
+                      <router-link :to="{ name: 'EditProduct ', params: { id: product.id } }" class='text-blue-500 hover:text-pink-700 hover:underline'>
                         {{product.id}}
+                      </router-link>
                     </td>
                   <td scope="row" class="px-4 py-4 text-base w-10">
                     <img :src="product.image[0]?.image" alt="Product Image" />

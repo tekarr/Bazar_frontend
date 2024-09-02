@@ -73,7 +73,9 @@
                 <tbody>
                     <tr v-for="store in filteredStores" :key="store.id" class="bg-white text-black " >
                         <td scope="row" class="px-6 py-8 font-medium text-base">
+                          <router-link :to="{ name: 'StorePage', params: { id: store.id } }" class='text-blue-500 hover:text-pink-700 hover:underline'>
                             {{store.id}}
+                          </router-link>
                         </td>
                       <td class=" px-6 py-4">
                       <img :src="store.image" alt="store image" class="w-10 h-10 rounded-full">
@@ -186,8 +188,6 @@ import {mapGetters, mapState} from "vuex";
         },
     },
       mounted() {
-        this.$store.dispatch('fetchStores');
-        this.$store.dispatch('fetchCategories');
 
 
       }

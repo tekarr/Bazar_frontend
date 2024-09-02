@@ -22,6 +22,8 @@ export default {
     },
     mounted() {
         this.changeLocale();
+        this.$store.dispatch('refreshAll');
+
         console.log(this.locale)
     },
     methods: {

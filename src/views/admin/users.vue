@@ -149,7 +149,6 @@ user.role_name.toLowerCase().includes(this.filters.role.toLowerCase());
     },
     },
     mounted() {
-      this.$store.dispatch('fetchUsers');
         },
     }
 

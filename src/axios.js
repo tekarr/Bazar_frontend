@@ -27,6 +27,7 @@ axiosClient.interceptors.response.use(
     error => {
         if (error.response && error.response.status === 401) {
             console.error('Unauthorized access - redirecting to login.');
+
             localStorage.removeItem('token');
         } else if (error.response && error.response.status === 403) {
             console.error('Forbidden access.');
