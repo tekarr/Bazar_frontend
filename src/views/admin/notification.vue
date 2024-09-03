@@ -46,7 +46,7 @@ import {mapState} from "vuex";
         }
     },
       computed: {
-      ...mapState(['notifications'])
+        ...mapState('admin', ['notifications']),
       },
     async created() {
     try {

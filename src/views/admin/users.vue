@@ -98,7 +98,7 @@ import {mapState} from "vuex";
         }
     },
       computed: {
-        ...mapState(['users']),
+        ...mapState('admin',['users']),
         filteredUsers() {
           return this.users.filter(user => {
             return user.id.toString().toLowerCase().includes(this.filters.id) &&

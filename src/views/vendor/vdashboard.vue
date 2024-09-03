@@ -34,7 +34,7 @@
                         </svg>
                     </div>
                     <div class="my-2">
-                        <h2 class="text-4xl font-bold"><span class="">{{statistics.$totalSales}}</span></h2>
+                        <h2 class="text-4xl font-bold"><span class="">{{statistics.totalSales}}</span></h2>
                     </div>
                     <p class="mt-2 font-sans text-base font-medium text-gray-500">{{ $t('Sales') }}</p>
                 </div>

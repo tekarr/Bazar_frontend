@@ -20,9 +20,10 @@ export default {
         locale: localStorage.getItem('locale') || 'en', 
     };
     },
+
     mounted() {
         this.changeLocale();
-        this.$store.dispatch('refreshAll');
+        this.$store.dispatch('admin/refreshAll');
 
         console.log(this.locale)
     },

@@ -118,7 +118,7 @@ import {mapState} from "vuex";
         }
     },
     computed: {
-        ...mapState(['orders']),
+        ...mapState('admin',['orders']),
       filteredOrders() {
           console.log(this.orders.data);
         return  this.orders.filter(order => {

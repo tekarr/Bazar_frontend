@@ -150,8 +150,8 @@ try {
     }
 },*/
   computed: {
-    ...mapState(['products']),
-    ...mapState(['categories']),
+    ...mapState('admin',['products']),
+    ...mapState('admin',['categories']),
     filteredProducts() {
       return this.products.filter(product => {
             return (

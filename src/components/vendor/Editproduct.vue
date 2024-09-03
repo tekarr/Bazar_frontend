@@ -183,7 +183,7 @@ export default {
             this.product = response.data.data;
             this.images = this.product.images.map(img => ({
             id: img.id,
-            url: `http://localhost:8000/storage/${img.image}`
+            url: `${img.image}`
             }));
             //this.images.push({ url: e.target.result });
             console.log(this.images)

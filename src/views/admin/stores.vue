@@ -135,8 +135,8 @@ import {mapGetters, mapState} from "vuex";
     },
       computed: {
         // Access the stores data from Vuex store
-        ...mapState(['stores']),
-        ...mapState(['categories']),
+        ...mapState('admin',['stores']),
+        ...mapState('admin',['categories']),
         filteredStores() {
           return this.stores.filter(store => {
                 return (

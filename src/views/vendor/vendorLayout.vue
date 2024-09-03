@@ -1,14 +1,14 @@
-<template>
+<template >
     <sidbar />
     
     <div :class="locale === 'en' ? 'sm:ml-64' : 'sm:mr-64'"> 
         <navbar/>  
 
-        <div class="m-3 bg-gray-100 w-full h-full rounded-3xl ">
+        <div class=" bg-gray-100 w-full h-full  ">
             <router-view class="p-4"> </router-view>
         </div>
     </div>
-    
+
 </template>
 
 <script>
@@ -23,6 +23,7 @@ import Navbar from '@/components/vendor/navbar.vue'
     },
     mounted() {
         this.changeLocale();
+        this.$store.dispatch('vendor/refreshAll')
         console.log(this.locale)
     },
     methods: {
@@ -34,7 +35,8 @@ import Navbar from '@/components/vendor/navbar.vue'
             document.body.removeAttribute('dir');
             }
         }
-    }
+    },
+
     }
 </script>
 
@@ -50,7 +52,6 @@ onMounted( async() => {
 
 //console.log(store.getters["auth/user"]);
 //console.log(store.state.auth.user);
-store.dispatch('auth/checkAuth')
 const userRole = store.state.auth.user.role_id;
 console.log(userRole);
 });

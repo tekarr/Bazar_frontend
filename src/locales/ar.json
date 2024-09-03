@@ -15,7 +15,7 @@
     ". All Rights Reserved.":"جميع الحقوق محفوظة.",
     "Privacy Policy":"سياسة الخصوصية",
     "Licensing":"الترخيص",
-    "customer":"زبون",
+    "customer":"الزبون",
     "admin":"مسؤل",
     "vendor":"بائع",
     "Shop":"المتجر",
@@ -34,7 +34,7 @@
     "Message":"رسالة",
     "Time":"وقت",
     "name":"اسم",
-    "Quantity":"كمية",
+    "Quantity":"الكمية",
     "category":"الفئة",
     "price":"السعر",
     "status":"الحالة",
@@ -43,7 +43,7 @@
     "Prefered image size":"حجم الصورة المفضل",
     "Store name":"اسم المتجر",
     "Description":"وصف",
-    "Status":"حالة",
+    "Status":"الحالة",
     "Update":"تحديث",
     "payment_method":"طريقة الدفع",
     "payment_status" : "حالة الدفع",
@@ -105,7 +105,11 @@
     "order status":"حالة الطلبية",
     "Update Profile": "تحديث الملف الشخصي",
     "Confirm New Password": "تأكيد كلمة المرور الجديدة",
-    "New Password": "كلمة المرور الجديدة"
+    "New Password": "كلمة المرور الجديدة",
+    "Order": "الطلبية",
+    "product": "المنتج",
+    "print": "طباعة",
+    " Update Password": "تحديث كلمة المرور"
 
 
 

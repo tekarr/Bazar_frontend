@@ -35,13 +35,12 @@
 
       async refreshAll() {
         try {
-       await   this.$store.dispatch('refreshAll')
+       await   this.$store.dispatch('admin/refreshAll')
           console.log('All states refreshed');
         } catch (error) {
           console.error('Error refreshing states:', error);
         }
       },
-      ...mapActions(['fetchUsers', 'fetchStores']),
 
 
       nMenu() {
