@@ -31,7 +31,7 @@
                     </button>
                 </div>
                 <img class="h-96 w-96 object-cover rounded-3xl  hover:cursor-pointer transition-all" 
-                    :src="mainImage" alt="">
+                :src="mainImage" alt="">
                 <!-- Previous and next buttons -->
                 <div class="flex justify-center items-center">
                     <button @click="nextImage" class="m-4  h-10 w-10 rounded-full border-2 border-gray-300 hover:border-pink-600 flex justify-center items-center">
@@ -107,13 +107,15 @@ import axiosClient from '@/axios';
             const response = await axiosClient.get(`api/products/${id}`);
             this.product = response.data.data;
             this.images = this.product.images;
+            console.log("this images :")
+            console.log(this.images[0]);
             this.variationAttributes = [...new Set(this.product.variations.map(v => v.attribute))]
             console.log(this.product);
         } catch (error) {
             console.error(`There was an error fetching the product: ${error}`);
         }
         if (this.images.length > 0) {
-        this.mainImage = this.images[0];
+        this.mainImage = this.images[0].image;
         }
         },
         methods:{
@@ -152,7 +154,6 @@ import axiosClient from '@/axios';
                 })
                 );
             });
-
                 if (!existingItem) {
                 cart.push(selectedItem);
                 localStorage.setItem('cart', JSON.stringify(cart));
@@ -162,20 +163,20 @@ import axiosClient from '@/axios';
                 this.error = true;
             }
         },
-            previousImage() {
-            let index = this.images.indexOf(this.mainImage);
-            if (index <= 0) {
-                index = this.images.length;
-            }
-            this.mainImage = this.images[index - 1];
-            },
-            nextImage() {
-                let index = this.images.indexOf(this.mainImage);
-                if (index >= this.images.length - 1) {
-                    index = -1;
-                }
-                this.mainImage = this.images[index + 1];
-            },
+        previousImage() {
+        let index = this.images.findIndex((image) => image.image === this.mainImage);
+        if (index <= 0) {
+            index = this.images.length;
+        }
+        this.mainImage = this.images[index - 1].image;
+        },
+        nextImage() {
+        let index = this.images.findIndex((image) => image.image === this.mainImage);
+        if (index >= this.images.length - 1) {
+            index = -1;
+        }
+        this.mainImage = this.images[index + 1].image;
+        },
     }
 }
 </script>

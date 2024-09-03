@@ -11,7 +11,23 @@
         </button>
         </div> -->
         
-        
+        <!-- Alert: Success -->
+        <div v-if="success" class="fixed inset-0 flex items-center justify-center z-20 bg-black bg-opacity-50">
+            <div class="bg-white p-6 rounded-3xl">
+            <p class="text-lg"> added successfully!</p>
+            <button @click="close" class="mt-4 bg-pink-600 hover:bg-pink-700 text-white font-bold py-2 px-4 rounded-3xl">Close</button>
+            </div>
+        </div>
+
+        <!-- Alert: error -->
+        <div v-if="error" class="fixed inset-0 flex items-center justify-center z-20 bg-black bg-opacity-50">
+            <div class="bg-white p-6 rounded-3xl">
+            <p class="text-lg"> already in your cart</p>
+            <button @click="close" class="mt-4 bg-pink-600 hover:bg-pink-700 text-white font-bold py-2 px-4 rounded-3xl">Close</button>
+            </div>
+        </div>
+
+
         <div class="flex justify-center py-4 z-10 my-4">
             <!-- stores or products -->
             <div  class="relative inline-block z-10 mx-4">
@@ -173,6 +189,8 @@ data() {
     activePage: 1,
     searchvalue:'',
     filters: {},
+    success: false,
+    error: false,
     attributes: [
         {
         name: "Color",
@@ -254,6 +272,40 @@ methods: {
         this.showOptions = false;
         this.allCategories();
         this.resetFilters();
+    },
+    addToCart(product) {
+            // Store product ID in localStorage
+            let cartItem = localStorage.getItem('cart');
+            let cart = [];
+            if (cartItem) {
+                try {
+                    cart = JSON.parse(cartItem)|| [];
+                } catch (error) {
+                    console.error('Error parsing cart data from localStorage:', error);
+                    cart = [];
+                }
+            }
+
+            const selectedItem = {
+                id: product.id,
+            };
+
+            const existingItem = cart.find((item) => {
+                return (
+                item.id === product.id )
+            });
+                if (!existingItem) {
+                cart.push(selectedItem);
+                localStorage.setItem('cart', JSON.stringify(cart));
+                console.log(cart);
+                this.success = true;
+            } else {
+                this.error = true;
+            }
+        },
+    close(){
+    this.success = false;
+    this.error = false;
     },
     resetFilters() {
     this.filters = {}; // Reset the filters object
