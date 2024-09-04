@@ -269,7 +269,7 @@ import axiosClient from '@/axios'
             console.log(response);
 
             if (this.PaymentMethod == 'localBankCards'){
-                const redirectUrl = response.data.data.data.result.redirect_url;                ;
+                const redirectUrl = response.data.data.result.redirect_url;                ;
                 window.location.href = redirectUrl;
                 this.removeAllFromCart();
                 return
