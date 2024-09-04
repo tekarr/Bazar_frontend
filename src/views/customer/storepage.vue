@@ -94,19 +94,28 @@ export default {
                     cart = [];
                 }
             }
-            if (!cart.includes(product.id)) {
-            cart.push(product.id);
-            localStorage.setItem('cart', JSON.stringify(cart));
-            console.log(cart);
-            this.success = true;
-            }else{
-            this.error = true;
+
+            const selectedItem = {
+                id: product.id,
+            };
+
+            const existingItem = cart.find((item) => {
+                return (
+                item.id === product.id )
+            });
+                if (!existingItem) {
+                cart.push(selectedItem);
+                localStorage.setItem('cart', JSON.stringify(cart));
+                console.log(cart);
+                this.success = true;
+            } else {
+                this.error = true;
             }
         },
-        close(){
-            this.success = false;
-            this.error = false;
-        }
+    close(){
+    this.success = false;
+    this.error = false;
+    },
     }, 
     // your existing methods
 }
