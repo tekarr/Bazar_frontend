@@ -26,7 +26,7 @@
                     <p>pending</p>
                     <p>processing</p>
                     <p>ready_for_shipment</p>
-                    <p>shipped</p>
+                    <p>in_the_way</p>
                     <p>delivered</p>
                 </div>
             </div>
@@ -74,7 +74,7 @@ import axiosClient from '@/axios';
             return 'w-[25%]';
             case 'ready_for_shipment':
             return 'w-[50%]';
-            case 'shipped':
+            case 'in_the_way':
             return 'w-[75%]';
             case 'delivered':
             return 'w-[100%]';

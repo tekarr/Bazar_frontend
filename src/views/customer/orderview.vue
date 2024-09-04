@@ -29,18 +29,19 @@
                 <tr class="bg-white">.</tr>
             </thead>
             <thead class="text-base text-gray-700 uppercase">
-                <tr v-for="product in products" :key="product.product_id" class="text-center">
+                <tr class="text-center">
                     <th scope="col" class="px-6 py-3 bg-gray-50">
-                        Product name
+                    Product name
                     </th>
                     <th scope="col" class="px-6 py-3">
-                        Price
+                    Price
                     </th>
                     <th scope="col" class="px-6 py-3 bg-gray-50">
-                        Quantity
+                    Quantity
                     </th>
-                    <th v-for="(variation, index) in product.variations" :key="index" scope="col" class="px-6 py-3 bg-gray-50">
-                        {{ variation.attribute }}
+                    <!-- Add more columns as needed -->
+                    <th scope="col" class="px-6 py-3 bg-gray-50">
+                    <!-- Add a column header for variations -->
                     </th>
                     <th class="px-6 py-3 bg-gray-50"></th>
                 </tr>

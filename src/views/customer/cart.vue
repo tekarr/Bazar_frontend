@@ -73,28 +73,6 @@
             {{ $t('Checkout') }}
             </h1>
 
-            <!-- Shipping Address -->
-
-            <div class="my-8">
-            <h2 class="text-xl font-semibold text-gray-700 mb-4">{{ $t('Shipping Address') }}</h2>
-
-            <div class="mt-4">
-                <label for="address" class="block text-gray-700 mb-1">{{ $t('Address') }}</label>
-                <input type="text" id="address" v-model="address" class="w-full rounded-lg border py-2 px-3 "/>
-            </div>
-
-            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 mt-4">
-                <div>
-                    <label for="Phone" class="block text-gray-700 mb-1">{{ $t('Phone number') }}</label>
-                    <input type="text" id="Phone" v-model="Phone" class="w-full rounded-lg border py-2 px-3"/>
-                </div>
-                <div class="mt-4 sm:mt-0">
-                    <label for="city" class="block text-gray-700 mb-1">{{ $t('City') }}</label>
-                    <input type="text" id="city" v-model="city" class="w-full rounded-lg border py-2 px-3"/>
-                </div>
-            </div>
-            </div>
-
             <!-- Payment Information -->
             <div>
             <h2 class="text-xl font-semibold text-gray-700 mb-4">{{ $t('Payment Method') }}</h2>
@@ -277,9 +255,7 @@ import axiosClient from '@/axios'
 
     async placeOrder(otpCode = null) {
         const order = {
-            mobile_number: this.Phone,
             payment_method: this.PaymentMethod,
-            shipping_address: this.address,
             products: this.products.map(product => ({
                 product_id: product.id,
                 quantity: this.qt[product.id],

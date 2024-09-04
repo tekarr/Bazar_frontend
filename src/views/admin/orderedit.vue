@@ -3,7 +3,7 @@
 
 
 
-    <p class="text-2xl font-bold pt-16   text-start ">Order : #{{ orders.id }}<br></p>
+    <p class="text-2xl font-bold pt-16 text-center mx-4 ">Order : #{{ orders.id }}<br></p>
 
     <!-- error massege -->
     <div v-if="errMsg" class="flex items-center justify-between p-3 my-2 mb-6 bg-red-600 text-white rounded">
@@ -33,29 +33,30 @@
     </div>
 
 
-    <div class="flex justify-start">
-    <button @click="updateStatus" :disabled="!hasChanges" :class="{ 'bg-gray-300': !hasChanges, 'bg-pink-600 hover:bg-pink-700': hasChanges }" class="bg-pink-600 text-white font-bold py-2  my-4 mx-2 h-10  w-80 ml-20 rounded-md">
-                        Update
-    </button>
-    <router-link :to="{ name: 'invoices', params: { id: orders.id }}" class="bg-white text-pink-600 hover:bg-pink-700 hover:text-white  font-bold py-2  my-4 h-10 w-80  text-center rounded-md">
-                    invoices
-    </router-link>
+    <div class="flex justify-center ">
+        <button @click="updateStatus" :disabled="!hasChanges" :class="{ 'bg-gray-300': !hasChanges, 'bg-pink-600 hover:bg-pink-700': hasChanges }" class="bg-pink-600 text-white font-bold py-2  my-4 mx-2 h-10  w-80 ml-20 rounded-md">
+                            Update
+        </button>
+        <router-link :to="{ name: 'invoices', params: { id: orders.id }}" class="bg-white text-pink-600 hover:bg-pink-700 hover:text-white  font-bold py-2  my-4 h-10 w-80  text-center rounded-md">
+                        invoices
+        </router-link>
     </div>
-  <div class="bg-white p-2 border border-gray-200 rounded-lg shadow-sm mb-2">
+    
+    <div class="bg-white p-2 border border-gray-200 rounded-lg shadow-sm mb-2">
 
-    <div class="flex gap-2 flex-nowrap items-center whitespace-nowrap">
-      <input v-model="filters.id" type="text" placeholder="Filter by ID" class="p-2 border rounded w-full sm:w-32">
-      <input v-model="filters.name" type="text" placeholder="Filter by name" class="p-2 border rounded w-full sm:w-32">
-      <input v-model="filters.store_id" type="text" placeholder="Filter by store" class="p-2 border rounded w-full sm:w-32">
-      <select v-model="filters.product_status" class="p-2 border rounded w-full sm:w-48">
-        <option value="">Select Status</option>
-        <option value="pending">Pending</option>
-        <option value="in_stock">In Stock</option>
-      </select>
+        <div class="flex gap-2 flex-nowrap items-center whitespace-nowrap">
+        <input v-model="filters.id" type="text" placeholder="Filter by ID" class="p-2 border rounded w-full sm:w-32">
+        <input v-model="filters.name" type="text" placeholder="Filter by name" class="p-2 border rounded w-full sm:w-32">
+        <input v-model="filters.store_id" type="text" placeholder="Filter by store" class="p-2 border rounded w-full sm:w-32">
+        <select v-model="filters.product_status" class="p-2 border rounded w-full sm:w-48">
+            <option value="">Select Status</option>
+            <option value="pending">Pending</option>
+            <option value="in_stock">In Stock</option>
+        </select>
+
+        </div>
 
     </div>
-
-  </div>
 
     <div  class="relative overflow-x-auto rounded-3xl sm:rounded-lg mt-2  mx-4 z-10 ">
 
