@@ -74,8 +74,8 @@
             </h1>
 
             <!-- Payment Information -->
-            <div>
-            <h2 class="text-xl font-semibold text-gray-700 mb-4">{{ $t('Payment Method') }}</h2>
+            <div class="mt-8">
+            <!-- <h2 class="text-xl font-semibold text-gray-700 mb-4">{{ $t('Payment Method') }}</h2> -->
 
             <!-- <div class="flex items-center mb-4">
                 <input type="radio" name="paymentMethod" value="creditCard" v-model="PaymentMethod" class="mr-2 text-pink-600 w-5 h-5 rounded-full"/>
@@ -103,63 +103,82 @@
                 <label for="pay_on_deliver" class="text-gray-700">Pay on Delivery</label>
             </div>
 
+
+            
+
             <hr class="my-6">
 
-            <div v-if="PaymentMethod === 'Adfali'" class="mt-4">
-                <header class="mb-8 text-center">
-                    <h1 class="text-2xl font-bold mb-1">OTP Code</h1>
-                    <p class="text-[15px] text-slate-500">Enter the 4-digit verification code that was sent to your phone number.</p>
-                </header>
-                <div class="flex items-center justify-center gap-3">
-                    <input v-model="code[0]"
-                        type="text"
-                        class="w-14 h-14 text-center text-2xl font-extrabold text-slate-900 bg-slate-100 border border-transparent hover:border-slate-200 appearance-none rounded p-4 outline-none focus:bg-white focus:border-pink-400 focus:ring-2 focus:ring-pink-100"
-                        pattern="\d*" maxlength="1" />
-                    <input v-model="code[1]"
-                        type="text"
-                        class="w-14 h-14 text-center text-2xl font-extrabold text-slate-900 bg-slate-100 border border-transparent hover:border-slate-200 appearance-none rounded p-4 outline-none focus:bg-white focus:border-pink-400 focus:ring-2 focus:ring-pink-100"
-                        maxlength="1" />
-                    <input v-model="code[2]"
-                        type="text"
-                        class="w-14 h-14 text-center text-2xl font-extrabold text-slate-900 bg-slate-100 border border-transparent hover:border-slate-200 appearance-none rounded p-4 outline-none focus:bg-white focus:border-pink-400 focus:ring-2 focus:ring-pink-100"
-                        maxlength="1" />
-                    <input v-model="code[3]"
-                        type="text"
-                        class="w-14 h-14 text-center text-2xl font-extrabold text-slate-900 bg-slate-100 border border-transparent hover:border-slate-200 appearance-none rounded p-4 outline-none focus:bg-white focus:border-pink-400 focus:ring-2 focus:ring-pink-100"
-                        maxlength="1" />
+            <!-- Phone number input field -->
+            <div v-if="PaymentMethod === 'Adfali' || PaymentMethod === 'Sadad'">
+            <label for="phone_number" class="block text-gray-700 mb-1">Phone Number</label>
+            <input type="tel" id="phone_number" v-model="Phone" class="w-full rounded-lg border py-2 px-3"/>
+            <button @click="showOtpDiv=true" class="bg-pink-600 text-white mx-2 px-4 py-2 rounded-3xl hover:bg-pink-700 focus:ring-4 focus:outline-none focus:ring-pink-300 mt-4">
+                Send OTP
+            </button>
+            </div>
+
+            
+            <div v-if="PaymentMethod === 'Adfali' && showOtpDiv"  class="fixed inset-0 flex items-center justify-center z-20 bg-black bg-opacity-50">
+                <div class="bg-white p-8 rounded-lg">
+                    <header class="mb-8 text-center">
+                        <h1 class="text-2xl font-bold mb-1">OTP Code</h1>
+                        <p class="text-[15px] text-slate-500">Enter the 4-digit verification code that was sent to your phone number.</p>
+                    </header>
+                    <div class="flex items-center justify-center gap-3">
+                        <input v-model="code[0]"
+                            type="text"
+                            class="w-14 h-14 text-center text-2xl font-extrabold text-slate-900 bg-slate-100 border border-transparent hover:border-slate-200 appearance-none rounded p-4 outline-none focus:bg-white focus:border-pink-400 focus:ring-2 focus:ring-pink-100"
+                            pattern="\d*" maxlength="1" />
+                        <input v-model="code[1]"
+                            type="text"
+                            class="w-14 h-14 text-center text-2xl font-extrabold text-slate-900 bg-slate-100 border border-transparent hover:border-slate-200 appearance-none rounded p-4 outline-none focus:bg-white focus:border-pink-400 focus:ring-2 focus:ring-pink-100"
+                            maxlength="1" />
+                        <input v-model="code[2]"
+                            type="text"
+                            class="w-14 h-14 text-center text-2xl font-extrabold text-slate-900 bg-slate-100 border border-transparent hover:border-slate-200 appearance-none rounded p-4 outline-none focus:bg-white focus:border-pink-400 focus:ring-2 focus:ring-pink-100"
+                            maxlength="1" />
+                        <input v-model="code[3]"
+                            type="text"
+                            class="w-14 h-14 text-center text-2xl font-extrabold text-slate-900 bg-slate-100 border border-transparent hover:border-slate-200 appearance-none rounded p-4 outline-none focus:bg-white focus:border-pink-400 focus:ring-2 focus:ring-pink-100"
+                            maxlength="1" />
+                    </div>
+                    <button class="mt-8 py-2 px-4 bg-pink-600 text-white rounded-lg hover:bg-pink-700" @click="showOtpDiv = false" >Enter</button>
                 </div>
             </div>
 
-            <div v-if="PaymentMethod === 'Sadad'" class="mt-4">
-                <header class="mb-8 text-center">
-                    <h1 class="text-2xl font-bold mb-1">OTP Code</h1>
-                    <p class="text-[15px] text-slate-500">Enter the 6-digit verification code that was sent to your phone number.</p>
-                </header>
-                <div class="flex items-center justify-center gap-3">
-                    <input v-model="code2[0]"
-                        type="text"
-                        class="w-14 h-14 text-center text-2xl font-extrabold text-slate-900 bg-slate-100 border border-transparent hover:border-slate-200 appearance-none rounded p-4 outline-none focus:bg-white focus:border-pink-400 focus:ring-2 focus:ring-pink-100"
-                        pattern="\d*" maxlength="1" />
-                    <input v-model="code2[1]"
-                        type="text"
-                        class="w-14 h-14 text-center text-2xl font-extrabold text-slate-900 bg-slate-100 border border-transparent hover:border-slate-200 appearance-none rounded p-4 outline-none focus:bg-white focus:border-pink-400 focus:ring-2 focus:ring-pink-100"
-                        maxlength="1" />
-                    <input v-model="code2[2]"
-                        type="text"
-                        class="w-14 h-14 text-center text-2xl font-extrabold text-slate-900 bg-slate-100 border border-transparent hover:border-slate-200 appearance-none rounded p-4 outline-none focus:bg-white focus:border-pink-400 focus:ring-2 focus:ring-pink-100"
-                        maxlength="1" />
-                    <input v-model="code2[3]"
-                        type="text"
-                        class="w-14 h-14 text-center text-2xl font-extrabold text-slate-900 bg-slate-100 border border-transparent hover:border-slate-200 appearance-none rounded p-4 outline-none focus:bg-white focus:border-pink-400 focus:ring-2 focus:ring-pink-100"
-                        maxlength="1" />
-                    <input v-model="code2[4]"
-                        type="text"
-                        class="w-14 h-14 text-center text-2xl font-extrabold text-slate-900 bg-slate-100 border border-transparent hover:border-slate-200 appearance-none rounded p-4 outline-none focus:bg-white focus:border-pink-400 focus:ring-2 focus:ring-pink-100"
-                        maxlength="1" />    
-                    <input v-model="code2[5]"
-                        type="text"
-                        class="w-14 h-14 text-center text-2xl font-extrabold text-slate-900 bg-slate-100 border border-transparent hover:border-slate-200 appearance-none rounded p-4 outline-none focus:bg-white focus:border-pink-400 focus:ring-2 focus:ring-pink-100"
-                        maxlength="1" />  
+            <div v-if="PaymentMethod === 'Sadad' && showOtpDiv" class="fixed inset-0 flex items-center justify-center z-20 bg-black bg-opacity-50">
+                <div class="bg-white p-8 rounded-lg">
+                    <header class="mb-8 text-center">
+                        <h1 class="text-2xl font-bold mb-1">OTP Code</h1>
+                        <p class="text-[15px] text-slate-500">Enter the 6-digit verification code that was sent to your phone number.</p>
+                    </header>
+                    <div class="flex items-center justify-center gap-3">
+                        <input v-model="code2[0]"
+                            type="text"
+                            class="w-14 h-14 text-center text-2xl font-extrabold text-slate-900 bg-slate-100 border border-transparent hover:border-slate-200 appearance-none rounded p-4 outline-none focus:bg-white focus:border-pink-400 focus:ring-2 focus:ring-pink-100"
+                            pattern="\d*" maxlength="1" />
+                        <input v-model="code2[1]"
+                            type="text"
+                            class="w-14 h-14 text-center text-2xl font-extrabold text-slate-900 bg-slate-100 border border-transparent hover:border-slate-200 appearance-none rounded p-4 outline-none focus:bg-white focus:border-pink-400 focus:ring-2 focus:ring-pink-100"
+                            maxlength="1" />
+                        <input v-model="code2[2]"
+                            type="text"
+                            class="w-14 h-14 text-center text-2xl font-extrabold text-slate-900 bg-slate-100 border border-transparent hover:border-slate-200 appearance-none rounded p-4 outline-none focus:bg-white focus:border-pink-400 focus:ring-2 focus:ring-pink-100"
+                            maxlength="1" />
+                        <input v-model="code2[3]"
+                            type="text"
+                            class="w-14 h-14 text-center text-2xl font-extrabold text-slate-900 bg-slate-100 border border-transparent hover:border-slate-200 appearance-none rounded p-4 outline-none focus:bg-white focus:border-pink-400 focus:ring-2 focus:ring-pink-100"
+                            maxlength="1" />
+                        <input v-model="code2[4]"
+                            type="text"
+                            class="w-14 h-14 text-center text-2xl font-extrabold text-slate-900 bg-slate-100 border border-transparent hover:border-slate-200 appearance-none rounded p-4 outline-none focus:bg-white focus:border-pink-400 focus:ring-2 focus:ring-pink-100"
+                            maxlength="1" />    
+                        <input v-model="code2[5]"
+                            type="text"
+                            class="w-14 h-14 text-center text-2xl font-extrabold text-slate-900 bg-slate-100 border border-transparent hover:border-slate-200 appearance-none rounded p-4 outline-none focus:bg-white focus:border-pink-400 focus:ring-2 focus:ring-pink-100"
+                            maxlength="1" />  
+                    </div>
+                    <button class="mt-8 py-2 px-4 bg-pink-600 text-white rounded-lg hover:bg-pink-700" @click="showOtpDiv = false" >Enter</button>
                 </div>
             </div>
 
@@ -215,6 +234,7 @@ import axiosClient from '@/axios'
             qt: {},
             totals: {},
             cart:[],
+            showOtpDiv: false,
 
             PaymentMethod: '',
             address: '',
@@ -223,6 +243,7 @@ import axiosClient from '@/axios'
             code: ['', '', '', ''],
             code2: ['', '', '', '', '', ''],
             variations:[]
+
         }
     },
     created() {
@@ -255,6 +276,7 @@ import axiosClient from '@/axios'
 
     async placeOrder(otpCode = null) {
         const order = {
+            mobile_number: this.Phone,
             payment_method: this.PaymentMethod,
             products: this.products.map(product => ({
                 product_id: product.id,
