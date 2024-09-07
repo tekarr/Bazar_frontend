@@ -49,15 +49,7 @@ import {mapState} from "vuex";
         ...mapState('admin', ['notifications']),
       },
     async created() {
-    try {
-        // const response = await axiosClient.get('api/admin/notifications');
-
-        // this.notifications  = response.data.data;
-        this.unread = notifications.filter(message => message.read_at === 'Unread').length
-      console.log(this.unread)
-        } catch (error) {
-        console.error(error);
-        }
+   this.$store.dispatch('admin/getNotifications');
     }, 
     methods: {
     handleClick(notification) {

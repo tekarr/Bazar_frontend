@@ -49,6 +49,14 @@
 
             <!-- id -->
 
+            <div class="mb-5 flex text-start w-80">
+              <p class="">Store ID : {{ store.id }}</p>
+              <p class="">
+                <p  class='text-blue-500 hover:text-pink-700 hover:underline'>
+                User ID  {{store.user}}
+              </p>
+              </p>
+            </div>
                 <hr class="my-4">
 
             <!-- name -->

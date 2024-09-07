@@ -1,9 +1,11 @@
 <template>
+   <div class="shadow-2xl ">
     <sidbar/>
+   </div>
     
     <div :class="locale === 'en' ? 'sm:ml-64' : 'sm:mr-64'">
         <navbar/>
-      <div class="m-3 bg-gray-100 w-full h-full rounded-3xl ">
+      <div class=" bg-gray-100 w-full h-full  ">
         <router-view class="p-4"> </router-view>
       </div>
     </div>

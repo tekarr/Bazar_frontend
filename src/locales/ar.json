@@ -109,7 +109,14 @@
     "Order": "الطلبية",
     "product": "المنتج",
     "print": "طباعة",
-    " Update Password": "تحديث كلمة المرور"
+    " Update Password": "تحديث كلمة المرور",
+    "localBankCards": "بطاقات البنوك المحلية",
+    "Adfali": "أدفعلي",
+    "Sadad": "سداد",
+    "Pay on Delivery": "الدفع عند الاستلام",
+    "Mobile Number": "رقم الهاتف",
+    "Confirm Payment": "تأكيد الدفع",
+    "Enter the OTP code sent to your mobile number.": "أدخل رمز OTP المرسل إلى رقم هاتفك المحمول."
 
 
 

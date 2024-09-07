@@ -1,7 +1,11 @@
 <template>
 
-    
+
     <div class="p-4  mt-20 items-start justify-start ">
+<div v-if="message" class="flex justify-between">
+    <p class="text-2xl font-bold text-red-500">{{ message }}</p>
+    <button @click="message = ''" class="text-2xl font-bold text-red-500">X</button>
+</div>
 
         <p class="text-3xl font-bold  pt-5 ">{{ $route.name }}</p>
         <div class="flex   min-h-screen">
@@ -37,17 +41,11 @@
                 <select v-model="category_id" id="category" class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-pink-600 focus:border-pink-600 sm:text-sm" required>
                   <option value="" disabled>Select Category</option>
                   <option v-for="category in categories" :key="category.id" :value="category.id">{{ category.name }}</option>
-                  <option value="new">Add New Category</option>
 
                 </select>
-                <button @click="showAddCategoryInput = !showAddCategoryInput" class="px-2 py-1 bg-gray-200 text-gray-600 rounded-lg focus:outline-none">
-                  <span class="text-xl">+</span>
-                </button>
-                <div v-if="showAddCategoryInput" class="mt-2">
-                  <input v-model="newCategoryName" type="text" placeholder="New Category Name" class="w-full px-3 py-2 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-pink-600 focus:border-pink-600 sm:text-sm" />
-                  <button @click="addCategory" class="mt-2 px-4 py-2 bg-pink-600 text-white rounded-lg">Add Category</button>
-                </div>
-              </div>
+
+
+                           </div>
 
               <!-- User -->
               <div class="mb-5">
@@ -73,11 +71,14 @@
 import navbar from './navbar.vue';
 import Sidbar from './Sidbar.vue';
 import {mapState} from "vuex";
+import axiosClient from "@/axios";
 export default {
     components: { navbar, Sidbar },
     data() {
       return{
+        message:'',
         storename: '',
+
         description: '',
         status: '',
         category_id: '',
@@ -88,8 +89,7 @@ export default {
       }
     },
   computed: {
-      ...mapState(['users']),
-    ...mapState(['categories']),
+      ...mapState('admin',['categories','users']),
 
   },
   mounted() {
@@ -97,6 +97,40 @@ export default {
     this.$store.dispatch('fetchCategories');
 
 
+  },
+  methods: {
+    onFileSelected(e) {
+      this.fileSelected = true;
+      this.fileName = e.target.files[0].name;
+      this.file = e.target.files[0];
+    },
+    submitForm() {
+      const formData = new FormData();
+      formData.append('name', this.storename);
+      formData.append('description', this.description);
+      formData.append('status', this.status);
+      formData.append('category_id', this.category_id);
+      formData.append('user_id', this.user_id);
+      formData.append('image', this.file);
+      this.$store.dispatch('addStore', formData);
+    },
+    addStore() {
+      try {
+       const response = axiosClient.post('api/admin/stores', {
+          name: this.storename,
+          description: this.description,
+          status: this.status,
+          category_id: this.category_id,
+          user_id: this.user_id,
+          image: this.file
+        });
+       this.message =response.data.message;
+        console.log(response);
+      } catch (e) {
+        this.message = 'Something went wrong. Please try again later.';
+        console.error(e);
+      }
+    }
   }
 
 };

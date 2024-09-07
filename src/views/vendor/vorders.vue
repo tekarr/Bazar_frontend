@@ -5,7 +5,7 @@
 
     <div class="bg-white p-2 border border-gray-200 w-fit rounded-lg shadow-sm  ">
       <div class="flex gap-2 flex-nowrap items-center whitespace-nowrap ">
-        <input v-model="filters.id" type="text" placeholder="Filter by ID" class="p-1 border rounded w-full sm:w-32">
+        <input v-model="filters.id" type="number" placeholder="ID" class="p-1 border rounded w-full sm:w-32">
         <select v-model="filters.status" class="p-1 border rounded w-full sm:w-32">
           <option value=""> {{ $t('order status') }}</option>
           <option value="pending">Pending</option>
@@ -25,6 +25,7 @@
         <select v-model="filters.payment_status" class="p-1 border rounded w-full sm:w-40">
           <option value="">{{ $t('payment status') }}</option>
           <option value="pending">Pending</option>
+          <option value="otp_sent">otp_sent</option>
           <option value="paid">Paid</option>
           <option value="failed">Failed</option>
         </select>

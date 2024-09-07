@@ -6,23 +6,48 @@ const state = () => ({
     products: [],
     orders: [],
     notifications: [],
-});
+    pagination: {
+        currentPage: 1,
+        lastPage: 1,
+        perPage: 10,
+        total: 0
+    },
+    filters: {
 
+    },
+    categories: [],
+});
 const mutations = {
     SET_USERS(state, users) {
         state.users = users;
     },
+    SET_FILTERS(state, filters) {
+        state.filters = filters;
+    },
     SET_STORES(state, stores) {
         state.stores = stores;
     },
-    SET_PRODUCTS(state, products) {
-        state.products = products;
+    SET_PRODUCTS(state,  data) {
+        state.products = data;
+
     },
-    SET_ORDERS(state, orders) {
-        state.orders = orders;
+    SET_ORDERS(state, data) {
+        state.orders = data;
+
     },
     SET_NOTIFICATIONS(state, notifications) {
         state.notifications = notifications;
+    },
+    SET_CATEGORIES(state, categories) {
+        state.categories = categories;
+    },
+    SET_PAGINATION(state, meta) {
+        state.pagination = {
+            currentPage: meta.current_page,
+            lastPage: meta.last_page,
+            perPage: meta.per_page,
+            total: meta.total
+        };
     },
     RESET_STATE(state) {
         state.users = [];
@@ -31,37 +56,71 @@ const mutations = {
         state.orders = [];
         state.notifications = [];
     },
+
 };
 
 const actions = {
-    async fetchUsers({ commit }) {
+    async fetchUsers({ commit, state }, page = 1) {
         try {
-            const response = await axiosClient.get('/api/admin/users');
+            const response = await axiosClient.get('/api/admin/users',{
+                params: {
+                    ...state.filters,
+                    page,
+                    perPage: state.pagination.perPage
+                }
+            });
             commit('SET_USERS', response.data.data);
+            commit('SET_PAGINATION', response.data.meta);
         } catch (error) {
             console.error('Error fetching users:', error);
         }
     },
-    async fetchStores({ commit }) {
+    async fetchStores({ commit, state }, page = 1) {
         try {
-            const response = await axiosClient.get('/api/admin/stores');
+            const response = await axiosClient.get('/api/admin/stores',
+                {
+                    params: {
+                        ...state.filters,
+                        page,
+                        perPage: state.pagination.perPage
+                    }
+                });
             commit('SET_STORES', response.data.data);
+            console.log(response.data);
+            commit('SET_PAGINATION', response.data.meta);
         } catch (error) {
             console.error('Error fetching stores:', error);
         }
     },
-    async fetchProducts({ commit }) {
+    async fetchProducts({ commit, state }, page = 1) {
         try {
-            const response = await axiosClient.get('/api/admin/products');
+            const response = await axiosClient.get('/api/admin/products', {
+                params: {
+                    ...state.filters,
+                    page,
+                    perPage: state.pagination.perPage
+                }
+            });
+            console.log(response.data.data);
             commit('SET_PRODUCTS', response.data.data);
+            commit('SET_PAGINATION', response.data.meta);
         } catch (error) {
             console.error('Error fetching products:', error);
         }
     },
-    async fetchOrders({ commit }) {
+    async fetchOrders({ commit, state }, page = 1) {
         try {
-            const response = await axiosClient.get('/api/admin/orders');
-            commit('SET_ORDERS', response.data);
+            const response = await axiosClient.get(`/api/admin/orders`,
+                {
+                    params: {
+                        ...state.filters,
+                        page,
+                        perPage: state.pagination.perPage
+                    }
+                });
+
+            commit('SET_ORDERS',response.data.data);
+            commit('SET_PAGINATION', response.data);
         } catch (error) {
             console.error('Error fetching orders:', error);
         }
@@ -74,16 +133,27 @@ const actions = {
             console.error('Error fetching notifications:', error);
         }
     },
+    async fetchCategories({ commit }) {
+        try {
+            const response = await axiosClient.get('/api/categories');
+            commit('SET_CATEGORIES', response.data);
+        } catch (error) {
+            console.error('Error fetching categories:', error);
+
+    }},
     resetState({ commit }) {
         commit('RESET_STATE');
     },
+    setFilters({ commit, dispatch }, filters) {
+        commit('SET_FILTERS', filters);
 
-    refreshAll({ dispatch }) {
+    },
+  async  refreshAll({ dispatch }) {
         // Reset the state before refetching
         dispatch('resetState');
 
         // Fetch new data
-        return Promise.all([
+        return  Promise.all([
             dispatch('fetchUsers'),
             dispatch('fetchStores'),
             dispatch('fetchProducts'),
@@ -103,6 +173,10 @@ const getters = {
     products: state => state.products,
     orders: state => state.orders,
     notifications: state => state.notifications,
+    pagination: state => state.pagination,
+    filteredOrders: state => state.orders,
+
+
 };
 
 export default {
@@ -112,3 +186,4 @@ export default {
     actions,
     getters,
 };
+

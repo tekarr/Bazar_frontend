@@ -3,7 +3,7 @@
         <!-- Statistic cards -->
         <div class="overflow-x-auto rounded-3xl mt-8 py-10">
 
-        <div class="grid grid-cols-4 gap-4 mb-4 md:grid-cols-1 lg:grid-cols-3 rounded-3xl ">
+        <div class="grid grid-cols-4 gap-4 mb-4 md:grid-cols-2 lg:grid-cols-3 rounded-3xl ">
 
             <!-- client card -->
             <router-link to="/admin/users" class="flex justify-center">
