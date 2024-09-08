@@ -20,10 +20,10 @@
         <!-- store -->
         <div>
             <div class="flex justify-center mt-36">
-                <div class="mx-8 my-1  w-full flex justify-center h-96 bg-gray-900 rounded-3xl overflow-hidden">
-                    <img class="rounded-3xl w-full h-full object-cover" :src="store.image" alt="">
-                </div>
-            </div>
+    <div class="mx-8 my-1 w-full flex justify-center h-96 bg-white rounded-3xl overflow-hidden">
+        <img class="rounded-3xl w-full h-full object-contain" :src="store.image" alt="">
+    </div>
+</div>
             <div class="mx-12 m-4"><span class="text-2xl font-bold">{{ store.name }}</span></div>
             <div class="mt-4">
                 <p class="mx-12 ">{{ store.description }}</p>
