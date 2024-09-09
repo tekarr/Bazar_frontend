@@ -14,16 +14,16 @@
         <!-- Alert: Success -->
         <div v-if="success" class="fixed inset-0 flex items-center justify-center z-20 bg-black bg-opacity-50">
             <div class="bg-white p-6 rounded-3xl">
-            <p class="text-lg"> added successfully!</p>
-            <button @click="close" class="mt-4 bg-pink-600 hover:bg-pink-700 text-white font-bold py-2 px-4 rounded-3xl">Close</button>
+            <p class="text-lg">{{ $t('added successfully!') }}</p>
+            <button @click="success = false" class="mt-4 bg-pink-600 hover:bg-pink-700 text-white font-bold py-2 px-4 rounded-3xl">{{ $t('Close') }}</button>
             </div>
         </div>
 
         <!-- Alert: error -->
         <div v-if="error" class="fixed inset-0 flex items-center justify-center z-20 bg-black bg-opacity-50">
             <div class="bg-white p-6 rounded-3xl">
-            <p class="text-lg"> already in your cart</p>
-            <button @click="close" class="mt-4 bg-pink-600 hover:bg-pink-700 text-white font-bold py-2 px-4 rounded-3xl">Close</button>
+            <p class="text-lg">{{ $t('already in your cart') }}</p>
+            <button @click="error = false" class="mt-4 bg-pink-600 hover:bg-pink-700 text-white font-bold py-2 px-4 rounded-3xl">{{ $t('Close') }}</button>
             </div>
         </div>
 
@@ -32,24 +32,22 @@
             <!-- stores or products -->
             <div  class="relative inline-block z-10 mx-4">
                 <button @click="showOptions = !showOptions" class="inline-flex justify-center w-full px-4 py-2 text-sm font-medium text-gray-700 bg-white border border-gray-300 rounded-md shadow-sm hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-100 focus:ring-indigo-500">
-                    {{ selectedOption }}
+                    {{ $t(selectedOption) }}
                     <svg class="mx-2 h-5 w-5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
                     <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd" />
                     </svg>
                 </button>
                 <ul v-if="showOptions" class="origin-top-right absolute right-0 mt-2 w-48 rounded-md shadow-lg py-1 bg-white ring-1 ring-black ring-opacity-5 focus:outline-none">
-                    <li @click="selectOption('Stores')" class="block py-2 px-4 text-sm text-gray-700 hover:bg-gray-100 hover:text-gray-900 cursor-pointer">
-                    Stores
+                    <li @click="selectOption('Stores')" class="block py-2 px-4 text-sm text-gray-700 hover:bg-gray-100 hover:text-gray-900 cursor-pointer">{{ $t('Stores') }}
                     </li>
-                    <li @click="selectOption('Products')" class="block py-2 px-4 text-sm text-gray-700 hover:bg-gray-100 hover:text-gray-900 cursor-pointer">
-                    Products
+                    <li @click="selectOption('Products')" class="block py-2 px-4 text-sm text-gray-700 hover:bg-gray-100 hover:text-gray-900 cursor-pointer">{{ $t('Products') }}
                     </li>
                 </ul>
             </div>
             <!-- categories -->    
             <div class="relative inline-block z-10 ">
                 <button @click="showCategories = !showCategories" class="inline-flex justify-center w-full px-4 py-2 text-sm font-medium text-gray-700 bg-white border border-gray-300 rounded-md shadow-sm hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-100 focus:ring-indigo-500">
-                {{ selectedCategory ? selectedCategory.name : 'All Categories' }}
+                {{ selectedCategory ? selectedCategory.name : $t('All Categories') }}
                 <svg class=" mx-2 h-5 w-5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
                     <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd" />
                 </svg>
@@ -57,7 +55,7 @@
                 <!-- <div v-if=" selectedCategory">{{ selectedCategory.name }}</div> -->
                 <ul v-if="showCategories" class="origin-top-right absolute right-0 mt-2 w-48 rounded-md shadow-lg py-1 bg-white ring-1 ring-black ring-opacity-5 focus:outline-none">
                     <li @click="allCategories" class="block py-2 px-4 text-sm text-gray-700 hover:bg-gray-100 hover:text-gray-900 cursor-pointer">
-                        All Categories
+                        {{ $t('All Categories') }}
                     </li>
                     <li v-for="category in categories" :key="category.id" @click="selectCategory2(category)" class="block py-2 px-4 text-sm text-gray-700 hover:bg-gray-100 hover:text-gray-900 cursor-pointer">
                         {{ category.name }}
@@ -137,7 +135,7 @@
                     <span class="text-lg md:text-2xl font-bold pb-3 md:pb-0">{{ product.price }}$</span>
                     <span class="text-lg md:text-2xl font-bold opacity-30 pb-3 md:pb-0">{{ product.store }}</span>
                     <button class="text-pink-600 hover:text-white border border-pink-600 bg-white hover:bg-pink-600 focus:ring-4 focus:outline-none focus:ring-pink-300 rounded-full text-xs font-medium px-5 py-2.5 text-center me-3 mb-3 " 
-                    @click.prevent="addToCart(product)">Add to Cart
+                    @click.prevent="addToCart(product)">{{ $t('Add to Cart') }}
                     </button>
                     </div>
                 </div>

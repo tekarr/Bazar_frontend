@@ -4,16 +4,16 @@
         <!-- Alert: Success -->
         <div v-if="success" class="fixed inset-0 flex items-center justify-center z-20 bg-black bg-opacity-50">
             <div class="bg-white p-6 rounded-3xl">
-            <p class="text-lg"> added successfully!</p>
-            <button @click="close" class="mt-4 bg-pink-600 hover:bg-pink-700 text-white font-bold py-2 px-4 rounded-3xl">Close</button>
+            <p class="text-lg">{{ $t('added successfully!') }}</p>
+            <button @click="success = false" class="mt-4 bg-pink-600 hover:bg-pink-700 text-white font-bold py-2 px-4 rounded-3xl">{{ $t('Close') }}</button>
             </div>
         </div>
 
         <!-- Alert: error -->
         <div v-if="error" class="fixed inset-0 flex items-center justify-center z-20 bg-black bg-opacity-50">
             <div class="bg-white p-6 rounded-3xl">
-            <p class="text-lg"> already in your cart</p>
-            <button @click="close" class="mt-4 bg-pink-600 hover:bg-pink-700 text-white font-bold py-2 px-4 rounded-3xl">Close</button>
+            <p class="text-lg">{{ $t('already in your cart') }}</p>
+            <button @click="error = false" class="mt-4 bg-pink-600 hover:bg-pink-700 text-white font-bold py-2 px-4 rounded-3xl">{{ $t('Close') }}</button>
             </div>
         </div>
 
